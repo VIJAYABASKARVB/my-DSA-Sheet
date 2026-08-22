@@ -1,0 +1,536 @@
+{
+  "topicId": "binary-search",
+  "name": "Binary Search",
+  "patterns": [
+    {
+      "patternId": "bs-1d-arrays",
+      "name": "Binary Search on 1D Arrays",
+      "problems": [
+        {
+          "id": "search-x-in-sorted-array",
+          "name": "Search X in Sorted Array",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/binary-search/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/binary-search-explained/"
+            }
+          ]
+        },
+        {
+          "id": "lower-bound",
+          "name": "Lower Bound",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/implement-lower-bound-bs-2/"
+            },
+            {
+              "platform": "Code360",
+              "url": "https://www.naukri.com/code360/problems/lower-bound_8165382"
+            }
+          ]
+        },
+        {
+          "id": "upper-bound",
+          "name": "Upper Bound",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/implement-upper-bound/"
+            },
+            {
+              "platform": "Code360",
+              "url": "https://www.naukri.com/code360/problems/implement-upper-bound_8165383"
+            }
+          ]
+        },
+        {
+          "id": "search-insert-position",
+          "name": "Search Insert Position",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/search-insert-position/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/search-insert-position/"
+            }
+          ]
+        },
+        {
+          "id": "floor-and-ceil-in-sorted-array",
+          "name": "Floor and Ceil in Sorted Array",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/floor-and-ceil-in-sorted-array/"
+            },
+            {
+              "platform": "Code360",
+              "url": "https://www.naukri.com/code360/problems/ceiling-in-a-sorted-array_1825401"
+            }
+          ]
+        },
+        {
+          "id": "first-and-last-occurrence",
+          "name": "First and Last Occurrence",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/last-occurrence-in-a-sorted-array/"
+            }
+          ]
+        },
+        {
+          "id": "count-occurrences-in-sorted-array",
+          "name": "Count Occurrences in a Sorted Array",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/count-occurrences-in-sorted-array/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/"
+            }
+          ]
+        },
+        {
+          "id": "find-minimum-in-rotated-sorted-array",
+          "name": "Find Minimum in Rotated Sorted Array",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/minimum-in-rotated-sorted-array/"
+            }
+          ]
+        },
+        {
+          "id": "find-how-many-times-array-rotated",
+          "name": "Find Out How Many Times the Array is Rotated",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/find-out-how-many-times-the-array-has-been-rotated/"
+            },
+            {
+              "platform": "Code360",
+              "url": "https://www.naukri.com/code360/problems/rotation_7449070"
+            }
+          ]
+        },
+        {
+          "id": "search-in-rotated-sorted-array-i",
+          "name": "Search in Rotated Sorted Array I",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/search-in-rotated-sorted-array/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/search-element-in-a-rotated-sorted-array/"
+            }
+          ]
+        },
+        {
+          "id": "search-in-rotated-sorted-array-ii",
+          "name": "Search in Rotated Sorted Array II",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/search-in-rotated-sorted-array-ii/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/search-element-in-rotated-sorted-array-ii/"
+            }
+          ]
+        },
+        {
+          "id": "single-element-in-sorted-array",
+          "name": "Single Element in a Sorted Array",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/single-element-in-a-sorted-array/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/single-element-in-a-sorted-array/"
+            }
+          ]
+        },
+        {
+          "id": "find-peak-element",
+          "name": "Find Peak Element",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/find-peak-element/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/peak-element-in-array/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "bs-on-answer-space",
+      "name": "Binary Search on Answer Space",
+      "problems": [
+        {
+          "id": "find-square-root",
+          "name": "Find Square Root of a Number",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/sqrtx/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/binary-search/finding-sqrt-of-a-number-using-binary-search/"
+            }
+          ]
+        },
+        {
+          "id": "find-nth-root",
+          "name": "Find Nth Root of a Number",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/nth-root-of-a-number-using-binary-search/"
+            },
+            {
+              "platform": "Code360",
+              "url": "https://www.naukri.com/code360/problems/nth-root-of-m_1062679"
+            }
+          ]
+        },
+        {
+          "id": "koko-eating-bananas",
+          "name": "Koko Eating Bananas",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/koko-eating-bananas/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/binary-search/koko-eating-bananas/"
+            }
+          ]
+        },
+        {
+          "id": "find-smallest-divisor",
+          "name": "Find the Smallest Divisor",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/binary-search/find-the-smallest-divisor-given-a-threshold/"
+            }
+          ]
+        },
+        {
+          "id": "capacity-to-ship-packages",
+          "name": "Capacity to Ship Packages Within D Days",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/capacity-to-ship-packages-within-d-days/"
+            }
+          ]
+        },
+        {
+          "id": "minimum-days-to-make-m-bouquets",
+          "name": "Minimum Days to Make M Bouquets",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/binary-search/minimum-days-to-make-m-bouquets/"
+            }
+          ]
+        },
+        {
+          "id": "kth-missing-positive-number",
+          "name": "Kth Missing Positive Number",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/kth-missing-positive-number/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/kth-missing-positive-number/"
+            }
+          ]
+        },
+        {
+          "id": "aggressive-cows",
+          "name": "Aggressive Cows",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/aggressive-cows-detailed-solution/"
+            },
+            {
+              "platform": "Code360",
+              "url": "https://www.naukri.com/code360/problems/aggressive-cows_1082559"
+            }
+          ]
+        },
+        {
+          "id": "book-allocation-problem",
+          "name": "Book Allocation Problem",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/allocate-minimum-number-of-pages-from-books/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/allocate-minimum-number-pages/"
+            }
+          ]
+        },
+        {
+          "id": "split-array-largest-sum",
+          "name": "Split Array - Largest Sum",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/split-array-largest-sum/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/split-array-largest-sum/"
+            }
+          ]
+        },
+        {
+          "id": "painters-partition",
+          "name": "Painter's Partition",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/painters-partition-problem-binary-search/"
+            },
+            {
+              "platform": "Code360",
+              "url": "https://www.naukri.com/code360/problems/painter-s-partition-problem_1089557"
+            }
+          ]
+        },
+        {
+          "id": "minimize-max-distance-gas-station",
+          "name": "Minimize Max Distance to Gas Station",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/minimize-the-maximum-distance-between-gas-stations/"
+            },
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/minimize-max-distance-to-gas-station/"
+            }
+          ]
+        },
+        {
+          "id": "kth-element-of-two-sorted-arrays",
+          "name": "Kth Element of 2 Sorted Arrays",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/k-th-element-of-two-sorted-arrays/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/"
+            }
+          ]
+        },
+        {
+          "id": "median-of-two-sorted-arrays",
+          "name": "Median of 2 Sorted Arrays",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/median-of-two-sorted-arrays/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/median-of-two-sorted-arrays-of-different-sizes/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "bs-2d-arrays",
+      "name": "Binary Search on 2D Arrays",
+      "problems": [
+        {
+          "id": "find-row-with-maximum-ones",
+          "name": "Find Row with Maximum 1's",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/find-the-row-with-maximum-number-of-1s/"
+            },
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/row-with-maximum-ones/"
+            }
+          ]
+        },
+        {
+          "id": "search-in-2d-matrix-i",
+          "name": "Search in a 2D Matrix",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/search-a-2d-matrix/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/search-in-a-sorted-2d-matrix/"
+            }
+          ]
+        },
+        {
+          "id": "search-in-2d-matrix-ii",
+          "name": "Search in 2D Matrix II",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/search-a-2d-matrix-ii/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/search-in-a-row-and-column-wise-sorted-matrix/"
+            }
+          ]
+        },
+        {
+          "id": "find-peak-element-ii",
+          "name": "Find Peak Element II",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/find-a-peak-element-ii/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/arrays/find-peak-element-in-2d-matrix/"
+            }
+          ]
+        },
+        {
+          "id": "matrix-median",
+          "name": "Matrix Median",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/median-of-row-wise-sorted-matrix/"
+            },
+            {
+              "platform": "Code360",
+              "url": "https://www.naukri.com/code360/problems/median-of-a-row-wise-sorted-matrix_1115506"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

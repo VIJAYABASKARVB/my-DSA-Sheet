@@ -9,6 +9,8 @@ import twoPointers from "@/data/two-pointers-topic.json";
 import slidingWindow from "@/data/sliding-window-topic.json";
 import matrix from "@/data/matrix-topic.json";
 import algorithms from "@/data/algorithms-topic.json";
+import linkedList from "@/data/linked-list-topic.json";
+import binarySearch from "@/data/binary-search-topic.json";
 
 type RawTopic = {
   topicId: string;
@@ -25,11 +27,13 @@ type RawTopic = {
 const rawTopics: RawTopic[] = [
   arraysHashing as RawTopic,
   twoPointers as RawTopic,
-  slidingWindow as RawTopic,
   prefixSum as RawTopic,
-  trees as RawTopic,
   matrix as RawTopic,
   algorithms as RawTopic,
+  slidingWindow as RawTopic,
+  linkedList as RawTopic,
+  binarySearch as RawTopic,
+  trees as RawTopic,
 ];
 
 function buildFallbackTopics(): Topic[] {

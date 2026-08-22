@@ -230,7 +230,7 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
   }
 
   // Sort topics by explicit order field; fallback to known order for legacy docs
-  const legacyOrder = ["arrays-hashing", "two-pointers", "sliding-window", "prefix-sum", "trees-dfs-bfs"];
+  const legacyOrder = ["arrays-hashing", "two-pointers", "prefix-sum", "matrix", "algorithms", "sliding-window", "linked-list", "binary-search", "trees-dfs-bfs"];
   topics.sort((a, b) => {
     const oa = (a as Topic & { order: number }).order;
     const ob = (b as Topic & { order: number }).order;
