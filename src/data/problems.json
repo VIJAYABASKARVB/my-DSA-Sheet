@@ -12,69 +12,83 @@
               "id": "largest-element-in-array",
               "name": "Largest Element in an Array",
               "difficulty": "Easy",
-              "source": "Striver",
-              "links": []
+              "links": [],
+              "tags": [
+                "Striver"
+              ]
             },
             {
               "id": "second-smallest-and-largest-element",
               "name": "Second Smallest & Largest Element",
               "difficulty": "Easy",
-              "source": "Striver",
-              "links": []
+              "links": [],
+              "tags": [
+                "Striver"
+              ]
             },
             {
               "id": "check-if-array-is-sorted",
               "name": "Check if Array is Sorted",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "linear-search",
               "name": "Linear Search",
               "difficulty": "Easy",
-              "source": "Striver",
-              "links": []
+              "links": [],
+              "tags": [
+                "Striver"
+              ]
             },
             {
               "id": "maximum-consecutive-ones",
               "name": "Maximum Consecutive Ones",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/max-consecutive-ones/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "concatenation-of-array",
               "name": "Concatenation of Array",
               "difficulty": "Easy",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/concatenation-of-array/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             },
             {
               "id": "remove-element",
               "name": "Remove Element",
               "difficulty": "Easy",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/remove-element/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             }
           ]
@@ -87,72 +101,84 @@
               "id": "contains-duplicate",
               "name": "Contains Duplicate",
               "difficulty": "Easy",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/contains-duplicate/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             },
             {
               "id": "valid-anagram",
               "name": "Valid Anagram",
               "difficulty": "Easy",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/valid-anagram/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             },
             {
               "id": "two-sum",
               "name": "Two Sum",
               "difficulty": "Easy",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/two-sum/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             },
             {
               "id": "majority-element",
               "name": "Majority Element",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/majority-element/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "find-missing-number",
               "name": "Find Missing Number",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/missing-number/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "number-that-appears-once",
               "name": "Number that Appears Once",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/single-number/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -165,68 +191,80 @@
               "id": "sort-an-array",
               "name": "Sort an Array",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/sort-an-array/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "sort-colors",
               "name": "Sort Colors",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/sort-colors/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "longest-common-prefix",
               "name": "Longest Common Prefix",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/longest-common-prefix/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "group-anagrams",
               "name": "Group Anagrams",
               "difficulty": "Medium",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/group-anagrams/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             },
             {
               "id": "merge-overlapping-intervals",
               "name": "Merge Overlapping Intervals",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/merge-intervals/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "leaders-in-an-array",
               "name": "Leaders in an Array",
               "difficulty": "Easy",
-              "source": "Striver",
-              "links": []
+              "links": [],
+              "tags": [
+                "Striver"
+              ]
             }
           ]
         },
@@ -238,67 +276,79 @@
               "id": "left-rotate-array-by-one",
               "name": "Left Rotate Array by One",
               "difficulty": "Easy",
-              "source": "Striver",
-              "links": []
+              "links": [],
+              "tags": [
+                "Striver"
+              ]
             },
             {
               "id": "rotate-array-by-k-places",
               "name": "Rotate Array by K Places",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/rotate-array/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "rearrange-array-by-sign",
               "name": "Rearrange Array by Sign",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/rearrange-array-elements-by-sign/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "next-permutation",
               "name": "Next Permutation",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/next-permutation/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "stock-buy-and-sell",
               "name": "Stock Buy and Sell",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "best-time-to-buy-and-sell-stock-ii",
               "name": "Best Time to Buy and Sell Stock II",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -311,12 +361,14 @@
               "id": "product-of-array-except-self",
               "name": "Product of Array Except Self",
               "difficulty": "Medium",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/product-of-array-except-self/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             }
           ]
@@ -329,60 +381,70 @@
               "id": "top-k-frequent-elements",
               "name": "Top K Frequent Elements",
               "difficulty": "Medium",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/top-k-frequent-elements/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             },
             {
               "id": "valid-sudoku",
               "name": "Valid Sudoku",
               "difficulty": "Medium",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/valid-sudoku/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             },
             {
               "id": "longest-consecutive-sequence",
               "name": "Longest Consecutive Sequence",
               "difficulty": "Medium",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/longest-consecutive-sequence/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             },
             {
               "id": "find-repeating-and-missing-number",
               "name": "Find Repeating & Missing Number",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/set-mismatch/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "majority-element-ii",
               "name": "Majority Element II",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/majority-element-ii/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -395,12 +457,14 @@
               "id": "first-missing-positive",
               "name": "First Missing Positive",
               "difficulty": "Hard",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/first-missing-positive/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -419,19 +483,20 @@
               "id": "range-sum-query-immutable",
               "name": "Range Sum Query - Immutable",
               "difficulty": "Easy",
-              "source": "Others",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/range-sum-query-immutable/"
                 }
+              ],
+              "tags": [
+                "Others"
               ]
             },
             {
               "id": "largest-subarray-with-sum-0",
               "name": "Largest Subarray with Sum 0",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
@@ -441,13 +506,15 @@
                   "platform": "GeeksForGeeks",
                   "url": "https://www.geeksforgeeks.org/find-the-largest-subarray-with-0-sum/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "longest-subarray-with-zero-sum",
               "name": "Longest Subarray with Zero Sum",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
@@ -457,25 +524,29 @@
                   "platform": "GeeksForGeeks",
                   "url": "https://www.geeksforgeeks.org/longest-sub-array-sum-0/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "contiguous-array",
               "name": "Contiguous Array",
               "difficulty": "Medium",
-              "source": "Others",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/contiguous-array/"
                 }
+              ],
+              "tags": [
+                "Others"
               ]
             },
             {
               "id": "count-subarrays-with-given-sum",
               "name": "Count Subarrays with Given Sum",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
@@ -485,13 +556,15 @@
                   "platform": "GeeksForGeeks",
                   "url": "https://www.geeksforgeeks.org/number-subarrays-sum-exactly-equal-k/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "subarray-sum-equals-k",
               "name": "Subarray Sum Equals K",
               "difficulty": "Medium",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -501,13 +574,15 @@
                   "platform": "InterviewBit",
                   "url": "https://www.interviewbit.com/problems/subarray-sum-equals-k/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             },
             {
               "id": "subarray-sums-divisible-by-k",
               "name": "Subarray Sums Divisible by K",
               "difficulty": "Medium",
-              "source": "Others",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -517,13 +592,15 @@
                   "platform": "InterviewBit",
                   "url": "https://www.interviewbit.com/problems/subarray-sums-divisible-by-k/"
                 }
+              ],
+              "tags": [
+                "Others"
               ]
             },
             {
               "id": "continuous-subarray-sum",
               "name": "Continuous Subarray Sum",
               "difficulty": "Medium",
-              "source": "Others",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -533,18 +610,23 @@
                   "platform": "InterviewBit",
                   "url": "https://www.interviewbit.com/problems/continuous-subarray-sum/"
                 }
+              ],
+              "tags": [
+                "Others"
               ]
             },
             {
               "id": "range-sum-query-2d-immutable",
               "name": "Range Sum Query 2D Immutable",
               "difficulty": "Medium",
-              "source": "Neetcode",
               "links": [
                 {
                   "platform": "LeetCode",
                   "url": "https://leetcode.com/problems/range-sum-query-2d-immutable/"
                 }
+              ],
+              "tags": [
+                "Neetcode"
               ]
             }
           ]
@@ -563,7 +645,6 @@
               "id": "binary-tree-inorder-traversal",
               "name": "Binary Tree Inorder Traversal",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -573,13 +654,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/inorder-traversal-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "binary-tree-preorder-traversal",
               "name": "Binary Tree Preorder Traversal",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -589,13 +672,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/preorder-traversal-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "binary-tree-postorder-traversal",
               "name": "Binary Tree Postorder Traversal",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -605,13 +690,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/post-order-traversal-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "binary-tree-level-order-traversal",
               "name": "Binary Tree Level Order Traversal",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -621,6 +708,9 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/level-order-traversal-of-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -633,7 +723,6 @@
               "id": "iterative-inorder-traversal",
               "name": "Iterative Binary Tree Inorder Traversal",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -643,13 +732,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/inorder-traversal-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "iterative-preorder-traversal",
               "name": "Iterative Binary Tree Preorder Traversal",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -659,13 +750,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/preorder-traversal-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "postorder-traversal-2-stacks",
               "name": "Binary Tree Postorder Traversal Using 2 Stacks",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -675,13 +768,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/post-order-traversal-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "postorder-traversal-1-stack",
               "name": "Binary Tree Postorder Traversal Using 1 Stack",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -691,6 +786,9 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/post-order-traversal-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -703,7 +801,6 @@
               "id": "maximum-depth-of-binary-tree",
               "name": "Maximum Depth of Binary Tree",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -713,13 +810,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/find-the-maximum-depth-of-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "balanced-binary-tree",
               "name": "Balanced Binary Tree",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -729,13 +828,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/check-whether-the-binary-tree-is-balanced-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "diameter-of-binary-tree",
               "name": "Diameter of Binary Tree",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -745,13 +846,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/calculate-the-diameter-of-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "binary-tree-maximum-path-sum",
               "name": "Binary Tree Maximum Path Sum",
               "difficulty": "Hard",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -761,6 +864,9 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/maximum-sum-path-in-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -773,7 +879,6 @@
               "id": "same-tree",
               "name": "Same Tree",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -783,13 +888,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/check-if-two-trees-are-identical/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "symmetric-tree",
               "name": "Symmetric Tree",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -799,13 +906,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/check-for-symmetrical-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "binary-tree-right-side-view",
               "name": "Binary Tree Right Side View",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -815,6 +924,9 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/right-left-view-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -827,7 +939,6 @@
               "id": "zigzag-level-order-traversal",
               "name": "ZigZag Level Order Traversal",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -837,13 +948,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/zig-zag-traversal-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "maximum-width-of-binary-tree",
               "name": "Maximum Width of Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -853,6 +966,9 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/maximum-width-of-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -865,7 +981,6 @@
               "id": "vertical-order-traversal",
               "name": "Vertical Order Traversal of a Binary Tree",
               "difficulty": "Hard",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -875,30 +990,37 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/vertical-order-traversal-of-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "top-view-of-binary-tree",
               "name": "Top View of Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/top-view-of-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "bottom-view-of-binary-tree",
               "name": "Bottom View of Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/bottom-view-of-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -911,19 +1033,20 @@
               "id": "print-root-to-node-path",
               "name": "Print Root to Node Path in a Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/print-root-to-node-path-in-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "lowest-common-ancestor",
               "name": "Lowest Common Ancestor of a Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -933,13 +1056,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/lowest-common-ancestor-for-two-given-nodes/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "all-nodes-distance-k",
               "name": "All Nodes Distance K in Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -949,6 +1074,9 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/print-all-the-nodes-at-a-distance-of-k-in-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -961,7 +1089,6 @@
               "id": "boundary-traversal",
               "name": "Boundary Traversal of Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -971,18 +1098,23 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/boundary-traversal-of-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "children-sum-property",
               "name": "Check for Children Sum Property in a Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/check-for-children-sum-property-in-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -995,19 +1127,20 @@
               "id": "requirements-to-construct-unique-bt",
               "name": "Requirements Needed to Construct a Unique Binary Tree",
               "difficulty": "Easy",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/construct-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "construct-bt-preorder-inorder",
               "name": "Construct Binary Tree from Preorder and Inorder Traversal",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -1017,13 +1150,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/construct-a-binary-tree-from-inorder-and-preorder-traversal/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "construct-bt-postorder-inorder",
               "name": "Construct Binary Tree from Inorder and Postorder Traversal",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -1033,6 +1168,9 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/construct-binary-tree-from-inorder-and-postorder-traversal/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]
@@ -1045,31 +1183,34 @@
               "id": "morris-inorder-traversal",
               "name": "Morris Inorder Traversal of a Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/morris-inorder-traversal-of-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "morris-preorder-traversal",
               "name": "Morris Preorder Traversal of a Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/morris-preorder-traversal-of-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "flatten-binary-tree-to-linked-list",
               "name": "Flatten Binary Tree to Linked List",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -1079,13 +1220,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/flatten-binary-tree-to-linked-list/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "count-complete-tree-nodes",
               "name": "Count Total Nodes in a Complete Binary Tree",
               "difficulty": "Medium",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -1095,13 +1238,15 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/count-number-of-nodes-in-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "serialize-deserialize-binary-tree",
               "name": "Serialize and Deserialize Binary Tree",
               "difficulty": "Hard",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "LeetCode",
@@ -1111,18 +1256,23 @@
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/serialize-and-deserialize-a-binary-tree/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             },
             {
               "id": "burn-binary-tree",
               "name": "Minimum Time Taken to Burn the Binary Tree from a Node",
               "difficulty": "Hard",
-              "source": "Striver",
               "links": [
                 {
                   "platform": "TakeUForward",
                   "url": "https://takeuforward.org/data-structure/minimum-time-taken-to-burn-the-binary-tree-from-a-node/"
                 }
+              ],
+              "tags": [
+                "Striver"
               ]
             }
           ]

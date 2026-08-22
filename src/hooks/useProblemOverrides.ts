@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
-import type { PlatformLink } from "@/lib/types";
-import { subscribeToOverrides, updateProblemLinks } from "@/lib/firestore";
+import type { PlatformLink, Tag } from "@/lib/types";
+import { subscribeToOverrides, updateProblemLinks, updateProblemTags } from "@/lib/firestore";
+
+type OverrideEntry = { links?: PlatformLink[]; tags?: Tag[] };
 
 export function useProblemOverrides() {
-  const [overrides, setOverrides] = useState<Record<string, PlatformLink[]>>({});
+  const [overrides, setOverrides] = useState<Record<string, OverrideEntry>>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,7 +15,7 @@ export function useProblemOverrides() {
     try {
       unsub = subscribeToOverrides((data) => {
         resolved = true;
-        setOverrides(data);
+        setOverrides(data as Record<string, OverrideEntry>);
         setLoading(false);
       });
     } catch (e) {
@@ -36,12 +38,42 @@ export function useProblemOverrides() {
   const updateLinks = useCallback((problemId: string, links: PlatformLink[]) => {
     setOverrides((prev) => {
       const next = { ...prev };
-      if (links.length === 0) delete next[problemId];
-      else next[problemId] = links;
+      const cur = next[problemId] ?? {};
+      if (links.length === 0 && !cur.tags?.length) {
+        delete next[problemId];
+      } else if (links.length === 0) {
+        next[problemId] = { ...cur, links: undefined };
+        if (!next[problemId].tags?.length) delete next[problemId];
+        else {
+          // keep tags, remove links key
+          const { links: _omit, ...rest } = next[problemId] as OverrideEntry & { links?: PlatformLink[] };
+          next[problemId] = rest;
+        }
+      } else {
+        next[problemId] = { ...cur, links };
+      }
       return next;
     });
     void updateProblemLinks(problemId, links);
   }, []);
 
-  return { overrides, updateLinks, loading };
+  const updateTags = useCallback((problemId: string, tags: Tag[]) => {
+    setOverrides((prev) => {
+      const next = { ...prev };
+      const cur = next[problemId] ?? {};
+      if (tags.length === 0 && !cur.links?.length) {
+        delete next[problemId];
+      } else if (tags.length === 0) {
+        const { tags: _omit, ...rest } = cur as OverrideEntry;
+        if (Object.keys(rest).length === 0) delete next[problemId];
+        else next[problemId] = rest;
+      } else {
+        next[problemId] = { ...cur, tags };
+      }
+      return next;
+    });
+    void updateProblemTags(problemId, tags);
+  }, []);
+
+  return { overrides, updateLinks, updateTags, loading };
 }

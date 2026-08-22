@@ -10,7 +10,7 @@ type RawTopic = {
   patterns: {
     patternId: string;
     name: string;
-    problems: { id: string; name: string; difficulty: string; source: string; links: { platform: string; url: string }[] }[];
+    problems: { id: string; name: string; difficulty: string; tags?: string[]; source?: string; links: { platform: string; url: string }[] }[];
   }[];
 };
 
@@ -27,6 +27,7 @@ function buildFallbackTopics(): Topic[] {
         id: prob.id,
         name: prob.name,
         difficulty: prob.difficulty as Topic["patterns"][number]["problems"][number]["difficulty"],
+        tags: (prob.tags ?? (prob.source ? [prob.source] : [])) as Topic["patterns"][number]["problems"][number]["tags"],
         source: prob.source as Topic["patterns"][number]["problems"][number]["source"],
         links: prob.links as Topic["patterns"][number]["problems"][number]["links"],
         topicId: t.topicId,

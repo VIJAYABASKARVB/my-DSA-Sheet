@@ -10,69 +10,83 @@
           "id": "largest-element-in-array",
           "name": "Largest Element in an Array",
           "difficulty": "Easy",
-          "source": "Striver",
-          "links": []
+          "links": [],
+          "tags": [
+            "Striver"
+          ]
         },
         {
           "id": "second-smallest-and-largest-element",
           "name": "Second Smallest & Largest Element",
           "difficulty": "Easy",
-          "source": "Striver",
-          "links": []
+          "links": [],
+          "tags": [
+            "Striver"
+          ]
         },
         {
           "id": "check-if-array-is-sorted",
           "name": "Check if Array is Sorted",
           "difficulty": "Easy",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "linear-search",
           "name": "Linear Search",
           "difficulty": "Easy",
-          "source": "Striver",
-          "links": []
+          "links": [],
+          "tags": [
+            "Striver"
+          ]
         },
         {
           "id": "maximum-consecutive-ones",
           "name": "Maximum Consecutive Ones",
           "difficulty": "Easy",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/max-consecutive-ones/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "concatenation-of-array",
           "name": "Concatenation of Array",
           "difficulty": "Easy",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/concatenation-of-array/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         },
         {
           "id": "remove-element",
           "name": "Remove Element",
           "difficulty": "Easy",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/remove-element/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         }
       ]
@@ -85,72 +99,84 @@
           "id": "contains-duplicate",
           "name": "Contains Duplicate",
           "difficulty": "Easy",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/contains-duplicate/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         },
         {
           "id": "valid-anagram",
           "name": "Valid Anagram",
           "difficulty": "Easy",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/valid-anagram/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         },
         {
           "id": "two-sum",
           "name": "Two Sum",
           "difficulty": "Easy",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/two-sum/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         },
         {
           "id": "majority-element",
           "name": "Majority Element",
           "difficulty": "Easy",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/majority-element/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "find-missing-number",
           "name": "Find Missing Number",
           "difficulty": "Easy",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/missing-number/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "number-that-appears-once",
           "name": "Number that Appears Once",
           "difficulty": "Easy",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/single-number/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         }
       ]
@@ -163,68 +189,80 @@
           "id": "sort-an-array",
           "name": "Sort an Array",
           "difficulty": "Medium",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/sort-an-array/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "sort-colors",
           "name": "Sort Colors",
           "difficulty": "Medium",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/sort-colors/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "longest-common-prefix",
           "name": "Longest Common Prefix",
           "difficulty": "Easy",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/longest-common-prefix/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "group-anagrams",
           "name": "Group Anagrams",
           "difficulty": "Medium",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/group-anagrams/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         },
         {
           "id": "merge-overlapping-intervals",
           "name": "Merge Overlapping Intervals",
           "difficulty": "Medium",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/merge-intervals/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "leaders-in-an-array",
           "name": "Leaders in an Array",
           "difficulty": "Easy",
-          "source": "Striver",
-          "links": []
+          "links": [],
+          "tags": [
+            "Striver"
+          ]
         }
       ]
     },
@@ -236,67 +274,79 @@
           "id": "left-rotate-array-by-one",
           "name": "Left Rotate Array by One",
           "difficulty": "Easy",
-          "source": "Striver",
-          "links": []
+          "links": [],
+          "tags": [
+            "Striver"
+          ]
         },
         {
           "id": "rotate-array-by-k-places",
           "name": "Rotate Array by K Places",
           "difficulty": "Medium",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/rotate-array/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "rearrange-array-by-sign",
           "name": "Rearrange Array by Sign",
           "difficulty": "Medium",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/rearrange-array-elements-by-sign/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "next-permutation",
           "name": "Next Permutation",
           "difficulty": "Medium",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/next-permutation/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "stock-buy-and-sell",
           "name": "Stock Buy and Sell",
           "difficulty": "Easy",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "best-time-to-buy-and-sell-stock-ii",
           "name": "Best Time to Buy and Sell Stock II",
           "difficulty": "Medium",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         }
       ]
@@ -309,12 +359,14 @@
           "id": "product-of-array-except-self",
           "name": "Product of Array Except Self",
           "difficulty": "Medium",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/product-of-array-except-self/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         }
       ]
@@ -327,60 +379,70 @@
           "id": "top-k-frequent-elements",
           "name": "Top K Frequent Elements",
           "difficulty": "Medium",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/top-k-frequent-elements/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         },
         {
           "id": "valid-sudoku",
           "name": "Valid Sudoku",
           "difficulty": "Medium",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/valid-sudoku/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         },
         {
           "id": "longest-consecutive-sequence",
           "name": "Longest Consecutive Sequence",
           "difficulty": "Medium",
-          "source": "Neetcode",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/longest-consecutive-sequence/"
             }
+          ],
+          "tags": [
+            "Neetcode"
           ]
         },
         {
           "id": "find-repeating-and-missing-number",
           "name": "Find Repeating & Missing Number",
           "difficulty": "Medium",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/set-mismatch/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         },
         {
           "id": "majority-element-ii",
           "name": "Majority Element II",
           "difficulty": "Medium",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/majority-element-ii/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         }
       ]
@@ -393,12 +455,14 @@
           "id": "first-missing-positive",
           "name": "First Missing Positive",
           "difficulty": "Hard",
-          "source": "Striver",
           "links": [
             {
               "platform": "LeetCode",
               "url": "https://leetcode.com/problems/first-missing-positive/"
             }
+          ],
+          "tags": [
+            "Striver"
           ]
         }
       ]

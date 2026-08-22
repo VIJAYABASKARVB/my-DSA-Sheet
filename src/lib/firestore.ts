@@ -2,25 +2,33 @@ import { db } from "./firebase";
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   setDoc,
   deleteDoc,
   onSnapshot,
   serverTimestamp,
   Timestamp,
+  deleteField,
 } from "firebase/firestore";
-import type { Status, PlatformLink, Topic, Problem, Difficulty, Source } from "./types";
+import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag } from "./types";
 
 type ProblemDoc = {
   id: string;
   name: string;
   difficulty: Difficulty;
-  source: Source;
+  tags: Tag[];
+  source?: string;
   links: PlatformLink[];
   topicId: string;
   topicName: string;
   patternId: string;
   patternName: string;
+};
+
+type OverrideDoc = {
+  links?: PlatformLink[];
+  tags?: Tag[];
 };
 
 export async function getProgress(): Promise<Record<string, Status>> {
@@ -60,36 +68,68 @@ export function subscribeToProgress(callback: (progress: Record<string, Status>)
   );
 }
 
-export async function getProblemOverrides(): Promise<Record<string, PlatformLink[]>> {
+export async function getProblemOverrides(): Promise<Record<string, OverrideDoc>> {
   const snap = await getDocs(collection(db, "problemOverrides"));
-  const out: Record<string, PlatformLink[]> = {};
+  const out: Record<string, OverrideDoc> = {};
   snap.forEach((d) => {
-    const data = d.data() as { links: PlatformLink[] };
-    if (Array.isArray(data.links)) out[d.id] = data.links;
+    const data = d.data() as OverrideDoc;
+    const entry: OverrideDoc = {};
+    if (Array.isArray(data.links)) entry.links = data.links;
+    if (Array.isArray(data.tags)) entry.tags = data.tags;
+    if (entry.links || entry.tags) out[d.id] = entry;
   });
   return out;
 }
 
 export async function updateProblemLinks(problemId: string, links: PlatformLink[]): Promise<void> {
   try {
+    const ref = doc(db, "problemOverrides", problemId);
     if (links.length === 0) {
-      await deleteDoc(doc(db, "problemOverrides", problemId));
+      const snap = await getDoc(ref);
+      const existing = snap.exists() ? (snap.data() as OverrideDoc) : undefined;
+      if (!existing?.tags || existing.tags.length === 0) {
+        await deleteDoc(ref);
+      } else {
+        await setDoc(ref, { links: deleteField(), updatedAt: serverTimestamp() }, { merge: true });
+      }
     } else {
-      await setDoc(doc(db, "problemOverrides", problemId), { links, updatedAt: serverTimestamp() }, { merge: true });
+      await setDoc(ref, { links, updatedAt: serverTimestamp() }, { merge: true });
     }
   } catch (e) {
     console.error("[firestore] updateProblemLinks failed", problemId, e);
   }
 }
 
-export function subscribeToOverrides(callback: (overrides: Record<string, PlatformLink[]>) => void): () => void {
+export async function updateProblemTags(problemId: string, tags: Tag[]): Promise<void> {
+  try {
+    const ref = doc(db, "problemOverrides", problemId);
+    if (tags.length === 0) {
+      const snap = await getDoc(ref);
+      const existing = snap.exists() ? (snap.data() as OverrideDoc) : undefined;
+      if (!existing?.links || existing.links.length === 0) {
+        await deleteDoc(ref);
+      } else {
+        await setDoc(ref, { tags: deleteField(), updatedAt: serverTimestamp() }, { merge: true });
+      }
+    } else {
+      await setDoc(ref, { tags, updatedAt: serverTimestamp() }, { merge: true });
+    }
+  } catch (e) {
+    console.error("[firestore] updateProblemTags failed", problemId, e);
+  }
+}
+
+export function subscribeToOverrides(callback: (overrides: Record<string, OverrideDoc>) => void): () => void {
   return onSnapshot(
     collection(db, "problemOverrides"),
     (snap) => {
-      const out: Record<string, PlatformLink[]> = {};
+      const out: Record<string, OverrideDoc> = {};
       snap.forEach((d) => {
-        const data = d.data() as { links: PlatformLink[] };
-        if (Array.isArray(data.links)) out[d.id] = data.links;
+        const data = d.data() as OverrideDoc;
+        const entry: OverrideDoc = {};
+        if (Array.isArray(data.links)) entry.links = data.links;
+        if (Array.isArray(data.tags)) entry.tags = data.tags;
+        if (entry.links || entry.tags) out[d.id] = entry;
       });
       callback(out);
     },
@@ -113,11 +153,13 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
       pMap.set(d.patternId, { patternName: d.patternName, problems: [] });
     }
     const group = pMap.get(d.patternId)!;
+    const tags: Tag[] = Array.isArray(d.tags) ? d.tags : d.source ? [d.source] : [];
     group.problems.push({
       id: d.id,
       name: d.name,
       difficulty: d.difficulty,
-      source: d.source,
+      tags,
+      source: d.source as unknown as Problem["source"],
       links: d.links ?? [],
       topicId: d.topicId,
       patternId: d.patternId,

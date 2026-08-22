@@ -76,11 +76,12 @@ for (const topic of topics) {
     for (const p of problems) {
       total++;
       const problemId = p.id;
+      const tags = Array.isArray(p.tags) ? p.tags : p.source ? [p.source] : [];
       const docData = {
         id: problemId,
         name: p.name,
         difficulty: p.difficulty,
-        source: p.source,
+        tags,
         links: p.links ?? [],
         topicId,
         topicName,

@@ -1,7 +1,7 @@
 "use client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ProblemRow } from "./ProblemRow";
-import type { Pattern, MergedProblem, Status, PlatformLink } from "@/lib/types";
+import type { Pattern, MergedProblem, Status, PlatformLink, Tag } from "@/lib/types";
 
 export function PatternAccordion({
   pattern,
@@ -9,12 +9,14 @@ export function PatternAccordion({
   progress,
   onStatusChange,
   onEditLinks,
+  onEditTags,
 }: {
   pattern: Pattern;
   problems: MergedProblem[];
   progress: Record<string, Status>;
   onStatusChange: (id: string, next: Status) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
+  onEditTags: (id: string, tags: Tag[]) => void;
 }) {
   const solved = problems.filter((p) => progress[p.id] === "solved").length;
   return (
@@ -35,6 +37,7 @@ export function PatternAccordion({
                 status={progress[p.id] ?? "unsolved"}
                 onStatusChange={onStatusChange}
                 onEditLinks={onEditLinks}
+                onEditTags={onEditTags}
               />
             ))}
           </div>

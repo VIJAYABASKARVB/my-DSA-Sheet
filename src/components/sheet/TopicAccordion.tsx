@@ -2,7 +2,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
 import { PatternAccordion } from "./PatternAccordion";
-import type { Topic, MergedProblem, Status, PlatformLink } from "@/lib/types";
+import type { Topic, MergedProblem, Status, PlatformLink, Tag } from "@/lib/types";
 
 export function TopicAccordion({
   topic,
@@ -10,12 +10,14 @@ export function TopicAccordion({
   progress,
   onStatusChange,
   onEditLinks,
+  onEditTags,
 }: {
   topic: Pick<Topic, "id" | "name">;
   patterns: { pattern: Topic["patterns"][number]; problems: MergedProblem[] }[];
   progress: Record<string, Status>;
   onStatusChange: (id: string, next: Status) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
+  onEditTags: (id: string, tags: Tag[]) => void;
 }) {
   const total = patterns.reduce((acc, cur) => acc + cur.problems.length, 0);
   const solved = patterns.reduce((acc, cur) => acc + cur.problems.filter((p) => progress[p.id] === "solved").length, 0);
@@ -40,6 +42,7 @@ export function TopicAccordion({
               progress={progress}
               onStatusChange={onStatusChange}
               onEditLinks={onEditLinks}
+              onEditTags={onEditTags}
             />
           ))}
         </AccordionContent>

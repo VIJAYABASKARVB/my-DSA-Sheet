@@ -1,6 +1,7 @@
 export type Difficulty = 'Easy' | 'Medium' | 'Hard';
 export type Status = 'unsolved' | 'solved' | 'review';
 export type Source = 'Neetcode' | 'Striver' | 'Others';
+export type Tag = string;
 
 export type PlatformLink = {
   platform: 'LeetCode' | 'TakeUForward' | 'Code360' | 'GeeksForGeeks' | 'InterviewBit';
@@ -11,7 +12,8 @@ export type Problem = {
   id: string;
   name: string;
   difficulty: Difficulty;
-  source: Source;
+  tags: Tag[];
+  source?: Source;
   links: PlatformLink[];
   topicId: string;
   patternId: string;
@@ -36,7 +38,8 @@ export type ProgressDoc = {
 };
 
 export type ProblemOverrideDoc = {
-  links: PlatformLink[];
+  links?: PlatformLink[];
+  tags?: Tag[];
   updatedAt: Date;
 };
 
