@@ -1,0 +1,398 @@
+{
+  "topicId": "trees-dfs-bfs",
+  "name": "Trees — DFS & BFS",
+  "patterns": [
+    {
+      "patternId": "stage-1-traversal-foundations",
+      "name": "Stage 1 — Traversal Foundations",
+      "problems": [
+        {
+          "id": "binary-tree-inorder-traversal",
+          "name": "Binary Tree Inorder Traversal",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-inorder-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/inorder-traversal-of-binary-tree/" }
+          ]
+        },
+        {
+          "id": "binary-tree-preorder-traversal",
+          "name": "Binary Tree Preorder Traversal",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-preorder-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/preorder-traversal-of-binary-tree/" }
+          ]
+        },
+        {
+          "id": "binary-tree-postorder-traversal",
+          "name": "Binary Tree Postorder Traversal",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-postorder-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/post-order-traversal-of-binary-tree/" }
+          ]
+        },
+        {
+          "id": "binary-tree-level-order-traversal",
+          "name": "Binary Tree Level Order Traversal",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/level-order-traversal-of-a-binary-tree/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-2-iterative-traversals",
+      "name": "Stage 2 — Iterative Traversals",
+      "problems": [
+        {
+          "id": "iterative-inorder-traversal",
+          "name": "Iterative Binary Tree Inorder Traversal",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-inorder-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/inorder-traversal-of-binary-tree/" }
+          ]
+        },
+        {
+          "id": "iterative-preorder-traversal",
+          "name": "Iterative Binary Tree Preorder Traversal",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-preorder-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/preorder-traversal-of-binary-tree/" }
+          ]
+        },
+        {
+          "id": "postorder-traversal-2-stacks",
+          "name": "Binary Tree Postorder Traversal Using 2 Stacks",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-postorder-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/post-order-traversal-of-binary-tree/" }
+          ]
+        },
+        {
+          "id": "postorder-traversal-1-stack",
+          "name": "Binary Tree Postorder Traversal Using 1 Stack",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-postorder-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/post-order-traversal-of-binary-tree/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-3-dfs-postorder-problems",
+      "name": "Stage 3 — DFS Post-order Problems",
+      "problems": [
+        {
+          "id": "maximum-depth-of-binary-tree",
+          "name": "Maximum Depth of Binary Tree",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/find-the-maximum-depth-of-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "balanced-binary-tree",
+          "name": "Balanced Binary Tree",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/balanced-binary-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/check-whether-the-binary-tree-is-balanced-binary-tree/" }
+          ]
+        },
+        {
+          "id": "diameter-of-binary-tree",
+          "name": "Diameter of Binary Tree",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/diameter-of-binary-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/calculate-the-diameter-of-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "binary-tree-maximum-path-sum",
+          "name": "Binary Tree Maximum Path Sum",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-maximum-path-sum/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/maximum-sum-path-in-binary-tree/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-4-dfs-preorder-problems",
+      "name": "Stage 4 — DFS Pre-order Problems",
+      "problems": [
+        {
+          "id": "same-tree",
+          "name": "Same Tree",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/same-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/check-if-two-trees-are-identical/" }
+          ]
+        },
+        {
+          "id": "symmetric-tree",
+          "name": "Symmetric Tree",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/symmetric-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/check-for-symmetrical-binary-tree/" }
+          ]
+        },
+        {
+          "id": "binary-tree-right-side-view",
+          "name": "Binary Tree Right Side View",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-right-side-view/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/right-left-view-of-binary-tree/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-5-bfs-level-order-variants",
+      "name": "Stage 5 — BFS Level Order Variants",
+      "problems": [
+        {
+          "id": "zigzag-level-order-traversal",
+          "name": "ZigZag Level Order Traversal",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/zig-zag-traversal-of-binary-tree/" }
+          ]
+        },
+        {
+          "id": "maximum-width-of-binary-tree",
+          "name": "Maximum Width of Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/maximum-width-of-binary-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/maximum-width-of-a-binary-tree/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-6-view-problems",
+      "name": "Stage 6 — View Problems (BFS + Column Map)",
+      "problems": [
+        {
+          "id": "vertical-order-traversal",
+          "name": "Vertical Order Traversal of a Binary Tree",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/vertical-order-traversal-of-binary-tree/" }
+          ]
+        },
+        {
+          "id": "top-view-of-binary-tree",
+          "name": "Top View of Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/top-view-of-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "bottom-view-of-binary-tree",
+          "name": "Bottom View of Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/bottom-view-of-a-binary-tree/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-7-path-and-ancestor-problems",
+      "name": "Stage 7 — Path & Ancestor Problems",
+      "problems": [
+        {
+          "id": "print-root-to-node-path",
+          "name": "Print Root to Node Path in a Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/print-root-to-node-path-in-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "lowest-common-ancestor",
+          "name": "Lowest Common Ancestor of a Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/lowest-common-ancestor-for-two-given-nodes/" }
+          ]
+        },
+        {
+          "id": "all-nodes-distance-k",
+          "name": "All Nodes Distance K in Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/print-all-the-nodes-at-a-distance-of-k-in-a-binary-tree/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-8-boundary-special-traversals",
+      "name": "Stage 8 — Boundary & Special Traversals",
+      "problems": [
+        {
+          "id": "boundary-traversal",
+          "name": "Boundary Traversal of Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/boundary-of-binary-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/boundary-traversal-of-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "children-sum-property",
+          "name": "Check for Children Sum Property in a Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/check-for-children-sum-property-in-a-binary-tree/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-9-construction-problems",
+      "name": "Stage 9 — Construction Problems",
+      "problems": [
+        {
+          "id": "requirements-to-construct-unique-bt",
+          "name": "Requirements Needed to Construct a Unique Binary Tree",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/construct-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "construct-bt-preorder-inorder",
+          "name": "Construct Binary Tree from Preorder and Inorder Traversal",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/construct-a-binary-tree-from-inorder-and-preorder-traversal/" }
+          ]
+        },
+        {
+          "id": "construct-bt-postorder-inorder",
+          "name": "Construct Binary Tree from Inorder and Postorder Traversal",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/construct-binary-tree-from-inorder-and-postorder-traversal/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-10-advanced-hard",
+      "name": "Stage 10 — Advanced / Hard",
+      "problems": [
+        {
+          "id": "morris-inorder-traversal",
+          "name": "Morris Inorder Traversal of a Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/morris-inorder-traversal-of-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "morris-preorder-traversal",
+          "name": "Morris Preorder Traversal of a Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/morris-preorder-traversal-of-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "flatten-binary-tree-to-linked-list",
+          "name": "Flatten Binary Tree to Linked List",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/flatten-binary-tree-to-linked-list/" }
+          ]
+        },
+        {
+          "id": "count-complete-tree-nodes",
+          "name": "Count Total Nodes in a Complete Binary Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/count-complete-tree-nodes/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/count-number-of-nodes-in-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "serialize-deserialize-binary-tree",
+          "name": "Serialize and Deserialize Binary Tree",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/" },
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/serialize-and-deserialize-a-binary-tree/" }
+          ]
+        },
+        {
+          "id": "burn-binary-tree",
+          "name": "Minimum Time Taken to Burn the Binary Tree from a Node",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            { "platform": "TakeUForward", "url": "https://takeuforward.org/data-structure/minimum-time-taken-to-burn-the-binary-tree-from-a-node/" }
+          ]
+        }
+      ]
+    }
+  ]
+}

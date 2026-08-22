@@ -2,13 +2,13 @@
 
 Personal clean DSA problem tracking sheet — inspired by Striver's A2Z but with multi-source problems, Firestore-backed progress, and a collapsible Topic → Pattern → Problem hierarchy.
 
-**Live topics:** `Arrays & Hashing` (7 stages, 34 problems) and `Trees — DFS & BFS` (10 stages, 34 problems) — **68 problems total**. Firestore syncs progress + editable links across devices (global store, no auth for v1).
+**Live topics:** `Arrays & Hashing` (7 stages, 34 problems) and `Trees — DFS & BFS` (10 stages, 34 problems) — **68 problems total**. Firestore is primary for **problems** (`problems/{problemId}`) + progress (`progress/{problemId}`) + editable link overrides (`problemOverrides/{problemId}`), all synced via `onSnapshot`. JSON files in `src/data/` are **seed-only artifacts** (backup/export), not fetched at runtime.
 
 ## Tech Stack
 
 - **Framework:** Next.js 14+ (App Router, `src/` dir, `@/*` alias)
-- **Styling:** Tailwind CSS v4 + shadcn/ui (`accordion`, `badge`, `button`, `progress`, `input`, `select`, `dialog`, `sonner`)
-- **Database:** Firebase Firestore (global collections `/progress` + `/problemOverrides`, `onSnapshot` realtime)
+- **Styling:** Tailwind CSS v4 + shadcn/ui (`accordion`, `badge`, `button`, `progress`, `input`, `select`, `dialog`, `sonner`) — forced dark (`class="dark"` on `<html>`)
+- **Database:** Firebase Firestore (collections `problems`, `progress`, `problemOverrides`, `onSnapshot` realtime)
 - **Language:** TypeScript strict (never `any`)
 - **Deployment:** Vercel
 
@@ -30,6 +30,9 @@ cp .env.example .env.local
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /problems/{problemId} {
+      allow read, write: if true;
+    }
     match /progress/{problemId} {
       allow read, write: if true;
     }
@@ -39,12 +42,17 @@ service cloud.firestore {
   }
 }
 
-# 5. Run
+# 5. Seed problems (Firestore primary, JSON is seed-only)
+npm run seed
+# → reads src/data/problems.json (built from arrays-topic.json + trees-topic.json) and upserts 68 docs to problems/
+
+# 6. Run
 npm run dev
 # → http://localhost:3000 redirects to /sheet
 
-# 6. Build
+# 7. Build
 npm run build
+# On Windows: npm run build already uses --webpack (Turbopack needs native bindings)
 ```
 
 ### Env vars (`.env.local` / Vercel)
@@ -60,34 +68,46 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 
 ## How to add new problems
 
-Edit `src/data/problems.ts` — add to the correct `Pattern.problems[]`:
+**Firestore primary — JSON is seed/export, not fetched at runtime.**
 
-```ts
+1. Edit the relevant JSON seed file:
+   - Arrays: `src/data/arrays-topic.json`
+   - Trees: `src/data/trees-topic.json` (verbatim IDs from your provided JSON, e.g., `postorder-traversal-2-stacks`, `vertical-order-traversal`, `burn-binary-tree`)
+   - Or edit combined `src/data/problems.json` (generated from the two above via `node -e` merge)
+
+Example entry (inside `patterns[].problems[]`):
+```json
 {
-  id: "two-sum-ii",                          // unique slug
-  name: "Two Sum II",
-  difficulty: "Medium",                      // Easy | Medium | Hard
-  source: "Neetcode",                        // Neetcode | Striver | Others
-  links: [{ platform: "LeetCode", url: "https://leetcode.com/problems/two-sum-ii/" }],
-  topicId: "arrays-hashing",
-  patternId: "stage-2-basic-hashing-counting",
+  "id": "two-sum-ii",
+  "name": "Two Sum II",
+  "difficulty": "Medium",
+  "source": "Neetcode",
+  "links": [{ "platform": "LeetCode", "url": "https://leetcode.com/problems/two-sum-ii/" }]
 }
 ```
 
-No Firestore seeding needed — static data is the source of truth. Redeploy after edits. Link overrides via the UI don't require code changes.
+2. Re-seed Firestore:
+```bash
+npm run seed
+# Or: node scripts/seed-problems.mjs
+```
+
+3. No redeploy needed for data — Firestore is live. The app’s `useProblems()` hook (`onSnapshot(collection(db,'problems'))`) picks up changes instantly across devices. Link overrides via UI still don’t require code changes.
+
+**Direct Firestore alternative:** Add a doc to `problems/{newId}` with fields `{ id, name, difficulty, source, links, topicId, topicName, patternId, patternName }` via Firebase console — no JSON edit needed.
 
 ## How link editing works
 
-Click `✎` on any `ProblemRow` → Dialog with per-platform `Select` + `url` `Input` → `Add link` / `Remove` → `Save` writes to Firestore `problemOverrides/{problemId}` (fire-and-forget, optimistic). `useProblemOverrides` merges overrides over static `problems.ts` links via `onSnapshot` — cross-device, realtime. Empty links delete the override doc (reverts to static).
+Click `✎` on any `ProblemRow` → Dialog with per-platform `Select` + `url` `Input` → `Add link` / `Remove` → `Save` writes to Firestore `problemOverrides/{problemId}` (fire-and-forget, optimistic). `useProblemOverrides` merges overrides over Firestore `problems` links via `onSnapshot` — cross-device, realtime. Empty links delete the override doc (reverts to Firestore base).
 
 ## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx          # root layout + Toaster
+│   ├── layout.tsx          # root layout + Toaster, forced dark
 │   ├── page.tsx            # → redirect('/sheet')
-│   └── sheet/page.tsx      # main sheet (merge + filters)
+│   └── sheet/page.tsx      # main sheet (useProblems + merge + filters)
 ├── components/
 │   ├── sheet/              # TopicAccordion, PatternAccordion, ProblemRow
 │   ├── ui/                 # shadcn components
@@ -95,9 +115,13 @@ src/
 ├── lib/
 │   ├── types.ts            # Difficulty, Status, Source, Problem, Topic...
 │   ├── firebase.ts         # getFirestore only (no Auth for v1)
-│   └── firestore.ts        # getProgress, subscribeToProgress, updateProblemStatus, etc.
-├── data/problems.ts        # 68 problems, single source of truth
-└── hooks/                  # useProgress, useProblemOverrides (onSnapshot + optimistic)
+│   └── firestore.ts        # subscribeToProblems, getProgress, subscribeToProgress, etc.
+├── data/
+│   ├── trees-topic.json    # Trees seed (verbatim, 10 stages, TakeUForward+LeetCode)
+│   ├── arrays-topic.json   # Arrays seed (converted to same shape)
+│   └── problems.json       # combined backup { topics: [...] } — not fetched, seed-only
+├── hooks/                  # useProblems (Firestore), useProgress, useProblemOverrides
+└── scripts/seed-problems.mjs  # reads problems.json → upserts problems/ collection
 ```
 
 ## Filter behavior
@@ -115,11 +139,12 @@ Click status icon on `ProblemRow`: `unsolved (☐) → solved (✓) → review (
 ```bash
 vercel
 # Set same NEXT_PUBLIC_FIREBASE_* env vars in Vercel dashboard → Redeploy
+# After first deploy, run `npm run seed` locally (with prod env vars) to populate Firestore problems
 ```
 
 ## Migration to multi-user (v2)
 
-Move global collections to `users/{userId}/progress/{problemId}` + `users/{userId}/problemOverrides/{problemId}` with Firebase Auth (`GoogleAuthProvider`, `onAuthStateChanged`, `AuthContext`). Keep `problems.ts` static or mirror to `problems/{problemId}` for admin.
+Move global collections to `users/{userId}/progress/{problemId}` + `users/{userId}/problemOverrides/{problemId}` with Firebase Auth (`GoogleAuthProvider`, `onAuthStateChanged`, `AuthContext`). `problems` collection stays global or also per-user if needed.
 
 ## License
 

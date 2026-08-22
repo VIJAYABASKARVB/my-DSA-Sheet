@@ -1,0 +1,344 @@
+{
+  "topicId": "arrays-hashing",
+  "name": "Arrays & Hashing",
+  "patterns": [
+    {
+      "patternId": "stage-1-array-basics",
+      "name": "Stage 1 — Array Basics",
+      "problems": [
+        {
+          "id": "largest-element-in-array",
+          "name": "Largest Element in an Array",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": []
+        },
+        {
+          "id": "second-smallest-and-largest-element",
+          "name": "Second Smallest & Largest Element",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": []
+        },
+        {
+          "id": "check-if-array-is-sorted",
+          "name": "Check if Array is Sorted",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/" }
+          ]
+        },
+        {
+          "id": "linear-search",
+          "name": "Linear Search",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": []
+        },
+        {
+          "id": "maximum-consecutive-ones",
+          "name": "Maximum Consecutive Ones",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/max-consecutive-ones/" }
+          ]
+        },
+        {
+          "id": "concatenation-of-array",
+          "name": "Concatenation of Array",
+          "difficulty": "Easy",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/concatenation-of-array/" }
+          ]
+        },
+        {
+          "id": "remove-element",
+          "name": "Remove Element",
+          "difficulty": "Easy",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/remove-element/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-2-basic-hashing-counting",
+      "name": "Stage 2 — Basic Hashing & Counting",
+      "problems": [
+        {
+          "id": "contains-duplicate",
+          "name": "Contains Duplicate",
+          "difficulty": "Easy",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/contains-duplicate/" }
+          ]
+        },
+        {
+          "id": "valid-anagram",
+          "name": "Valid Anagram",
+          "difficulty": "Easy",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/valid-anagram/" }
+          ]
+        },
+        {
+          "id": "two-sum",
+          "name": "Two Sum",
+          "difficulty": "Easy",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/two-sum/" }
+          ]
+        },
+        {
+          "id": "majority-element",
+          "name": "Majority Element",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/majority-element/" }
+          ]
+        },
+        {
+          "id": "find-missing-number",
+          "name": "Find Missing Number",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/missing-number/" }
+          ]
+        },
+        {
+          "id": "number-that-appears-once",
+          "name": "Number that Appears Once",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/single-number/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-3-sorting-based-problems",
+      "name": "Stage 3 — Sorting-Based Problems",
+      "problems": [
+        {
+          "id": "sort-an-array",
+          "name": "Sort an Array",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/sort-an-array/" }
+          ]
+        },
+        {
+          "id": "sort-colors",
+          "name": "Sort Colors",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/sort-colors/" }
+          ]
+        },
+        {
+          "id": "longest-common-prefix",
+          "name": "Longest Common Prefix",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/longest-common-prefix/" }
+          ]
+        },
+        {
+          "id": "group-anagrams",
+          "name": "Group Anagrams",
+          "difficulty": "Medium",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/group-anagrams/" }
+          ]
+        },
+        {
+          "id": "merge-overlapping-intervals",
+          "name": "Merge Overlapping Intervals",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/merge-intervals/" }
+          ]
+        },
+        {
+          "id": "leaders-in-an-array",
+          "name": "Leaders in an Array",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": []
+        }
+      ]
+    },
+    {
+      "patternId": "stage-4-array-manipulation",
+      "name": "Stage 4 — Array Manipulation",
+      "problems": [
+        {
+          "id": "left-rotate-array-by-one",
+          "name": "Left Rotate Array by One",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": []
+        },
+        {
+          "id": "rotate-array-by-k-places",
+          "name": "Rotate Array by K Places",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/rotate-array/" }
+          ]
+        },
+        {
+          "id": "rearrange-array-by-sign",
+          "name": "Rearrange Array by Sign",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/rearrange-array-elements-by-sign/" }
+          ]
+        },
+        {
+          "id": "next-permutation",
+          "name": "Next Permutation",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/next-permutation/" }
+          ]
+        },
+        {
+          "id": "stock-buy-and-sell",
+          "name": "Stock Buy and Sell",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" }
+          ]
+        },
+        {
+          "id": "best-time-to-buy-and-sell-stock-ii",
+          "name": "Best Time to Buy and Sell Stock II",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-5-prefix-sum-pattern",
+      "name": "Stage 5 — Prefix Sum Pattern",
+      "problems": [
+        {
+          "id": "range-sum-query-2d-immutable",
+          "name": "Range Sum Query 2D Immutable",
+          "difficulty": "Medium",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/range-sum-query-2d-immutable/" }
+          ]
+        },
+        {
+          "id": "subarray-sum-equals-k",
+          "name": "Subarray Sum Equals K",
+          "difficulty": "Medium",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/subarray-sum-equals-k/" }
+          ]
+        },
+        {
+          "id": "product-of-array-except-self",
+          "name": "Product of Array Except Self",
+          "difficulty": "Medium",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/product-of-array-except-self/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-6-advanced-hashing",
+      "name": "Stage 6 — Advanced Hashing",
+      "problems": [
+        {
+          "id": "top-k-frequent-elements",
+          "name": "Top K Frequent Elements",
+          "difficulty": "Medium",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/top-k-frequent-elements/" }
+          ]
+        },
+        {
+          "id": "valid-sudoku",
+          "name": "Valid Sudoku",
+          "difficulty": "Medium",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/valid-sudoku/" }
+          ]
+        },
+        {
+          "id": "longest-consecutive-sequence",
+          "name": "Longest Consecutive Sequence",
+          "difficulty": "Medium",
+          "source": "Neetcode",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/longest-consecutive-sequence/" }
+          ]
+        },
+        {
+          "id": "find-repeating-and-missing-number",
+          "name": "Find Repeating & Missing Number",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/set-mismatch/" }
+          ]
+        },
+        {
+          "id": "majority-element-ii",
+          "name": "Majority Element II",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/majority-element-ii/" }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-7-hard-placement-classics",
+      "name": "Stage 7 — Hard / Placement Classics",
+      "problems": [
+        {
+          "id": "first-missing-positive",
+          "name": "First Missing Positive",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "links": [
+            { "platform": "LeetCode", "url": "https://leetcode.com/problems/first-missing-positive/" }
+          ]
+        }
+      ]
+    }
+  ]
+}

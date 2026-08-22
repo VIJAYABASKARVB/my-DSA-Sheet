@@ -1,16 +1,17 @@
 "use client";
 import { useMemo, useState } from "react";
-import { topics } from "@/data/problems";
+import { useProblems } from "@/hooks/useProblems";
 import { useProgress } from "@/hooks/useProgress";
 import { useProblemOverrides } from "@/hooks/useProblemOverrides";
 import { FilterBar, type Filters } from "@/components/FilterBar";
 import { TopicAccordion } from "@/components/sheet/TopicAccordion";
-import type { MergedProblem, Topic, Pattern } from "@/lib/types";
+import type { MergedProblem, Pattern } from "@/lib/types";
 
 type MergedPatternGroup = { pattern: Pattern; problems: MergedProblem[] };
 type MergedTopic = { id: string; name: string; patterns: MergedPatternGroup[] };
 
 export default function SheetPage() {
+  const { topics, loading: problemsLoading } = useProblems();
   const { progress, updateStatus, loading: pLoading } = useProgress();
   const { overrides, updateLinks, loading: oLoading } = useProblemOverrides();
   const [filters, setFilters] = useState<Filters>({ search: "", topic: null, difficulty: null, status: null, source: null });
@@ -32,7 +33,7 @@ export default function SheetPage() {
           ),
         })),
       })),
-    [overrides]
+    [topics, overrides]
   );
 
   const filtered: MergedTopic[] = useMemo(() => {
@@ -57,7 +58,7 @@ export default function SheetPage() {
       .filter(Boolean) as MergedTopic[];
   }, [mergedTopics, filters, progress]);
 
-  const loading = pLoading || oLoading;
+  const loading = pLoading || oLoading || problemsLoading;
   const totalProblems = topics.flatMap((t) => t.patterns.flatMap((p) => p.problems)).length;
   const solvedCount = Object.values(progress).filter((s) => s === "solved").length;
 
@@ -71,8 +72,12 @@ export default function SheetPage() {
       </div>
       <FilterBar filters={filters} setFilters={setFilters} topicNames={topics.map((t) => t.name)} />
       <div className="p-4">
-        {loading ? <div className="text-sm text-muted-foreground py-4">Loading progress…</div> : null}
-        {filtered.length === 0 ? (
+        {loading ? <div className="text-sm text-muted-foreground py-4">Loading problems…</div> : null}
+        {!loading && topics.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">
+            No problems found — Firestore is empty. Run <code className="bg-muted px-1 rounded">npm run seed</code> to populate from JSON files.
+          </div>
+        ) : filtered.length === 0 && !loading ? (
           <div className="text-center py-12 text-muted-foreground">
             No problems match your filters.{" "}
             <button
