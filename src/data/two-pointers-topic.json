@@ -1,0 +1,268 @@
+{
+  "topicId": "two-pointers",
+  "name": "Two Pointers",
+  "patterns": [
+    {
+      "patternId": "stage-1-opposite-ends-basic",
+      "name": "Stage 1 — Opposite Ends (Basic)",
+      "problems": [
+        {
+          "id": "reverse-string",
+          "name": "Reverse String",
+          "difficulty": "Easy",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/reverse-string/"
+            }
+          ]
+        },
+        {
+          "id": "valid-palindrome",
+          "name": "Valid Palindrome",
+          "difficulty": "Easy",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/valid-palindrome/"
+            }
+          ]
+        },
+        {
+          "id": "valid-palindrome-ii",
+          "name": "Valid Palindrome II",
+          "difficulty": "Easy",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/valid-palindrome-ii/"
+            }
+          ]
+        },
+        {
+          "id": "two-sum-ii",
+          "name": "Two Sum II - Input Array Is Sorted",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-2-slow-fast-pointer",
+      "name": "Stage 2 — Slow & Fast Pointer (Same Direction)",
+      "problems": [
+        {
+          "id": "remove-duplicates-from-sorted-array",
+          "name": "Remove Duplicates from Sorted Array",
+          "difficulty": "Easy",
+          "tags": ["Striver"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/remove-duplicates-in-place-from-sorted-array/"
+            }
+          ]
+        },
+        {
+          "id": "move-zeros-to-end",
+          "name": "Move Zeros to End",
+          "difficulty": "Easy",
+          "tags": ["Striver"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/move-zeroes/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/move-all-zeros-to-the-end-of-the-array/"
+            }
+          ]
+        },
+        {
+          "id": "merge-strings-alternately",
+          "name": "Merge Strings Alternately",
+          "difficulty": "Easy",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/merge-strings-alternately/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-3-two-array-merge",
+      "name": "Stage 3 — Two Arrays / Merge",
+      "problems": [
+        {
+          "id": "union-of-two-sorted-arrays",
+          "name": "Union of Two Sorted Arrays",
+          "difficulty": "Easy",
+          "tags": ["Striver"],
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/union-of-two-sorted-arrays/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/union-and-intersection-of-two-sorted-arrays-2/"
+            }
+          ]
+        },
+        {
+          "id": "merge-sorted-arrays-without-extra-space",
+          "name": "Merge Sorted Arrays Without Extra Space",
+          "difficulty": "Hard",
+          "tags": ["Striver"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/merge-sorted-array/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/merge-two-sorted-arrays-without-extra-space/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-4-opposite-ends-greedy",
+      "name": "Stage 4 — Opposite Ends + Greedy",
+      "problems": [
+        {
+          "id": "container-with-most-water",
+          "name": "Container With Most Water",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/container-with-most-water/"
+            }
+          ]
+        },
+        {
+          "id": "boats-to-save-people",
+          "name": "Boats to Save People",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/boats-to-save-people/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-5-sort-fix-two-pointer",
+      "name": "Stage 5 — Sort + Fix + Two Pointer",
+      "problems": [
+        {
+          "id": "3-sum",
+          "name": "3 Sum",
+          "difficulty": "Medium",
+          "tags": ["Striver"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/3sum/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/3-sum-find-triplets-that-add-up-to-a-zero/"
+            }
+          ]
+        },
+        {
+          "id": "4-sum",
+          "name": "4 Sum",
+          "difficulty": "Medium",
+          "tags": ["Striver"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/4sum/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/4-sum-find-quads-that-add-up-to-the-target-value/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-6-reversal-trick",
+      "name": "Stage 6 — Reversal Trick",
+      "problems": [
+        {
+          "id": "rotate-array",
+          "name": "Rotate Array",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/rotate-array/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/rotate-array-by-k-elements/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-7-hard",
+      "name": "Stage 7 — Hard",
+      "problems": [
+        {
+          "id": "trapping-rain-water",
+          "name": "Trapping Rain Water",
+          "difficulty": "Hard",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/trapping-rain-water/"
+            }
+          ]
+        },
+        {
+          "id": "best-time-to-buy-and-sell-stock-two-pointers",
+          "name": "Best Time to Buy and Sell Stock",
+          "difficulty": "Easy",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
