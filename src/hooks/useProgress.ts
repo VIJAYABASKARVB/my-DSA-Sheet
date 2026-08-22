@@ -8,11 +8,29 @@ export function useProgress() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsub = subscribeToProgress((data) => {
-      setProgress(data);
+    let resolved = false;
+    let unsub: (() => void) | null = null;
+    try {
+      unsub = subscribeToProgress((data) => {
+        resolved = true;
+        setProgress(data);
+        setLoading(false);
+      });
+    } catch (e) {
+      console.warn("[useProgress] Firestore subscribe failed, using local (in-memory)", e);
       setLoading(false);
-    });
-    return () => unsub();
+      resolved = true;
+    }
+    const timer = setTimeout(() => {
+      if (!resolved) {
+        console.info("[useProgress] Firestore timeout, using local (in-memory)");
+        setLoading(false);
+      }
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+      if (unsub) unsub();
+    };
   }, []);
 
   const updateStatus = useCallback((problemId: string, status: Status) => {

@@ -8,11 +8,29 @@ export function useProblemOverrides() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsub = subscribeToOverrides((data) => {
-      setOverrides(data);
+    let resolved = false;
+    let unsub: (() => void) | null = null;
+    try {
+      unsub = subscribeToOverrides((data) => {
+        resolved = true;
+        setOverrides(data);
+        setLoading(false);
+      });
+    } catch (e) {
+      console.warn("[useProblemOverrides] Firestore subscribe failed, using local", e);
       setLoading(false);
-    });
-    return () => unsub();
+      resolved = true;
+    }
+    const timer = setTimeout(() => {
+      if (!resolved) {
+        console.info("[useProblemOverrides] Firestore timeout, using local");
+        setLoading(false);
+      }
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+      if (unsub) unsub();
+    };
   }, []);
 
   const updateLinks = useCallback((problemId: string, links: PlatformLink[]) => {
