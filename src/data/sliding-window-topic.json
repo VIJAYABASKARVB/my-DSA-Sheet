@@ -1,0 +1,256 @@
+{
+  "topicId": "sliding-window",
+  "name": "Sliding Window",
+  "patterns": [
+    {
+      "patternId": "fixed-window",
+      "name": "Fixed Window (FW)",
+      "problems": [
+        {
+          "id": "contains-duplicate-ii",
+          "name": "Contains Duplicate II",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/contains-duplicate-ii/"
+            }
+          ]
+        },
+        {
+          "id": "maximum-points-from-cards",
+          "name": "Maximum Points You Can Obtain from Cards",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/"
+            }
+          ]
+        },
+        {
+          "id": "permutation-in-string",
+          "name": "Permutation in String",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/permutation-in-string/"
+            }
+          ]
+        },
+        {
+          "id": "find-all-anagrams-in-string",
+          "name": "Find All Anagrams in a String",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/find-all-anagrams-in-a-string/"
+            }
+          ]
+        },
+        {
+          "id": "sliding-window-maximum",
+          "name": "Sliding Window Maximum",
+          "difficulty": "Hard",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/sliding-window-maximum/"
+            }
+          ]
+        },
+        {
+          "id": "find-k-closest-elements",
+          "name": "Find K Closest Elements",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/find-k-closest-elements/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "dynamic-window",
+      "name": "Dynamic Window (DW)",
+      "problems": [
+        {
+          "id": "longest-subarray-with-sum-k",
+          "name": "Longest Subarray with Sum K (Positive)",
+          "difficulty": "Medium",
+          "tags": ["Striver"],
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/longest-subarray-with-sum-k/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/longest-sub-array-sum-k/"
+            }
+          ]
+        },
+        {
+          "id": "minimum-size-subarray-sum",
+          "name": "Minimum Size Subarray Sum",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/minimum-size-subarray-sum/"
+            }
+          ]
+        },
+        {
+          "id": "longest-substring-without-repeating-characters",
+          "name": "Longest Substring Without Repeating Characters",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
+            }
+          ]
+        },
+        {
+          "id": "max-consecutive-ones-iii",
+          "name": "Max Consecutive Ones III",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/max-consecutive-ones-iii/"
+            }
+          ]
+        },
+        {
+          "id": "fruit-into-baskets",
+          "name": "Fruit Into Baskets",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/fruit-into-baskets/"
+            }
+          ]
+        },
+        {
+          "id": "longest-repeating-character-replacement",
+          "name": "Longest Repeating Character Replacement",
+          "difficulty": "Medium",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/longest-repeating-character-replacement/"
+            }
+          ]
+        },
+        {
+          "id": "number-of-substrings-containing-all-three-characters",
+          "name": "Number of Substrings Containing All Three Characters",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/"
+            }
+          ]
+        },
+        {
+          "id": "subarray-product-less-than-k",
+          "name": "Subarray Product Less Than K",
+          "difficulty": "Medium",
+          "tags": ["Striver"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/subarray-product-less-than-k/"
+            }
+          ]
+        },
+        {
+          "id": "minimum-window-substring",
+          "name": "Minimum Window Substring",
+          "difficulty": "Hard",
+          "tags": ["Neetcode"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/minimum-window-substring/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "dynamic-window-at-most-k-trick",
+      "name": "Dynamic Window — At Most K Trick",
+      "problems": [
+        {
+          "id": "longest-substring-with-at-most-k-distinct",
+          "name": "Longest Substring With At Most K Distinct Characters",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/"
+            }
+          ]
+        },
+        {
+          "id": "binary-subarrays-with-sum",
+          "name": "Binary Subarrays With Sum",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/binary-subarrays-with-sum/"
+            }
+          ]
+        },
+        {
+          "id": "count-number-of-nice-subarrays",
+          "name": "Count Number of Nice Subarrays",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/count-number-of-nice-subarrays/"
+            }
+          ]
+        },
+        {
+          "id": "subarrays-with-k-different-integers",
+          "name": "Subarrays with K Different Integers",
+          "difficulty": "Hard",
+          "tags": ["Others"],
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/subarrays-with-k-different-integers/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
