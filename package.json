@@ -9,7 +9,9 @@
         "lint": "eslint",
         "dev:turbo": "next dev",
         "build:turbo": "next build",
-        "seed": "node scripts/seed-problems.mjs"
+        "seed": "node scripts/seed-problems.mjs",
+        "wipe:progress": "node scripts/wipe-progress.mjs",
+        "wipe:overrides": "node scripts/wipe-progress.mjs --overrides"
     },
     "dependencies": {
         "@base-ui/react": "^1.7.0",

@@ -1,0 +1,144 @@
+{
+  "topicId": "prefix-sum",
+  "name": "Prefix Sum",
+  "patterns": [
+    {
+      "patternId": "prefix-sum-problems",
+      "name": "Prefix Sum — Ordered Problem List",
+      "problems": [
+        {
+          "id": "range-sum-query-immutable",
+          "name": "Range Sum Query - Immutable",
+          "difficulty": "Easy",
+          "source": "Others",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/range-sum-query-immutable/"
+            }
+          ]
+        },
+        {
+          "id": "largest-subarray-with-sum-0",
+          "name": "Largest Subarray with Sum 0",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/largest-subarray-with-0-sum/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/find-the-largest-subarray-with-0-sum/"
+            }
+          ]
+        },
+        {
+          "id": "longest-subarray-with-zero-sum",
+          "name": "Longest Subarray with Zero Sum",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/longest-subarray-with-0-sum/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/longest-sub-array-sum-0/"
+            }
+          ]
+        },
+        {
+          "id": "contiguous-array",
+          "name": "Contiguous Array",
+          "difficulty": "Medium",
+          "source": "Others",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/contiguous-array/"
+            }
+          ]
+        },
+        {
+          "id": "count-subarrays-with-given-sum",
+          "name": "Count Subarrays with Given Sum",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/count-subarray-sum-equals-k/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/number-subarrays-sum-exactly-equal-k/"
+            }
+          ]
+        },
+        {
+          "id": "subarray-sum-equals-k",
+          "name": "Subarray Sum Equals K",
+          "difficulty": "Medium",
+          "source": "Neetcode",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/subarray-sum-equals-k/"
+            },
+            {
+              "platform": "InterviewBit",
+              "url": "https://www.interviewbit.com/problems/subarray-sum-equals-k/"
+            }
+          ]
+        },
+        {
+          "id": "subarray-sums-divisible-by-k",
+          "name": "Subarray Sums Divisible by K",
+          "difficulty": "Medium",
+          "source": "Others",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/subarray-sums-divisible-by-k/"
+            },
+            {
+              "platform": "InterviewBit",
+              "url": "https://www.interviewbit.com/problems/subarray-sums-divisible-by-k/"
+            }
+          ]
+        },
+        {
+          "id": "continuous-subarray-sum",
+          "name": "Continuous Subarray Sum",
+          "difficulty": "Medium",
+          "source": "Others",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/continuous-subarray-sum/"
+            },
+            {
+              "platform": "InterviewBit",
+              "url": "https://www.interviewbit.com/problems/continuous-subarray-sum/"
+            }
+          ]
+        },
+        {
+          "id": "range-sum-query-2d-immutable",
+          "name": "Range Sum Query 2D Immutable",
+          "difficulty": "Medium",
+          "source": "Neetcode",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/range-sum-query-2d-immutable/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -26,7 +26,10 @@
           "difficulty": "Easy",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/"
+            }
           ]
         },
         {
@@ -42,7 +45,10 @@
           "difficulty": "Easy",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/max-consecutive-ones/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/max-consecutive-ones/"
+            }
           ]
         },
         {
@@ -51,7 +57,10 @@
           "difficulty": "Easy",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/concatenation-of-array/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/concatenation-of-array/"
+            }
           ]
         },
         {
@@ -60,7 +69,10 @@
           "difficulty": "Easy",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/remove-element/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/remove-element/"
+            }
           ]
         }
       ]
@@ -75,7 +87,10 @@
           "difficulty": "Easy",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/contains-duplicate/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/contains-duplicate/"
+            }
           ]
         },
         {
@@ -84,7 +99,10 @@
           "difficulty": "Easy",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/valid-anagram/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/valid-anagram/"
+            }
           ]
         },
         {
@@ -93,7 +111,10 @@
           "difficulty": "Easy",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/two-sum/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/two-sum/"
+            }
           ]
         },
         {
@@ -102,7 +123,10 @@
           "difficulty": "Easy",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/majority-element/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/majority-element/"
+            }
           ]
         },
         {
@@ -111,7 +135,10 @@
           "difficulty": "Easy",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/missing-number/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/missing-number/"
+            }
           ]
         },
         {
@@ -120,7 +147,10 @@
           "difficulty": "Easy",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/single-number/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/single-number/"
+            }
           ]
         }
       ]
@@ -135,7 +165,10 @@
           "difficulty": "Medium",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/sort-an-array/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/sort-an-array/"
+            }
           ]
         },
         {
@@ -144,7 +177,10 @@
           "difficulty": "Medium",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/sort-colors/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/sort-colors/"
+            }
           ]
         },
         {
@@ -153,7 +189,10 @@
           "difficulty": "Easy",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/longest-common-prefix/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/longest-common-prefix/"
+            }
           ]
         },
         {
@@ -162,7 +201,10 @@
           "difficulty": "Medium",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/group-anagrams/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/group-anagrams/"
+            }
           ]
         },
         {
@@ -171,7 +213,10 @@
           "difficulty": "Medium",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/merge-intervals/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/merge-intervals/"
+            }
           ]
         },
         {
@@ -200,7 +245,10 @@
           "difficulty": "Medium",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/rotate-array/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/rotate-array/"
+            }
           ]
         },
         {
@@ -209,7 +257,10 @@
           "difficulty": "Medium",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/rearrange-array-elements-by-sign/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/rearrange-array-elements-by-sign/"
+            }
           ]
         },
         {
@@ -218,7 +269,10 @@
           "difficulty": "Medium",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/next-permutation/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/next-permutation/"
+            }
           ]
         },
         {
@@ -227,7 +281,10 @@
           "difficulty": "Easy",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
+            }
           ]
         },
         {
@@ -236,7 +293,10 @@
           "difficulty": "Medium",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/"
+            }
           ]
         }
       ]
@@ -246,30 +306,15 @@
       "name": "Stage 5 — Prefix Sum Pattern",
       "problems": [
         {
-          "id": "range-sum-query-2d-immutable",
-          "name": "Range Sum Query 2D Immutable",
-          "difficulty": "Medium",
-          "source": "Neetcode",
-          "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/range-sum-query-2d-immutable/" }
-          ]
-        },
-        {
-          "id": "subarray-sum-equals-k",
-          "name": "Subarray Sum Equals K",
-          "difficulty": "Medium",
-          "source": "Neetcode",
-          "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/subarray-sum-equals-k/" }
-          ]
-        },
-        {
           "id": "product-of-array-except-self",
           "name": "Product of Array Except Self",
           "difficulty": "Medium",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/product-of-array-except-self/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/product-of-array-except-self/"
+            }
           ]
         }
       ]
@@ -284,7 +329,10 @@
           "difficulty": "Medium",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/top-k-frequent-elements/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/top-k-frequent-elements/"
+            }
           ]
         },
         {
@@ -293,7 +341,10 @@
           "difficulty": "Medium",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/valid-sudoku/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/valid-sudoku/"
+            }
           ]
         },
         {
@@ -302,7 +353,10 @@
           "difficulty": "Medium",
           "source": "Neetcode",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/longest-consecutive-sequence/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/longest-consecutive-sequence/"
+            }
           ]
         },
         {
@@ -311,7 +365,10 @@
           "difficulty": "Medium",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/set-mismatch/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/set-mismatch/"
+            }
           ]
         },
         {
@@ -320,7 +377,10 @@
           "difficulty": "Medium",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/majority-element-ii/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/majority-element-ii/"
+            }
           ]
         }
       ]
@@ -335,7 +395,10 @@
           "difficulty": "Hard",
           "source": "Striver",
           "links": [
-            { "platform": "LeetCode", "url": "https://leetcode.com/problems/first-missing-positive/" }
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/first-missing-positive/"
+            }
           ]
         }
       ]

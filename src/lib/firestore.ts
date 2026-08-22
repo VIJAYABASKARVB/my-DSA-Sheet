@@ -143,8 +143,8 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
     topics.push({ id: topic.id, name: topic.name, patterns });
   }
 
-  // Preserve known topic order: arrays-hashing first, trees-dfs-bfs second
-  const order = ["arrays-hashing", "trees-dfs-bfs"];
+  // Preserve known topic order: arrays → prefix-sum → trees
+  const order = ["arrays-hashing", "prefix-sum", "trees-dfs-bfs"];
   topics.sort((a, b) => {
     const ia = order.indexOf(a.id);
     const ib = order.indexOf(b.id);
