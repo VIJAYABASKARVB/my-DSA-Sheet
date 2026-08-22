@@ -489,6 +489,25 @@
       "name": "Stage 7 — Hard / Placement Classics",
       "problems": [
         {
+          "id": "print-subarray-with-maximum-subarray-sum",
+          "name": "Print Subarray with Maximum Subarray Sum",
+          "difficulty": "Medium",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/maximum-subarray/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/kadanes-algorithm-maximum-subarray-sum-in-an-array/"
+            }
+          ],
+          "tags": [
+            "Striver"
+          ],
+          "order": 0
+        },
+        {
           "id": "first-missing-positive",
           "name": "First Missing Positive",
           "difficulty": "Hard",
@@ -501,7 +520,26 @@
           "tags": [
             "Striver"
           ],
-          "order": 0
+          "order": 1
+        },
+        {
+          "id": "reverse-pairs",
+          "name": "Reverse Pairs",
+          "difficulty": "Hard",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/reverse-pairs/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/count-reverse-pairs/"
+            }
+          ],
+          "tags": [
+            "Striver"
+          ],
+          "order": 2
         }
       ],
       "order": 6
