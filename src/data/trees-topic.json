@@ -22,7 +22,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "binary-tree-preorder-traversal",
@@ -40,7 +41,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "binary-tree-postorder-traversal",
@@ -58,7 +60,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         },
         {
           "id": "binary-tree-level-order-traversal",
@@ -76,9 +79,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 3
         }
-      ]
+      ],
+      "order": 0
     },
     {
       "patternId": "stage-2-iterative-traversals",
@@ -100,7 +105,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "iterative-preorder-traversal",
@@ -118,7 +124,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "postorder-traversal-2-stacks",
@@ -136,7 +143,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         },
         {
           "id": "postorder-traversal-1-stack",
@@ -154,9 +162,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 3
         }
-      ]
+      ],
+      "order": 1
     },
     {
       "patternId": "stage-3-dfs-postorder-problems",
@@ -178,7 +188,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "balanced-binary-tree",
@@ -196,7 +207,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "diameter-of-binary-tree",
@@ -214,7 +226,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         },
         {
           "id": "binary-tree-maximum-path-sum",
@@ -232,9 +245,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 3
         }
-      ]
+      ],
+      "order": 2
     },
     {
       "patternId": "stage-4-dfs-preorder-problems",
@@ -256,7 +271,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "symmetric-tree",
@@ -274,7 +290,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "binary-tree-right-side-view",
@@ -292,9 +309,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         }
-      ]
+      ],
+      "order": 3
     },
     {
       "patternId": "stage-5-bfs-level-order-variants",
@@ -316,7 +335,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "maximum-width-of-binary-tree",
@@ -334,9 +354,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         }
-      ]
+      ],
+      "order": 4
     },
     {
       "patternId": "stage-6-view-problems",
@@ -358,7 +380,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "top-view-of-binary-tree",
@@ -372,7 +395,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "bottom-view-of-binary-tree",
@@ -386,9 +410,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         }
-      ]
+      ],
+      "order": 5
     },
     {
       "patternId": "stage-7-path-and-ancestor-problems",
@@ -406,7 +432,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "lowest-common-ancestor",
@@ -424,7 +451,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "all-nodes-distance-k",
@@ -442,9 +470,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         }
-      ]
+      ],
+      "order": 6
     },
     {
       "patternId": "stage-8-boundary-special-traversals",
@@ -466,7 +496,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "children-sum-property",
@@ -480,9 +511,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         }
-      ]
+      ],
+      "order": 7
     },
     {
       "patternId": "stage-9-construction-problems",
@@ -500,7 +533,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "construct-bt-preorder-inorder",
@@ -518,7 +552,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "construct-bt-postorder-inorder",
@@ -536,9 +571,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         }
-      ]
+      ],
+      "order": 8
     },
     {
       "patternId": "stage-10-advanced-hard",
@@ -556,7 +593,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "morris-preorder-traversal",
@@ -570,7 +608,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "flatten-binary-tree-to-linked-list",
@@ -588,7 +627,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         },
         {
           "id": "count-complete-tree-nodes",
@@ -606,7 +646,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 3
         },
         {
           "id": "serialize-deserialize-binary-tree",
@@ -624,7 +665,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 4
         },
         {
           "id": "burn-binary-tree",
@@ -638,9 +680,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 5
         }
-      ]
+      ],
+      "order": 9
     }
   ]
 }

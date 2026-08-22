@@ -17,18 +17,21 @@ export type Problem = {
   links: PlatformLink[];
   topicId: string;
   patternId: string;
+  order: number;
 };
 
 export type Pattern = {
   id: string;
   name: string;
   topicId: string;
+  order: number;
   problems: Problem[];
 };
 
 export type Topic = {
   id: string;
   name: string;
+  order: number;
   patterns: Pattern[];
 };
 

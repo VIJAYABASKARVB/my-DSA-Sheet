@@ -1,0 +1,81 @@
+{
+  "topicId": "matrix",
+  "name": "Matrix",
+  "patterns": [
+    {
+      "patternId": "matrix-manipulation",
+      "name": "Matrix Manipulation",
+      "order": 0,
+      "problems": [
+        {
+          "id": "set-matrix-zeroes",
+          "name": "Set Matrix Zeroes",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/set-matrix-zeroes/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/set-matrix-zero/"
+            }
+          ]
+        },
+        {
+          "id": "spiral-matrix",
+          "name": "Spiral Matrix",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/spiral-matrix/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/spiral-traversal-of-matrix/"
+            }
+          ]
+        },
+        {
+          "id": "rotate-matrix-90",
+          "name": "Rotate Matrix by 90°",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/rotate-image/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/rotate-image-by-90-degree/"
+            }
+          ]
+        },
+        {
+          "id": "pascals-triangle-i",
+          "name": "Pascal's Triangle I",
+          "difficulty": "Easy",
+          "tags": ["Others"],
+          "order": 3,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/pascals-triangle/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/program-to-generate-pascals-triangle/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "topicId": "algorithms",
+  "name": "Algorithms",
+  "patterns": [
+    {
+      "patternId": "kadanes-algorithm",
+      "name": "Kadane's Algorithm",
+      "order": 0,
+      "problems": [
+        {
+          "id": "kadanes-algorithm",
+          "name": "Kadane's Algorithm",
+          "difficulty": "Easy",
+          "tags": ["Others"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/kadanes-algorithm-maximum-subarray-sum-in-an-array/"
+            }
+          ]
+        },
+        {
+          "id": "maximum-subarray",
+          "name": "Maximum Subarray",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/maximum-subarray/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/kadanes-algorithm-maximum-subarray-sum-in-an-array/"
+            }
+          ]
+        },
+        {
+          "id": "maximum-product-subarray",
+          "name": "Maximum Product Subarray",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/maximum-product-subarray/"
+            }
+          ]
+        },
+        {
+          "id": "maximum-sum-circular-subarray",
+          "name": "Maximum Sum Circular Subarray",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "order": 3,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/maximum-sum-circular-subarray/"
+            }
+          ]
+        },
+        {
+          "id": "maximum-absolute-sum-of-any-subarray",
+          "name": "Maximum Absolute Sum of Any Subarray",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "order": 4,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "merge-sort-algorithm",
+      "name": "Merge Sort Algorithm",
+      "order": 1,
+      "problems": [
+        {
+          "id": "count-inversions",
+          "name": "Count Inversions",
+          "difficulty": "Medium",
+          "tags": ["Others"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/counting-inversions/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/count-inversions-in-an-array/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,15 +1,16 @@
 #!/usr/bin/env node
-// Seed Firestore `problems` collection from src/data/problems.json (flat collection, verbatim IDs)
+// Seed Firestore collections from individual topic JSON files (source of truth)
 // Usage: npm run seed  (requires NEXT_PUBLIC_FIREBASE_* env vars in .env.local or shell)
+// Reads 5 topic JSON files and upserts to Firestore: topics/{topicId}, patterns/{patternId}, problems/{problemId}
 // No runtime JSON fetch — JSON files are seed-only artifacts, app reads exclusively from Firestore via onSnapshot.
 
 import { readFileSync } from "fs";
 import { resolve } from "path";
+import { existsSync } from "fs";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc, serverTimestamp, collection, getDocs } from "firebase/firestore";
 
 // Load env from .env.local if present (simple parser, no dotenv dep)
-import { existsSync } from "fs";
 function loadEnvFile(path) {
   if (!existsSync(path)) return;
   const src = readFileSync(path, "utf8");
@@ -47,34 +48,78 @@ if (missing.length) {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const PROBLEMS_JSON = resolve(process.cwd(), "src/data/problems.json");
-if (!existsSync(PROBLEMS_JSON)) {
-  console.error(`Not found: ${PROBLEMS_JSON}`);
-  process.exit(1);
+// Read individual topic JSON files (source of truth)
+const topicFiles = [
+  "src/data/arrays-hashing-topic.json",
+  "src/data/two-pointers-topic.json",
+  "src/data/sliding-window-topic.json",
+  "src/data/prefix-sum-topic.json",
+  "src/data/trees-topic.json",
+  "src/data/matrix-topic.json",
+  "src/data/algorithms-topic.json",
+];
+
+const topics = [];
+for (const rel of topicFiles) {
+  const full = resolve(process.cwd(), rel);
+  if (!existsSync(full)) {
+    console.error(`Not found: ${full}`);
+    process.exit(1);
+  }
+  const data = JSON.parse(readFileSync(full, "utf8"));
+  topics.push(data);
+  console.log(`Loaded ${rel}: ${data.topicId} — ${data.patterns.length} patterns, ${data.patterns.reduce((a, p) => a + p.problems.length, 0)} problems`);
 }
 
-const raw = JSON.parse(readFileSync(PROBLEMS_JSON, "utf8"));
-const topics = raw.topics ?? raw;
-if (!Array.isArray(topics)) {
-  console.error("Invalid problems.json: expected { topics: [...] } or [...]");
-  process.exit(1);
-}
+console.log(`\nFound ${topics.length} topics from individual JSON files`);
 
-let total = 0;
-let seeded = 0;
+let totalProblems = 0;
+let totalPatterns = 0;
+let seededProblems = 0;
+let seededPatterns = 0;
+let seededTopics = 0;
 
-console.log(`Found ${topics.length} topics in ${PROBLEMS_JSON}`);
-
-for (const topic of topics) {
+for (let topicIdx = 0; topicIdx < topics.length; topicIdx++) {
+  const topic = topics[topicIdx];
   const topicId = topic.topicId ?? topic.id;
   const topicName = topic.name;
+  const topicOrder = topicIdx;
   const patterns = topic.patterns ?? [];
+
+  // Write topic metadata to topics/{topicId}
+  const topicDoc = {
+    topicId,
+    name: topicName,
+    order: topicOrder,
+    patternIds: patterns.map((p) => p.patternId ?? p.id),
+    updatedAt: serverTimestamp(),
+  };
+  await setDoc(doc(db, "topics", topicId), topicDoc, { merge: true });
+  seededTopics++;
+  console.log(`  + topics/${topicId} (order ${topicOrder})`);
+
   for (const pat of patterns) {
     const patternId = pat.patternId ?? pat.id;
     const patternName = pat.name;
+    const patternOrder = pat.order ?? patterns.indexOf(pat);
     const problems = pat.problems ?? [];
+    totalPatterns++;
+
+    // Write pattern to patterns/{patternId}
+    const patternDoc = {
+      patternId,
+      name: patternName,
+      topicId,
+      topicName,
+      order: patternOrder,
+      problemIds: problems.map((p) => p.id),
+      updatedAt: serverTimestamp(),
+    };
+    await setDoc(doc(db, "patterns", patternId), patternDoc, { merge: true });
+    seededPatterns++;
+
     for (const p of problems) {
-      total++;
+      totalProblems++;
       const problemId = p.id;
       const tags = Array.isArray(p.tags) ? p.tags : p.source ? [p.source] : [];
       const docData = {
@@ -85,26 +130,35 @@ for (const topic of topics) {
         links: p.links ?? [],
         topicId,
         topicName,
+        topicOrder,
         patternId,
         patternName,
+        patternOrder,
+        order: p.order ?? problems.indexOf(p),
         updatedAt: serverTimestamp(),
       };
-      // Use merge to keep idempotent
       await setDoc(doc(db, "problems", problemId), docData, { merge: true });
-      seeded++;
-      if (seeded % 10 === 0) console.log(`  ...seeded ${seeded}/${total} (${problemId})`);
+      seededProblems++;
+      if (seededProblems % 10 === 0) console.log(`  ...seeded ${seededProblems}/${totalProblems} problems (${problemId})`);
     }
   }
 }
 
-console.log(`✅ Seeded ${seeded} problems to Firestore collection "problems" (project: ${firebaseConfig.projectId})`);
+console.log(`\n✅ Seeded ${seededTopics} topics, ${seededPatterns} patterns, ${seededProblems} problems to Firestore (project: ${firebaseConfig.projectId})`);
 
-// Optional verification: count docs
+// Verification: count docs in each collection
 try {
-  const snap = await getDocs(collection(db, "problems"));
-  console.log(`Verified collection size: ${snap.size} docs in "problems"`);
+  const [topicsSnap, patternsSnap, problemsSnap] = await Promise.all([
+    getDocs(collection(db, "topics")),
+    getDocs(collection(db, "patterns")),
+    getDocs(collection(db, "problems")),
+  ]);
+  console.log(`Verified: topics=${topicsSnap.size}, patterns=${patternsSnap.size}, problems=${problemsSnap.size}`);
+  if (topicsSnap.size !== 7) console.warn(`⚠️  Expected 7 topics, got ${topicsSnap.size}`);
+  if (patternsSnap.size !== 31) console.warn(`⚠️  Expected 31 patterns, got ${patternsSnap.size}`);
+  if (problemsSnap.size !== 120) console.warn(`⚠️  Expected 120 problems, got ${problemsSnap.size}`);
 } catch (e) {
-  console.warn("Could not verify collection size:", e.message);
+  console.warn("Could not verify collection sizes:", e.message);
 }
 
 process.exit(0);

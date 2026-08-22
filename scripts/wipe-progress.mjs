@@ -55,7 +55,29 @@ async function wipeCollection(name) {
   console.log(`✅ Wiped ${deleted} docs from "${name}"`);
 }
 
-await wipeCollection("progress");
+async function wipeUserProgress() {
+  try {
+    const usersSnap = await getDocs(collection(db, "users"));
+    console.log(`Found ${usersSnap.size} users`);
+    let totalDeleted = 0;
+    for (const userDoc of usersSnap.docs) {
+      const progSnap = await getDocs(collection(db, "users", userDoc.id, "progress"));
+      console.log(`  User ${userDoc.id}: ${progSnap.size} progress docs`);
+      for (const d of progSnap.docs) {
+        await deleteDoc(doc(db, "users", userDoc.id, "progress", d.id));
+        totalDeleted++;
+      }
+    }
+    console.log(`✅ Wiped ${totalDeleted} docs from users/*/progress`);
+    return totalDeleted;
+  } catch (e) {
+    console.warn("Could not wipe users/*/progress (may not exist yet):", e.message);
+    return 0;
+  }
+}
+
+await wipeCollection("progress"); // legacy global
+await wipeUserProgress();
 if (includeOverrides) {
   await wipeCollection("problemOverrides");
   console.log("Also wiped problemOverrides (via --overrides)");

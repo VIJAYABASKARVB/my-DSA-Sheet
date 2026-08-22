@@ -1,5 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -17,5 +18,28 @@ if (missing.length && typeof window !== "undefined") {
   console.warn(`[firebase] Missing env vars: ${missing.join(", ")} — Firestore will fail until .env.local is set.`);
 }
 
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig as Record<string, string>);
-export const db = getFirestore(app);
+let app: ReturnType<typeof initializeApp>;
+try {
+  app = getApps().length ? getApp() : initializeApp(firebaseConfig as Record<string, string>);
+} catch (e) {
+  // Fallback for build/prerender without env — use dummy app
+  app = { name: "[DEFAULT]", options: firebaseConfig } as unknown as ReturnType<typeof initializeApp>;
+  if (typeof window !== "undefined") console.warn("[firebase] initializeApp failed:", e);
+}
+let _db: ReturnType<typeof getFirestore> | null = null;
+try {
+  _db = getFirestore(app);
+} catch (e) {
+  if (typeof window !== "undefined") console.warn("[firebase] getFirestore failed:", e);
+  _db = null as unknown as ReturnType<typeof getFirestore>;
+}
+export const db = _db as ReturnType<typeof getFirestore>;
+
+let _auth: ReturnType<typeof getAuth> | null = null;
+try {
+  _auth = getAuth(app);
+} catch (e) {
+  if (typeof window !== "undefined") console.warn("[firebase] getAuth failed (missing env):", e);
+  _auth = null as unknown as ReturnType<typeof getAuth>;
+}
+export const auth = _auth as ReturnType<typeof getAuth>;

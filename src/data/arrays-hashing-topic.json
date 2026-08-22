@@ -13,7 +13,8 @@
           "links": [],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "second-smallest-and-largest-element",
@@ -22,7 +23,8 @@
           "links": [],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "check-if-array-is-sorted",
@@ -36,7 +38,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         },
         {
           "id": "linear-search",
@@ -45,7 +48,8 @@
           "links": [],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 3
         },
         {
           "id": "maximum-consecutive-ones",
@@ -59,7 +63,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 4
         },
         {
           "id": "concatenation-of-array",
@@ -73,7 +78,8 @@
           ],
           "tags": [
             "Neetcode"
-          ]
+          ],
+          "order": 5
         },
         {
           "id": "remove-element",
@@ -87,9 +93,11 @@
           ],
           "tags": [
             "Neetcode"
-          ]
+          ],
+          "order": 6
         }
-      ]
+      ],
+      "order": 0
     },
     {
       "patternId": "stage-2-basic-hashing-counting",
@@ -107,7 +115,8 @@
           ],
           "tags": [
             "Neetcode"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "valid-anagram",
@@ -121,7 +130,8 @@
           ],
           "tags": [
             "Neetcode"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "two-sum",
@@ -135,21 +145,8 @@
           ],
           "tags": [
             "Neetcode"
-          ]
-        },
-        {
-          "id": "majority-element",
-          "name": "Majority Element",
-          "difficulty": "Easy",
-          "links": [
-            {
-              "platform": "LeetCode",
-              "url": "https://leetcode.com/problems/majority-element/"
-            }
           ],
-          "tags": [
-            "Striver"
-          ]
+          "order": 2
         },
         {
           "id": "find-missing-number",
@@ -163,7 +160,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 3
         },
         {
           "id": "number-that-appears-once",
@@ -177,9 +175,26 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 4
+        },
+        {
+          "id": "majority-element",
+          "name": "Majority Element",
+          "difficulty": "Easy",
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/majority-element/"
+            }
+          ],
+          "tags": [
+            "Striver"
+          ],
+          "order": 5
         }
-      ]
+      ],
+      "order": 1
     },
     {
       "patternId": "stage-3-sorting-based-problems",
@@ -197,7 +212,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "sort-colors",
@@ -211,7 +227,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "longest-common-prefix",
@@ -225,7 +242,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         },
         {
           "id": "group-anagrams",
@@ -239,7 +257,8 @@
           ],
           "tags": [
             "Neetcode"
-          ]
+          ],
+          "order": 3
         },
         {
           "id": "merge-overlapping-intervals",
@@ -253,7 +272,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 4
         },
         {
           "id": "leaders-in-an-array",
@@ -262,9 +282,11 @@
           "links": [],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 5
         }
-      ]
+      ],
+      "order": 2
     },
     {
       "patternId": "stage-4-array-manipulation",
@@ -277,7 +299,8 @@
           "links": [],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "rotate-array-by-k-places",
@@ -291,7 +314,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "rearrange-array-by-sign",
@@ -305,7 +329,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 2
         },
         {
           "id": "next-permutation",
@@ -319,7 +344,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 3
         },
         {
           "id": "stock-buy-and-sell",
@@ -333,7 +359,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 4
         },
         {
           "id": "best-time-to-buy-and-sell-stock-ii",
@@ -347,9 +374,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 5
         }
-      ]
+      ],
+      "order": 3
     },
     {
       "patternId": "stage-5-prefix-sum-pattern",
@@ -367,9 +396,11 @@
           ],
           "tags": [
             "Neetcode"
-          ]
+          ],
+          "order": 0
         }
-      ]
+      ],
+      "order": 4
     },
     {
       "patternId": "stage-6-advanced-hashing",
@@ -387,7 +418,8 @@
           ],
           "tags": [
             "Neetcode"
-          ]
+          ],
+          "order": 0
         },
         {
           "id": "valid-sudoku",
@@ -401,7 +433,8 @@
           ],
           "tags": [
             "Neetcode"
-          ]
+          ],
+          "order": 1
         },
         {
           "id": "longest-consecutive-sequence",
@@ -415,7 +448,8 @@
           ],
           "tags": [
             "Neetcode"
-          ]
+          ],
+          "order": 2
         },
         {
           "id": "find-repeating-and-missing-number",
@@ -429,7 +463,8 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 3
         },
         {
           "id": "majority-element-ii",
@@ -443,9 +478,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 4
         }
-      ]
+      ],
+      "order": 5
     },
     {
       "patternId": "stage-7-hard-placement-classics",
@@ -463,9 +500,11 @@
           ],
           "tags": [
             "Striver"
-          ]
+          ],
+          "order": 0
         }
-      ]
+      ],
+      "order": 6
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { db } from "./firebase";
+import { db, auth } from "./firebase";
 import {
   collection,
   doc,
@@ -22,8 +22,11 @@ type ProblemDoc = {
   links: PlatformLink[];
   topicId: string;
   topicName: string;
+  topicOrder?: number;
   patternId: string;
   patternName: string;
+  patternOrder?: number;
+  order?: number;
 };
 
 type OverrideDoc = {
@@ -31,8 +34,13 @@ type OverrideDoc = {
   tags?: Tag[];
 };
 
-export async function getProgress(): Promise<Record<string, Status>> {
-  const snap = await getDocs(collection(db, "progress"));
+export function getCurrentUserId(): string {
+  return auth?.currentUser?.uid ?? "anon";
+}
+
+export async function getProgress(userId?: string): Promise<Record<string, Status>> {
+  const uid = userId || getCurrentUserId();
+  const snap = await getDocs(collection(db, "users", uid, "progress"));
   const out: Record<string, Status> = {};
   snap.forEach((d) => {
     const data = d.data() as { status: Status; updatedAt?: Timestamp };
@@ -41,21 +49,26 @@ export async function getProgress(): Promise<Record<string, Status>> {
   return out;
 }
 
-export async function updateProblemStatus(problemId: string, status: Status): Promise<void> {
+export async function updateProblemStatus(problemId: string, status: Status, userId?: string): Promise<void> {
+  const uid = userId || getCurrentUserId();
   try {
     if (status === "unsolved") {
-      await deleteDoc(doc(db, "progress", problemId));
+      await deleteDoc(doc(db, "users", uid, "progress", problemId));
     } else {
-      await setDoc(doc(db, "progress", problemId), { status, updatedAt: serverTimestamp() }, { merge: true });
+      await setDoc(doc(db, "users", uid, "progress", problemId), { status, updatedAt: serverTimestamp() }, { merge: true });
     }
   } catch (e) {
     console.error("[firestore] updateProblemStatus failed", problemId, e);
   }
 }
 
-export function subscribeToProgress(callback: (progress: Record<string, Status>) => void): () => void {
+export function subscribeToProgress(
+  callback: (progress: Record<string, Status>) => void,
+  userId?: string
+): () => void {
+  const uid = userId || getCurrentUserId();
   return onSnapshot(
-    collection(db, "progress"),
+    collection(db, "users", uid, "progress"),
     (snap) => {
       const out: Record<string, Status> = {};
       snap.forEach((d) => {
@@ -139,18 +152,52 @@ export function subscribeToOverrides(callback: (overrides: Record<string, Overri
 
 // ---- Problems (Firestore primary) ----
 
+// TREES STAGE 10 — LEARNING ORDER DEPENDENCY:
+// Morris Inorder → Morris Preorder → Flatten Binary Tree to Linked List
+// Reason: Flatten uses the same right-pointer threading trick as Morris Traversal.
+// Without understanding Morris first, Flatten appears to be magic.
+// Do NOT reorder these three problems.
+
 function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
-  const topicMap = new Map<string, Topic>();
-  const patternMap = new Map<string, Map<string, { patternName: string; problems: Problem[] }>>();
+  const topicMap = new Map<string, Topic & { order: number }>();
+  const patternMap = new Map<
+    string,
+    Map<string, { patternName: string; patternOrder: number; problems: Problem[] }>
+  >();
+  const topicOrderMap = new Map<string, number>();
 
   for (const d of docs) {
     if (!topicMap.has(d.topicId)) {
-      topicMap.set(d.topicId, { id: d.topicId, name: d.topicName, patterns: [] });
+      topicMap.set(d.topicId, {
+        id: d.topicId,
+        name: d.topicName,
+        order: d.topicOrder ?? 999,
+        patterns: [],
+      });
       patternMap.set(d.topicId, new Map());
+      topicOrderMap.set(d.topicId, d.topicOrder ?? 999);
+    } else {
+      // Keep smallest topicOrder if multiple docs have different values
+      const cur = topicOrderMap.get(d.topicId)!;
+      const incoming = d.topicOrder ?? 999;
+      if (incoming < cur) {
+        topicOrderMap.set(d.topicId, incoming);
+        topicMap.get(d.topicId)!.order = incoming;
+      }
     }
     const pMap = patternMap.get(d.topicId)!;
     if (!pMap.has(d.patternId)) {
-      pMap.set(d.patternId, { patternName: d.patternName, problems: [] });
+      pMap.set(d.patternId, {
+        patternName: d.patternName,
+        patternOrder: d.patternOrder ?? 999,
+        problems: [],
+      });
+    } else {
+      const existing = pMap.get(d.patternId)!;
+      const incoming = d.patternOrder ?? 999;
+      if (incoming < existing.patternOrder) {
+        existing.patternOrder = incoming;
+      }
     }
     const group = pMap.get(d.patternId)!;
     const tags: Tag[] = Array.isArray(d.tags) ? d.tags : d.source ? [d.source] : [];
@@ -163,6 +210,7 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
       links: d.links ?? [],
       topicId: d.topicId,
       patternId: d.patternId,
+      order: d.order ?? 999,
     });
   }
 
@@ -174,22 +222,23 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
         id: patternId,
         name: g.patternName,
         topicId,
-        problems: g.problems,
+        order: g.patternOrder,
+        problems: g.problems.sort((a, b) => (a.order ?? 999) - (b.order ?? 999)),
       }))
-      .sort((a, b) => {
-        const na = parseInt(a.id.match(/stage-(\d+)/)?.[1] ?? "0", 10);
-        const nb = parseInt(b.id.match(/stage-(\d+)/)?.[1] ?? "0", 10);
-        if (na !== nb) return na - nb;
-        return a.id.localeCompare(b.id);
-      });
-    topics.push({ id: topic.id, name: topic.name, patterns });
+      .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+    topics.push({ id: topic.id, name: topic.name, order: topicOrderMap.get(topicId) ?? 999, patterns });
   }
 
-  // Preserve known topic order: arrays → two-pointers → sliding-window → prefix-sum → trees
-  const order = ["arrays-hashing", "two-pointers", "sliding-window", "prefix-sum", "trees-dfs-bfs"];
+  // Sort topics by explicit order field; fallback to known order for legacy docs
+  const legacyOrder = ["arrays-hashing", "two-pointers", "sliding-window", "prefix-sum", "trees-dfs-bfs"];
   topics.sort((a, b) => {
-    const ia = order.indexOf(a.id);
-    const ib = order.indexOf(b.id);
+    const oa = (a as Topic & { order: number }).order;
+    const ob = (b as Topic & { order: number }).order;
+    if (oa !== 999 || ob !== 999) {
+      if (oa !== ob) return oa - ob;
+    }
+    const ia = legacyOrder.indexOf(a.id);
+    const ib = legacyOrder.indexOf(b.id);
     if (ia !== -1 && ib !== -1) return ia - ib;
     if (ia !== -1) return -1;
     if (ib !== -1) return 1;

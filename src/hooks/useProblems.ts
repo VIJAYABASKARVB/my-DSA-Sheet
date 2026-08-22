@@ -2,28 +2,47 @@
 import { useEffect, useState } from "react";
 import type { Topic } from "@/lib/types";
 import { subscribeToProblems } from "@/lib/firestore";
-import fallbackData from "@/data/problems.json";
+import arraysHashing from "@/data/arrays-hashing-topic.json";
+import trees from "@/data/trees-topic.json";
+import prefixSum from "@/data/prefix-sum-topic.json";
+import twoPointers from "@/data/two-pointers-topic.json";
+import slidingWindow from "@/data/sliding-window-topic.json";
+import matrix from "@/data/matrix-topic.json";
+import algorithms from "@/data/algorithms-topic.json";
 
 type RawTopic = {
   topicId: string;
   name: string;
+  order?: number;
   patterns: {
     patternId: string;
     name: string;
-    problems: { id: string; name: string; difficulty: string; tags?: string[]; source?: string; links: { platform: string; url: string }[] }[];
+    order?: number;
+    problems: { id: string; name: string; difficulty: string; order?: number; tags?: string[]; source?: string; links: { platform: string; url: string }[] }[];
   }[];
 };
 
+const rawTopics: RawTopic[] = [
+  arraysHashing as RawTopic,
+  twoPointers as RawTopic,
+  slidingWindow as RawTopic,
+  prefixSum as RawTopic,
+  trees as RawTopic,
+  matrix as RawTopic,
+  algorithms as RawTopic,
+];
+
 function buildFallbackTopics(): Topic[] {
-  const raw = fallbackData as { topics: RawTopic[] };
-  return raw.topics.map((t) => ({
+  return rawTopics.map((t, tIdx) => ({
     id: t.topicId,
     name: t.name,
-    patterns: t.patterns.map((p) => ({
+    order: t.order ?? tIdx,
+    patterns: t.patterns.map((p, pIdx) => ({
       id: p.patternId,
       name: p.name,
       topicId: t.topicId,
-      problems: p.problems.map((prob) => ({
+      order: p.order ?? pIdx,
+      problems: p.problems.map((prob, probIdx) => ({
         id: prob.id,
         name: prob.name,
         difficulty: prob.difficulty as Topic["patterns"][number]["problems"][number]["difficulty"],
@@ -32,6 +51,7 @@ function buildFallbackTopics(): Topic[] {
         links: prob.links as Topic["patterns"][number]["problems"][number]["links"],
         topicId: t.topicId,
         patternId: p.patternId,
+        order: prob.order ?? probIdx,
       })),
     })),
   }));

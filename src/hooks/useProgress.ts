@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
 import type { Status } from "@/lib/types";
-import { subscribeToProgress, updateProblemStatus } from "@/lib/firestore";
+import { subscribeToProgress, updateProblemStatus, getCurrentUserId } from "@/lib/firestore";
 
-export function useProgress() {
+export function useProgress(userId?: string) {
   const [progress, setProgress] = useState<Record<string, Status>>({});
   const [loading, setLoading] = useState(true);
+
+  const effectiveUserId = userId ?? getCurrentUserId();
 
   useEffect(() => {
     let resolved = false;
@@ -15,7 +17,7 @@ export function useProgress() {
         resolved = true;
         setProgress(data);
         setLoading(false);
-      });
+      }, effectiveUserId);
     } catch (e) {
       console.warn("[useProgress] Firestore subscribe failed, using local (in-memory)", e);
       setLoading(false);
@@ -31,7 +33,7 @@ export function useProgress() {
       clearTimeout(timer);
       if (unsub) unsub();
     };
-  }, []);
+  }, [effectiveUserId]);
 
   const updateStatus = useCallback((problemId: string, status: Status) => {
     setProgress((prev) => {
@@ -40,8 +42,8 @@ export function useProgress() {
       else next[problemId] = status;
       return next;
     });
-    void updateProblemStatus(problemId, status);
-  }, []);
+    void updateProblemStatus(problemId, status, effectiveUserId);
+  }, [effectiveUserId]);
 
   return { progress, updateStatus, loading };
 }

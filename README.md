@@ -2,7 +2,7 @@
 
 Personal clean DSA problem tracking sheet — inspired by Striver's A2Z but with multi-source problems, Firestore-backed progress, and a collapsible Topic → Pattern → Problem hierarchy.
 
-**Live topics:** `Arrays & Hashing` (7 stages, 34 problems) and `Trees — DFS & BFS` (10 stages, 34 problems) — **68 problems total**. Firestore is primary for **problems** (`problems/{problemId}`) + progress (`progress/{problemId}`) + editable link overrides (`problemOverrides/{problemId}`), all synced via `onSnapshot`. JSON files in `src/data/` are **seed-only artifacts** (backup/export), not fetched at runtime.
+**Live topics:** `Arrays & Hashing` (7 stages, 32 problems), `Two Pointers` (7 stages, 16 problems), `Sliding Window` (3 patterns, 19 problems), `Prefix Sum` (9 problems) and `Trees — DFS & BFS` (10 stages, 34 problems) — **110 problems total**. Firestore is primary for **problems** (`problems/{problemId}`) + **topics** (`topics/{topicId}`) + **patterns** (`patterns/{patternId}`) + progress (`users/{userId}/progress/{problemId}`) + editable link overrides (`problemOverrides/{problemId}`), all synced via `onSnapshot`. JSON files in `src/data/` are **seed-only artifacts** (backup/export), not fetched at runtime. See [Problem Ordering Notes](#problem-ordering-notes).
 
 ## Tech Stack
 
@@ -33,8 +33,17 @@ service cloud.firestore {
     match /problems/{problemId} {
       allow read, write: if true;
     }
-    match /progress/{problemId} {
+    match /topics/{topicId} {
       allow read, write: if true;
+    }
+    match /patterns/{patternId} {
+      allow read, write: if true;
+    }
+    match /users/{userId}/progress/{problemId} {
+      allow read, write: if true;
+    }
+    match /progress/{problemId} {
+      allow read, write: if true; // legacy fallback
     }
     match /problemOverrides/{problemId} {
       allow read, write: if true;
@@ -44,7 +53,7 @@ service cloud.firestore {
 
 # 5. Seed problems (Firestore primary, JSON is seed-only)
 npm run seed
-# → reads src/data/problems.json (built from arrays-topic.json + trees-topic.json) and upserts 68 docs to problems/
+# → reads src/data/arrays-hashing-topic.json + trees-topic.json + prefix-sum-topic.json + two-pointers-topic.json + sliding-window-topic.json and upserts 110 docs to problems/, topics/, patterns/
 
 # 6. Run
 npm run dev
@@ -71,9 +80,11 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 **Firestore primary — JSON is seed/export, not fetched at runtime.**
 
 1. Edit the relevant JSON seed file:
-   - Arrays: `src/data/arrays-topic.json`
+   - Arrays: `src/data/arrays-hashing-topic.json`
    - Trees: `src/data/trees-topic.json` (verbatim IDs from your provided JSON, e.g., `postorder-traversal-2-stacks`, `vertical-order-traversal`, `burn-binary-tree`)
-   - Or edit combined `src/data/problems.json` (generated from the two above via `node -e` merge)
+   - Prefix Sum: `src/data/prefix-sum-topic.json`
+   - Two Pointers: `src/data/two-pointers-topic.json`
+   - Sliding Window: `src/data/sliding-window-topic.json`
 
 Example entry (inside `patterns[].problems[]`):
 ```json
@@ -96,6 +107,14 @@ npm run seed
 
 **Direct Firestore alternative:** Add a doc to `problems/{newId}` with fields `{ id, name, difficulty, source, links, topicId, topicName, patternId, patternName }` via Firebase console — no JSON edit needed.
 
+## Problem Ordering Notes
+
+### Trees — Stage 10
+Morris Inorder and Morris Preorder Traversal must be studied before
+Flatten Binary Tree to Linked List. Flatten uses the same right-pointer
+threading concept introduced by Morris Traversal. This order is intentional
+and must not be changed when adding or reordering problems.
+
 ## How link editing works
 
 Click `✎` on any `ProblemRow` → Dialog with per-platform `Select` + `url` `Input` → `Add link` / `Remove` → `Save` writes to Firestore `problemOverrides/{problemId}` (fire-and-forget, optimistic). `useProblemOverrides` merges overrides over Firestore `problems` links via `onSnapshot` — cross-device, realtime. Empty links delete the override doc (reverts to Firestore base).
@@ -117,11 +136,14 @@ src/
 │   ├── firebase.ts         # getFirestore only (no Auth for v1)
 │   └── firestore.ts        # subscribeToProblems, getProgress, subscribeToProgress, etc.
 ├── data/
-│   ├── trees-topic.json    # Trees seed (verbatim, 10 stages, TakeUForward+LeetCode)
-│   ├── arrays-topic.json   # Arrays seed (converted to same shape)
-│   └── problems.json       # combined backup { topics: [...] } — not fetched, seed-only
-├── hooks/                  # useProblems (Firestore), useProgress, useProblemOverrides
-└── scripts/seed-problems.mjs  # reads problems.json → upserts problems/ collection
+│   ├── arrays-hashing-topic.json  # Arrays & Hashing seed (7 stages, 32 problems)
+│   ├── trees-topic.json           # Trees seed (verbatim, 10 stages, TakeUForward+LeetCode)
+│   ├── prefix-sum-topic.json      # Prefix Sum seed (9 problems)
+│   ├── two-pointers-topic.json    # Two Pointers seed (7 stages, 16 problems)
+│   ├── sliding-window-topic.json  # Sliding Window seed (3 patterns, 19 problems)
+│   └── problems.json              # (deprecated — individual topic JSONs are now source of truth)
+├── hooks/                  # useProblems (Firestore fallback from 5 topic JSONs), useProgress (users/{userId}/progress), useProblemOverrides
+└── scripts/seed-problems.mjs  # reads 5 topic JSONs → upserts topics/, patterns/, problems/ collections with order fields
 ```
 
 ## Filter behavior
@@ -132,7 +154,7 @@ src/
 
 ## Status cycle
 
-Click status icon on `ProblemRow`: `unsolved (☐) → solved (✓) → review (⟳) → unsolved`. Optimistic UI, Firestore `setDoc`/`deleteDoc` with `serverTimestamp()`. `unsolved` = no doc in `/progress`.
+Click status icon on `ProblemRow`: `unsolved (☐) → solved (✓) → review (⟳) → unsolved`. Optimistic UI, Firestore `setDoc`/`deleteDoc` with `serverTimestamp()` to `users/{userId}/progress/{problemId}` (falls back to `anon` when no auth). `unsolved` = no doc in `users/{userId}/progress`.
 
 ## Deployment to Vercel
 
