@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import type { MergedProblem, Status, PlatformLink, Tag } from "@/lib/types";
+import { RecallButtons } from "./RecallButtons";
+import type { MergedProblem, Status, PlatformLink, Tag, RecallStatus } from "@/lib/types";
 
 const difficultyStyles: Record<string, string> = {
   Easy: "bg-emerald/10 text-emerald border-emerald/15",
@@ -15,6 +16,7 @@ const difficultyStyles: Record<string, string> = {
 };
 const platformBadge: Record<string, string> = {
   LeetCode: "LC",
+  NeetCode: "NC",
   TakeUForward: "TUF",
   Code360: "C360",
   GeeksForGeeks: "GFG",
@@ -48,13 +50,17 @@ const SUGGESTED_TAGS: Tag[] = ["Neetcode", "Striver", "Others"];
 export function ProblemRow({
   problem,
   status,
+  recallStatus,
   onStatusChange,
+  onRecallChange,
   onEditLinks,
   onEditTags,
 }: {
   problem: MergedProblem;
   status: Status;
+  recallStatus?: RecallStatus | null;
   onStatusChange: (id: string, next: Status) => void;
+  onRecallChange?: (id: string, next: RecallStatus) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
   onEditTags: (id: string, tags: Tag[]) => void;
 }) {
@@ -101,6 +107,7 @@ export function ProblemRow({
   return (
     <>
       <div
+        id={`problem-${problem.id}`}
         className="flex flex-wrap sm:flex-nowrap items-center gap-3 py-3 px-4 border-b border-white/5 last:border-b-0 hover:bg-white/[0.02] transition-colors active:scale-[0.99]"
       >
         {/* Status button */}
@@ -111,6 +118,15 @@ export function ProblemRow({
         >
           <StatusIcon className="w-3.5 h-3.5" strokeWidth={1.5} />
         </button>
+
+        {/* Recall status buttons */}
+        {onRecallChange && (
+          <RecallButtons
+            problemId={problem.id}
+            recallStatus={recallStatus}
+            onUpdate={onRecallChange}
+          />
+        )}
 
         {/* Problem name */}
         <span className="flex-1 min-w-0 truncate text-sm font-medium text-foreground">
@@ -254,6 +270,7 @@ export function ProblemRow({
                     </SelectTrigger>
                     <SelectContent className="bg-zinc-800 border-white/10">
                       <SelectItem value="LeetCode">LeetCode</SelectItem>
+                      <SelectItem value="NeetCode">NeetCode</SelectItem>
                       <SelectItem value="TakeUForward">TakeUForward</SelectItem>
                       <SelectItem value="Code360">Code360</SelectItem>
                       <SelectItem value="GeeksForGeeks">GeeksForGeeks</SelectItem>

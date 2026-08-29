@@ -1,20 +1,24 @@
 "use client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PatternAccordion } from "./PatternAccordion";
-import type { Topic, MergedProblem, Status, PlatformLink, Tag } from "@/lib/types";
+import type { Topic, MergedProblem, Status, PlatformLink, Tag, RecallStatus } from "@/lib/types";
 
 export function TopicAccordion({
   topic,
   patterns,
   progress,
+  spacedReviews,
   onStatusChange,
+  onRecallChange,
   onEditLinks,
   onEditTags,
 }: {
   topic: Pick<Topic, "id" | "name">;
   patterns: { pattern: Topic["patterns"][number]; problems: MergedProblem[] }[];
   progress: Record<string, Status>;
+  spacedReviews?: Record<string, { recallStatus: RecallStatus | null }>;
   onStatusChange: (id: string, next: Status) => void;
+  onRecallChange?: (id: string, next: RecallStatus) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
   onEditTags: (id: string, tags: Tag[]) => void;
 }) {
@@ -57,7 +61,9 @@ export function TopicAccordion({
                 pattern={pattern}
                 problems={problems}
                 progress={progress}
+                spacedReviews={spacedReviews}
                 onStatusChange={onStatusChange}
+                onRecallChange={onRecallChange}
                 onEditLinks={onEditLinks}
                 onEditTags={onEditTags}
               />

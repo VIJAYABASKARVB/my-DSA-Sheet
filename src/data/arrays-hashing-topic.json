@@ -80,21 +80,6 @@
             "Neetcode"
           ],
           "order": 5
-        },
-        {
-          "id": "remove-element",
-          "name": "Remove Element",
-          "difficulty": "Easy",
-          "links": [
-            {
-              "platform": "LeetCode",
-              "url": "https://leetcode.com/problems/remove-element/"
-            }
-          ],
-          "tags": [
-            "Neetcode"
-          ],
-          "order": 6
         }
       ],
       "order": 0
