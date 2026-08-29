@@ -11,6 +11,9 @@ import {
   Timestamp,
   deleteField,
   increment,
+  query,
+  where,
+  orderBy,
 } from "firebase/firestore";
 import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag, RecallStatus } from "./types";
 
@@ -157,13 +160,19 @@ export function subscribeToSpacedReviews(
     if (onError) onError(new Error("Not signed in"));
     return () => {};
   }
+  // Firestore index required: nextReviewAt ASC on users/{uid}/progress
+  // Firestore will log a direct link to create it on first run in dev console
   return onSnapshot(
-    collection(db, "users", uid, "progress"),
+    query(
+      collection(db, "users", uid, "progress"),
+      where("nextReviewAt", "<=", Timestamp.now()),
+      orderBy("nextReviewAt", "asc")
+    ),
     (snap) => {
       const out: Record<string, SpacedReviewDoc> = {};
       snap.forEach((d) => {
         const data = d.data() as SpacedReviewDoc;
-        // Only include docs that have spaced repetition fields
+        // secondary guard: race/corrupt write where nextReviewAt exists but recallStatus null
         if (data.recallStatus) out[d.id] = data;
       });
       callback(out);
