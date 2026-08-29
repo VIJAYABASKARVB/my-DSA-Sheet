@@ -30,46 +30,57 @@ export function TopicAccordion({
   const pct = total > 0 ? Math.round((solved / total) * 100) : 0;
 
   return (
-    <Accordion defaultValue={[topic.id]} className="mb-4">
+    <Accordion defaultValue={[topic.id]} className="mb-5">
       <AccordionItem
         value={topic.id}
-        className="rounded-[1.25rem] border border-white/5 bg-card/50 overflow-hidden data-[state=open]:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] transition-shadow"
+        className="group/topic bezel-outer !p-1.5 overflow-hidden data-[state=open]:shadow-[0_16px_48px_rgba(0,0,0,0.5)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] border-0"
       >
-        <AccordionTrigger className="px-6 py-4 hover:no-underline group">
-          <div className="flex items-center justify-between w-full">
-            <span className="font-semibold text-base tracking-tight text-foreground text-left">
-              {topic.name}
-            </span>
-            <div className="flex items-center gap-3 ml-4 shrink-0">
-              <span className="text-xs font-mono text-muted-foreground whitespace-nowrap">
-                <span className="text-emerald">{solved}</span>/{total}
+        <div className="bezel-inner overflow-hidden">
+          <AccordionTrigger className="px-5 md:px-6 py-4 hover:no-underline group flex items-center justify-between gap-4 bg-transparent hover:bg-white/[0.02] transition-colors duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] rounded-[calc(2rem-0.375rem)] [&[data-state=open]]:rounded-b-none">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <div className="hidden sm:flex w-1 self-stretch min-h-[28px] rounded-full bg-emerald/60 group-data-[state=open]/topic:bg-emerald transition-colors duration-700" />
+              <span className="font-[var(--font-instrument-serif)] text-[18px] md:text-[20px] tracking-[-0.02em] leading-none text-foreground text-left truncate">
+                {topic.name}
               </span>
-              <div className="w-20 h-1.5 rounded-full bg-white/5 overflow-hidden">
+              <span className="hidden md:inline-flex items-center rounded-full bg-white/[0.04] border border-white/5 px-2.5 py-1 text-[11px] font-mono text-zinc-400 shrink-0">
+                {patterns.length} patterns
+              </span>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="text-xs font-mono text-zinc-500 whitespace-nowrap hidden sm:inline">
+                <span className="text-emerald font-medium">{solved}</span>
+                <span className="text-zinc-600">/</span>
+                {total}
+              </span>
+              <div className="w-[88px] h-1.5 rounded-full bg-white/[0.06] border border-white/[0.04] overflow-hidden p-0.5 hidden sm:flex">
                 <div
-                  className="h-full rounded-full bg-emerald transition-all duration-500"
+                  className="h-full rounded-full bg-emerald transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
                   style={{ width: `${pct}%` }}
                 />
               </div>
+              <span className="sm:hidden text-[11px] font-mono px-2 py-1 rounded-full bg-emerald/10 border border-emerald/15 text-emerald">
+                {pct}%
+              </span>
             </div>
-          </div>
-        </AccordionTrigger>
-        <AccordionContent className="px-4 pb-4">
-          <div className="space-y-2">
-            {patterns.map(({ pattern, problems }) => (
-              <PatternAccordion
-                key={pattern.id}
-                pattern={pattern}
-                problems={problems}
-                progress={progress}
-                spacedReviews={spacedReviews}
-                onStatusChange={onStatusChange}
-                onRecallChange={onRecallChange}
-                onEditLinks={onEditLinks}
-                onEditTags={onEditTags}
-              />
-            ))}
-          </div>
-        </AccordionContent>
+          </AccordionTrigger>
+          <AccordionContent className="px-2 pb-2 md:px-3 md:pb-3">
+            <div className="space-y-2.5 pt-1">
+              {patterns.map(({ pattern, problems }) => (
+                <PatternAccordion
+                  key={pattern.id}
+                  pattern={pattern}
+                  problems={problems}
+                  progress={progress}
+                  spacedReviews={spacedReviews}
+                  onStatusChange={onStatusChange}
+                  onRecallChange={onRecallChange}
+                  onEditLinks={onEditLinks}
+                  onEditTags={onEditTags}
+                />
+              ))}
+            </div>
+          </AccordionContent>
+        </div>
       </AccordionItem>
     </Accordion>
   );
