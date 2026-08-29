@@ -10,8 +10,9 @@ import {
   serverTimestamp,
   Timestamp,
   deleteField,
+  increment,
 } from "firebase/firestore";
-import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag } from "./types";
+import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag, RecallStatus } from "./types";
 
 type ProblemDoc = {
   id: string;
@@ -34,12 +35,22 @@ type OverrideDoc = {
   tags?: Tag[];
 };
 
-export function getCurrentUserId(): string {
-  return auth?.currentUser?.uid ?? "anon";
+export type SpacedReviewDoc = {
+  recallStatus: RecallStatus | null;
+  lastReviewedAt?: Timestamp;
+  nextReviewAt?: Timestamp;
+  reviewCount?: number;
+  status?: Status;
+  updatedAt?: Timestamp;
+};
+
+export function getCurrentUserId(): string | null {
+  return auth?.currentUser?.uid ?? null;
 }
 
 export async function getProgress(userId?: string): Promise<Record<string, Status>> {
   const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot load progress");
   const snap = await getDocs(collection(db, "users", uid, "progress"));
   const out: Record<string, Status> = {};
   snap.forEach((d) => {
@@ -51,22 +62,25 @@ export async function getProgress(userId?: string): Promise<Record<string, Statu
 
 export async function updateProblemStatus(problemId: string, status: Status, userId?: string): Promise<void> {
   const uid = userId || getCurrentUserId();
-  try {
-    if (status === "unsolved") {
-      await deleteDoc(doc(db, "users", uid, "progress", problemId));
-    } else {
-      await setDoc(doc(db, "users", uid, "progress", problemId), { status, updatedAt: serverTimestamp() }, { merge: true });
-    }
-  } catch (e) {
-    console.error("[firestore] updateProblemStatus failed", problemId, e);
+  if (!uid) throw new Error("Not signed in — cannot save progress");
+  if (status === "unsolved") {
+    await deleteDoc(doc(db, "users", uid, "progress", problemId));
+  } else {
+    await setDoc(doc(db, "users", uid, "progress", problemId), { status, updatedAt: serverTimestamp() }, { merge: true });
   }
 }
 
 export function subscribeToProgress(
   callback: (progress: Record<string, Status>) => void,
-  userId?: string
+  userId?: string,
+  onError?: (err: Error) => void
 ): () => void {
   const uid = userId || getCurrentUserId();
+  if (!uid) {
+    // No user yet — return noop; caller should re-subscribe when uid available
+    if (onError) onError(new Error("Not signed in"));
+    return () => {};
+  }
   return onSnapshot(
     collection(db, "users", uid, "progress"),
     (snap) => {
@@ -77,7 +91,87 @@ export function subscribeToProgress(
       });
       callback(out);
     },
-    (err) => console.error("[firestore] subscribeToProgress error", err)
+    (err) => {
+      console.error("[firestore] subscribeToProgress error", err);
+      if (onError) onError(err as Error);
+    }
+  );
+}
+
+// ---- Spaced Repetition ----
+
+const RECALL_INTERVALS: Record<RecallStatus, number> = {
+  easy: 7,
+  hint: 3,
+  blank: 1,
+};
+
+function computeNextReviewDate(recallStatus: RecallStatus, from: Date = new Date()): Date {
+  const days = RECALL_INTERVALS[recallStatus];
+  if (days === undefined) throw new Error(`Invalid recallStatus: ${String(recallStatus)}`);
+  const d = new Date(from);
+  d.setDate(d.getDate() + days);
+  return d;
+}
+
+export async function updateRecallStatus(
+  problemId: string,
+  recallStatus: RecallStatus,
+  userId?: string
+): Promise<void> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot save recall status");
+  const nextDate = computeNextReviewDate(recallStatus, new Date());
+  await setDoc(
+    doc(db, "users", uid, "progress", problemId),
+    {
+      recallStatus,
+      lastReviewedAt: serverTimestamp(),
+      nextReviewAt: Timestamp.fromDate(nextDate),
+      reviewCount: increment(1),
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
+}
+
+export async function getSpacedReviews(userId?: string): Promise<Record<string, SpacedReviewDoc>> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot load reviews");
+  const snap = await getDocs(collection(db, "users", uid, "progress"));
+  const out: Record<string, SpacedReviewDoc> = {};
+  snap.forEach((d) => {
+    const data = d.data() as SpacedReviewDoc;
+    if (data.recallStatus) out[d.id] = data;
+  });
+  return out;
+}
+
+export function subscribeToSpacedReviews(
+  callback: (reviews: Record<string, SpacedReviewDoc>) => void,
+  userId?: string,
+  onError?: (err: Error) => void
+): () => void {
+  const uid = userId || getCurrentUserId();
+  if (!uid) {
+    if (onError) onError(new Error("Not signed in"));
+    return () => {};
+  }
+  return onSnapshot(
+    collection(db, "users", uid, "progress"),
+    (snap) => {
+      const out: Record<string, SpacedReviewDoc> = {};
+      snap.forEach((d) => {
+        const data = d.data() as SpacedReviewDoc;
+        // Only include docs that have spaced repetition fields
+        if (data.recallStatus) out[d.id] = data;
+      });
+      callback(out);
+    },
+    (err) => {
+      console.error("[firestore] subscribeToSpacedReviews error", err);
+      if (onError) onError(err as Error);
+    }
   );
 }
 
@@ -95,44 +189,45 @@ export async function getProblemOverrides(): Promise<Record<string, OverrideDoc>
 }
 
 export async function updateProblemLinks(problemId: string, links: PlatformLink[]): Promise<void> {
-  try {
-    const ref = doc(db, "problemOverrides", problemId);
-    if (links.length === 0) {
-      const snap = await getDoc(ref);
-      const existing = snap.exists() ? (snap.data() as OverrideDoc) : undefined;
-      if (!existing?.tags || existing.tags.length === 0) {
-        await deleteDoc(ref);
-      } else {
-        await setDoc(ref, { links: deleteField(), updatedAt: serverTimestamp() }, { merge: true });
-      }
+  if (!auth?.currentUser) throw new Error("Not signed in — cannot save links");
+  const ref = doc(db, "problemOverrides", problemId);
+  if (links.length === 0) {
+    const snap = await getDoc(ref);
+    const existing = snap.exists() ? (snap.data() as OverrideDoc) : undefined;
+    if (!existing?.tags || existing.tags.length === 0) {
+      await deleteDoc(ref);
     } else {
-      await setDoc(ref, { links, updatedAt: serverTimestamp() }, { merge: true });
+      await setDoc(ref, { links: deleteField(), updatedAt: serverTimestamp() }, { merge: true });
     }
-  } catch (e) {
-    console.error("[firestore] updateProblemLinks failed", problemId, e);
+  } else {
+    await setDoc(ref, { links, updatedAt: serverTimestamp() }, { merge: true });
   }
 }
 
 export async function updateProblemTags(problemId: string, tags: Tag[]): Promise<void> {
-  try {
-    const ref = doc(db, "problemOverrides", problemId);
-    if (tags.length === 0) {
-      const snap = await getDoc(ref);
-      const existing = snap.exists() ? (snap.data() as OverrideDoc) : undefined;
-      if (!existing?.links || existing.links.length === 0) {
-        await deleteDoc(ref);
-      } else {
-        await setDoc(ref, { tags: deleteField(), updatedAt: serverTimestamp() }, { merge: true });
-      }
+  if (!auth?.currentUser) throw new Error("Not signed in — cannot save tags");
+  const ref = doc(db, "problemOverrides", problemId);
+  if (tags.length === 0) {
+    const snap = await getDoc(ref);
+    const existing = snap.exists() ? (snap.data() as OverrideDoc) : undefined;
+    if (!existing?.links || existing.links.length === 0) {
+      await deleteDoc(ref);
     } else {
-      await setDoc(ref, { tags, updatedAt: serverTimestamp() }, { merge: true });
+      await setDoc(ref, { tags: deleteField(), updatedAt: serverTimestamp() }, { merge: true });
     }
-  } catch (e) {
-    console.error("[firestore] updateProblemTags failed", problemId, e);
+  } else {
+    await setDoc(ref, { tags, updatedAt: serverTimestamp() }, { merge: true });
   }
 }
 
-export function subscribeToOverrides(callback: (overrides: Record<string, OverrideDoc>) => void): () => void {
+export function subscribeToOverrides(
+  callback: (overrides: Record<string, OverrideDoc>) => void,
+  onError?: (err: Error) => void
+): () => void {
+  if (!auth?.currentUser) {
+    // Gated by auth — caller should wait for sign-in; return noop to avoid permission-denied spam
+    return () => {};
+  }
   return onSnapshot(
     collection(db, "problemOverrides"),
     (snap) => {
@@ -146,7 +241,10 @@ export function subscribeToOverrides(callback: (overrides: Record<string, Overri
       });
       callback(out);
     },
-    (err) => console.error("[firestore] subscribeToOverrides error", err)
+    (err) => {
+      console.error("[firestore] subscribeToOverrides error", err);
+      if (onError) onError(err as Error);
+    }
   );
 }
 
@@ -230,7 +328,8 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
   }
 
   // Sort topics by explicit order field; fallback to known order for legacy docs
-  const legacyOrder = ["arrays-hashing", "two-pointers", "prefix-sum", "matrix", "algorithms", "sliding-window", "linked-list", "binary-search", "trees-dfs-bfs"];
+  // Order: array & hashing → Two Pointers → Prefix Sum → matrix manipulation → algorithms → LinkedList → Sliding Window → Binary search → trees
+  const legacyOrder = ["arrays-hashing", "two-pointers", "prefix-sum", "matrix", "algorithms", "linked-list", "sliding-window", "binary-search", "trees-dfs-bfs"];
   topics.sort((a, b) => {
     const oa = (a as Topic & { order: number }).order;
     const ob = (b as Topic & { order: number }).order;
@@ -255,7 +354,10 @@ export async function getProblems(): Promise<Topic[]> {
   return buildTopicsFromDocs(docs);
 }
 
-export function subscribeToProblems(callback: (topics: Topic[]) => void): () => void {
+export function subscribeToProblems(
+  callback: (topics: Topic[]) => void,
+  onError?: (err: Error) => void
+): () => void {
   return onSnapshot(
     collection(db, "problems"),
     (snap) => {
@@ -263,6 +365,9 @@ export function subscribeToProblems(callback: (topics: Topic[]) => void): () => 
       snap.forEach((d) => docs.push(d.data() as ProblemDoc));
       callback(buildTopicsFromDocs(docs));
     },
-    (err) => console.error("[firestore] subscribeToProblems error", err)
+    (err) => {
+      console.error("[firestore] subscribeToProblems error", err);
+      if (onError) onError(err as Error);
+    }
   );
 }

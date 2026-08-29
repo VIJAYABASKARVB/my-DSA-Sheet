@@ -1,7 +1,9 @@
 "use client";
 
 import { useMemo } from "react";
-import { BookOpen, Code2 } from "lucide-react";
+import { BookOpen, Code2, LogIn, LogOut, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 function CircularProgress({
   value,
@@ -47,10 +49,22 @@ export function AppHeader({
   solvedCount,
   totalProblems,
   topicCount,
+  dueCount,
+  user,
+  authLoading,
+  signingIn,
+  onSignIn,
+  onSignOut,
 }: {
   solvedCount: number;
   totalProblems: number;
   topicCount: number;
+  dueCount?: number;
+  user?: { photoURL?: string | null; displayName?: string | null; email?: string | null } | null;
+  authLoading?: boolean;
+  signingIn?: boolean;
+  onSignIn?: () => void;
+  onSignOut?: () => void;
 }) {
   const pct = useMemo(
     () => (totalProblems > 0 ? Math.round((solvedCount / totalProblems) * 100) : 0),
@@ -81,8 +95,17 @@ export function AppHeader({
           </span>
         </div>
 
-        {/* Right — progress ring + solved */}
+        {/* Right — progress ring + solved + due + auth */}
         <div className="flex items-center gap-3">
+          {typeof dueCount === "number" && dueCount > 0 && (
+            <Badge
+              variant="outline"
+              className="hidden sm:inline-flex bg-amber-500/10 text-amber-400 border-amber-500/20 text-[11px] gap-1 px-2 py-1"
+            >
+              <Clock className="w-3 h-3" strokeWidth={1.5} />
+              {dueCount} due
+            </Badge>
+          )}
           <div className="flex items-center gap-2">
             <div className="relative">
               <CircularProgress value={pct} />
@@ -95,15 +118,53 @@ export function AppHeader({
               <span className="text-muted-foreground"> / {totalProblems}</span>
             </div>
           </div>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
-            aria-label="GitHub"
-          >
-            <Code2 className="w-4 h-4" strokeWidth={1.5} />
-          </a>
+          <div className="h-6 w-px bg-white/10 hidden sm:block" aria-hidden="true" />
+          {/* Auth */}
+          {authLoading ? (
+            <div className="w-20 h-8 rounded-lg bg-white/5 animate-pulse" aria-label="Loading auth" />
+          ) : user ? (
+            <div className="flex items-center gap-2">
+              {user.photoURL ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={user.photoURL}
+                  alt={user.displayName ?? user.email ?? "User"}
+                  className="w-7 h-7 rounded-full border border-white/10 object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div className="w-7 h-7 rounded-full bg-emerald/15 border border-emerald/20 flex items-center justify-center text-[10px] font-mono text-emerald">
+                  {(user.displayName ?? user.email ?? "U").slice(0, 1).toUpperCase()}
+                </div>
+              )}
+              <div className="hidden sm:flex flex-col leading-none">
+                <span className="text-xs font-medium text-foreground truncate max-w-[120px]">
+                  {user.displayName ?? user.email?.split("@")[0] ?? "Signed in"}
+                </span>
+                {user.email && <span className="text-[10px] text-muted-foreground truncate max-w-[120px]">{user.email}</span>}
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onSignOut}
+                className="h-8 border-white/10 hover:bg-white/5 text-xs px-2.5"
+              >
+                <LogOut className="w-3.5 h-3.5 mr-1.5" strokeWidth={1.5} />
+                <span className="hidden sm:inline">Sign out</span>
+                <span className="sm:hidden">Out</span>
+              </Button>
+            </div>
+          ) : (
+            <Button
+              onClick={onSignIn}
+              disabled={!!signingIn}
+              size="sm"
+              className="h-8 bg-emerald hover:bg-emerald/90 text-white text-xs px-3"
+            >
+              <LogIn className="w-3.5 h-3.5 mr-1.5" strokeWidth={1.5} />
+              {signingIn ? "Signing in…" : "Sign in with Google"}
+            </Button>
+          )}
         </div>
       </div>
     </header>

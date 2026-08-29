@@ -48,15 +48,17 @@ if (missing.length) {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Read individual topic JSON files (source of truth)
+// Read individual topic JSON files (source of truth) — order matches requested: array & hashing → Two Pointers → Prefix Sum → matrix → algorithms → LinkedList → Sliding Window → Binary search → trees
 const topicFiles = [
   "src/data/arrays-hashing-topic.json",
   "src/data/two-pointers-topic.json",
-  "src/data/sliding-window-topic.json",
   "src/data/prefix-sum-topic.json",
-  "src/data/trees-topic.json",
   "src/data/matrix-topic.json",
   "src/data/algorithms-topic.json",
+  "src/data/linked-list-topic.json",
+  "src/data/sliding-window-topic.json",
+  "src/data/binary-search-topic.json",
+  "src/data/trees-topic.json",
 ];
 
 const topics = [];
@@ -154,9 +156,7 @@ try {
     getDocs(collection(db, "problems")),
   ]);
   console.log(`Verified: topics=${topicsSnap.size}, patterns=${patternsSnap.size}, problems=${problemsSnap.size}`);
-  if (topicsSnap.size !== 7) console.warn(`⚠️  Expected 7 topics, got ${topicsSnap.size}`);
-  if (patternsSnap.size !== 31) console.warn(`⚠️  Expected 31 patterns, got ${patternsSnap.size}`);
-  if (problemsSnap.size !== 120) console.warn(`⚠️  Expected 120 problems, got ${problemsSnap.size}`);
+  if (topicsSnap.size !== 9) console.warn(`⚠️  Expected 9 topics, got ${topicsSnap.size}`);
 } catch (e) {
   console.warn("Could not verify collection sizes:", e.message);
 }

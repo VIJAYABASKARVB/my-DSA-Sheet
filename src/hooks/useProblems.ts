@@ -30,8 +30,8 @@ const rawTopics: RawTopic[] = [
   prefixSum as RawTopic,
   matrix as RawTopic,
   algorithms as RawTopic,
-  slidingWindow as RawTopic,
   linkedList as RawTopic,
+  slidingWindow as RawTopic,
   binarySearch as RawTopic,
   trees as RawTopic,
 ];
@@ -63,55 +63,76 @@ function buildFallbackTopics(): Topic[] {
 
 const FALLBACK_TOPICS = buildFallbackTopics();
 
-export function useProblems() {
+export function useProblems(userId?: string | null) {
   const [topics, setTopics] = useState<Topic[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     let unsub: (() => void) | null = null;
     let resolved = false;
 
-    // Helper to use local fallback (immediate, no network)
     const useFallback = () => {
       if (cancelled || resolved) return;
       resolved = true;
       setTopics(FALLBACK_TOPICS);
       setLoading(false);
-      console.info("[useProblems] Using local fallback (Firestore empty / not configured)");
+      console.info("[useProblems] Using local fallback (Firestore empty / not configured / not signed in)");
+    };
+
+    const onError = (err: Error) => {
+      const msg = err.message ?? String(err);
+      console.warn("[useProblems] Firestore error", msg);
+      // If not signed in, fallback silently (allow browsing). If signed in, show why Firestore failed but still fallback so app usable.
+      if (msg.includes("permission-denied") || msg.includes("Missing or insufficient permissions")) {
+        // Likely not signed in yet — silently fallback, don't spam
+        useFallback();
+        return;
+      }
+      if (msg.includes("Database") && msg.includes("not found")) {
+        // Only toast if user is signed in (they expect sync). For anon browsing, keep quiet.
+        if (userId) {
+          // Handled by useProgress toast; avoid duplicate loud toast here
+          console.error("[useProblems] Database not found — needs creation in console (asia-southeast1)");
+        }
+      }
+      setError(msg);
+      useFallback();
     };
 
     try {
-      unsub = subscribeToProblems((data) => {
-        if (cancelled) return;
-        // Firestore as primary — if empty (not seeded), fall back to local so sheet is usable locally
-        if (data.length === 0) {
-          useFallback();
-        } else {
-          resolved = true;
-          setTopics(data);
-          setLoading(false);
-        }
-      });
+      unsub = subscribeToProblems(
+        (data) => {
+          if (cancelled) return;
+          if (data.length === 0) {
+            useFallback();
+          } else {
+            resolved = true;
+            setTopics(data);
+            setLoading(false);
+            setError(null);
+          }
+        },
+        onError
+      );
     } catch (e) {
       console.warn("[useProblems] Firestore subscribe failed, using fallback", e);
       useFallback();
     }
 
-    // Safety: if Firestore doesn't respond in 2s (e.g., missing env), fall back so local works
     const timer = setTimeout(() => {
       if (!resolved) {
         useFallback();
       }
-    }, 2000);
+    }, 2500);
 
     return () => {
       cancelled = true;
       clearTimeout(timer);
       if (unsub) unsub();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userId]);
 
-  return { topics, loading };
+  return { topics, loading, error };
 }
