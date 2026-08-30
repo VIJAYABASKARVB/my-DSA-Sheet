@@ -123,19 +123,19 @@
   --secondary-foreground: #E8E6E1;
 
   --muted: #1E1E1E;
-  --muted-foreground: #9A9996;
+  --muted-foreground: #B8B8B5;
 
   --accent: #1E1E1E;
   --accent-foreground: #F5F5F3;
 
   --destructive: #E57373;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.10);
+  --input: rgba(255, 255, 255, 0.10);
   --ring: #F5F5F3;
 
   --chart-1: #F5F5F3;
-  --chart-2: #9A9996;
-  --chart-3: rgba(255, 255, 255, 0.08);
+  --chart-2: #B8B8B5;
+  --chart-3: rgba(255, 255, 255, 0.10);
   --chart-4: #1E1E1E;
   --chart-5: #E57373;
 
@@ -145,7 +145,7 @@
   --sidebar-primary-foreground: #0F0F0F;
   --sidebar-accent: #1E1E1E;
   --sidebar-accent-foreground: #F5F5F3;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-border: rgba(255, 255, 255, 0.10);
   --sidebar-ring: #F5F5F3;
 }
 
@@ -263,9 +263,9 @@ body::before {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
 }
 .dark .eyebrow {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.10);
   background: #1A1A1A;
-  color: #9A9996;
+  color: #B8B8B5;
 }
 
 /* Flat card */
@@ -277,7 +277,7 @@ body::before {
 }
 .dark .flat-card {
   background: #1A1A1A;
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.10);
 }
 .flat-card:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -316,9 +316,9 @@ kbd {
   border-radius: 4px;
 }
 .dark kbd {
-  color: #9A9996;
+  color: #B8B8B5;
   background: #242424;
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.10);
 }
 
 /* Hide scrollbar but keep scroll */
@@ -330,9 +330,9 @@ kbd {
 
 /* Hairlines */
 .hairline-y { border-left: 1px solid #EAEAEA; }
-.dark .hairline-y { border-left-color: rgba(255,255,255,0.08); }
+.dark .hairline-y { border-left-color: rgba(255,255,255,0.10); }
 .hairline-x { border-top: 1px solid #EAEAEA; }
-.dark .hairline-x { border-top-color: rgba(255,255,255,0.08); }
+.dark .hairline-x { border-top-color: rgba(255,255,255,0.10); }
 
 /* Ambient blob */
 .ambient-blob {

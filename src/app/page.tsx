@@ -203,7 +203,7 @@ export default function LandingPage() {
                 </div>
                 <div className="bg-muted p-4">
                   <div className="flex items-center gap-2">
-                    <span className="w-7 h-7 rounded-[6px] bg-[#FBF3DB] dark:bg-[#FBF3DB]/15 border border-border flex items-center justify-center">
+                    <span className="w-7 h-7 rounded-[6px] bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 border border-border flex items-center justify-center">
                       <MinimalIcon kind="clock" />
                     </span>
                     <span className="text-xs font-medium text-foreground">Due for Review</span>
@@ -244,7 +244,7 @@ export default function LandingPage() {
           <div data-reveal className="reveal flat-card col-span-12 lg:col-span-7 p-6 md:p-8 flex flex-col">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <span className="inline-flex items-center rounded-full bg-[#EDF3EC] dark:bg-[#EDF3EC]/12 border border-border px-2.5 py-1 text-[11px] font-mono font-medium text-[#346538] dark:text-[#86EFAC]">Progress is the product</span>
+                <span className="inline-flex items-center rounded-full bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 border border-border px-2.5 py-1 text-[11px] font-mono font-medium text-[#346538] dark:text-[#86EFAC]">Progress is the product</span>
                 <h3 className="mt-4 font-[var(--font-newsreader)] text-[22px] leading-tight tracking-[-0.02em] text-foreground">
                   Every surface answers
                   <br />
@@ -268,7 +268,7 @@ export default function LandingPage() {
                 <div className="text-[10px] tracking-[0.08em] uppercase font-medium text-muted-foreground font-mono">In review</div>
                 <div className="mt-1.5 text-xl font-mono font-semibold text-foreground">7</div>
                 <div className="text-xs text-muted-foreground">spaced</div>
-                <div className="mt-3 h-1.5 rounded-full bg-[#FBF3DB] dark:bg-[#FBF3DB]/15 border border-border overflow-hidden">
+                <div className="mt-3 h-1.5 rounded-full bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 border border-border overflow-hidden">
                   <div className="h-full bg-[#956400] dark:bg-[#EAB308] w-[60%]" />
                 </div>
               </div>
@@ -276,7 +276,7 @@ export default function LandingPage() {
                 <div className="text-[10px] tracking-[0.08em] uppercase font-medium text-muted-foreground font-mono">Due today</div>
                 <div className="mt-1.5 text-xl font-mono font-semibold text-foreground">3</div>
                 <div className="text-xs text-muted-foreground">click to jump</div>
-                <div className="mt-3 inline-flex rounded-full bg-[#FBF3DB] dark:bg-[#FBF3DB]/15 border border-border px-2 py-1 text-[10px] font-medium text-[#956400] dark:text-[#EAB308]">most overdue first</div>
+                <div className="mt-3 inline-flex rounded-full bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 border border-border px-2 py-1 text-[10px] font-medium text-[#956400] dark:text-[#EAB308]">most overdue first</div>
               </div>
             </div>
             <div className="mt-auto pt-5 flex items-center gap-2 text-xs text-muted-foreground border-t border-border">
@@ -286,11 +286,11 @@ export default function LandingPage() {
 
           <div data-reveal className="reveal flat-card col-span-12 lg:col-span-5 p-6 md:p-8 flex flex-col">
             <div className="w-full h-28 rounded-[8px] border border-border bg-muted flex items-center justify-center gap-3">
-              <span className="w-10 h-10 rounded-[8px] bg-[#E1F3FE] dark:bg-[#E1F3FE]/12 border border-border flex items-center justify-center">
+              <span className="w-10 h-10 rounded-[8px] bg-[#E1F3FE] dark:bg-[#E1F3FE]/16 border border-border flex items-center justify-center">
                 <MinimalIcon kind="layers" />
               </span>
-              <span className="w-10 h-10 rounded-[8px] bg-[#FDEBEC] dark:bg-[#FDEBEC]/10 border border-border flex items-center justify-center opacity-60 translate-y-1">○</span>
-              <span className="w-10 h-10 rounded-[8px] bg-[#EDF3EC] dark:bg-[#EDF3EC]/10 border border-border flex items-center justify-center opacity-40 -translate-y-1">◇</span>
+              <span className="w-10 h-10 rounded-[8px] bg-[#FDEBEC] dark:bg-[#FDEBEC]/16 border border-border flex items-center justify-center opacity-60 translate-y-1">○</span>
+              <span className="w-10 h-10 rounded-[8px] bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 border border-border flex items-center justify-center opacity-40 -translate-y-1">◇</span>
             </div>
             <div className="inline-flex w-fit mt-6 items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-[11px] font-medium text-foreground">
               Learn in dependency order
@@ -321,7 +321,7 @@ export default function LandingPage() {
                   {["Easy", "Medium", "Hard"].map((d) => (
                     <span
                       key={d}
-                      className={`px-3 py-1.5 rounded-[6px] text-xs font-medium border ${d === "Hard" ? "bg-[#FDEBEC] dark:bg-[#FDEBEC]/10 text-[#9F2F2D] dark:text-[#FCA5A5] border-border" : d === "Medium" ? "bg-[#FBF3DB] dark:bg-[#FBF3DB]/10 text-[#956400] dark:text-[#FDE68A] border-border" : "bg-[#EDF3EC] dark:bg-[#EDF3EC]/10 text-[#346538] dark:text-[#86EFAC] border-border"}`}
+                       className={`px-3 py-1.5 rounded-[6px] text-xs font-medium border ${d === "Hard" ? "bg-[#FDEBEC] dark:bg-[#FDEBEC]/16 text-[#9F2F2D] dark:text-[#FCA5A5] border-border" : d === "Medium" ? "bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 text-[#956400] dark:text-[#FDE68A] border-border" : "bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 text-[#346538] dark:text-[#86EFAC] border-border"}`}
                     >
                       {d}
                     </span>
@@ -340,13 +340,13 @@ export default function LandingPage() {
                 </h4>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Easy / hint / blank → next review computed. Due section sorts most overdue first.</p>
                 <div className="mt-4 flex flex-wrap gap-2 text-xs">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#EDF3EC] dark:bg-[#EDF3EC]/10 px-2.5 py-1 text-[#346538] dark:text-[#86EFAC] font-medium">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 px-2.5 py-1 text-[#346538] dark:text-[#86EFAC] font-medium">
                     <MinimalIcon kind="check" /> Easy · +7d
                   </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#FBF3DB] dark:bg-[#FBF3DB]/10 px-2.5 py-1 text-[#956400] dark:text-[#FDE68A] font-medium">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 px-2.5 py-1 text-[#956400] dark:text-[#FDE68A] font-medium">
                     <MinimalIcon kind="clock" /> Hint · +2d
                   </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#FDEBEC] dark:bg-[#FDEBEC]/10 px-2.5 py-1 text-[#9F2F2D] dark:text-[#FCA5A5] font-medium">Blank · +1d</span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#FDEBEC] dark:bg-[#FDEBEC]/16 px-2.5 py-1 text-[#9F2F2D] dark:text-[#FCA5A5] font-medium">Blank · +1d</span>
                 </div>
               </div>
             </div>

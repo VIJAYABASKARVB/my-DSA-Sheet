@@ -19,15 +19,15 @@ type Props = {
 const recallBadge: Record<RecallStatus, { label: string; className: string }> = {
   easy: {
     label: "easy",
-    className: "bg-[#EDF3EC] dark:bg-[#EDF3EC]/10 text-[#346538] dark:text-[#86EFAC] border-border",
+    className: "bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 text-[#346538] dark:text-[#86EFAC] border-border",
   },
   hint: {
     label: "hint",
-    className: "bg-[#FBF3DB] dark:bg-[#FBF3DB]/10 text-[#956400] dark:text-[#FDE68A] border-border",
+    className: "bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 text-[#956400] dark:text-[#FDE68A] border-border",
   },
   blank: {
     label: "blank",
-    className: "bg-[#FDEBEC] dark:bg-[#FDEBEC]/10 text-[#9F2F2D] dark:text-[#FCA5A5] border-border",
+    className: "bg-[#FDEBEC] dark:bg-[#FDEBEC]/16 text-[#9F2F2D] dark:text-[#FCA5A5] border-border",
   },
 };
 
@@ -53,7 +53,7 @@ export function DueForReviewSection({ dueReviews, problemMap, topicMap, patternM
     <section className="rounded-[12px] border border-border bg-card overflow-hidden" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }} aria-label="Due for review">
       <div className="px-4 py-3 flex items-center justify-between border-b border-border bg-muted/50">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-[6px] bg-[#FBF3DB] dark:bg-[#FBF3DB]/15 border border-border flex items-center justify-center text-[11px]" aria-hidden="true">
+          <div className="w-7 h-7 rounded-[6px] bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 border border-border flex items-center justify-center text-[11px]" aria-hidden="true">
             ◷
           </div>
           <h3 className="text-[13px] font-medium tracking-tight text-foreground">Due for Review</h3>
@@ -63,7 +63,7 @@ export function DueForReviewSection({ dueReviews, problemMap, topicMap, patternM
           aria-label={`${dueReviews.length} due today`}
           className={`rounded-full text-[11px] px-2.5 py-1 font-mono border tabular-nums ${
             dueReviews.length > 0
-              ? "bg-[#FBF3DB] dark:bg-[#FBF3DB]/15 text-[#956400] dark:text-[#EAB308] border-border"
+              ? "bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 text-[#956400] dark:text-[#EAB308] border-border"
               : "bg-muted text-muted-foreground border-border"
           }`}
         >
@@ -80,13 +80,13 @@ export function DueForReviewSection({ dueReviews, problemMap, topicMap, patternM
           </div>
         ) : error ? (
           <div className="p-8 text-center">
-            <div className="w-9 h-9 rounded-[6px] bg-[#FDEBEC] dark:bg-[#FDEBEC]/10 border border-border flex items-center justify-center mx-auto mb-3 text-[#9F2F2D] dark:text-[#FCA5A5] text-sm">!</div>
+            <div className="w-9 h-9 rounded-[6px] bg-[#FDEBEC] dark:bg-[#FDEBEC]/16 border border-border flex items-center justify-center mx-auto mb-3 text-[#9F2F2D] dark:text-[#FCA5A5] text-sm">!</div>
             <p className="text-sm text-foreground font-medium">Failed to load reviews</p>
             <p className="text-xs text-muted-foreground mt-1">{error}</p>
           </div>
         ) : dueReviews.length === 0 ? (
           <div className="p-8 text-center">
-            <div className="w-9 h-9 rounded-[6px] bg-[#EDF3EC] dark:bg-[#EDF3EC]/10 border border-border flex items-center justify-center mx-auto mb-3 text-[#346538] dark:text-[#86EFAC] text-sm">✓</div>
+            <div className="w-9 h-9 rounded-[6px] bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 border border-border flex items-center justify-center mx-auto mb-3 text-[#346538] dark:text-[#86EFAC] text-sm">✓</div>
             <p className="text-sm text-foreground font-medium">All caught up!</p>
             <p className="text-xs text-muted-foreground mt-1">No problems due for review. Keep solving.</p>
           </div>
@@ -100,7 +100,7 @@ export function DueForReviewSection({ dueReviews, problemMap, topicMap, patternM
               const TopicName = problem ? topicMap.get(problem.topicId) ?? problem.topicId : "—";
               const PatternName = problem ? patternMap.get(problem.patternId) ?? problem.patternId : "—";
               const overdueDays = item.nextReviewAt ? daysOverdue(item.nextReviewAt as Timestamp) : 0;
-              const overdueBg = overdueDays > 3 ? "bg-[#FDEBEC]/60 dark:bg-[#FDEBEC]/10" : overdueDays > 1 ? "bg-[#FBF3DB]/50 dark:bg-[#FBF3DB]/10" : "";
+              const overdueBg = overdueDays > 3 ? "bg-[#FDEBEC]/60 dark:bg-[#FDEBEC]/16" : overdueDays > 1 ? "bg-[#FBF3DB]/50 dark:bg-[#FBF3DB]/16" : "";
 
               return (
                 <button

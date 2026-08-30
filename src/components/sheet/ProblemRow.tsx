@@ -8,9 +8,9 @@ import { RecallButtons } from "./RecallButtons";
 import type { MergedProblem, Status, PlatformLink, Tag, RecallStatus } from "@/lib/types";
 
 const difficultyStyles: Record<string, string> = {
-  Easy: "bg-[#EDF3EC] dark:bg-[#EDF3EC]/10 text-[#346538] dark:text-[#86EFAC] border-border",
-  Medium: "bg-[#FBF3DB] dark:bg-[#FBF3DB]/10 text-[#956400] dark:text-[#FDE68A] border-border",
-  Hard: "bg-[#FDEBEC] dark:bg-[#FDEBEC]/10 text-[#9F2F2D] dark:text-[#FCA5A5] border-border",
+  Easy: "bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 text-[#346538] dark:text-[#86EFAC] border-border",
+  Medium: "bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 text-[#956400] dark:text-[#FDE68A] border-border",
+  Hard: "bg-[#FDEBEC] dark:bg-[#FDEBEC]/16 text-[#9F2F2D] dark:text-[#FCA5A5] border-border",
 };
 const platformBadge: Record<string, string> = {
   LeetCode: "LC",
@@ -37,7 +37,7 @@ const statusConfig: Record<Status, { label: string; bg: string; border: string; 
   },
   review: {
     label: "↻",
-    bg: "bg-[#FBF3DB] dark:bg-[#FBF3DB]/15",
+    bg: "bg-[#FBF3DB] dark:bg-[#FBF3DB]/16",
     border: "border-border",
     text: "text-[#956400] dark:text-[#EAB308]",
   },

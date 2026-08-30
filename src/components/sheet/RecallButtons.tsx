@@ -15,21 +15,21 @@ const buttonConfig: Record<RecallStatus, { label: string; active: string; inacti
     short: "E",
     active: "bg-primary text-primary-foreground border-primary",
     inactive:
-      "bg-[#EDF3EC] dark:bg-[#EDF3EC]/10 text-[#346538] dark:text-[#86EFAC] border-border hover:bg-[#E1F0E3] dark:hover:bg-[#EDF3EC]/15",
+      "bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 text-[#346538] dark:text-[#86EFAC] border-border hover:bg-[#E1F0E3] dark:hover:bg-[#EDF3EC]/20",
   },
   hint: {
     label: "Needed hint",
     short: "H",
     active: "bg-primary text-primary-foreground border-primary",
     inactive:
-      "bg-[#FBF3DB] dark:bg-[#FBF3DB]/10 text-[#956400] dark:text-[#FDE68A] border-border hover:bg-[#F5EED0] dark:hover:bg-[#FBF3DB]/15",
+      "bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 text-[#956400] dark:text-[#FDE68A] border-border hover:bg-[#F5EED0] dark:hover:bg-[#FBF3DB]/20",
   },
   blank: {
     label: "Blanked out",
     short: "B",
     active: "bg-primary text-primary-foreground border-primary",
     inactive:
-      "bg-[#FDEBEC] dark:bg-[#FDEBEC]/10 text-[#9F2F2D] dark:text-[#FCA5A5] border-border hover:bg-[#FBDADD] dark:hover:bg-[#FDEBEC]/15",
+      "bg-[#FDEBEC] dark:bg-[#FDEBEC]/16 text-[#9F2F2D] dark:text-[#FCA5A5] border-border hover:bg-[#FBDADD] dark:hover:bg-[#FDEBEC]/20",
   },
 };
 

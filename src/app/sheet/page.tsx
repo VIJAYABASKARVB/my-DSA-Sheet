@@ -196,7 +196,7 @@ export default function SheetPage() {
 
         {/* Auth gate — pale yellow */}
         {!authLoading && !user && (
-          <div className="mb-6 rounded-[12px] border border-border bg-[#FBF3DB] dark:bg-[#FBF3DB]/10 px-4 md:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3" role="status" aria-live="polite">
+          <div className="mb-6 rounded-[12px] border border-border bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 px-4 md:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3" role="status" aria-live="polite">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 rounded-[6px] bg-card border border-border flex items-center justify-center shrink-0 text-[#956400] dark:text-[#EAB308] text-xs" aria-hidden="true">
                 !

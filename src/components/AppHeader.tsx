@@ -124,7 +124,7 @@ export function AppHeader({
               {typeof dueCount === "number" && dueCount > 0 && (
                 <>
                   <span className="w-px h-3 bg-border" aria-hidden="true" />
-                  <span className="inline-flex items-center gap-1 rounded-[6px] bg-[#FBF3DB] dark:bg-[#FBF3DB]/15 border border-border px-2 py-0.5 text-[11px] font-medium text-[#956400] dark:text-[#EAB308]">
+                  <span className="inline-flex items-center gap-1 rounded-[6px] bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 border border-border px-2 py-0.5 text-[11px] font-medium text-[#956400] dark:text-[#EAB308]">
                     {dueCount} due
                   </span>
                 </>
@@ -249,7 +249,7 @@ export function AppHeader({
                 </div>
                 <div className="text-xs text-muted-foreground">{topicCount} topics · {totalProblems} problems</div>
                 {typeof dueCount === "number" && dueCount > 0 && (
-                  <span className="mt-1.5 inline-flex items-center rounded-full bg-[#FBF3DB] dark:bg-[#FBF3DB]/15 border border-border px-2 py-0.5 text-[11px] font-medium text-[#956400] dark:text-[#EAB308]">
+                  <span className="mt-1.5 inline-flex items-center rounded-full bg-[#FBF3DB] dark:bg-[#FBF3DB]/16 border border-border px-2 py-0.5 text-[11px] font-medium text-[#956400] dark:text-[#EAB308]">
                     {dueCount} due
                   </span>
                 )}
