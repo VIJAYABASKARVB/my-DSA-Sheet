@@ -13,20 +13,23 @@ const buttonConfig: Record<RecallStatus, { label: string; active: string; inacti
   easy: {
     label: "Easy recall",
     short: "E",
-    active: "bg-[#111111] text-white border-[#111111]",
-    inactive: "bg-[#EDF3EC] text-[#346538] border-[#EAEAEA] hover:bg-[#E1F0E3] hover:border-[#D0D0CE]",
+    active: "bg-primary text-primary-foreground border-primary",
+    inactive:
+      "bg-[#EDF3EC] dark:bg-[#EDF3EC]/10 text-[#346538] dark:text-[#86EFAC] border-border hover:bg-[#E1F0E3] dark:hover:bg-[#EDF3EC]/15",
   },
   hint: {
     label: "Needed hint",
     short: "H",
-    active: "bg-[#111111] text-white border-[#111111]",
-    inactive: "bg-[#FBF3DB] text-[#956400] border-[#EAEAEA] hover:bg-[#F5EED0] hover:border-[#D0D0CE]",
+    active: "bg-primary text-primary-foreground border-primary",
+    inactive:
+      "bg-[#FBF3DB] dark:bg-[#FBF3DB]/10 text-[#956400] dark:text-[#FDE68A] border-border hover:bg-[#F5EED0] dark:hover:bg-[#FBF3DB]/15",
   },
   blank: {
     label: "Blanked out",
     short: "B",
-    active: "bg-[#111111] text-white border-[#111111]",
-    inactive: "bg-[#FDEBEC] text-[#9F2F2D] border-[#EAEAEA] hover:bg-[#FBDADD] hover:border-[#D0D0CE]",
+    active: "bg-primary text-primary-foreground border-primary",
+    inactive:
+      "bg-[#FDEBEC] dark:bg-[#FDEBEC]/10 text-[#9F2F2D] dark:text-[#FCA5A5] border-border hover:bg-[#FBDADD] dark:hover:bg-[#FDEBEC]/15",
   },
 };
 
@@ -47,7 +50,7 @@ export function RecallButtons({ problemId, recallStatus, onUpdate, disabled }: P
             className={cn(
               "w-7 h-7 sm:w-8 sm:h-8 rounded-[6px] border flex items-center justify-center shrink-0 text-[10px] font-mono font-semibold",
               "transition-colors duration-150",
-              "active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20",
+              "active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20",
               "disabled:opacity-50 disabled:pointer-events-none",
               isActive ? cfg.active : cfg.inactive
             )}

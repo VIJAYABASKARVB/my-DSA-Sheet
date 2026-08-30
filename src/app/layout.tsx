@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Newsreader, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,10 +36,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  colorScheme: "light",
+  colorScheme: "dark light",
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F7F6F3",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F7F6F3" },
+    { media: "(prefers-color-scheme: dark)", color: "#0F0F0F" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -49,9 +53,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body className="min-h-[100dvh] flex flex-col bg-background text-foreground">
-        <div className="ambient-blob" aria-hidden="true" style={{ top: "8%", right: "12%" }} />
-        <main className="flex-1 min-h-[100dvh]">{children}</main>
-        <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+          <div className="ambient-blob" aria-hidden="true" style={{ top: "8%", right: "12%" }} />
+          <main className="flex-1 min-h-[100dvh]">{children}</main>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

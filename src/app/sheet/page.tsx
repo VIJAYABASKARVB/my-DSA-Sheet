@@ -17,7 +17,7 @@ type MergedTopic = { id: string; name: string; patterns: MergedPatternGroup[] };
 
 function SkeletonCard() {
   return (
-    <div className="rounded-[12px] border border-[#EAEAEA] bg-white p-5 space-y-3">
+    <div className="rounded-[12px] border border-border bg-card p-5 space-y-3">
       <div className="flex items-center justify-between">
         <div className="h-4 w-36 skeleton rounded-[6px]" />
         <div className="h-3 w-16 skeleton rounded-full" />
@@ -29,12 +29,12 @@ function SkeletonCard() {
 
 function StatRailCard({ label, value, sub }: { label: string; value: React.ReactNode; sub?: string }) {
   return (
-    <div className="rounded-[12px] border border-[#EAEAEA] bg-white p-5">
-      <div className="text-[10px] tracking-[0.08em] uppercase font-medium text-[#787774] font-mono mb-2">{label}</div>
-      <div className="text-[26px] font-mono font-semibold tracking-[-0.03em] leading-none text-[#111111]">
+    <div className="rounded-[12px] border border-border bg-card p-5">
+      <div className="text-[10px] tracking-[0.08em] uppercase font-medium text-muted-foreground font-mono mb-2">{label}</div>
+      <div className="text-[26px] font-mono font-semibold tracking-[-0.03em] leading-none text-foreground">
         {value}
       </div>
-      {sub && <div className="text-xs text-[#787774] mt-1.5">{sub}</div>}
+      {sub && <div className="text-xs text-muted-foreground mt-1.5">{sub}</div>}
     </div>
   );
 }
@@ -147,7 +147,7 @@ export default function SheetPage() {
   }, [topics, mergedTopics]);
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-[#F7F6F3]">
+    <div className="min-h-[100dvh] flex flex-col bg-background">
       <AppHeader
         solvedCount={solvedCount}
         totalProblems={totalProblems}
@@ -162,32 +162,32 @@ export default function SheetPage() {
 
       <div id="sheet-content" className="max-w-[1160px] mx-auto w-full flex-1 px-4 md:px-6" tabIndex={-1}>
         {/* HERO — minimal editorial */}
-        <section className="relative py-10 md:py-14 border-b border-[#EAEAEA] mb-8" aria-labelledby="hero-title">
+        <section className="relative py-10 md:py-14 border-b border-border mb-8" aria-labelledby="hero-title">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="max-w-[720px]">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="eyebrow">Curated for depth · not sprawl</span>
-                <Link href="/" className="hidden md:inline-flex items-center gap-1 text-[11px] font-medium text-[#787774] hover:text-[#111111] transition-colors border-l border-[#EAEAEA] pl-2.5 ml-1">
+                <Link href="/" className="hidden md:inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors border-l border-border pl-2.5 ml-1">
                   ← Back to home
                 </Link>
               </div>
-              <h1 id="hero-title" className="mt-4 font-[var(--font-newsreader)] text-[clamp(1.9rem,4.5vw,2.6rem)] leading-[1.05] tracking-[-0.03em] text-[#111111]">
-                Your DSA <span className="italic font-[300] text-[#787774]">Sheet</span>, perfected.
+              <h1 id="hero-title" className="mt-4 font-[var(--font-newsreader)] text-[clamp(1.9rem,4.5vw,2.6rem)] leading-[1.05] tracking-[-0.03em] text-foreground">
+                Your DSA <span className="italic font-[300] text-muted-foreground">Sheet</span>, perfected.
               </h1>
-              <p className="mt-2.5 text-[13px] leading-relaxed text-[#787774] max-w-[58ch]">
+              <p className="mt-2.5 text-[13px] leading-relaxed text-muted-foreground max-w-[58ch]">
                 Striver and NeetCode, merged and ordered. Topic → Pattern → Problem with spaced repetition and Firestore sync. Built for depth, not sprawl.
               </p>
             </div>
 
             <div className="flex items-center gap-2 flex-wrap lg:justify-end shrink-0">
-              <div className="inline-flex items-center gap-3 rounded-[8px] border border-[#EAEAEA] bg-white px-3 py-2" aria-label={`${pct}% complete`}>
-                <span className="text-[11px] font-mono tracking-wide px-2.5 py-1 rounded-[6px] bg-[#111111] text-white font-medium tabular-nums">{pct}% done</span>
-                <span className="text-xs font-mono text-[#787774] tabular-nums">
-                  <span className="text-[#111111] font-medium">{solvedCount}</span> / {totalProblems}
+              <div className="inline-flex items-center gap-3 rounded-[8px] border border-border bg-card px-3 py-2" aria-label={`${pct}% complete`}>
+                <span className="text-[11px] font-mono tracking-wide px-2.5 py-1 rounded-[6px] bg-primary text-primary-foreground font-medium tabular-nums">{pct}% done</span>
+                <span className="text-xs font-mono text-muted-foreground tabular-nums">
+                  <span className="text-foreground font-medium">{solvedCount}</span> / {totalProblems}
                 </span>
-                <span className="hidden sm:block w-px h-4 bg-[#EAEAEA]" aria-hidden="true" />
-                <span className="hidden sm:inline-flex text-xs text-[#787774] gap-1">
-                  <span className="font-mono text-[#111111] font-medium">{topics.length}</span> topics
+                <span className="hidden sm:block w-px h-4 bg-border" aria-hidden="true" />
+                <span className="hidden sm:inline-flex text-xs text-muted-foreground gap-1">
+                  <span className="font-mono text-foreground font-medium">{topics.length}</span> topics
                 </span>
               </div>
             </div>
@@ -196,15 +196,15 @@ export default function SheetPage() {
 
         {/* Auth gate — pale yellow */}
         {!authLoading && !user && (
-          <div className="mb-6 rounded-[12px] border border-[#EAEAEA] bg-[#FBF3DB] px-4 md:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3" role="status" aria-live="polite">
+          <div className="mb-6 rounded-[12px] border border-border bg-[#FBF3DB] dark:bg-[#FBF3DB]/10 px-4 md:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3" role="status" aria-live="polite">
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-[6px] bg-white border border-[#EAEAEA] flex items-center justify-center shrink-0 text-[#956400] text-xs" aria-hidden="true">
+              <div className="w-8 h-8 rounded-[6px] bg-card border border-border flex items-center justify-center shrink-0 text-[#956400] dark:text-[#EAB308] text-xs" aria-hidden="true">
                 !
               </div>
               <div>
-                <div className="text-sm font-medium tracking-tight text-[#111111]">Sign in to sync across devices</div>
-                <div className="text-xs leading-relaxed text-[#787774] mt-0.5 max-w-[60ch]">
-                  Progress in <code className="font-mono text-[#956400] bg-white border border-[#EAEAEA] px-1 py-0.5 rounded text-[11px]">users/{`{uid}`}/progress</code> · Without sign-in, changes reset on refresh.
+                <div className="text-sm font-medium tracking-tight text-foreground">Sign in to sync across devices</div>
+                <div className="text-xs leading-relaxed text-muted-foreground mt-0.5 max-w-[60ch]">
+                  Progress in <code className="font-mono text-[#956400] dark:text-[#EAB308] bg-card border border-border px-1 py-0.5 rounded text-[11px]">users/{`{uid}`}/progress</code> · Without sign-in, changes reset on refresh.
                 </div>
               </div>
             </div>
@@ -212,7 +212,7 @@ export default function SheetPage() {
               onClick={signInWithGoogle}
               disabled={signingIn}
               aria-label="Sign in with Google to enable sync"
-              className="inline-flex items-center justify-center rounded-[6px] bg-[#111111] hover:bg-[#333333] text-white text-xs font-medium px-4 py-2 shrink-0 transition-colors active:scale-[0.98] disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20"
+              className="inline-flex items-center justify-center rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-medium px-4 py-2 shrink-0 transition-colors active:scale-[0.98] disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20"
             >
               {signingIn ? "Signing in…" : "Sign in with Google"}
             </button>
@@ -220,7 +220,7 @@ export default function SheetPage() {
         )}
 
         {/* FilterBar — sticky minimal */}
-        <div className="sticky top-[56px] z-10 -mx-1 px-1 py-2 -mt-2 bg-[#F7F6F3]/85 backdrop-blur-[8px] border-b border-transparent data-[scrolled=true]:border-[#EAEAEA] data-[scrolled=true]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300" id="filter-sticky">
+        <div className="sticky top-[56px] z-10 -mx-1 px-1 py-2 -mt-2 bg-background/85 backdrop-blur-[8px] border-b border-transparent data-[scrolled=true]:border-border data-[scrolled=true]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:data-[scrolled=true]:shadow-[0_2px_12px_rgba(0,0,0,0.3)] transition-all duration-300" id="filter-sticky">
           <FilterBar
             filters={filters}
             setFilters={setFilters}
@@ -251,25 +251,25 @@ export default function SheetPage() {
                 <SkeletonCard />
               </div>
             ) : topics.length === 0 ? (
-              <div className="rounded-[12px] border border-[#EAEAEA] bg-white flex flex-col items-center justify-center py-14 md:py-16 text-center p-8">
-                <div className="w-12 h-12 rounded-[8px] bg-[#F7F6F3] border border-[#EAEAEA] flex items-center justify-center mb-4 text-[#787774] text-sm" aria-hidden="true">
+              <div className="rounded-[12px] border border-border bg-card flex flex-col items-center justify-center py-14 md:py-16 text-center p-8">
+                <div className="w-12 h-12 rounded-[8px] bg-muted border border-border flex items-center justify-center mb-4 text-muted-foreground text-sm" aria-hidden="true">
                   ◻
                 </div>
-                <h2 className="font-[var(--font-newsreader)] text-xl tracking-tight text-[#111111] mb-1.5">No problems loaded</h2>
-                <p className="text-sm text-[#787774] max-w-sm mb-5 leading-relaxed">Firestore is empty. Seed your data to get started.</p>
-                <code className="font-mono text-xs bg-[#F7F6F3] border border-[#EAEAEA] rounded-[6px] px-3 py-1.5 text-[#787774]">npm run seed</code>
+                <h2 className="font-[var(--font-newsreader)] text-xl tracking-tight text-foreground mb-1.5">No problems loaded</h2>
+                <p className="text-sm text-muted-foreground max-w-sm mb-5 leading-relaxed">Firestore is empty. Seed your data to get started.</p>
+                <code className="font-mono text-xs bg-muted border border-border rounded-[6px] px-3 py-1.5 text-muted-foreground">npm run seed</code>
               </div>
             ) : filtered.length === 0 ? (
-              <div className="rounded-[12px] border border-[#EAEAEA] bg-white flex flex-col items-center justify-center py-14 md:py-16 text-center p-8">
-                <div className="w-12 h-12 rounded-[8px] bg-[#F7F6F3] border border-[#EAEAEA] flex items-center justify-center mb-4 text-[#787774] text-sm" aria-hidden="true">
+              <div className="rounded-[12px] border border-border bg-card flex flex-col items-center justify-center py-14 md:py-16 text-center p-8">
+                <div className="w-12 h-12 rounded-[8px] bg-muted border border-border flex items-center justify-center mb-4 text-muted-foreground text-sm" aria-hidden="true">
                   ⌕
                 </div>
-                <h2 className="font-[var(--font-newsreader)] text-xl tracking-tight text-[#111111] mb-1.5">No matches</h2>
-                <p className="text-sm text-[#787774] max-w-sm mb-5">No problems match your current filters. Adjust or clear to rediscover.</p>
+                <h2 className="font-[var(--font-newsreader)] text-xl tracking-tight text-foreground mb-1.5">No matches</h2>
+                <p className="text-sm text-muted-foreground max-w-sm mb-5">No problems match your current filters. Adjust or clear to rediscover.</p>
                 <button
                   onClick={() => setFilters({ search: "", topic: null, difficulty: null, status: null, tags: [] })}
                   aria-label="Clear all filters"
-                  className="inline-flex items-center gap-2 rounded-[6px] bg-[#111111] hover:bg-[#333333] text-white text-sm font-medium px-4 py-2 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20"
+                  className="inline-flex items-center gap-2 rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-4 py-2 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20"
                 >
                   Clear all filters
                 </button>
@@ -323,15 +323,15 @@ export default function SheetPage() {
               />
               <StatRailCard
                 label="Total Solved"
-                value={<span className="text-[#111111]">{solvedCount}</span>}
+                value={<span className="text-foreground">{solvedCount}</span>}
                 sub={`of ${totalProblems} problems · ${pct}% complete`}
               />
               <div className="grid grid-cols-2 gap-3">
-                <StatRailCard label="In Review" value={<span className="text-[#956400]">{reviewedCount}</span>} />
-                <StatRailCard label="Remaining" value={<span className="text-[#787774]">{unsolvedCount}</span>} />
+                <StatRailCard label="In Review" value={<span className="text-[#956400] dark:text-[#EAB308]">{reviewedCount}</span>} />
+                <StatRailCard label="Remaining" value={<span className="text-muted-foreground">{unsolvedCount}</span>} />
               </div>
 
-              <div className="rounded-[12px] border border-[#EAEAEA] bg-white p-5">
+              <div className="rounded-[12px] border border-border bg-card p-5">
                 <div className="eyebrow mb-4">Topics</div>
                 <div className="space-y-3.5">
                   {topics.map((t) => {
@@ -344,14 +344,14 @@ export default function SheetPage() {
                     return (
                       <div key={t.id}>
                         <div className="flex items-center justify-between text-xs mb-1.5">
-                          <span className="text-[#111111] truncate pr-2 font-medium">{t.name}</span>
-                          <span className="font-mono text-[#787774] shrink-0 tabular-nums">
+                          <span className="text-foreground truncate pr-2 font-medium">{t.name}</span>
+                          <span className="font-mono text-muted-foreground shrink-0 tabular-nums">
                             {tSolved}/{tTotal}
                           </span>
                         </div>
-                        <div className="h-1.5 w-full rounded-full bg-[#F7F6F3] border border-[#EAEAEA] overflow-hidden p-0.5">
+                        <div className="h-1.5 w-full rounded-full bg-muted border border-border overflow-hidden p-0.5">
                           <div
-                            className="h-full rounded-full bg-[#111111] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                            className="h-full rounded-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                             style={{ width: `${pctT}%` }}
                           />
                         </div>
@@ -361,8 +361,8 @@ export default function SheetPage() {
                 </div>
               </div>
 
-              <div className="px-2 py-3 text-center border-t border-[#EAEAEA] mt-1">
-                <p className="text-[11px] leading-relaxed text-[#787774]">
+              <div className="px-2 py-3 text-center border-t border-border mt-1">
+                <p className="text-[11px] leading-relaxed text-muted-foreground">
                   Minimal Archive · Warm monochrome ·<br />
                   <span className="font-mono">depth, not sprawl</span>
                 </p>

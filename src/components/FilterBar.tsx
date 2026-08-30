@@ -12,14 +12,14 @@ export type Filters = {
 };
 
 const difficultyActive: Record<Difficulty, string> = {
-  Easy: "bg-[#111111] text-white border-[#111111]",
-  Medium: "bg-[#111111] text-white border-[#111111]",
-  Hard: "bg-[#111111] text-white border-[#111111]",
+  Easy: "bg-primary text-primary-foreground border-primary",
+  Medium: "bg-primary text-primary-foreground border-primary",
+  Hard: "bg-primary text-primary-foreground border-primary",
 };
 const statusActive: Record<Status, string> = {
-  solved: "bg-[#111111] text-white border-[#111111]",
-  unsolved: "bg-white text-[#111111] border-[#EAEAEA]",
-  review: "bg-[#111111] text-white border-[#111111]",
+  solved: "bg-primary text-primary-foreground border-primary",
+  unsolved: "bg-card text-foreground border-border",
+  review: "bg-primary text-primary-foreground border-primary",
 };
 
 export function FilterBar({
@@ -51,10 +51,10 @@ export function FilterBar({
     filters.search || filters.topic || filters.difficulty || filters.status || filters.tags.length > 0;
 
   return (
-    <div className="rounded-[12px] border border-[#EAEAEA] bg-white p-3 md:p-4" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+    <div className="rounded-[12px] border border-border bg-card p-3 md:p-4" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
       <div className="flex flex-wrap items-center gap-2.5">
         <div className="relative flex-1 min-w-[180px]">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#787774] text-xs pointer-events-none" aria-hidden="true">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-xs pointer-events-none" aria-hidden="true">
             ⌕
           </span>
           <label htmlFor="sheet-search" className="sr-only">
@@ -67,13 +67,13 @@ export function FilterBar({
             placeholder="Search problems…"
             value={filters.search}
             onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-            className="h-10 pl-8 pr-9 rounded-[8px] bg-[#F7F6F3] border-[#EAEAEA] text-sm placeholder:text-[#787774] focus-visible:border-[#111111]/20 focus-visible:ring-1 focus-visible:ring-[#111111]/20"
+            className="h-10 pl-8 pr-9 rounded-[8px] bg-muted border-border text-sm placeholder:text-muted-foreground focus-visible:border-ring/20 focus-visible:ring-1 focus-visible:ring-ring/20"
           />
           {filters.search && (
             <button
               onClick={() => setFilters({ ...filters, search: "" })}
               aria-label="Clear search"
-              className="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-[6px] border border-[#EAEAEA] bg-white hover:bg-[#F7F6F3] flex items-center justify-center text-[#787774] hover:text-[#111111] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20"
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-[6px] border border-border bg-card hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20"
             >
               <span className="text-xs leading-none">×</span>
             </button>
@@ -86,10 +86,10 @@ export function FilterBar({
             setFilters({ ...filters, topic: v === "all" || v === null ? null : v })
           }
         >
-          <SelectTrigger aria-label="Filter by topic" className="w-[160px] h-10 rounded-[8px] bg-[#F7F6F3] border-[#EAEAEA] text-sm data-[placeholder]:text-[#787774] focus-visible:ring-1 focus-visible:ring-[#111111]/20">
+          <SelectTrigger aria-label="Filter by topic" className="w-[160px] h-10 rounded-[8px] bg-muted border-border text-sm data-[placeholder]:text-muted-foreground focus-visible:ring-1 focus-visible:ring-ring/20">
             <SelectValue placeholder="All Topics" />
           </SelectTrigger>
-          <SelectContent className="bg-white border-[#EAEAEA] rounded-[8px]">
+          <SelectContent className="bg-popover border-border rounded-[8px]">
             <SelectItem value="all">All Topics</SelectItem>
             {topicNames.map((n) => (
               <SelectItem key={n} value={n}>
@@ -103,7 +103,7 @@ export function FilterBar({
           <button
             onClick={() => setFilters({ search: "", topic: null, difficulty: null, status: null, tags: [] })}
             aria-label="Clear all filters"
-            className="h-10 px-4 rounded-[6px] border border-[#EAEAEA] bg-white hover:bg-[#F7F6F3] text-xs font-medium text-[#111111] transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20 shrink-0"
+            className="h-10 px-4 rounded-[6px] border border-border bg-card hover:bg-muted text-xs font-medium text-foreground transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 shrink-0"
           >
             Clear
           </button>
@@ -111,16 +111,16 @@ export function FilterBar({
       </div>
 
       <div className="flex flex-wrap items-center gap-2 mt-3" role="toolbar" aria-label="Filter by difficulty, status and tags">
-        <div className="flex items-center gap-1 rounded-[8px] bg-[#F7F6F3] border border-[#EAEAEA] p-1" role="group" aria-label="Difficulty">
+        <div className="flex items-center gap-1 rounded-[8px] bg-muted border border-border p-1" role="group" aria-label="Difficulty">
           {(["Easy", "Medium", "Hard"] as Difficulty[]).map((d) => (
             <button
               key={d}
               aria-pressed={filters.difficulty === d}
               onClick={() => toggle("difficulty", d)}
-              className={`h-7 px-3 rounded-[6px] text-xs font-medium transition-colors border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20 ${
+              className={`h-7 px-3 rounded-[6px] text-xs font-medium transition-colors border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${
                 filters.difficulty === d
                   ? difficultyActive[d]
-                  : "text-[#787774] hover:text-[#111111] hover:bg-white border-transparent"
+                  : "text-muted-foreground hover:text-foreground hover:bg-card border-transparent"
               }`}
             >
               {d}
@@ -128,16 +128,16 @@ export function FilterBar({
           ))}
         </div>
 
-        <div className="flex items-center gap-1 rounded-[8px] bg-[#F7F6F3] border border-[#EAEAEA] p-1" role="group" aria-label="Status">
+        <div className="flex items-center gap-1 rounded-[8px] bg-muted border border-border p-1" role="group" aria-label="Status">
           {(["solved", "unsolved", "review"] as Status[]).map((s) => (
             <button
               key={s}
               aria-pressed={filters.status === s}
               onClick={() => toggle("status", s)}
-              className={`h-7 px-3 rounded-[6px] text-xs font-medium capitalize transition-colors border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20 ${
+              className={`h-7 px-3 rounded-[6px] text-xs font-medium capitalize transition-colors border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${
                 filters.status === s
                   ? statusActive[s]
-                  : "text-[#787774] hover:text-[#111111] hover:bg-white border-transparent"
+                  : "text-muted-foreground hover:text-foreground hover:bg-card border-transparent"
               }`}
             >
               {s}
@@ -146,7 +146,7 @@ export function FilterBar({
         </div>
 
         {(availableTags.length > 0 || filters.tags.length > 0) && (
-          <div className="w-px h-6 bg-[#EAEAEA] mx-1 hidden sm:block" />
+          <div className="w-px h-6 bg-border mx-1 hidden sm:block" />
         )}
 
         <div className="relative flex-1 min-w-0 flex items-center">
@@ -158,10 +158,10 @@ export function FilterBar({
                   key={tag}
                   aria-pressed={active}
                   onClick={() => toggleTag(tag)}
-                  className={`h-7 px-3 rounded-full text-xs font-medium whitespace-nowrap border shrink-0 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20 ${
+                  className={`h-7 px-3 rounded-full text-xs font-medium whitespace-nowrap border shrink-0 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${
                     active
-                      ? "bg-[#111111] text-white border-[#111111]"
-                      : "bg-white text-[#787774] border-[#EAEAEA] hover:text-[#111111] hover:bg-[#F7F6F3]"
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-card text-muted-foreground border-border hover:text-foreground hover:bg-muted"
                   }`}
                 >
                   {tag}
@@ -169,18 +169,18 @@ export function FilterBar({
               );
             })}
             {availableTags.length === 0 && (
-              <span className="text-xs text-[#787774] px-2">No tags yet — add via edit on any problem</span>
+              <span className="text-xs text-muted-foreground px-2">No tags yet — add via edit on any problem</span>
             )}
           </div>
           {availableTags.length > 4 && (
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent hidden sm:block" aria-hidden="true" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-card to-transparent hidden sm:block" aria-hidden="true" />
           )}
         </div>
       </div>
 
       {hasActive && (
-        <div className="mt-3 flex items-center gap-2 text-[11px] text-[#787774] font-mono" role="status" aria-live="polite">
-          <span className="w-1 h-1 rounded-full bg-[#111111]" aria-hidden="true" />
+        <div className="mt-3 flex items-center gap-2 text-[11px] text-muted-foreground font-mono" role="status" aria-live="polite">
+          <span className="w-1 h-1 rounded-full bg-primary" aria-hidden="true" />
           Filters active — showing refined results
         </div>
       )}

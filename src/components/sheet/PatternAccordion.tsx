@@ -29,25 +29,25 @@ export function PatternAccordion({
     <Accordion className="">
       <AccordionItem
         value={pattern.id}
-        className="rounded-[8px] border border-[#EAEAEA] bg-white overflow-hidden hover:border-[#E5E5E3] data-[state=open]:border-[#EAEAEA] transition-colors"
+        className="rounded-[8px] border border-border bg-card overflow-hidden hover:border-border data-[state=open]:border-border transition-colors"
       >
-        <AccordionTrigger className="px-4 py-3 hover:no-underline group/pattern focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/10 focus-visible:ring-inset">
-          <span className="flex-1 text-left text-[13px] font-medium tracking-tight text-[#111111] group-hover/pattern:text-[#2F3437] transition-colors">
+        <AccordionTrigger className="px-4 py-3 hover:no-underline group/pattern focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/10 focus-visible:ring-inset">
+          <span className="flex-1 text-left text-[13px] font-medium tracking-tight text-foreground group-hover/pattern:text-foreground transition-colors">
             {pattern.name}
           </span>
           <div className="flex items-center gap-2.5 mr-2 shrink-0">
-            <span className="text-[11px] font-mono tabular-nums px-2 py-0.5 rounded-full bg-[#F7F6F3] border border-[#EAEAEA] text-[#787774]">
-              <span className="text-[#111111]">{solved}</span>
-              <span className="text-[#EAEAEA]">/</span>
+            <span className="text-[11px] font-mono tabular-nums px-2 py-0.5 rounded-full bg-muted border border-border text-muted-foreground">
+              <span className="text-foreground">{solved}</span>
+              <span className="text-border">/</span>
               {problems.length}
             </span>
-            <div className="w-14 h-1 rounded-full bg-[#F7F6F3] border border-[#EAEAEA] overflow-hidden p-0.5 hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of pattern complete`}>
-              <div className="h-full rounded-full bg-[#111111]/80 group-data-[state=open]:bg-[#111111] transition-all" style={{ width: `${pct}%` }} />
+            <div className="w-14 h-1 rounded-full bg-muted border border-border overflow-hidden p-0.5 hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of pattern complete`}>
+              <div className="h-full rounded-full bg-primary/80 group-data-[state=open]:bg-primary transition-all" style={{ width: `${pct}%` }} />
             </div>
           </div>
         </AccordionTrigger>
         <AccordionContent className="pb-0">
-          <div className="border-t border-[#EAEAEA] bg-white rounded-b-[8px] overflow-hidden">
+          <div className="border-t border-border bg-card rounded-b-[8px] overflow-hidden">
             {problems.map((p) => (
               <ProblemRow
                 key={p.id}

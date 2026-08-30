@@ -33,31 +33,31 @@ export function TopicAccordion({
     <Accordion defaultValue={[topic.id]} className="mb-3">
       <AccordionItem
         value={topic.id}
-        className="rounded-[12px] border border-[#EAEAEA] bg-white overflow-hidden data-[state=open]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-shadow"
+        className="rounded-[12px] border border-border bg-card overflow-hidden data-[state=open]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:data-[state=open]:shadow-[0_2px_12px_rgba(0,0,0,0.3)] transition-shadow"
       >
-        <AccordionTrigger className="px-5 py-4 hover:no-underline group flex items-center justify-between gap-4 bg-white hover:bg-[#FBFBFA] transition-colors [&[data-state=open]]:border-b [&[data-state=open]]:border-[#EAEAEA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/10 focus-visible:ring-inset">
+        <AccordionTrigger className="px-5 py-4 hover:no-underline group flex items-center justify-between gap-4 bg-card hover:bg-muted/50 transition-colors [&[data-state=open]]:border-b [&[data-state=open]]:border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/10 focus-visible:ring-inset">
           <div className="flex items-center gap-3 min-w-0 flex-1">
-            <span className="hidden sm:block w-0.5 self-stretch min-h-[20px] rounded-full bg-[#EAEAEA] group-data-[state=open]:bg-[#111111] transition-colors" aria-hidden="true" />
-            <h2 className="font-[var(--font-newsreader)] text-[17px] md:text-[18px] tracking-[-0.02em] leading-none text-[#111111] text-left truncate">
+            <span className="hidden sm:block w-0.5 self-stretch min-h-[20px] rounded-full bg-border group-data-[state=open]:bg-primary transition-colors" aria-hidden="true" />
+            <h2 className="font-[var(--font-newsreader)] text-[17px] md:text-[18px] tracking-[-0.02em] leading-none text-foreground text-left truncate">
               {topic.name}
             </h2>
-            <span className="hidden md:inline-flex items-center rounded-full bg-[#F7F6F3] border border-[#EAEAEA] px-2.5 py-1 text-[11px] font-mono text-[#787774] shrink-0">
+            <span className="hidden md:inline-flex items-center rounded-full bg-muted border border-border px-2.5 py-1 text-[11px] font-mono text-muted-foreground shrink-0">
               {patterns.length} patterns
             </span>
           </div>
           <div className="flex items-center gap-3 shrink-0">
-            <span className="text-xs font-mono tabular-nums text-[#787774] whitespace-nowrap hidden sm:inline">
-              <span className="text-[#111111] font-medium">{solved}</span>
-              <span className="text-[#EAEAEA]">/</span>
+            <span className="text-xs font-mono tabular-nums text-muted-foreground whitespace-nowrap hidden sm:inline">
+              <span className="text-foreground font-medium">{solved}</span>
+              <span className="text-border">/</span>
               {total}
             </span>
-            <div className="w-[88px] h-1.5 rounded-full bg-[#F7F6F3] border border-[#EAEAEA] overflow-hidden p-0.5 hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of topic complete`}>
-              <div className="h-full rounded-full bg-[#111111] transition-all duration-500" style={{ width: `${pct}%` }} />
+            <div className="w-[88px] h-1.5 rounded-full bg-muted border border-border overflow-hidden p-0.5 hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of topic complete`}>
+              <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: `${pct}%` }} />
             </div>
-            <span className="sm:hidden text-[11px] font-mono tabular-nums px-2.5 py-1 rounded-full bg-[#F7F6F3] border border-[#EAEAEA] text-[#111111]">{pct}%</span>
+            <span className="sm:hidden text-[11px] font-mono tabular-nums px-2.5 py-1 rounded-full bg-muted border border-border text-foreground">{pct}%</span>
           </div>
         </AccordionTrigger>
-        <AccordionContent className="px-2 pb-2 md:px-3 md:pb-3 bg-[#FBFBFA]">
+        <AccordionContent className="px-2 pb-2 md:px-3 md:pb-3 bg-muted/30">
           <div className="space-y-2 pt-2">
             {patterns.map(({ pattern, problems }) => (
               <PatternAccordion
