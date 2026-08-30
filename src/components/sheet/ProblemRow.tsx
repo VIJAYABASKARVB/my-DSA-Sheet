@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Circle, CheckCircle2, RotateCw, Pencil, ArrowUpRight, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -10,9 +8,9 @@ import { RecallButtons } from "./RecallButtons";
 import type { MergedProblem, Status, PlatformLink, Tag, RecallStatus } from "@/lib/types";
 
 const difficultyStyles: Record<string, string> = {
-  Easy: "bg-emerald/10 text-emerald border-emerald/20",
-  Medium: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-  Hard: "bg-red-500/10 text-red-400 border-red-500/20",
+  Easy: "bg-[#EDF3EC] text-[#346538] border-[#EAEAEA]",
+  Medium: "bg-[#FBF3DB] text-[#956400] border-[#EAEAEA]",
+  Hard: "bg-[#FDEBEC] text-[#9F2F2D] border-[#EAEAEA]",
 };
 const platformBadge: Record<string, string> = {
   LeetCode: "LC",
@@ -24,24 +22,24 @@ const platformBadge: Record<string, string> = {
 };
 const cycle: Record<Status, Status> = { unsolved: "solved", solved: "review", review: "unsolved" };
 
-const statusConfig: Record<Status, { icon: typeof Circle; color: string; bg: string; border: string }> = {
+const statusConfig: Record<Status, { label: string; bg: string; border: string; text: string }> = {
   unsolved: {
-    icon: Circle,
-    color: "text-zinc-500",
-    bg: "bg-white/[0.04]",
-    border: "border-white/10",
+    label: "○",
+    bg: "bg-white",
+    border: "border-[#EAEAEA]",
+    text: "text-[#787774]",
   },
   solved: {
-    icon: CheckCircle2,
-    color: "text-emerald",
-    bg: "bg-emerald/10",
-    border: "border-emerald/20",
+    label: "✓",
+    bg: "bg-[#111111]",
+    border: "border-[#111111]",
+    text: "text-white",
   },
   review: {
-    icon: RotateCw,
-    color: "text-amber-400",
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/20",
+    label: "↻",
+    bg: "bg-[#FBF3DB]",
+    border: "border-[#EAEAEA]",
+    text: "text-[#956400]",
   },
 };
 
@@ -102,28 +100,21 @@ export function ProblemRow({
   };
 
   const cfg = statusConfig[status];
-  const StatusIcon = cfg.icon;
 
   return (
     <>
       <div
         id={`problem-${problem.id}`}
-        className="group/row flex flex-wrap sm:flex-nowrap items-center gap-2.5 md:gap-3 py-2.5 px-3 md:px-4 border-b border-white/[0.04] last:border-b-0 hover:bg-white/[0.02] active:bg-white/[0.03] transition-colors duration-150 ease-out"
+        className="group/row flex flex-wrap sm:flex-nowrap items-center gap-2.5 md:gap-3 py-2.5 px-3 md:px-4 border-b border-[#EAEAEA] last:border-b-0 hover:bg-[#F7F6F3] transition-colors"
       >
-        {/* Status — fast product feedback */}
         <button
           aria-label={`Status: ${status}. Click to cycle to ${cycle[status]}.`}
           onClick={() => onStatusChange(problem.id, cycle[status])}
-          className={`group/status w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all duration-200 ease-out active:scale-[0.90] hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald/40 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0F0F0F] ${cfg.bg} ${cfg.border} ${cfg.color}`}
+          className={`w-7 h-7 rounded-[6px] border flex items-center justify-center shrink-0 text-xs font-medium transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20 ${cfg.bg} ${cfg.border} ${cfg.text}`}
         >
-          <StatusIcon
-            className={`w-3.5 h-3.5 transition-transform duration-200 ease-out group-hover/status:scale-105 ${status === "review" ? "group-hover/status:rotate-180" : ""}`}
-            strokeWidth={1.5}
-            aria-hidden="true"
-          />
+          <span aria-hidden="true">{cfg.label}</span>
         </button>
 
-        {/* Recall */}
         {onRecallChange && (
           <RecallButtons
             problemId={problem.id}
@@ -132,37 +123,33 @@ export function ProblemRow({
           />
         )}
 
-        {/* Name */}
-        <span className="flex-1 min-w-[120px] truncate text-[13px] font-medium tracking-tight text-zinc-100 group-hover/row:text-white transition-colors duration-150 ease-out">
+        <span className="flex-1 min-w-[120px] truncate text-[13px] font-medium tracking-tight text-[#111111] group-hover/row:text-[#2F3437] transition-colors">
           {problem.name}
         </span>
 
-        {/* Difficulty pill — rounded-full */}
         <Badge
           variant="outline"
           aria-label={`Difficulty ${problem.difficulty}`}
-          className={`rounded-full text-[10px] font-semibold uppercase tracking-wider shrink-0 px-2.5 py-1 border ${difficultyStyles[problem.difficulty]}`}
+          className={`rounded-full text-[10px] font-semibold uppercase tracking-wide shrink-0 px-2.5 py-1 border ${difficultyStyles[problem.difficulty]}`}
         >
           {problem.difficulty}
         </Badge>
 
-        {/* Tags — pill */}
-        <div className="flex gap-1 flex-wrap shrink-0 max-w-[30vw] hidden sm:flex">
+        <div className="hidden sm:flex gap-1 flex-wrap shrink-0 max-w-[28vw]">
           {(problem.tags ?? []).length === 0 ? (
-            <span className="text-[10px] text-zinc-600 italic">no tags</span>
+            <span className="text-[10px] text-[#787774] italic">no tags</span>
           ) : (
             (problem.tags ?? []).map((tag) => (
-              <Badge key={tag} variant="secondary" className="rounded-full text-[10px] bg-white/[0.04] border-white/5 text-zinc-400 px-2 py-0.5 font-medium">
+              <Badge key={tag} variant="secondary" className="rounded-full text-[10px] bg-white border-[#EAEAEA] text-[#787774] px-2 py-0.5 font-medium">
                 {tag}
               </Badge>
             ))
           )}
         </div>
 
-        {/* Platform links — compact pills, horizontal scroll with fade */}
-        <div className="flex gap-1.5 overflow-x-auto shrink-0 max-w-[42vw] scrollbar-none -mr-1 pr-1">
+        <div className="flex gap-1.5 overflow-x-auto shrink-0 max-w-[40vw] scrollbar-none -mr-1 pr-1">
           {problem.links.length === 0 ? (
-            <span className="text-[10px] text-zinc-600 whitespace-nowrap hidden md:inline">no links</span>
+            <span className="text-[10px] text-[#787774] whitespace-nowrap hidden md:inline">no links</span>
           ) : (
             problem.links.map((l, i) => (
               <a
@@ -171,51 +158,49 @@ export function ProblemRow({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${l.platform} — ${problem.name}`}
-                className="group/link inline-flex items-center gap-1 pl-2.5 pr-1 py-1 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/15 text-[11px] font-mono text-zinc-400 hover:text-white whitespace-nowrap transition-all duration-200 ease-out hover:scale-[1.01] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald/30"
+                className="inline-flex items-center gap-1 pl-2.5 pr-1 py-1 rounded-[6px] border border-[#EAEAEA] bg-white hover:bg-[#F7F6F3] text-[11px] font-mono text-[#787774] hover:text-[#111111] whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20"
               >
                 {platformBadge[l.platform] ?? l.platform}
-                <span className="w-5 h-5 rounded-full bg-white/10 group-hover/link:bg-white group-hover/link:text-black flex items-center justify-center transition-all duration-200 ease-out group-hover/link:translate-x-[1px] group-hover/link:-translate-y-[1px]" aria-hidden="true">
-                  <ArrowUpRight className="w-3 h-3" strokeWidth={1.5} />
+                <span className="w-5 h-5 rounded-[4px] border border-[#EAEAEA] bg-[#F7F6F3] flex items-center justify-center text-[10px]" aria-hidden="true">
+                  ↗
                 </span>
               </a>
             ))
           )}
         </div>
 
-        {/* Edit — island button */}
         <button
           onClick={handleOpen}
           aria-label={`Edit links and tags for ${problem.name}`}
-          className="w-8 h-8 rounded-full bg-white/[0.04] border border-white/5 flex items-center justify-center shrink-0 text-zinc-500 hover:text-white hover:bg-white/[0.08] hover:border-white/10 transition-all duration-200 ease-out active:scale-[0.90] hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald/30 group/edit"
+          className="w-7 h-7 rounded-[6px] border border-[#EAEAEA] bg-white flex items-center justify-center shrink-0 text-[#787774] hover:text-[#111111] hover:bg-[#F7F6F3] transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20"
         >
-          <Pencil className="w-3.5 h-3.5 transition-transform duration-200 ease-out group-hover/edit:rotate-6" strokeWidth={1.25} aria-hidden="true" />
+          <span aria-hidden="true" className="text-xs">✎</span>
         </button>
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[560px] max-h-[85vh] overflow-y-auto bg-[#0A0A0A]/90 backdrop-blur-3xl border-white/10 shadow-[0_24px_64px_rgba(0,0,0,0.6)] rounded-[2rem] p-1.5 gap-0">
-          <div className="rounded-[calc(2rem-0.375rem)] bg-zinc-900 border border-white/5 p-6">
-            <DialogHeader className="pb-4 border-b border-white/5 mb-6">
-              <DialogTitle className="text-foreground font-[var(--font-instrument-serif)] text-xl tracking-tight">{problem.name}</DialogTitle>
-              <p className="text-xs text-zinc-500 mt-1">Edit tags and platform links — synced to Firestore overrides.</p>
+        <DialogContent className="sm:max-w-[560px] max-h-[85vh] overflow-y-auto bg-white border border-[#EAEAEA] rounded-[12px] p-0 gap-0 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+          <div className="p-6">
+            <DialogHeader className="pb-4 border-b border-[#EAEAEA] mb-6">
+              <DialogTitle className="text-[#111111] font-[var(--font-newsreader)] text-xl tracking-tight">{problem.name}</DialogTitle>
+              <p className="text-xs text-[#787774] mt-1">Edit tags and platform links — synced to Firestore overrides.</p>
             </DialogHeader>
             <div className="space-y-6">
-              {/* Tags */}
               <div className="space-y-3">
-                <h4 className="eyebrow !bg-white/[0.04] !text-zinc-400 !border-white/5 w-fit">Tags</h4>
+                <h4 className="eyebrow w-fit">Tags</h4>
                 <div className="flex flex-wrap gap-1.5 min-h-[28px]">
                   {draftTags.length === 0 ? (
-                    <span className="text-xs text-zinc-600 italic py-1">No tags yet</span>
+                    <span className="text-xs text-[#787774] italic py-1">No tags yet</span>
                   ) : (
                     draftTags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="rounded-full gap-1.5 pr-1 bg-white/[0.06] border-white/10 text-zinc-200 hover:bg-white/[0.08]">
+                      <Badge key={tag} variant="secondary" className="rounded-full gap-1.5 pr-1 bg-[#F7F6F3] border-[#EAEAEA] text-[#111111] hover:bg-[#EAEAEA]">
                         {tag}
                         <button
                           onClick={() => setDraftTags((prev) => prev.filter((t) => t !== tag))}
-                          className="ml-0.5 w-5 h-5 rounded-full bg-white/10 hover:bg-red-500 hover:text-white flex items-center justify-center transition-colors"
+                          className="ml-0.5 w-5 h-5 rounded-full bg-white border border-[#EAEAEA] hover:bg-[#FDEBEC] hover:text-[#9F2F2D] flex items-center justify-center transition-colors"
                           aria-label={`Remove ${tag}`}
                         >
-                          <X className="w-2.5 h-2.5" strokeWidth={1.5} />
+                          <span className="text-[10px]">×</span>
                         </button>
                       </Badge>
                     ))
@@ -232,9 +217,9 @@ export function ProblemRow({
                         addTag(newTag);
                       }
                     }}
-                    className="rounded-full bg-white/[0.04] border-white/10 text-sm focus-visible:border-emerald/30 focus-visible:ring-0 h-9"
+                    className="rounded-[8px] bg-[#F7F6F3] border-[#EAEAEA] text-sm focus-visible:border-[#111111]/20 focus-visible:ring-0 h-9"
                   />
-                  <button onClick={() => addTag(newTag)} className="px-4 h-9 rounded-full bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors shrink-0">
+                  <button onClick={() => addTag(newTag)} className="px-4 h-9 rounded-[6px] bg-[#111111] hover:bg-[#333333] text-white text-sm font-medium transition-colors shrink-0">
                     Add
                   </button>
                 </div>
@@ -248,10 +233,10 @@ export function ProblemRow({
                           if (active) setDraftTags((prev) => prev.filter((t) => t.toLowerCase() !== tag.toLowerCase()));
                           else addTag(tag);
                         }}
-                        className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+                        className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                           active
-                            ? "bg-emerald text-white border-emerald shadow-[0_2px_10px_rgba(16,185,129,0.25)]"
-                            : "bg-white/[0.04] text-zinc-400 border-white/5 hover:text-white hover:bg-white/[0.08]"
+                            ? "bg-[#111111] text-white border-[#111111]"
+                            : "bg-white text-[#787774] border-[#EAEAEA] hover:text-[#111111] hover:bg-[#F7F6F3]"
                         }`}
                       >
                         {tag}
@@ -261,9 +246,8 @@ export function ProblemRow({
                 </div>
               </div>
 
-              {/* Links */}
               <div className="space-y-3">
-                <h4 className="eyebrow !bg-white/[0.04] !text-zinc-400 !border-white/5 w-fit">Links</h4>
+                <h4 className="eyebrow w-fit">Links</h4>
                 {draft.map((l, idx) => (
                   <div key={idx} className="flex gap-2 items-center">
                     <Select
@@ -275,10 +259,10 @@ export function ProblemRow({
                         );
                       }}
                     >
-                      <SelectTrigger className="w-[160px] rounded-full bg-white/[0.04] border-white/10 text-sm h-9">
+                      <SelectTrigger className="w-[160px] rounded-[8px] bg-[#F7F6F3] border-[#EAEAEA] text-sm h-9">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-zinc-900 border-white/10 rounded-2xl">
+                      <SelectContent className="bg-white border-[#EAEAEA] rounded-[8px]">
                         <SelectItem value="LeetCode">LeetCode</SelectItem>
                         <SelectItem value="NeetCode">NeetCode</SelectItem>
                         <SelectItem value="TakeUForward">TakeUForward</SelectItem>
@@ -293,34 +277,31 @@ export function ProblemRow({
                       onChange={(e) =>
                         setDraft((d) => d.map((x, i) => (i === idx ? { ...x, url: e.target.value } : x)))
                       }
-                      className="rounded-full bg-white/[0.04] border-white/10 text-sm focus-visible:border-emerald/30 focus-visible:ring-0 h-9 flex-1"
+                      className="rounded-[8px] bg-[#F7F6F3] border-[#EAEAEA] text-sm focus-visible:border-[#111111]/20 focus-visible:ring-0 h-9 flex-1"
                     />
                     <button
                       onClick={() => setDraft((d) => d.filter((_, i) => i !== idx))}
-                      className="w-8 h-8 rounded-full bg-white/5 border border-white/10 text-zinc-500 hover:text-red-400 hover:bg-red-500/10 hover:border-red-500/20 flex items-center justify-center transition-colors shrink-0"
+                      className="w-8 h-8 rounded-[6px] bg-white border border-[#EAEAEA] text-[#787774] hover:text-[#9F2F2D] hover:bg-[#FDEBEC] hover:border-[#EAEAEA] flex items-center justify-center transition-colors shrink-0"
                     >
-                      <X className="w-4 h-4" strokeWidth={1.25} />
+                      <span className="text-sm">×</span>
                     </button>
                   </div>
                 ))}
                 <button
                   onClick={() => setDraft((d) => [...d, { platform: "LeetCode", url: "" }])}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/[0.08] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] border border-[#EAEAEA] bg-[#F7F6F3] hover:bg-white text-xs font-medium text-[#787774] hover:text-[#111111] transition-colors"
                 >
-                  <span className="w-5 h-5 rounded-full bg-white text-black flex items-center justify-center text-[14px] leading-none">+</span>
+                  <span className="w-5 h-5 rounded-full bg-white border border-[#EAEAEA] flex items-center justify-center text-xs leading-none">+</span>
                   Add link
                 </button>
               </div>
             </div>
-            <DialogFooter className="mt-8 gap-2 sm:gap-2">
-              <button onClick={() => setOpen(false)} className="px-5 py-2 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] text-sm font-medium text-zinc-300 hover:text-white transition-colors">
+            <DialogFooter className="mt-8 gap-2 sm:gap-2 border-t border-[#EAEAEA] bg-[#FBFBFA] -mx-6 -mb-6 p-4 rounded-b-[12px]">
+              <button onClick={() => setOpen(false)} className="px-5 py-2 rounded-[6px] border border-[#EAEAEA] bg-white hover:bg-[#F7F6F3] text-sm font-medium text-[#787774] hover:text-[#111111] transition-colors">
                 Cancel
               </button>
-              <button onClick={handleSave} className="group inline-flex items-center gap-1 pl-5 pr-1 py-1 rounded-full bg-emerald hover:bg-emerald/90 text-white text-sm font-medium transition-all active:scale-[0.98]">
+              <button onClick={handleSave} className="inline-flex items-center justify-center rounded-[6px] bg-[#111111] hover:bg-[#333333] text-white text-sm font-medium px-5 py-2 transition-colors active:scale-[0.98]">
                 Save
-                <span className="w-7 h-7 rounded-full bg-white text-emerald flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]">
-                  <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.5} />
-                </span>
               </button>
             </DialogFooter>
           </div>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif, Outfit, Space_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Newsreader, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -15,6 +15,13 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  display: "swap",
+  style: ["normal", "italic"],
+});
+
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   subsets: ["latin"],
@@ -22,39 +29,27 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-cabinet",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "My DSA Sheet — Vanguard Edition",
-  description: "The obsessive archive for DSA. 110 problems, 5 topics, spaced repetition — depth, not sprawl. Vanguard OLED + ethereal glass.",
+  title: "My DSA Sheet — Minimal Archive",
+  description: "Curated DSA archive — Topic → Pattern → Problem, 110 problems, spaced repetition. Warm monochrome, editorial precision.",
 };
 
 export const viewport: Viewport = {
-  colorScheme: "dark",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
+  themeColor: "#F7F6F3",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${outfit.variable} ${spaceGrotesk.variable} dark h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} ${instrumentSerif.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-[100dvh] flex flex-col bg-background text-foreground selection:bg-emerald/30">
-        <div className="grain" aria-hidden="true" />
-        <div className="mesh" aria-hidden="true" />
+      <body className="min-h-[100dvh] flex flex-col bg-background text-foreground">
+        <div className="ambient-blob" aria-hidden="true" style={{ top: "8%", right: "12%" }} />
         <main className="flex-1 min-h-[100dvh]">{children}</main>
         <Toaster />
       </body>

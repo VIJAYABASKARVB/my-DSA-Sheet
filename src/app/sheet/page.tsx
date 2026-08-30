@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useProblems } from "@/hooks/useProblems";
@@ -9,8 +10,6 @@ import { FilterBar, type Filters } from "@/components/FilterBar";
 import { TopicAccordion } from "@/components/sheet/TopicAccordion";
 import { AppHeader } from "@/components/AppHeader";
 import { DueForReviewSection } from "@/components/sheet/DueForReviewSection";
-import { SearchX, Database, Filter, LogIn, ShieldAlert, ArrowUpRight, Sparkles, Layers, Target } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import type { MergedProblem, Pattern } from "@/lib/types";
 
 type MergedPatternGroup = { pattern: Pattern; problems: MergedProblem[] };
@@ -18,28 +17,24 @@ type MergedTopic = { id: string; name: string; patterns: MergedPatternGroup[] };
 
 function SkeletonCard() {
   return (
-    <div className="bezel-outer">
-      <div className="bezel-inner p-5 space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="h-5 w-40 skeleton rounded-full" />
-          <div className="h-4 w-20 skeleton rounded-full" />
-        </div>
-        <div className="h-1.5 w-full skeleton rounded-full" />
+    <div className="rounded-[12px] border border-[#EAEAEA] bg-white p-5 space-y-3">
+      <div className="flex items-center justify-between">
+        <div className="h-4 w-36 skeleton rounded-[6px]" />
+        <div className="h-3 w-16 skeleton rounded-full" />
       </div>
+      <div className="h-1.5 w-full skeleton rounded-full" />
     </div>
   );
 }
 
 function StatRailCard({ label, value, sub }: { label: string; value: React.ReactNode; sub?: string }) {
   return (
-    <div className="bezel-outer">
-      <div className="bezel-inner p-5">
-        <div className="text-[10px] tracking-[0.16em] uppercase font-medium text-zinc-500 mb-2">{label}</div>
-        <div className="text-[28px] font-mono font-semibold tracking-[-0.03em] leading-none text-foreground">
-          {value}
-        </div>
-        {sub && <div className="text-xs text-zinc-500 mt-1.5">{sub}</div>}
+    <div className="rounded-[12px] border border-[#EAEAEA] bg-white p-5">
+      <div className="text-[10px] tracking-[0.08em] uppercase font-medium text-[#787774] font-mono mb-2">{label}</div>
+      <div className="text-[26px] font-mono font-semibold tracking-[-0.03em] leading-none text-[#111111]">
+        {value}
       </div>
+      {sub && <div className="text-xs text-[#787774] mt-1.5">{sub}</div>}
     </div>
   );
 }
@@ -137,7 +132,6 @@ export default function SheetPage() {
   const topicNames = topics.map((t) => t.name);
   const pct = totalProblems > 0 ? Math.round((solvedCount / totalProblems) * 100) : 0;
 
-  // Maps for DueForReviewSection
   const { problemMap, topicMap, patternMap } = useMemo(() => {
     const pMap = new Map<string, MergedProblem>();
     const tMap = new Map<string, string>();
@@ -153,7 +147,7 @@ export default function SheetPage() {
   }, [topics, mergedTopics]);
 
   return (
-    <div className="min-h-[100dvh] flex flex-col">
+    <div className="min-h-[100dvh] flex flex-col bg-[#F7F6F3]">
       <AppHeader
         solvedCount={solvedCount}
         totalProblems={totalProblems}
@@ -167,96 +161,66 @@ export default function SheetPage() {
       />
 
       <div id="sheet-content" className="max-w-[1160px] mx-auto w-full flex-1 px-4 md:px-6" tabIndex={-1}>
-        {/* HERO — vanguard 2.0: cinematic breathing, still product-dense */}
-        <section className="relative py-12 md:py-20 border-b border-white/[0.04] mb-10 overflow-hidden" aria-labelledby="hero-title">
-          <div className="flex flex-col gap-5">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <div className="eyebrow w-fit">
-                <Sparkles className="w-3 h-3" strokeWidth={1.25} aria-hidden="true" />
-                CURATED FOR DEPTH · NOT SPRAWL
+        {/* HERO — minimal editorial */}
+        <section className="relative py-10 md:py-14 border-b border-[#EAEAEA] mb-8" aria-labelledby="hero-title">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div className="max-w-[720px]">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="eyebrow">Curated for depth · not sprawl</span>
+                <Link href="/" className="hidden md:inline-flex items-center gap-1 text-[11px] font-medium text-[#787774] hover:text-[#111111] transition-colors border-l border-[#EAEAEA] pl-2.5 ml-1">
+                  ← Back to home
+                </Link>
               </div>
-              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-emerald text-white text-[10px] tracking-wide font-semibold px-2.5 py-1">
-                VANGUARD EDITION
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white text-black text-[10px] tracking-wide font-bold px-2.5 py-1 shadow-[0_4px_16px_rgba(255,255,255,0.12)]">
-                NEW · VANGUARD 2.0
-              </span>
-              <a href="/" className="hidden md:inline-flex items-center gap-1 rounded-full bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 text-white text-[11px] font-medium px-3 py-1 transition-colors">
-                ← Back to home
-              </a>
-              <span className="hidden md:inline-flex items-center gap-1 text-[11px] text-zinc-500">
-                <span className="w-1 h-1 rounded-full bg-emerald animate-pulse" aria-hidden="true" /> Live
-              </span>
+              <h1 id="hero-title" className="mt-4 font-[var(--font-newsreader)] text-[clamp(1.9rem,4.5vw,2.6rem)] leading-[1.05] tracking-[-0.03em] text-[#111111]">
+                Your DSA <span className="italic font-[300] text-[#787774]">Sheet</span>, perfected.
+              </h1>
+              <p className="mt-2.5 text-[13px] leading-relaxed text-[#787774] max-w-[58ch]">
+                Striver and NeetCode, merged and ordered. Topic → Pattern → Problem with spaced repetition and Firestore sync. Built for depth, not sprawl.
+              </p>
             </div>
 
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-              <div className="max-w-[720px] relative">
-                <div className="absolute -left-8 -top-8 w-72 h-72 rounded-full bg-emerald/10 blur-[64px] pointer-events-none hidden lg:block" aria-hidden="true" />
-                <h1 id="hero-title" className="relative font-[var(--font-instrument-serif)] text-[clamp(2rem,5.5vw,3.5rem)] leading-[0.92] tracking-[-0.04em] text-foreground">
-                  Your DSA
-                  <span className="font-mono text-[0.5em] tracking-[-0.02em] font-light text-zinc-500 ml-2.5 align-middle" aria-hidden="true">—</span>
-                  <br />
-                  <span className="text-emerald">Sheet</span>
-                  <span className="text-zinc-500">, perfected.</span>
-                </h1>
-                <p className="relative mt-3.5 text-sm leading-relaxed text-zinc-400 max-w-[58ch]">
-                  Striver and NeetCode, merged and ordered. Topic → Pattern → Problem with spaced repetition and Firestore sync. Built for depth, not sprawl.
-                </p>
-              </div>
-
-              {/* Metric cluster — dense product, one line, no double pill */}
-              <div className="flex items-center gap-3 flex-wrap lg:justify-end shrink-0">
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] border border-white/5 p-1 pr-1.5" aria-label={`${pct}% complete, ${solvedCount} of ${totalProblems} solved`}>
-                  <span className="px-3 py-1.5 rounded-full bg-emerald text-white text-xs font-mono font-medium flex items-center gap-1.5">
-                    <Target className="w-3.5 h-3.5" strokeWidth={1.25} aria-hidden="true" /> {pct}% done
-                  </span>
-                  <span className="pl-2 pr-2 text-xs font-mono text-zinc-400 tabular-nums">
-                    <span className="text-foreground font-medium">{solvedCount}</span> / {totalProblems}
-                  </span>
-                  <span className="hidden sm:inline h-4 w-px bg-white/10 mx-1" aria-hidden="true" />
-                  <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-zinc-500 pr-2">
-                    <Layers className="w-3.5 h-3.5" strokeWidth={1.25} aria-hidden="true" />
-                    <span className="font-mono text-foreground">{topics.length}</span> topics
-                  </span>
-                </div>
+            <div className="flex items-center gap-2 flex-wrap lg:justify-end shrink-0">
+              <div className="inline-flex items-center gap-3 rounded-[8px] border border-[#EAEAEA] bg-white px-3 py-2" aria-label={`${pct}% complete`}>
+                <span className="text-[11px] font-mono tracking-wide px-2.5 py-1 rounded-[6px] bg-[#111111] text-white font-medium tabular-nums">{pct}% done</span>
+                <span className="text-xs font-mono text-[#787774] tabular-nums">
+                  <span className="text-[#111111] font-medium">{solvedCount}</span> / {totalProblems}
+                </span>
+                <span className="hidden sm:block w-px h-4 bg-[#EAEAEA]" aria-hidden="true" />
+                <span className="hidden sm:inline-flex text-xs text-[#787774] gap-1">
+                  <span className="font-mono text-[#111111] font-medium">{topics.length}</span> topics
+                </span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Auth gate — amber, now compact */}
+        {/* Auth gate — pale yellow */}
         {!authLoading && !user && (
-          <div className="mb-6 bezel-outer !bg-amber-500/[0.06] !border-amber-500/15" role="status" aria-live="polite">
-            <div className="rounded-[calc(2rem-0.375rem)] bg-[#1A1508]/80 border border-amber-500/10 px-4 md:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-amber-500/15 border border-amber-500/20 flex items-center justify-center shrink-0" aria-hidden="true">
-                  <ShieldAlert className="w-4 h-4 text-amber-400" strokeWidth={1.25} />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold tracking-tight text-foreground">Sign in to sync across devices</div>
-                  <div className="text-xs leading-relaxed text-zinc-400 mt-0.5 max-w-[60ch]">
-                    Progress in <code className="font-mono text-amber-300/80 bg-amber-500/10 px-1 py-0.5 rounded text-[11px]">users/{`{uid}`}/progress</code> · Follow your Gmail. Without sign-in, changes reset on refresh.
-                  </div>
+          <div className="mb-6 rounded-[12px] border border-[#EAEAEA] bg-[#FBF3DB] px-4 md:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3" role="status" aria-live="polite">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-[6px] bg-white border border-[#EAEAEA] flex items-center justify-center shrink-0 text-[#956400] text-xs" aria-hidden="true">
+                !
+              </div>
+              <div>
+                <div className="text-sm font-medium tracking-tight text-[#111111]">Sign in to sync across devices</div>
+                <div className="text-xs leading-relaxed text-[#787774] mt-0.5 max-w-[60ch]">
+                  Progress in <code className="font-mono text-[#956400] bg-white border border-[#EAEAEA] px-1 py-0.5 rounded text-[11px]">users/{`{uid}`}/progress</code> · Without sign-in, changes reset on refresh.
                 </div>
               </div>
-              <button
-                onClick={signInWithGoogle}
-                disabled={signingIn}
-                aria-label="Sign in with Google to enable sync"
-                className="group inline-flex items-center gap-1 rounded-full bg-amber-500 hover:bg-amber-400 text-black text-xs font-semibold pl-4 pr-1 py-1 shrink-0 transition-all duration-200 ease-out active:scale-[0.98] disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/50"
-              >
-                <LogIn className="w-3.5 h-3.5" strokeWidth={1.25} aria-hidden="true" />
-                {signingIn ? "Signing in…" : "Sign in with Google"}
-                <span className="w-7 h-7 rounded-full bg-black text-amber-400 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 ease-out ml-1.5" aria-hidden="true">
-                  <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.5} />
-                </span>
-              </button>
             </div>
+            <button
+              onClick={signInWithGoogle}
+              disabled={signingIn}
+              aria-label="Sign in with Google to enable sync"
+              className="inline-flex items-center justify-center rounded-[6px] bg-[#111111] hover:bg-[#333333] text-white text-xs font-medium px-4 py-2 shrink-0 transition-colors active:scale-[0.98] disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20"
+            >
+              {signingIn ? "Signing in…" : "Sign in with Google"}
+            </button>
           </div>
         )}
 
-        {/* FilterBar — sticky vanguard 2.0 with scroll shadow */}
-        <div className="sticky top-[72px] z-10 -mx-1 px-1 py-2 -mt-2 bg-gradient-to-b from-background via-background/80 to-transparent backdrop-blur-[2px] border-b border-transparent data-[scrolled=true]:border-white/[0.06] data-[scrolled=true]:shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-all duration-300" id="filter-sticky">
+        {/* FilterBar — sticky minimal */}
+        <div className="sticky top-[56px] z-10 -mx-1 px-1 py-2 -mt-2 bg-[#F7F6F3]/85 backdrop-blur-[8px] border-b border-transparent data-[scrolled=true]:border-[#EAEAEA] data-[scrolled=true]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300" id="filter-sticky">
           <FilterBar
             filters={filters}
             setFilters={setFilters}
@@ -279,56 +243,43 @@ export default function SheetPage() {
 
         {/* Main + stat rail */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6 md:gap-8 mt-6 pb-24">
-          {/* Main — Topics */}
-          <main className="space-y-4 min-w-0" aria-label="Problem topics">
+          <main className="space-y-3 min-w-0" aria-label="Problem topics">
             {loading ? (
-              <div className="space-y-4" aria-busy="true" aria-live="polite">
+              <div className="space-y-3" aria-busy="true" aria-live="polite">
                 <SkeletonCard />
                 <SkeletonCard />
                 <SkeletonCard />
               </div>
             ) : topics.length === 0 ? (
-              <div className="bezel-outer">
-                <div className="bezel-inner flex flex-col items-center justify-center py-16 md:py-20 text-center p-8">
-                  <div className="w-16 h-16 rounded-full bg-white/[0.04] border border-white/5 flex items-center justify-center mb-5" aria-hidden="true">
-                    <Database className="w-7 h-7 text-zinc-500" strokeWidth={1.25} />
-                  </div>
-                  <h2 className="font-[var(--font-instrument-serif)] text-xl tracking-tight text-foreground mb-2">No problems loaded</h2>
-                  <p className="text-sm text-zinc-500 max-w-sm mb-6 leading-relaxed">
-                    Firestore is empty. Seed your data to get started — vanguard edition awaits.
-                  </p>
-                  <code className="font-mono text-xs bg-white/[0.04] border border-white/5 rounded-full px-4 py-2 text-zinc-400">
-                    npm run seed
-                  </code>
+              <div className="rounded-[12px] border border-[#EAEAEA] bg-white flex flex-col items-center justify-center py-14 md:py-16 text-center p-8">
+                <div className="w-12 h-12 rounded-[8px] bg-[#F7F6F3] border border-[#EAEAEA] flex items-center justify-center mb-4 text-[#787774] text-sm" aria-hidden="true">
+                  ◻
                 </div>
+                <h2 className="font-[var(--font-newsreader)] text-xl tracking-tight text-[#111111] mb-1.5">No problems loaded</h2>
+                <p className="text-sm text-[#787774] max-w-sm mb-5 leading-relaxed">Firestore is empty. Seed your data to get started.</p>
+                <code className="font-mono text-xs bg-[#F7F6F3] border border-[#EAEAEA] rounded-[6px] px-3 py-1.5 text-[#787774]">npm run seed</code>
               </div>
             ) : filtered.length === 0 ? (
-              <div className="bezel-outer">
-                <div className="bezel-inner flex flex-col items-center justify-center py-16 md:py-20 text-center p-8">
-                  <div className="w-16 h-16 rounded-full bg-white/[0.04] border border-white/5 flex items-center justify-center mb-5" aria-hidden="true">
-                    <SearchX className="w-7 h-7 text-zinc-500" strokeWidth={1.25} />
-                  </div>
-                  <h2 className="font-[var(--font-instrument-serif)] text-xl tracking-tight text-foreground mb-2">No matches</h2>
-                  <p className="text-sm text-zinc-500 max-w-sm mb-6">No problems match your current filters. Adjust or clear to rediscover.</p>
-                  <button
-                    onClick={() => setFilters({ search: "", topic: null, difficulty: null, status: null, tags: [] })}
-                    aria-label="Clear all filters"
-                    className="group inline-flex items-center gap-1 rounded-full bg-white text-black text-sm font-medium pl-4 pr-1 py-1 hover:bg-zinc-100 transition-all duration-200 ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-                  >
-                    <Filter className="w-3.5 h-3.5" strokeWidth={1.25} aria-hidden="true" />
-                    Clear all filters
-                    <span className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform duration-200" aria-hidden="true">
-                      <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.5} />
-                    </span>
-                  </button>
+              <div className="rounded-[12px] border border-[#EAEAEA] bg-white flex flex-col items-center justify-center py-14 md:py-16 text-center p-8">
+                <div className="w-12 h-12 rounded-[8px] bg-[#F7F6F3] border border-[#EAEAEA] flex items-center justify-center mb-4 text-[#787774] text-sm" aria-hidden="true">
+                  ⌕
                 </div>
+                <h2 className="font-[var(--font-newsreader)] text-xl tracking-tight text-[#111111] mb-1.5">No matches</h2>
+                <p className="text-sm text-[#787774] max-w-sm mb-5">No problems match your current filters. Adjust or clear to rediscover.</p>
+                <button
+                  onClick={() => setFilters({ search: "", topic: null, difficulty: null, status: null, tags: [] })}
+                  aria-label="Clear all filters"
+                  className="inline-flex items-center gap-2 rounded-[6px] bg-[#111111] hover:bg-[#333333] text-white text-sm font-medium px-4 py-2 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/20"
+                >
+                  Clear all filters
+                </button>
               </div>
             ) : (
               filtered.map((topic, idx) => (
                 <div
                   key={topic.id}
                   className="reveal"
-                  style={{ transitionDelay: `${idx * 80}ms` }}
+                  style={{ transitionDelay: `${idx * 80}ms` } as React.CSSProperties}
                   ref={(el) => {
                     if (!el) return;
                     const obs = new IntersectionObserver(
@@ -360,9 +311,8 @@ export default function SheetPage() {
             )}
           </main>
 
-          {/* Right rail — sticky */}
           <aside className="hidden lg:block space-y-4" aria-label="Progress summary">
-            <div className="sticky top-[88px] space-y-4">
+            <div className="sticky top-[72px] space-y-4">
               <DueForReviewSection
                 dueReviews={dueReviews}
                 problemMap={problemMap}
@@ -373,53 +323,48 @@ export default function SheetPage() {
               />
               <StatRailCard
                 label="Total Solved"
-                value={<span className="text-emerald">{solvedCount}</span>}
+                value={<span className="text-[#111111]">{solvedCount}</span>}
                 sub={`of ${totalProblems} problems · ${pct}% complete`}
               />
               <div className="grid grid-cols-2 gap-3">
-                <StatRailCard label="In Review" value={<span className="text-amber-400">{reviewedCount}</span>} />
-                <StatRailCard label="Remaining" value={<span className="text-zinc-400">{unsolvedCount}</span>} />
+                <StatRailCard label="In Review" value={<span className="text-[#956400]">{reviewedCount}</span>} />
+                <StatRailCard label="Remaining" value={<span className="text-[#787774]">{unsolvedCount}</span>} />
               </div>
 
-              {/* Topic breakdown — bezel */}
-              <div className="bezel-outer">
-                <div className="bezel-inner p-5">
-                  <div className="eyebrow mb-4 !bg-white/[0.04] !text-zinc-400 !border-white/5">
-                    <Layers className="w-3 h-3" strokeWidth={1.25} /> Topics
-                  </div>
-                  <div className="space-y-3.5">
-                    {topics.map((t) => {
-                      const tTotal = t.patterns.reduce((a, p) => a + p.problems.length, 0);
-                      const tSolved = t.patterns.reduce(
-                        (a, p) => a + p.problems.filter((pr) => progress[pr.id] === "solved").length,
-                        0
-                      );
-                      const pctT = tTotal > 0 ? Math.round((tSolved / tTotal) * 100) : 0;
-                      return (
-                        <div key={t.id}>
-                          <div className="flex items-center justify-between text-xs mb-1.5">
-                            <span className="text-foreground truncate pr-2 font-medium">{t.name}</span>
-                            <span className="font-mono text-zinc-500 shrink-0">
-                              {tSolved}/{tTotal}
-                            </span>
-                          </div>
-                          <div className="h-1.5 w-full rounded-full bg-white/[0.04] border border-white/[0.03] overflow-hidden p-0.5">
-                            <div
-                              className="h-full rounded-full bg-emerald transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
-                              style={{ width: `${pctT}%` }}
-                            />
-                          </div>
+              <div className="rounded-[12px] border border-[#EAEAEA] bg-white p-5">
+                <div className="eyebrow mb-4">Topics</div>
+                <div className="space-y-3.5">
+                  {topics.map((t) => {
+                    const tTotal = t.patterns.reduce((a, p) => a + p.problems.length, 0);
+                    const tSolved = t.patterns.reduce(
+                      (a, p) => a + p.problems.filter((pr) => progress[pr.id] === "solved").length,
+                      0
+                    );
+                    const pctT = tTotal > 0 ? Math.round((tSolved / tTotal) * 100) : 0;
+                    return (
+                      <div key={t.id}>
+                        <div className="flex items-center justify-between text-xs mb-1.5">
+                          <span className="text-[#111111] truncate pr-2 font-medium">{t.name}</span>
+                          <span className="font-mono text-[#787774] shrink-0 tabular-nums">
+                            {tSolved}/{tTotal}
+                          </span>
                         </div>
-                      );
-                    })}
-                  </div>
+                        <div className="h-1.5 w-full rounded-full bg-[#F7F6F3] border border-[#EAEAEA] overflow-hidden p-0.5">
+                          <div
+                            className="h-full rounded-full bg-[#111111] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                            style={{ width: `${pctT}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
-              <div className="px-2 py-3 text-center border-t border-white/[0.04] mt-1">
-                <p className="text-[11px] leading-relaxed text-zinc-600">
-                  Vanguard Edition · Ethereal Glass ·<br />
-                  <span className="font-mono text-zinc-500">obsessive archive — depth, not sprawl</span>
+              <div className="px-2 py-3 text-center border-t border-[#EAEAEA] mt-1">
+                <p className="text-[11px] leading-relaxed text-[#787774]">
+                  Minimal Archive · Warm monochrome ·<br />
+                  <span className="font-mono">depth, not sprawl</span>
                 </p>
               </div>
             </div>
