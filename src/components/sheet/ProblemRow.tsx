@@ -108,17 +108,18 @@ export function ProblemRow({
     <>
       <div
         id={`problem-${problem.id}`}
-        className="group/row flex flex-wrap sm:flex-nowrap items-center gap-2.5 md:gap-3 py-3 px-3 md:px-4 border-b border-white/[0.04] last:border-b-0 hover:bg-white/[0.02] active:bg-white/[0.03] will-change-transform transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
+        className="group/row flex flex-wrap sm:flex-nowrap items-center gap-2.5 md:gap-3 py-2.5 px-3 md:px-4 border-b border-white/[0.04] last:border-b-0 hover:bg-white/[0.02] active:bg-white/[0.03] transition-colors duration-150 ease-out"
       >
-        {/* Status — magnetic */}
+        {/* Status — fast product feedback */}
         <button
-          aria-label={`Status: ${status}. Click to cycle.`}
+          aria-label={`Status: ${status}. Click to cycle to ${cycle[status]}.`}
           onClick={() => onStatusChange(problem.id, cycle[status])}
-          className={`group/status w-8 h-8 rounded-full border flex items-center justify-center shrink-0 will-change-transform transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.92] hover:scale-105 ${cfg.bg} ${cfg.border} ${cfg.color}`}
+          className={`group/status w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all duration-200 ease-out active:scale-[0.90] hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald/40 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0F0F0F] ${cfg.bg} ${cfg.border} ${cfg.color}`}
         >
           <StatusIcon
-            className={`w-3.5 h-3.5 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/status:scale-110 ${status === "review" ? "group-hover/status:rotate-180" : ""}`}
+            className={`w-3.5 h-3.5 transition-transform duration-200 ease-out group-hover/status:scale-105 ${status === "review" ? "group-hover/status:rotate-180" : ""}`}
             strokeWidth={1.5}
+            aria-hidden="true"
           />
         </button>
 
@@ -132,13 +133,14 @@ export function ProblemRow({
         )}
 
         {/* Name */}
-        <span className="flex-1 min-w-0 truncate text-[13px] font-medium tracking-tight text-zinc-100 group-hover/row:text-white transition-colors duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]">
+        <span className="flex-1 min-w-[120px] truncate text-[13px] font-medium tracking-tight text-zinc-100 group-hover/row:text-white transition-colors duration-150 ease-out">
           {problem.name}
         </span>
 
         {/* Difficulty pill — rounded-full */}
         <Badge
           variant="outline"
+          aria-label={`Difficulty ${problem.difficulty}`}
           className={`rounded-full text-[10px] font-semibold uppercase tracking-wider shrink-0 px-2.5 py-1 border ${difficultyStyles[problem.difficulty]}`}
         >
           {problem.difficulty}
@@ -157,8 +159,8 @@ export function ProblemRow({
           )}
         </div>
 
-        {/* Platform links — button-in-button */}
-        <div className="flex gap-1.5 overflow-x-auto shrink-0 max-w-[42vw] scrollbar-none">
+        {/* Platform links — compact pills, horizontal scroll with fade */}
+        <div className="flex gap-1.5 overflow-x-auto shrink-0 max-w-[42vw] scrollbar-none -mr-1 pr-1">
           {problem.links.length === 0 ? (
             <span className="text-[10px] text-zinc-600 whitespace-nowrap hidden md:inline">no links</span>
           ) : (
@@ -168,10 +170,11 @@ export function ProblemRow({
                 href={l.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/link inline-flex items-center gap-1 pl-2.5 pr-1 py-1 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/15 text-[11px] font-mono text-zinc-400 hover:text-white whitespace-nowrap will-change-transform transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98]"
+                aria-label={`${l.platform} — ${problem.name}`}
+                className="group/link inline-flex items-center gap-1 pl-2.5 pr-1 py-1 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/15 text-[11px] font-mono text-zinc-400 hover:text-white whitespace-nowrap transition-all duration-200 ease-out hover:scale-[1.01] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald/30"
               >
                 {platformBadge[l.platform] ?? l.platform}
-                <span className="w-5 h-5 rounded-full bg-white/10 group-hover/link:bg-white group-hover/link:text-black flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/link:translate-x-[1px] group-hover/link:-translate-y-[1px] group-hover/link:scale-105">
+                <span className="w-5 h-5 rounded-full bg-white/10 group-hover/link:bg-white group-hover/link:text-black flex items-center justify-center transition-all duration-200 ease-out group-hover/link:translate-x-[1px] group-hover/link:-translate-y-[1px]" aria-hidden="true">
                   <ArrowUpRight className="w-3 h-3" strokeWidth={1.5} />
                 </span>
               </a>
@@ -182,10 +185,10 @@ export function ProblemRow({
         {/* Edit — island button */}
         <button
           onClick={handleOpen}
-          aria-label="Edit links and tags"
-          className="w-8 h-8 rounded-full bg-white/[0.04] border border-white/5 flex items-center justify-center shrink-0 text-zinc-500 hover:text-white hover:bg-white/[0.08] hover:border-white/10 will-change-transform transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.92] hover:scale-105 group/edit"
+          aria-label={`Edit links and tags for ${problem.name}`}
+          className="w-8 h-8 rounded-full bg-white/[0.04] border border-white/5 flex items-center justify-center shrink-0 text-zinc-500 hover:text-white hover:bg-white/[0.08] hover:border-white/10 transition-all duration-200 ease-out active:scale-[0.90] hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald/30 group/edit"
         >
-          <Pencil className="w-3.5 h-3.5 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/edit:rotate-12" strokeWidth={1.25} />
+          <Pencil className="w-3.5 h-3.5 transition-transform duration-200 ease-out group-hover/edit:rotate-6" strokeWidth={1.25} aria-hidden="true" />
         </button>
       </div>
 

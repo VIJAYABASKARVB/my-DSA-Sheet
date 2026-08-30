@@ -39,7 +39,7 @@ const buttonConfig: Record<
 
 export function RecallButtons({ problemId, recallStatus, onUpdate, disabled }: Props) {
   return (
-    <div className="flex items-center gap-1 shrink-0" role="group" aria-label="Recall status">
+    <div className="flex items-center gap-1 shrink-0" role="group" aria-label={`Recall for ${problemId}`}>
       {(Object.keys(buttonConfig) as RecallStatus[]).map((key) => {
         const cfg = buttonConfig[key];
         const Icon = cfg.icon;
@@ -53,14 +53,14 @@ export function RecallButtons({ problemId, recallStatus, onUpdate, disabled }: P
             disabled={disabled}
             onClick={() => onUpdate(problemId, key)}
             className={cn(
-              "w-7 h-7 rounded-full border flex items-center justify-center shrink-0",
-              "transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
-              "active:scale-[0.92] hover:scale-105 will-change-transform",
+              "w-7 h-7 sm:w-8 sm:h-8 rounded-full border flex items-center justify-center shrink-0",
+              "transition-all duration-200 ease-out",
+              "active:scale-[0.90] hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0F0F0F]",
               "disabled:opacity-50 disabled:pointer-events-none",
-              isActive ? cfg.active : cfg.inactive
+              isActive ? cfg.active + " focus-visible:ring-white/20" : cfg.inactive + " focus-visible:ring-emerald/30"
             )}
           >
-            <Icon className="w-3.5 h-3.5" strokeWidth={1.5} />
+            <Icon className="w-3.5 h-3.5" strokeWidth={1.5} aria-hidden="true" />
           </button>
         );
       })}

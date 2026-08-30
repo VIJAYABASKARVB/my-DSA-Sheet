@@ -54,19 +54,20 @@ export function DueForReviewSection({ dueReviews, problemMap, topicMap, patternM
   };
 
   return (
-    <div className="bezel-outer">
+    <section className="bezel-outer" aria-label="Due for review">
       <div className="bezel-inner overflow-hidden">
         {/* Header — pill */}
         <div className="px-4 py-3 flex items-center justify-between border-b border-white/[0.06] bg-white/[0.015]">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center" aria-hidden="true">
               <Clock className="w-3.5 h-3.5 text-amber-400" strokeWidth={1.25} />
             </div>
             <h3 className="text-[13px] font-semibold tracking-tight text-foreground">Due for Review</h3>
           </div>
           <Badge
             variant="outline"
-            className={`rounded-full text-[11px] px-2.5 py-1 font-mono border ${
+            aria-label={`${dueReviews.length} due today`}
+            className={`rounded-full text-[11px] px-2.5 py-1 font-mono border tabular-nums ${
               dueReviews.length > 0
                 ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
                 : "bg-white/[0.04] text-zinc-500 border-white/10"
@@ -117,7 +118,8 @@ export function DueForReviewSection({ dueReviews, problemMap, topicMap, patternM
                   <button
                     key={item.problemId}
                     onClick={() => handleSelect(item.problemId)}
-                    className={`group w-full text-left px-4 py-3.5 hover:bg-white/[0.03] will-change-transform transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] flex items-center gap-3 ${overdueIntensity}`}
+                    aria-label={`Jump to ${problem?.name ?? item.problemId}, ${overdueText}`}
+                    className={`group w-full text-left px-4 py-3.5 hover:bg-white/[0.03] focus-visible:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/20 focus-visible:ring-inset transition-colors duration-200 ease-out flex items-center gap-3 ${overdueIntensity}`}
                   >
                     <div className="flex-1 min-w-0">
                       <div className="text-[13px] font-medium tracking-tight text-zinc-100 truncate group-hover:text-white transition-colors">
@@ -148,7 +150,7 @@ export function DueForReviewSection({ dueReviews, problemMap, topicMap, patternM
                       {item.reviewCount !== undefined && (
                         <span className="text-[11px] font-mono text-zinc-500">×{item.reviewCount}</span>
                       )}
-                      <span className="w-6 h-6 rounded-full bg-white/[0.04] border border-white/5 group-hover:bg-white group-hover:text-black flex items-center justify-center text-zinc-500 group-hover:border-white transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[1px] group-hover:-translate-y-[1px] opacity-0 group-hover:opacity-100">
+                      <span className="w-6 h-6 rounded-full bg-white/[0.04] border border-white/5 group-hover:bg-white group-hover:text-black group-focus-visible:bg-white group-focus-visible:text-black flex items-center justify-center text-zinc-500 group-hover:border-white transition-all duration-200 ease-out group-hover:translate-x-[1px] group-hover:-translate-y-[1px] opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
                         <ArrowUpRight className="w-3 h-3" strokeWidth={1.5} />
                       </span>
                     </div>
@@ -165,6 +167,6 @@ export function DueForReviewSection({ dueReviews, problemMap, topicMap, patternM
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }
