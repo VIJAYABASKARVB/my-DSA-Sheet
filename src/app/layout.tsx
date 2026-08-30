@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif, Outfit, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -22,9 +22,21 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-cabinet",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "My DSA Sheet — Vanguard Edition",
-  description: "Personal DSA problem tracking sheet — Arrays & Hashing + Trees · Ethereal Glass · Vanguard Build",
+  description: "The obsessive archive for DSA. 110 problems, 5 topics, spaced repetition — depth, not sprawl. Vanguard OLED + ethereal glass.",
 };
 
 export const viewport: Viewport = {
@@ -37,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} dark h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${outfit.variable} ${spaceGrotesk.variable} dark h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-[100dvh] flex flex-col bg-background text-foreground selection:bg-emerald/30">

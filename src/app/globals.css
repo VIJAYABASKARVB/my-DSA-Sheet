@@ -311,3 +311,66 @@
   -ms-overflow-style: none;
 }
 .scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ————— Landing: Vanguard 2.0 ————— */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Hero inline pill image */
+.hero-pill {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 9999px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 8px 24px rgba(0,0,0,0.35);
+}
+
+/* Scrub text — words start dim */
+.scrub-word {
+  display: inline;
+  transition: color 0.2s linear, opacity 0.2s linear;
+}
+
+/* Landing bento card lift */
+.bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: oklch(0.145 0 0);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.30);
+  transition: border-color 0.5s var(--ease-vanguard), transform 0.7s var(--ease-vanguard), box-shadow 0.7s var(--ease-vanguard);
+  will-change: transform;
+}
+.bento-card:hover {
+  border-color: rgba(255,255,255,0.10);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 48px rgba(0,0,0,0.45);
+}
+
+/* Horizontal accordion slice */
+.acc-slice {
+  flex: 1;
+  min-width: 0;
+  transition: flex 0.7s cubic-bezier(0.32, 0.72, 0, 1), filter 0.5s ease;
+  overflow: hidden;
+}
+.acc-slice:hover { flex: 1.8; }
+@media (max-width: 768px) {
+  .acc-slice:hover { flex: 1; }
+}
+
+/* Subtle grid line */
+.hairline-y { border-left: 1px solid rgba(255,255,255,0.06); }
+.hairline-x { border-top: 1px solid rgba(255,255,255,0.06); }

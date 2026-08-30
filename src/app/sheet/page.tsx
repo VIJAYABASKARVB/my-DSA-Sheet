@@ -155,8 +155,8 @@ export default function SheetPage() {
       />
 
       <div id="sheet-content" className="max-w-[1160px] mx-auto w-full flex-1 px-4 md:px-6" tabIndex={-1}>
-        {/* HERO — product-restrained, tighter than brand hero: py-12 breathing */}
-        <section className="py-10 md:py-16 border-b border-white/[0.04] mb-8" aria-labelledby="hero-title">
+        {/* HERO — vanguard 2.0: cinematic breathing, still product-dense */}
+        <section className="relative py-12 md:py-20 border-b border-white/[0.04] mb-10 overflow-hidden" aria-labelledby="hero-title">
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-3">
               <div className="eyebrow w-fit">
@@ -172,15 +172,16 @@ export default function SheetPage() {
             </div>
 
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-              <div className="max-w-[640px]">
-                <h1 id="hero-title" className="font-[var(--font-instrument-serif)] text-[clamp(2rem,5.5vw,3.5rem)] leading-[0.92] tracking-[-0.04em] text-foreground">
+              <div className="max-w-[720px] relative">
+                <div className="absolute -left-8 -top-8 w-72 h-72 rounded-full bg-emerald/10 blur-[64px] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <h1 id="hero-title" className="relative font-[var(--font-instrument-serif)] text-[clamp(2rem,5.5vw,3.5rem)] leading-[0.92] tracking-[-0.04em] text-foreground">
                   Your DSA
                   <span className="font-mono text-[0.5em] tracking-[-0.02em] font-light text-zinc-500 ml-2.5 align-middle" aria-hidden="true">—</span>
                   <br />
                   <span className="text-emerald">Sheet</span>
                   <span className="text-zinc-500">, perfected.</span>
                 </h1>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-400 max-w-[54ch]">
+                <p className="relative mt-3.5 text-sm leading-relaxed text-zinc-400 max-w-[58ch]">
                   Striver and NeetCode, merged and ordered. Topic → Pattern → Problem with spaced repetition and Firestore sync. Built for depth, not sprawl.
                 </p>
               </div>
@@ -236,13 +237,15 @@ export default function SheetPage() {
           </div>
         )}
 
-        {/* FilterBar — double-bezel already */}
-        <FilterBar
-          filters={filters}
-          setFilters={setFilters}
-          topicNames={topicNames}
-          availableTags={availableTags}
-        />
+        {/* FilterBar — sticky vanguard 2.0 */}
+        <div className="sticky top-[72px] z-10 -mx-1 px-1 py-2 -mt-2 bg-gradient-to-b from-background via-background/80 to-transparent backdrop-blur-[2px]">
+          <FilterBar
+            filters={filters}
+            setFilters={setFilters}
+            topicNames={topicNames}
+            availableTags={availableTags}
+          />
+        </div>
 
         {/* Due for Review — mobile */}
         <div className="lg:hidden mt-6">
