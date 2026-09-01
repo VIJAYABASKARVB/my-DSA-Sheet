@@ -10,12 +10,8 @@ import {
   serverTimestamp,
   Timestamp,
   deleteField,
-  increment,
-  query,
-  where,
-  orderBy,
 } from "firebase/firestore";
-import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag, RecallStatus } from "./types";
+import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag } from "./types";
 
 type ProblemDoc = {
   id: string;
@@ -36,15 +32,6 @@ type ProblemDoc = {
 type OverrideDoc = {
   links?: PlatformLink[];
   tags?: Tag[];
-};
-
-export type SpacedReviewDoc = {
-  recallStatus: RecallStatus | null;
-  lastReviewedAt?: Timestamp;
-  nextReviewAt?: Timestamp;
-  reviewCount?: number;
-  status?: Status;
-  updatedAt?: Timestamp;
 };
 
 export function getCurrentUserId(): string | null {
@@ -96,89 +83,6 @@ export function subscribeToProgress(
     },
     (err) => {
       console.error("[firestore] subscribeToProgress error", err);
-      if (onError) onError(err as Error);
-    }
-  );
-}
-
-// ---- Spaced Repetition ----
-
-const RECALL_INTERVALS: Record<RecallStatus, number> = {
-  easy: 7,
-  hint: 3,
-  blank: 1,
-};
-
-function computeNextReviewDate(recallStatus: RecallStatus, from: Date = new Date()): Date {
-  const days = RECALL_INTERVALS[recallStatus];
-  if (days === undefined) throw new Error(`Invalid recallStatus: ${String(recallStatus)}`);
-  const d = new Date(from);
-  d.setDate(d.getDate() + days);
-  return d;
-}
-
-export async function updateRecallStatus(
-  problemId: string,
-  recallStatus: RecallStatus,
-  userId?: string
-): Promise<void> {
-  const uid = userId || getCurrentUserId();
-  if (!uid) throw new Error("Not signed in — cannot save recall status");
-  const nextDate = computeNextReviewDate(recallStatus, new Date());
-  await setDoc(
-    doc(db, "users", uid, "progress", problemId),
-    {
-      recallStatus,
-      lastReviewedAt: serverTimestamp(),
-      nextReviewAt: Timestamp.fromDate(nextDate),
-      reviewCount: increment(1),
-      updatedAt: serverTimestamp(),
-    },
-    { merge: true }
-  );
-}
-
-export async function getSpacedReviews(userId?: string): Promise<Record<string, SpacedReviewDoc>> {
-  const uid = userId || getCurrentUserId();
-  if (!uid) throw new Error("Not signed in — cannot load reviews");
-  const snap = await getDocs(collection(db, "users", uid, "progress"));
-  const out: Record<string, SpacedReviewDoc> = {};
-  snap.forEach((d) => {
-    const data = d.data() as SpacedReviewDoc;
-    if (data.recallStatus) out[d.id] = data;
-  });
-  return out;
-}
-
-export function subscribeToSpacedReviews(
-  callback: (reviews: Record<string, SpacedReviewDoc>) => void,
-  userId?: string,
-  onError?: (err: Error) => void
-): () => void {
-  const uid = userId || getCurrentUserId();
-  if (!uid) {
-    if (onError) onError(new Error("Not signed in"));
-    return () => {};
-  }
-  // Firestore index required: nextReviewAt ASC on users/{uid}/progress
-  // Firestore will log a direct link to create it on first run in dev console
-  return onSnapshot(
-    query(
-      collection(db, "users", uid, "progress"),
-      where("nextReviewAt", "<=", Timestamp.now()),
-      orderBy("nextReviewAt", "asc")
-    ),
-    (snap) => {
-      const out: Record<string, SpacedReviewDoc> = {};
-      snap.forEach((d) => {
-        const data = d.data() as SpacedReviewDoc;
-        // secondary guard: race/corrupt write where nextReviewAt exists but recallStatus null
-        if (data.recallStatus) out[d.id] = data;
-      });
-      callback(out);
-    },
-    (err) => {
-      console.error("[firestore] subscribeToSpacedReviews error", err);
       if (onError) onError(err as Error);
     }
   );

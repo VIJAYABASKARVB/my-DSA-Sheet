@@ -35,16 +35,20 @@ export type Topic = {
   patterns: Pattern[];
 };
 
-export type RecallStatus = "easy" | "hint" | "blank";
+import type { Timestamp } from "firebase/firestore";
+
+export type RevisionSchedule = {
+  learnedAt: Timestamp;
+  revisionDates: Timestamp[];
+  currentRevisionIndex: number; // 0..6 (6 => fully mastered)
+  completedRevisions: Timestamp[];
+  isFullyMastered: boolean;
+};
 
 export type ProgressDoc = {
   status: Exclude<Status, 'unsolved'>;
   updatedAt: Date;
-  // Spaced repetition fields (per-user, stored in users/{uid}/progress/{problemId})
-  recallStatus?: RecallStatus | null;
-  lastReviewedAt?: Date;
-  nextReviewAt?: Date;
-  reviewCount?: number;
+  revisionSchedule?: RevisionSchedule | null;
 };
 
 export type ProblemOverrideDoc = {

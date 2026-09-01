@@ -2,6 +2,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import type { Status } from "@/lib/types";
 import { subscribeToProgress, updateProblemStatus } from "@/lib/firestore";
+import { ensureRevisionSchedule } from "@/lib/revision-schedule";
 import { toast } from "sonner";
 
 export function useProgress(userId?: string | null) {
@@ -93,6 +94,15 @@ export function useProgress(userId?: string | null) {
 
       try {
         await updateProblemStatus(problemId, status, userId);
+        // Auto-generate 1-3-5-1-4-7 schedule on solved (Day 0)
+        if (status === "solved") {
+          try {
+            await ensureRevisionSchedule(problemId, new Date(), userId);
+          } catch (e) {
+            console.warn("[useProgress] ensureRevisionSchedule failed", e);
+            toast.error("Solved but failed to create revision schedule: " + (e as Error).message);
+          }
+        }
         // Silent on success to avoid spam; loud only on failure per requirement
       } catch (e) {
         // Revert optimistic change
@@ -112,6 +122,11 @@ export function useProgress(userId?: string | null) {
         try {
           await new Promise((r) => setTimeout(r, 800));
           await updateProblemStatus(problemId, status, userId);
+          if (status === "solved") {
+            try {
+              await ensureRevisionSchedule(problemId, new Date(), userId);
+            } catch {}
+          }
           // Retry succeeded — re-apply optimistic
           setProgress((prevState) => {
             const next = { ...prevState };

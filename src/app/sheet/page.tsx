@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useProblems } from "@/hooks/useProblems";
 import { useProgress } from "@/hooks/useProgress";
 import { useProblemOverrides } from "@/hooks/useProblemOverrides";
-import { useSpacedRepetition } from "@/hooks/useSpacedRepetition";
+import { useRevisionSchedule } from "@/hooks/useRevisionSchedule";
 import { FilterBar, type Filters } from "@/components/FilterBar";
 import { TopicAccordion } from "@/components/sheet/TopicAccordion";
 import { AppHeader } from "@/components/AppHeader";
@@ -44,7 +44,7 @@ export default function SheetPage() {
   const { topics, loading: problemsLoading } = useProblems(user?.uid ?? null);
   const { progress, updateStatus, loading: pLoading } = useProgress(user?.uid ?? null);
   const { overrides, updateLinks, updateTags, loading: oLoading } = useProblemOverrides(user?.uid ?? null);
-  const { reviews, dueReviews, dueCount, updateRecall, loading: srLoading, error: srError } = useSpacedRepetition(user?.uid ?? null);
+  const { revisions, dueToday, upcoming, dueCount, markRevisionDone, loading: srLoading, error: srError } = useRevisionSchedule(user?.uid ?? null);
   const [filters, setFilters] = useState<Filters>({
     search: "",
     topic: null,
@@ -236,12 +236,14 @@ export default function SheetPage() {
         {/* Due for Review — mobile */}
         <div className="lg:hidden mt-6">
           <DueForReviewSection
-            dueReviews={dueReviews}
+            dueToday={dueToday}
+            upcoming={upcoming}
             problemMap={problemMap}
             topicMap={topicMap}
             patternMap={patternMap}
             loading={srLoading}
             error={srError}
+            onMarkRevised={markRevisionDone}
           />
         </div>
 
@@ -304,9 +306,9 @@ export default function SheetPage() {
                     topic={{ id: topic.id, name: topic.name }}
                     patterns={topic.patterns}
                     progress={progress}
-                    spacedReviews={reviews}
+                    revisions={revisions}
                     onStatusChange={updateStatus}
-                    onRecallChange={updateRecall}
+                    onMarkRevised={markRevisionDone}
                     onEditLinks={updateLinks}
                     onEditTags={updateTags}
                   />
@@ -318,12 +320,14 @@ export default function SheetPage() {
           <aside className="hidden lg:block space-y-4" aria-label="Progress summary">
             <div className="sticky top-[72px] space-y-4">
               <DueForReviewSection
-                dueReviews={dueReviews}
+                dueToday={dueToday}
+                upcoming={upcoming}
                 problemMap={problemMap}
                 topicMap={topicMap}
                 patternMap={patternMap}
                 loading={srLoading}
                 error={srError}
+                onMarkRevised={markRevisionDone}
               />
               <StatRailCard
                 label="Completed"

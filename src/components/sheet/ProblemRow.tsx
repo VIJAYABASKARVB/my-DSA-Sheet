@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { RecallButtons } from "./RecallButtons";
-import type { MergedProblem, Status, PlatformLink, Tag, RecallStatus } from "@/lib/types";
+import type { MergedProblem, Status, PlatformLink, Tag, RevisionSchedule } from "@/lib/types";
 
 const difficultyStyles: Record<string, string> = {
   Easy: "bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 text-[#346538] dark:text-[#86EFAC] border-border",
@@ -20,7 +20,7 @@ const platformBadge: Record<string, string> = {
   GeeksForGeeks: "GFG",
   InterviewBit: "IB",
 };
-const cycle: Record<Status, Status> = { unsolved: "solved", solved: "review", review: "unsolved" };
+const cycle: Record<Status, Status> = { unsolved: "solved", solved: "unsolved", review: "unsolved" };
 
 const statusConfig: Record<Status, { label: string; bg: string; border: string; text: string }> = {
   unsolved: {
@@ -48,17 +48,17 @@ const SUGGESTED_TAGS: Tag[] = ["Neetcode", "Striver", "Others"];
 export function ProblemRow({
   problem,
   status,
-  recallStatus,
+  revisionSchedule,
   onStatusChange,
-  onRecallChange,
+  onMarkRevised,
   onEditLinks,
   onEditTags,
 }: {
   problem: MergedProblem;
   status: Status;
-  recallStatus?: RecallStatus | null;
+  revisionSchedule?: RevisionSchedule | null;
   onStatusChange: (id: string, next: Status) => void;
-  onRecallChange?: (id: string, next: RecallStatus) => void;
+  onMarkRevised?: (id: string) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
   onEditTags: (id: string, tags: Tag[]) => void;
 }) {
@@ -115,17 +115,36 @@ export function ProblemRow({
           <span aria-hidden="true">{cfg.label}</span>
         </button>
 
-        {onRecallChange && (
-          <RecallButtons
-            problemId={problem.id}
-            recallStatus={recallStatus}
-            onUpdate={onRecallChange}
-          />
-        )}
-
         <span className="flex-1 min-w-[120px] truncate text-[13px] font-medium tracking-tight text-foreground group-hover/row:text-foreground transition-colors">
           {problem.name}
         </span>
+
+        {status === "solved" && revisionSchedule && !revisionSchedule.isFullyMastered && (
+          <span className="inline-flex items-center gap-1.5 shrink-0">
+            <span className="flex items-center gap-1">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`w-1.5 h-1.5 rounded-full border ${
+                    i < revisionSchedule.currentRevisionIndex
+                      ? "bg-primary border-primary"
+                      : i === revisionSchedule.currentRevisionIndex
+                        ? "bg-[#FBF3DB] border-border dark:bg-[#FBF3DB]/40"
+                        : "bg-muted border-border"
+                  }`}
+                />
+              ))}
+            </span>
+            <Badge variant="outline" className="rounded-full text-[10px] px-2 py-0.5 font-mono border bg-muted text-muted-foreground">
+              Revision {revisionSchedule.currentRevisionIndex + 1} of 6
+            </Badge>
+          </span>
+        )}
+        {status === "solved" && revisionSchedule?.isFullyMastered && (
+          <Badge variant="outline" className="rounded-full text-[10px] px-2 py-0.5 font-medium border bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 text-[#346538] dark:text-[#86EFAC]">
+            Mastered ✓
+          </Badge>
+        )}
 
         <Badge
           variant="outline"
@@ -168,6 +187,18 @@ export function ProblemRow({
             ))
           )}
         </div>
+
+        {status === "solved" && revisionSchedule && !revisionSchedule.isFullyMastered && onMarkRevised && (
+          <Button
+            variant="outline"
+            size="xs"
+            onClick={() => onMarkRevised(problem.id)}
+            aria-label={`Mark Revised for ${problem.name}`}
+            className="h-7 px-3 rounded-[6px] text-xs font-medium border-border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary shrink-0"
+          >
+            Mark Revised ✓
+          </Button>
+        )}
 
         <button
           onClick={handleOpen}
