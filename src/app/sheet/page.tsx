@@ -353,10 +353,10 @@ export default function SheetPage() {
                             {tCompleted}/{tTotal}
                           </span>
                         </div>
-                        <div className="h-1.5 w-full rounded-full bg-muted border border-border overflow-hidden p-0.5" role="progressbar" aria-valuenow={pctT} aria-valuemin={0} aria-valuemax={100} aria-label={`${pctT}% of ${t.name} complete`}>
+                        <div className="h-2 w-full rounded-full bg-secondary border border-border overflow-hidden" role="progressbar" aria-valuenow={pctT} aria-valuemin={0} aria-valuemax={100} aria-label={`${pctT}% of ${t.name} complete`}>
                           <div
                             className="h-full rounded-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                            style={{ width: `${pctT}%` }}
+                            style={{ width: `${pctT}%`, minWidth: pctT > 0 ? '4px' : '0' }}
                           />
                         </div>
                       </div>

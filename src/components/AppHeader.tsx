@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 function CircularProgress({
   value,
   size = 32,
-  strokeWidth = 1.75,
+  strokeWidth = 2.2,
 }: {
   value: number;
   size?: number;
@@ -15,17 +15,18 @@ function CircularProgress({
 }) {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-  const offset = circumference - (value / 100) * circumference;
+  const clamped = Math.max(0, Math.min(100, value));
+  const offset = circumference - (clamped / 100) * circumference;
   return (
     <svg
       width={size}
       height={size}
-      className="rotate-[-90deg]"
+      className="rotate-[-90deg] block"
       role="progressbar"
-      aria-valuenow={value}
+      aria-valuenow={clamped}
       aria-valuemin={0}
       aria-valuemax={100}
-      aria-label={`${value}% solved`}
+      aria-label={`${clamped}% complete`}
     >
       <circle
         cx={size / 2}
@@ -35,6 +36,7 @@ function CircularProgress({
         className="text-border"
         stroke="currentColor"
         strokeWidth={strokeWidth}
+        opacity={0.9}
       />
       <circle
         cx={size / 2}
@@ -141,7 +143,7 @@ export function AppHeader({
             {/* Progress — minimal */}
             <div className="hidden sm:flex items-center gap-2.5 pl-1 pr-3 py-1 rounded-[8px] border border-border bg-muted">
               <div className="relative">
-                <CircularProgress value={pct} size={30} strokeWidth={1.75} />
+                <CircularProgress value={pct} size={30} strokeWidth={2.2} />
                 <span className="absolute inset-0 flex items-center justify-center text-[9px] font-mono font-semibold text-foreground">
                   {pct}
                 </span>
@@ -155,7 +157,7 @@ export function AppHeader({
 
             <div className="flex sm:hidden items-center gap-2" aria-label={`${pct}% complete`}>
               <div className="relative">
-                <CircularProgress value={pct} size={28} strokeWidth={1.75} />
+                <CircularProgress value={pct} size={28} strokeWidth={2.2} />
                 <span className="absolute inset-0 flex items-center justify-center text-[8px] font-mono font-semibold text-foreground" aria-hidden="true">
                   {pct}
                 </span>
@@ -243,7 +245,7 @@ export function AppHeader({
           <div className="px-4 py-5 space-y-5">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <CircularProgress value={pct} size={44} strokeWidth={1.75} />
+                <CircularProgress value={pct} size={44} strokeWidth={2.5} />
                 <span className="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-semibold text-foreground">
                   {pct}%
                 </span>

@@ -41,8 +41,8 @@ export function PatternAccordion({
               <span className="text-muted-foreground/40 mx-0.5">/</span>
               {problems.length}
             </span>
-            <div className="w-14 h-1 rounded-full bg-muted border border-border overflow-hidden p-0.5 hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of pattern complete`}>
-              <div className="h-full rounded-full bg-primary/80 group-data-[state=open]:bg-primary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" style={{ width: `${pct}%` }} />
+            <div className="w-14 h-2 rounded-full bg-secondary border border-border overflow-hidden hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of pattern complete`}>
+              <div className="h-full rounded-full bg-primary/80 group-data-[state=open]:bg-primary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" style={{ width: `${pct}%`, minWidth: pct > 0 ? '2px' : '0' }} />
             </div>
           </div>
         </AccordionTrigger>
