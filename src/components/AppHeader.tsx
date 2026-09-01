@@ -55,6 +55,8 @@ function CircularProgress({
 
 export function AppHeader({
   solvedCount,
+  reviewedCount = 0,
+  completedCount,
   totalProblems,
   topicCount,
   dueCount,
@@ -65,6 +67,8 @@ export function AppHeader({
   onSignOut,
 }: {
   solvedCount: number;
+  reviewedCount?: number;
+  completedCount?: number;
   totalProblems: number;
   topicCount: number;
   dueCount?: number;
@@ -74,9 +78,10 @@ export function AppHeader({
   onSignIn?: () => void;
   onSignOut?: () => void;
 }) {
+  const completed = completedCount ?? solvedCount + (reviewedCount ?? 0);
   const pct = useMemo(
-    () => (totalProblems > 0 ? Math.round((solvedCount / totalProblems) * 100) : 0),
-    [solvedCount, totalProblems]
+    () => (totalProblems > 0 ? Math.round((completed / totalProblems) * 100) : 0),
+    [completed, totalProblems]
   );
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -142,13 +147,13 @@ export function AppHeader({
                 </span>
               </div>
               <div className="text-xs leading-none">
-                <span className="font-mono font-medium text-foreground tabular-nums">{solvedCount}</span>
+                <span className="font-mono font-medium text-foreground tabular-nums">{completed}</span>
                 <span className="text-muted-foreground"> / {totalProblems}</span>
-                <div className="text-[10px] font-mono tracking-wide text-muted-foreground">solved</div>
+                <div className="text-[10px] font-mono tracking-wide text-muted-foreground">done</div>
               </div>
             </div>
 
-            <div className="flex sm:hidden items-center gap-2" aria-label={`${pct}% solved`}>
+            <div className="flex sm:hidden items-center gap-2" aria-label={`${pct}% complete`}>
               <div className="relative">
                 <CircularProgress value={pct} size={28} strokeWidth={1.75} />
                 <span className="absolute inset-0 flex items-center justify-center text-[8px] font-mono font-semibold text-foreground" aria-hidden="true">
@@ -245,7 +250,7 @@ export function AppHeader({
               </div>
               <div>
                 <div className="text-sm font-mono font-medium text-foreground tabular-nums">
-                  {solvedCount} / {totalProblems}
+                  {completed} / {totalProblems}
                 </div>
                 <div className="text-xs text-muted-foreground">{topicCount} topics · {totalProblems} problems</div>
                 {typeof dueCount === "number" && dueCount > 0 && (

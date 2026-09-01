@@ -128,9 +128,10 @@ export default function SheetPage() {
   const totalProblems = topics.flatMap((t) => t.patterns.flatMap((p) => p.problems)).length;
   const solvedCount = Object.values(progress).filter((s) => s === "solved").length;
   const reviewedCount = Object.values(progress).filter((s) => s === "review").length;
-  const unsolvedCount = totalProblems - solvedCount - reviewedCount;
+  const completedCount = solvedCount + reviewedCount;
+  const unsolvedCount = totalProblems - completedCount;
   const topicNames = topics.map((t) => t.name);
-  const pct = totalProblems > 0 ? Math.round((solvedCount / totalProblems) * 100) : 0;
+  const pct = totalProblems > 0 ? Math.round((completedCount / totalProblems) * 100) : 0;
 
   const { problemMap, topicMap, patternMap } = useMemo(() => {
     const pMap = new Map<string, MergedProblem>();
@@ -150,6 +151,8 @@ export default function SheetPage() {
     <div className="min-h-[100dvh] flex flex-col bg-background">
       <AppHeader
         solvedCount={solvedCount}
+        reviewedCount={reviewedCount}
+        completedCount={completedCount}
         totalProblems={totalProblems}
         topicCount={topics.length}
         dueCount={dueCount}
@@ -183,7 +186,8 @@ export default function SheetPage() {
               <div className="inline-flex items-center gap-3 rounded-[8px] border border-border bg-card px-3 py-2" aria-label={`${pct}% complete`}>
                 <span className="text-[11px] font-mono tracking-wide px-2.5 py-1 rounded-[6px] bg-primary text-primary-foreground font-medium tabular-nums">{pct}% done</span>
                 <span className="text-xs font-mono text-muted-foreground tabular-nums">
-                  <span className="text-foreground font-medium">{solvedCount}</span> / {totalProblems}
+                  <span className="text-foreground font-medium">{completedCount}</span> / {totalProblems}
+                  <span className="hidden sm:inline text-muted-foreground/60 ml-1">({solvedCount} solved · {reviewedCount} review)</span>
                 </span>
                 <span className="hidden sm:block w-px h-4 bg-border" aria-hidden="true" />
                 <span className="hidden sm:inline-flex text-xs text-muted-foreground gap-1">
@@ -322,9 +326,9 @@ export default function SheetPage() {
                 error={srError}
               />
               <StatRailCard
-                label="Total Solved"
-                value={<span className="text-foreground">{solvedCount}</span>}
-                sub={`of ${totalProblems} problems · ${pct}% complete`}
+                label="Completed"
+                value={<span className="text-foreground">{completedCount}</span>}
+                sub={`of ${totalProblems} · ${pct}% · ${solvedCount} solved · ${reviewedCount} review`}
               />
               <div className="grid grid-cols-2 gap-3">
                 <StatRailCard label="In Review" value={<span className="text-[#956400] dark:text-[#EAB308]">{reviewedCount}</span>} />
@@ -336,20 +340,20 @@ export default function SheetPage() {
                 <div className="space-y-3.5">
                   {topics.map((t) => {
                     const tTotal = t.patterns.reduce((a, p) => a + p.problems.length, 0);
-                    const tSolved = t.patterns.reduce(
-                      (a, p) => a + p.problems.filter((pr) => progress[pr.id] === "solved").length,
+                    const tCompleted = t.patterns.reduce(
+                      (a, p) => a + p.problems.filter((pr) => progress[pr.id] === "solved" || progress[pr.id] === "review").length,
                       0
                     );
-                    const pctT = tTotal > 0 ? Math.round((tSolved / tTotal) * 100) : 0;
+                    const pctT = tTotal > 0 ? Math.round((tCompleted / tTotal) * 100) : 0;
                     return (
                       <div key={t.id}>
                         <div className="flex items-center justify-between text-xs mb-1.5">
                           <span className="text-foreground truncate pr-2 font-medium">{t.name}</span>
                           <span className="font-mono text-muted-foreground shrink-0 tabular-nums">
-                            {tSolved}/{tTotal}
+                            {tCompleted}/{tTotal}
                           </span>
                         </div>
-                        <div className="h-1.5 w-full rounded-full bg-muted border border-border overflow-hidden p-0.5">
+                        <div className="h-1.5 w-full rounded-full bg-muted border border-border overflow-hidden p-0.5" role="progressbar" aria-valuenow={pctT} aria-valuemin={0} aria-valuemax={100} aria-label={`${pctT}% of ${t.name} complete`}>
                           <div
                             className="h-full rounded-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                             style={{ width: `${pctT}%` }}

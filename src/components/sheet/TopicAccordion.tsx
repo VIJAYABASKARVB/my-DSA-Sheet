@@ -23,11 +23,11 @@ export function TopicAccordion({
   onEditTags: (id: string, tags: Tag[]) => void;
 }) {
   const total = patterns.reduce((acc, cur) => acc + cur.problems.length, 0);
-  const solved = patterns.reduce(
-    (acc, cur) => acc + cur.problems.filter((p) => progress[p.id] === "solved").length,
+  const completed = patterns.reduce(
+    (acc, cur) => acc + cur.problems.filter((p) => progress[p.id] === "solved" || progress[p.id] === "review").length,
     0
   );
-  const pct = total > 0 ? Math.round((solved / total) * 100) : 0;
+  const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
     <Accordion defaultValue={[topic.id]} className="mb-3">
@@ -47,12 +47,12 @@ export function TopicAccordion({
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <span className="text-xs font-mono tabular-nums text-muted-foreground whitespace-nowrap hidden sm:inline">
-              <span className="text-foreground font-medium">{solved}</span>
-              <span className="text-border">/</span>
+              <span className="text-foreground font-medium">{completed}</span>
+              <span className="text-muted-foreground/40 mx-0.5">/</span>
               {total}
             </span>
             <div className="w-[88px] h-1.5 rounded-full bg-muted border border-border overflow-hidden p-0.5 hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of topic complete`}>
-              <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: `${pct}%` }} />
+              <div className="h-full rounded-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" style={{ width: `${pct}%` }} />
             </div>
             <span className="sm:hidden text-[11px] font-mono tabular-nums px-2.5 py-1 rounded-full bg-muted border border-border text-foreground">{pct}%</span>
           </div>

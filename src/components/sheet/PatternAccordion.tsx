@@ -22,8 +22,8 @@ export function PatternAccordion({
   onEditLinks: (id: string, links: PlatformLink[]) => void;
   onEditTags: (id: string, tags: Tag[]) => void;
 }) {
-  const solved = problems.filter((p) => progress[p.id] === "solved").length;
-  const pct = problems.length > 0 ? Math.round((solved / problems.length) * 100) : 0;
+  const completed = problems.filter((p) => progress[p.id] === "solved" || progress[p.id] === "review").length;
+  const pct = problems.length > 0 ? Math.round((completed / problems.length) * 100) : 0;
 
   return (
     <Accordion className="">
@@ -37,12 +37,12 @@ export function PatternAccordion({
           </span>
           <div className="flex items-center gap-2.5 mr-2 shrink-0">
             <span className="text-[11px] font-mono tabular-nums px-2 py-0.5 rounded-full bg-muted border border-border text-muted-foreground">
-              <span className="text-foreground">{solved}</span>
-              <span className="text-border">/</span>
+              <span className="text-foreground">{completed}</span>
+              <span className="text-muted-foreground/40 mx-0.5">/</span>
               {problems.length}
             </span>
             <div className="w-14 h-1 rounded-full bg-muted border border-border overflow-hidden p-0.5 hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of pattern complete`}>
-              <div className="h-full rounded-full bg-primary/80 group-data-[state=open]:bg-primary transition-all" style={{ width: `${pct}%` }} />
+              <div className="h-full rounded-full bg-primary/80 group-data-[state=open]:bg-primary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" style={{ width: `${pct}%` }} />
             </div>
           </div>
         </AccordionTrigger>

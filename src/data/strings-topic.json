@@ -1,0 +1,284 @@
+{
+  "topicId": "strings",
+  "name": "Strings",
+  "patterns": [
+    {
+      "patternId": "stage-1-basic-string-manipulation",
+      "name": "Stage 1 — Basic String Manipulation",
+      "order": 0,
+      "problems": [
+        {
+          "id": "remove-outermost-parentheses",
+          "name": "Remove Outermost Parentheses",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/remove-outermost-parentheses/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/remove-outermost-parentheses/"
+            }
+          ]
+        },
+        {
+          "id": "largest-odd-number-in-string",
+          "name": "Largest Odd Number in a String",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/largest-odd-number-in-string/"
+            }
+          ]
+        },
+        {
+          "id": "rotate-string",
+          "name": "Rotate String",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/rotate-string/"
+            }
+          ]
+        },
+        {
+          "id": "reverse-words-in-string",
+          "name": "Reverse Words in a Given String / Palindrome Check",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 3,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/reverse-words-in-a-string/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/reverse-words-in-a-string/"
+            }
+          ]
+        },
+        {
+          "id": "reverse-every-word-in-string",
+          "name": "Reverse Every Word in a String",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 4,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/reverse-every-word-in-a-string/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/reverse-words-in-a-given-string/"
+            }
+          ]
+        },
+        {
+          "id": "longest-common-prefix-strings",
+          "name": "Longest Common Prefix",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 5,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/longest-common-prefix/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/longest-common-prefix/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-2-hashmap-frequency",
+      "name": "Stage 2 — HashMap & Frequency",
+      "order": 1,
+      "problems": [
+        {
+          "id": "check-strings-anagram",
+          "name": "Check if Two Strings are Anagram of Each Other",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/valid-anagram/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/check-if-two-strings-are-anagrams-of-each-other/"
+            }
+          ]
+        },
+        {
+          "id": "isomorphic-string",
+          "name": "Isomorphic String",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/isomorphic-strings/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/check-if-two-strings-are-isomorphic/"
+            }
+          ]
+        },
+        {
+          "id": "sort-characters-by-frequency",
+          "name": "Sort Characters by Frequency",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/sort-characters-by-frequency/"
+            }
+          ]
+        },
+        {
+          "id": "roman-to-integer",
+          "name": "Roman to Integer",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 3,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/roman-to-integer/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/roman-number-to-integer/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-3-counting-parsing",
+      "name": "Stage 3 — Counting & Parsing",
+      "order": 2,
+      "problems": [
+        {
+          "id": "maximum-nesting-depth-parentheses",
+          "name": "Maximum Nesting Depth of the Parentheses",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/"
+            }
+          ]
+        },
+        {
+          "id": "string-to-integer-atoi",
+          "name": "String to Integer (atoi)",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/string-to-integer-atoi/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/implement-atoi/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-4-substring-problems",
+      "name": "Stage 4 — Substring Problems",
+      "order": 3,
+      "problems": [
+        {
+          "id": "count-number-of-substrings",
+          "name": "Count Number of Substrings",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/count-number-of-substrings/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/count-number-of-substrings/"
+            }
+          ]
+        },
+        {
+          "id": "longest-palindromic-substring",
+          "name": "Longest Palindromic Substring",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/longest-palindromic-substring/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/longest-palindromic-substring/"
+            }
+          ]
+        },
+        {
+          "id": "sum-of-beauty-of-all-substrings",
+          "name": "Sum of Beauty of All Substrings",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "tags": ["Striver"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/sum-of-beauty-of-all-substrings/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

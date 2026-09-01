@@ -9,6 +9,7 @@ import twoPointers from "@/data/two-pointers-topic.json";
 import slidingWindow from "@/data/sliding-window-topic.json";
 import matrix from "@/data/matrix-topic.json";
 import algorithms from "@/data/algorithms-topic.json";
+import strings from "@/data/strings-topic.json";
 import linkedList from "@/data/linked-list-topic.json";
 import binarySearch from "@/data/binary-search-topic.json";
 
@@ -30,6 +31,7 @@ const rawTopics: RawTopic[] = [
   prefixSum as RawTopic,
   matrix as RawTopic,
   algorithms as RawTopic,
+  strings as RawTopic,
   linkedList as RawTopic,
   slidingWindow as RawTopic,
   binarySearch as RawTopic,
