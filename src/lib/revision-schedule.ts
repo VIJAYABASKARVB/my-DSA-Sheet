@@ -1,4 +1,4 @@
-import { Timestamp, doc, setDoc, getDoc, getDocs, collection, onSnapshot, serverTimestamp } from "firebase/firestore";
+import { Timestamp, doc, setDoc, getDoc, getDocs, collection, onSnapshot, serverTimestamp, deleteField } from "firebase/firestore";
 import { db, auth } from "./firebase";
 import type { RevisionSchedule } from "./types";
 
@@ -75,7 +75,9 @@ export async function getTodaysRevisions(userId?: string): Promise<Record<string
   const todayEnd = new Date(today);
   todayEnd.setHours(23, 59, 59, 999);
   snap.forEach((d) => {
-    const data = d.data() as { revisionSchedule?: RevisionSchedule };
+    const data = d.data() as { revisionSchedule?: RevisionSchedule; status?: string };
+    // Hard-delete consistency: ignore orphans where status !== solved
+    if (data.status !== "solved") return;
     const sched = data.revisionSchedule;
     if (!sched || sched.isFullyMastered) return;
     const idx = sched.currentRevisionIndex ?? 0;
@@ -108,8 +110,11 @@ export function subscribeToRevisions(
     (snap) => {
       const out: Record<string, RevisionSchedule> = {};
       snap.forEach((d) => {
-        const data = d.data() as { revisionSchedule?: RevisionSchedule };
-        if (data.revisionSchedule) out[d.id] = data.revisionSchedule;
+        const data = d.data() as { revisionSchedule?: RevisionSchedule; status?: string };
+        if (!data.revisionSchedule) return;
+        // Hide orphan schedules where status !== solved (hard-delete consistency)
+        if (data.status !== "solved") return;
+        out[d.id] = data.revisionSchedule;
       });
       callback(out);
     },
@@ -150,10 +155,19 @@ export async function markRevisionDone(problemId: string, userId?: string): Prom
   );
 }
 
-export async function ensureRevisionSchedule(problemId: string, learnedAt: Date = new Date(), userId?: string): Promise<RevisionSchedule> {
+export async function ensureRevisionSchedule(problemId: string, learnedAt: Date = new Date(), userId?: string): Promise<RevisionSchedule | null> {
   const uid = userId || getCurrentUserId();
   if (!uid) throw new Error("Not signed in — cannot ensure schedule");
   const ref = doc(db, "users", uid, "progress", problemId);
+  // Race guard: if user quickly toggled to unsolved, doc may be deleted or status !== solved — abort to avoid orphan
+  try {
+    const curSnap = await getDoc(ref);
+    if (!curSnap.exists()) return null;
+    const curData = curSnap.data() as { status?: string };
+    if (curData.status !== "solved") return null;
+  } catch {
+    // if read fails, proceed cautiously
+  }
   const schedule = createInitialSchedule(learnedAt);
   await setDoc(
     ref,
@@ -164,4 +178,34 @@ export async function ensureRevisionSchedule(problemId: string, learnedAt: Date 
     { merge: true }
   );
   return schedule;
+}
+
+export async function clearRevisionSchedule(problemId: string, userId?: string): Promise<void> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot clear schedule");
+  const ref = doc(db, "users", uid, "progress", problemId);
+  // Hard-delete is preferred via deleteDoc in firestore.ts, but provide explicit clear for robustness
+  try {
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+    await setDoc(ref, { revisionSchedule: deleteField(), updatedAt: serverTimestamp() }, { merge: true });
+  } catch (e) {
+    console.warn("[revision-schedule] clearRevisionSchedule failed", e);
+    throw e;
+  }
+}
+
+export async function restoreRevisionSchedule(problemId: string, schedule: RevisionSchedule, userId?: string): Promise<void> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot restore schedule");
+  const ref = doc(db, "users", uid, "progress", problemId);
+  await setDoc(
+    ref,
+    {
+      status: "solved",
+      revisionSchedule: schedule,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
 }

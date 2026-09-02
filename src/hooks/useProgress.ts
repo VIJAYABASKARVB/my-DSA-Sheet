@@ -77,6 +77,19 @@ export function useProgress(userId?: string | null) {
     };
   }, [userId]);
 
+  const optimisticRemove = useCallback((problemId: string) => {
+    setProgress((prevState) => {
+      if (!(problemId in prevState)) return prevState;
+      const next = { ...prevState };
+      delete next[problemId];
+      return next;
+    });
+  }, []);
+
+  const optimisticRestore = useCallback((problemId: string, status: Exclude<Status, "unsolved">) => {
+    setProgress((prev) => ({ ...prev, [problemId]: status }));
+  }, []);
+
   const updateStatus = useCallback(
     async (problemId: string, status: Status) => {
       if (!userId) {
@@ -143,5 +156,5 @@ export function useProgress(userId?: string | null) {
     [userId]
   );
 
-  return { progress, updateStatus, loading, error };
+  return { progress, updateStatus, optimisticRemove, optimisticRestore, loading, error };
 }

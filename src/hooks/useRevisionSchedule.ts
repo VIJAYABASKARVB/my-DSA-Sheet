@@ -75,6 +75,19 @@ export function useRevisionSchedule(userId?: string | null) {
     };
   }, [userId]);
 
+  const removeRevision = useCallback((problemId: string) => {
+    setRevisions((prev) => {
+      if (!(problemId in prev)) return prev;
+      const next = { ...prev };
+      delete next[problemId];
+      return next;
+    });
+  }, []);
+
+  const restoreRevision = useCallback((problemId: string, schedule: RevisionSchedule) => {
+    setRevisions((prev) => ({ ...prev, [problemId]: schedule }));
+  }, []);
+
   const markRevisionDone = useCallback(
     async (problemId: string) => {
       if (!userId) {
@@ -176,5 +189,5 @@ export function useRevisionSchedule(userId?: string | null) {
 
   const dueCount = dueToday.length;
 
-  return { revisions, dueToday, upcoming, dueCount, markRevisionDone, loading, error };
+  return { revisions, dueToday, upcoming, dueCount, markRevisionDone, removeRevision, restoreRevision, loading, error };
 }

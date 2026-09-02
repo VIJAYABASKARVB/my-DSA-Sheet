@@ -11,7 +11,7 @@ import {
   Timestamp,
   deleteField,
 } from "firebase/firestore";
-import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag } from "./types";
+import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag, RevisionSchedule } from "./types";
 
 type ProblemDoc = {
   id: string;
@@ -58,6 +58,25 @@ export async function updateProblemStatus(problemId: string, status: Status, use
   } else {
     await setDoc(doc(db, "users", uid, "progress", problemId), { status, updatedAt: serverTimestamp() }, { merge: true });
   }
+}
+
+export async function restoreProgressWithSchedule(
+  problemId: string,
+  status: Exclude<Status, "unsolved">,
+  schedule: RevisionSchedule,
+  userId?: string
+): Promise<void> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot restore progress");
+  await setDoc(
+    doc(db, "users", uid, "progress", problemId),
+    {
+      status,
+      revisionSchedule: schedule,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
 }
 
 export function subscribeToProgress(

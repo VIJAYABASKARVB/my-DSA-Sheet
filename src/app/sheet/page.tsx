@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useProblems } from "@/hooks/useProblems";
 import { useProgress } from "@/hooks/useProgress";
@@ -10,7 +10,9 @@ import { FilterBar, type Filters } from "@/components/FilterBar";
 import { TopicAccordion } from "@/components/sheet/TopicAccordion";
 import { AppHeader } from "@/components/AppHeader";
 import { DueForReviewSection } from "@/components/sheet/DueForReviewSection";
-import type { MergedProblem, Pattern } from "@/lib/types";
+import type { MergedProblem, Pattern, Status, RevisionSchedule } from "@/lib/types";
+import { toast } from "sonner";
+import { restoreProgressWithSchedule } from "@/lib/firestore";
 
 type MergedPatternGroup = { pattern: Pattern; problems: MergedProblem[] };
 type MergedTopic = { id: string; name: string; patterns: MergedPatternGroup[] };
@@ -42,9 +44,9 @@ function StatRailCard({ label, value, sub }: { label: string; value: React.React
 export default function SheetPage() {
   const { user, loading: authLoading, signingIn, signInWithGoogle, signOut } = useAuth();
   const { topics, loading: problemsLoading } = useProblems(user?.uid ?? null);
-  const { progress, updateStatus, loading: pLoading } = useProgress(user?.uid ?? null);
+  const { progress, updateStatus, optimisticRemove, optimisticRestore, loading: pLoading } = useProgress(user?.uid ?? null);
   const { overrides, updateLinks, updateTags, loading: oLoading } = useProblemOverrides(user?.uid ?? null);
-  const { revisions, dueToday, upcoming, dueCount, markRevisionDone, loading: srLoading, error: srError } = useRevisionSchedule(user?.uid ?? null);
+  const { revisions, dueToday, upcoming, dueCount, markRevisionDone, removeRevision, restoreRevision, loading: srLoading, error: srError } = useRevisionSchedule(user?.uid ?? null);
   const [filters, setFilters] = useState<Filters>({
     search: "",
     topic: null,
@@ -146,6 +148,73 @@ export default function SheetPage() {
     }
     return { problemMap: pMap, topicMap: tMap, patternMap: patMap };
   }, [topics, mergedTopics]);
+
+  // Hard-delete with 5s Undo: solved -> unsolved accidentally
+  const handleStatusChange = useCallback(
+    (problemId: string, next: Status) => {
+      const prevStatus = (progress[problemId] ?? "unsolved") as Status;
+      const prevSchedule = revisions[problemId] as RevisionSchedule | undefined;
+
+      // Only intercept accidental uncheck: solved (with schedule) -> unsolved
+      if (prevStatus === "solved" && next === "unsolved" && prevSchedule) {
+        if (!user?.uid) {
+          // Not signed in — fallback to plain toggle (no persistence)
+          updateStatus(problemId, next);
+          return;
+        }
+        const problemName = problemMap.get(problemId)?.name ?? problemId;
+        const backupSchedule: RevisionSchedule = {
+          ...prevSchedule,
+          revisionDates: [...prevSchedule.revisionDates],
+          completedRevisions: [...(prevSchedule.completedRevisions ?? [])],
+        };
+        // Snapshot to avoid mutation after optimistic delete
+        const backupStatus: Exclude<Status, "unsolved"> = "solved";
+
+        // Optimistic immediate removal from UI (both progress + revision rail)
+        optimisticRemove(problemId);
+        removeRevision(problemId);
+
+        // Persist hard-delete
+        void updateStatus(problemId, next);
+
+        // Show Undo toast (5s)
+        toast(`Removed "${problemName}"`, {
+          description: "Hard-deleted from revisions. Undo within 5s.",
+          duration: 5000,
+          action: {
+            label: "Undo",
+            onClick: async () => {
+              // Optimistic restore
+              optimisticRestore(problemId, backupStatus);
+              restoreRevision(problemId, backupSchedule);
+              try {
+                await restoreProgressWithSchedule(problemId, backupStatus, backupSchedule, user.uid);
+                toast.success(`Restored "${problemName}"`);
+              } catch (e) {
+                const msg = (e as Error).message ?? String(e);
+                console.error("[sheet] restore failed", e);
+                toast.error("Failed to restore: " + msg);
+                // Revert optimistic restore on failure
+                optimisticRemove(problemId);
+                removeRevision(problemId);
+              }
+            },
+          },
+        });
+        return;
+      }
+
+      // Generic hard-delete without schedule (e.g., review -> unsolved) — also hard-delete
+      if (next === "unsolved" && (prevStatus === "review" || prevStatus === "solved")) {
+        // Ensure revision also removed optimistically even if no schedule captured (covers orphan)
+        if (revisions[problemId]) removeRevision(problemId);
+      }
+
+      updateStatus(problemId, next);
+    },
+    [progress, revisions, problemMap, user, updateStatus, optimisticRemove, optimisticRestore, removeRevision, restoreRevision]
+  );
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background">
@@ -307,7 +376,7 @@ export default function SheetPage() {
                     patterns={topic.patterns}
                     progress={progress}
                     revisions={revisions}
-                    onStatusChange={updateStatus}
+                    onStatusChange={handleStatusChange}
                     onMarkRevised={markRevisionDone}
                     onEditLinks={updateLinks}
                     onEditTags={updateTags}
