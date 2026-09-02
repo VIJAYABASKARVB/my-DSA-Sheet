@@ -1,0 +1,343 @@
+{
+  "topicId": "recursion-backtracking",
+  "name": "Recursion",
+  "patterns": [
+    {
+      "patternId": "stage-1-basic-recursion",
+      "name": "Stage 1 — Basic Recursion",
+      "order": 0,
+      "problems": [
+        {
+          "id": "recursive-atoi",
+          "name": "Recursive Implementation of atoi()",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/recursive-implementation-of-atoi/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/recursive-implementation-atoi/"
+            }
+          ]
+        },
+        {
+          "id": "pow-x-n",
+          "name": "Pow(x, n)",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/powx-n/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/implement-powxn-x-raised-to-the-power-n/"
+            }
+          ]
+        },
+        {
+          "id": "count-good-numbers",
+          "name": "Count Good Numbers",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/count-good-numbers/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/count-good-numbers/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-2-recursion-on-data-structures",
+      "name": "Stage 2 — Recursion on Data Structures",
+      "order": 1,
+      "problems": [
+        {
+          "id": "reverse-a-stack",
+          "name": "Reverse a Stack",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/reverse-a-stack-using-recursion/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/reverse-a-stack-using-recursion/"
+            }
+          ]
+        },
+        {
+          "id": "sort-a-stack-using-recursion",
+          "name": "Sort a Stack Using Recursion",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/sort-a-stack-using-recursion/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/sort-a-stack-using-recursion/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-3-string-generation",
+      "name": "Stage 3 — String & Bit Generation",
+      "order": 2,
+      "problems": [
+        {
+          "id": "generate-binary-strings-no-consecutive-ones",
+          "name": "Generate Binary Strings Without Consecutive 1s",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/generate-binary-strings-without-consecutive-1s/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/generate-binary-strings-without-consecutive-1s/"
+            }
+          ]
+        },
+        {
+          "id": "generate-parentheses",
+          "name": "Generate Parentheses",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/generate-parentheses/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/generate-parentheses/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-4-subsequences-pick-not-pick",
+      "name": "Stage 4 — Subsequences (Pick / Not Pick)",
+      "order": 3,
+      "problems": [
+        {
+          "id": "learn-all-patterns-of-subsequences",
+          "name": "Learn All Patterns of Subsequences (Theory)",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/all-subsequences-of-an-array-recursion/"
+            }
+          ]
+        },
+        {
+          "id": "power-set",
+          "name": "Power Set",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/subsets/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/power-set-print-all-the-possible-subsequences-of-the-string/"
+            }
+          ]
+        },
+        {
+          "id": "check-subsequence-sum-k-exists",
+          "name": "Check if There Exists a Subsequence with Sum K",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/check-if-there-exists-a-subsequence-with-sum-k/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/check-if-array-has-a-subset-with-given-sum/"
+            }
+          ]
+        },
+        {
+          "id": "count-subsequences-sum-k",
+          "name": "Count All Subsequences with Sum K",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 3,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/count-all-subsequences-with-sum-k/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/count-of-subsets-with-sum-equal-to-x/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-5-combination-problems",
+      "name": "Stage 5 — Combination Problems",
+      "order": 4,
+      "problems": [
+        {
+          "id": "subsets-i",
+          "name": "Subsets I",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/subsets/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/subsets/"
+            }
+          ]
+        },
+        {
+          "id": "subsets-ii",
+          "name": "Subsets II",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/subsets-ii/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/subsets-ii/"
+            }
+          ]
+        },
+        {
+          "id": "combination-sum",
+          "name": "Combination Sum",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/combination-sum/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/combination-sum-1/"
+            }
+          ]
+        },
+        {
+          "id": "combination-sum-ii",
+          "name": "Combination Sum II",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 3,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/combination-sum-ii/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/combination-sum-ii/"
+            }
+          ]
+        },
+        {
+          "id": "combination-sum-iii",
+          "name": "Combination Sum III",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 4,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/combination-sum-iii/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/combination-sum-iii/"
+            }
+          ]
+        },
+        {
+          "id": "letter-combinations-phone-number",
+          "name": "Letter Combinations of a Phone Number",
+          "difficulty": "Medium",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 5,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/letter-combinations-of-a-phone-number/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

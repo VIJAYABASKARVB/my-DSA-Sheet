@@ -10,6 +10,7 @@ import slidingWindow from "@/data/sliding-window-topic.json";
 import matrix from "@/data/matrix-topic.json";
 import algorithms from "@/data/algorithms-topic.json";
 import strings from "@/data/strings-topic.json";
+import recursionBacktracking from "@/data/recursion-backtracking-topic.json";
 import linkedList from "@/data/linked-list-topic.json";
 import binarySearch from "@/data/binary-search-topic.json";
 
@@ -32,6 +33,7 @@ const rawTopics: RawTopic[] = [
   matrix as RawTopic,
   algorithms as RawTopic,
   strings as RawTopic,
+  recursionBacktracking as RawTopic,
   linkedList as RawTopic,
   slidingWindow as RawTopic,
   binarySearch as RawTopic,

@@ -241,8 +241,8 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
   }
 
   // Sort topics by explicit order field; fallback to known order for legacy docs
-  // Order: array & hashing → Two Pointers → Prefix Sum → matrix manipulation → algorithms → Strings → LinkedList → Sliding Window → Binary search → trees
-  const legacyOrder = ["arrays-hashing", "two-pointers", "prefix-sum", "matrix", "algorithms", "strings", "linked-list", "sliding-window", "binary-search", "trees-dfs-bfs"];
+  // Order: array & hashing → Two Pointers → Prefix Sum → matrix manipulation → algorithms → Strings → Recursion & Backtracking → LinkedList → Sliding Window → Binary search → trees
+  const legacyOrder = ["arrays-hashing", "two-pointers", "prefix-sum", "matrix", "algorithms", "strings", "recursion-backtracking", "linked-list", "sliding-window", "binary-search", "trees-dfs-bfs"];
   topics.sort((a, b) => {
     const oa = (a as Topic & { order: number }).order;
     const ob = (b as Topic & { order: number }).order;
