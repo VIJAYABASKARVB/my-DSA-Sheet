@@ -8,6 +8,8 @@ export function PatternAccordion({
   problems,
   progress,
   revisions,
+  isOpen,
+  onToggle,
   onStatusChange,
   onMarkRevised,
   onEditLinks,
@@ -17,6 +19,8 @@ export function PatternAccordion({
   problems: MergedProblem[];
   progress: Record<string, Status>;
   revisions?: Record<string, RevisionSchedule>;
+  isOpen?: boolean;
+  onToggle?: (open: boolean) => void;
   onStatusChange: (id: string, next: Status) => void;
   onMarkRevised?: (id: string) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
@@ -24,9 +28,20 @@ export function PatternAccordion({
 }) {
   const completed = problems.filter((p) => progress[p.id] === "solved" || progress[p.id] === "review").length;
   const pct = problems.length > 0 ? Math.round((completed / problems.length) * 100) : 0;
+  const isControlled = isOpen !== undefined && onToggle !== undefined;
+  const handleValueChange = (value: string[]) => {
+    if (!onToggle) return;
+    const nextOpen = value.includes(pattern.id);
+    if (nextOpen !== isOpen) onToggle(nextOpen);
+  };
 
   return (
-    <Accordion className="">
+    <Accordion
+      className=""
+      {...(isControlled
+        ? { value: isOpen ? [pattern.id] : [], onValueChange: handleValueChange }
+        : { defaultValue: [] })}
+    >
       <AccordionItem
         value={pattern.id}
         className="rounded-[8px] border border-border bg-card overflow-hidden hover:border-border data-[state=open]:border-border transition-colors"

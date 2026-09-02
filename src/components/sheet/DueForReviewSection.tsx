@@ -17,6 +17,7 @@ type Props = {
   loading: boolean;
   error: string | null;
   onMarkRevised?: (problemId: string) => void;
+  onSelectProblem?: (problemId: string) => void;
 };
 
 function formatOverdue(target: Timestamp | Date | undefined): string {
@@ -46,8 +47,12 @@ function ProgressDots({ currentIdx, mastered }: { currentIdx: number; mastered: 
   );
 }
 
-export function DueForReviewSection({ dueToday, upcoming, problemMap, topicMap, patternMap, loading, error, onMarkRevised }: Props) {
+export function DueForReviewSection({ dueToday, upcoming, problemMap, topicMap, patternMap, loading, error, onMarkRevised, onSelectProblem }: Props) {
   const handleSelect = (problemId: string) => {
+    if (onSelectProblem) {
+      onSelectProblem(problemId);
+      return;
+    }
     const el = document.getElementById(`problem-${problemId}`);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "center" });

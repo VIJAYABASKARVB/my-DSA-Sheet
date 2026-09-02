@@ -8,6 +8,10 @@ export function TopicAccordion({
   patterns,
   progress,
   revisions,
+  expandedTopics,
+  expandedPatterns,
+  onExpandedTopicsChange,
+  onExpandedPatternsChange,
   onStatusChange,
   onMarkRevised,
   onEditLinks,
@@ -17,6 +21,10 @@ export function TopicAccordion({
   patterns: { pattern: Topic["patterns"][number]; problems: MergedProblem[] }[];
   progress: Record<string, Status>;
   revisions?: Record<string, RevisionSchedule>;
+  expandedTopics?: string[];
+  expandedPatterns?: string[];
+  onExpandedTopicsChange?: (ids: string[]) => void;
+  onExpandedPatternsChange?: (ids: string[]) => void;
   onStatusChange: (id: string, next: Status) => void;
   onMarkRevised?: (id: string) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
@@ -28,9 +36,24 @@ export function TopicAccordion({
     0
   );
   const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+  const isControlled = expandedTopics !== undefined && onExpandedTopicsChange !== undefined;
+  // Treat empty controlled array as "default open all" to avoid flash-closed on first mount before sheet/page populates
+  const isOpen = isControlled ? (expandedTopics!.length === 0 ? true : expandedTopics!.includes(topic.id)) : true;
+  const handleTopicChange = (value: string[]) => {
+    if (!onExpandedTopicsChange || !expandedTopics) return;
+    const nextOpen = value.includes(topic.id);
+    if (nextOpen && !expandedTopics.includes(topic.id)) {
+      onExpandedTopicsChange([...expandedTopics, topic.id]);
+    } else if (!nextOpen && expandedTopics.includes(topic.id)) {
+      onExpandedTopicsChange(expandedTopics.filter((id) => id !== topic.id));
+    }
+  };
 
   return (
-    <Accordion defaultValue={[topic.id]} className="mb-3">
+    <Accordion
+      {...(isControlled ? { value: isOpen ? [topic.id] : [], onValueChange: handleTopicChange } : { defaultValue: [topic.id] })}
+      className="mb-3"
+    >
       <AccordionItem
         value={topic.id}
         className="rounded-[12px] border border-border bg-card overflow-hidden data-[state=open]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:data-[state=open]:shadow-[0_2px_12px_rgba(0,0,0,0.3)] transition-shadow"
@@ -66,6 +89,15 @@ export function TopicAccordion({
                 problems={problems}
                 progress={progress}
                 revisions={revisions}
+                isOpen={expandedPatterns?.includes(pattern.id)}
+                onToggle={(open) => {
+                  if (!onExpandedPatternsChange || !expandedPatterns) return;
+                  if (open && !expandedPatterns.includes(pattern.id)) {
+                    onExpandedPatternsChange([...expandedPatterns, pattern.id]);
+                  } else if (!open && expandedPatterns.includes(pattern.id)) {
+                    onExpandedPatternsChange(expandedPatterns.filter((id) => id !== pattern.id));
+                  }
+                }}
                 onStatusChange={onStatusChange}
                 onMarkRevised={onMarkRevised}
                 onEditLinks={onEditLinks}

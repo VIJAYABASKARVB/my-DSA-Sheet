@@ -54,6 +54,15 @@ export default function SheetPage() {
     status: null,
     tags: [],
   });
+  const [expandedTopics, setExpandedTopics] = useState<string[]>([]);
+  const [expandedPatterns, setExpandedPatterns] = useState<string[]>([]);
+
+  // Keep topics expanded by default when they first load
+  useEffect(() => {
+    if (topics.length > 0 && expandedTopics.length === 0) {
+      setExpandedTopics(topics.map((t) => t.id));
+    }
+  }, [topics, expandedTopics.length]);
 
   useEffect(() => {
     const el = document.getElementById("filter-sticky");
@@ -148,6 +157,48 @@ export default function SheetPage() {
     }
     return { problemMap: pMap, topicMap: tMap, patternMap: patMap };
   }, [topics, mergedTopics]);
+
+  // Navigate from revision rail to problem row: auto-expand topic+pattern, clear filters if hidden, scroll & highlight
+  const handleNavigateToProblem = useCallback(
+    (problemId: string) => {
+      const prob = problemMap.get(problemId);
+      if (!prob) {
+        toast.error("Problem not found: " + problemId);
+        return;
+      }
+      // If filtered hides the problem, clear filters so it becomes visible
+      const inFiltered = filtered.some((t) =>
+        t.patterns.some((g) => g.problems.some((p) => p.id === problemId))
+      );
+      if (!inFiltered) {
+        setFilters({ search: "", topic: null, difficulty: null, status: null, tags: [] });
+        toast("Filters cleared to show problem");
+      }
+      // Ensure topic + pattern are expanded
+      setExpandedTopics((prev) => (prev.includes(prob.topicId) ? prev : [...prev, prob.topicId]));
+      setExpandedPatterns((prev) => (prev.includes(prob.patternId) ? prev : [...prev, prob.patternId]));
+
+      // Wait for React to render filtered + expanded accordions, then scroll
+      const doScroll = (attempt = 0) => {
+        const el = document.getElementById(`problem-${problemId}`);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.classList.add("ring-1", "ring-ring/20", "bg-muted");
+          // Make focusable for a11y
+          if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+          try {
+            (el as HTMLElement).focus({ preventScroll: true });
+          } catch {}
+          setTimeout(() => el.classList.remove("ring-1", "ring-ring/20", "bg-muted"), 1600);
+        } else if (attempt < 4) {
+          setTimeout(() => doScroll(attempt + 1), 180);
+        }
+      };
+      // 120ms initial delay covers filter clearing + accordion open animation start
+      setTimeout(() => doScroll(0), 120);
+    },
+    [problemMap, filtered]
+  );
 
   // Hard-delete with 5s Undo: solved -> unsolved accidentally
   const handleStatusChange = useCallback(
@@ -313,6 +364,7 @@ export default function SheetPage() {
             loading={srLoading}
             error={srError}
             onMarkRevised={markRevisionDone}
+            onSelectProblem={handleNavigateToProblem}
           />
         </div>
 
@@ -376,6 +428,10 @@ export default function SheetPage() {
                     patterns={topic.patterns}
                     progress={progress}
                     revisions={revisions}
+                    expandedTopics={expandedTopics}
+                    expandedPatterns={expandedPatterns}
+                    onExpandedTopicsChange={setExpandedTopics}
+                    onExpandedPatternsChange={setExpandedPatterns}
                     onStatusChange={handleStatusChange}
                     onMarkRevised={markRevisionDone}
                     onEditLinks={updateLinks}
@@ -397,6 +453,7 @@ export default function SheetPage() {
                 loading={srLoading}
                 error={srError}
                 onMarkRevised={markRevisionDone}
+                onSelectProblem={handleNavigateToProblem}
               />
               <StatRailCard
                 label="Completed"
