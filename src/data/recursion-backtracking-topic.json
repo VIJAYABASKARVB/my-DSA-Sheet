@@ -338,6 +338,157 @@
           ]
         }
       ]
+    },
+    {
+      "patternId": "stage-6-backtracking-hard",
+      "name": "Stage 6 — Backtracking Hard Problems",
+      "order": 5,
+      "problems": [
+        {
+          "id": "rat-in-a-maze",
+          "name": "Rat in a Maze",
+          "difficulty": "Hard",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/rat-in-a-maze/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/"
+            }
+          ]
+        },
+        {
+          "id": "word-search",
+          "name": "Word Search",
+          "difficulty": "Hard",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/word-search/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/word-search/"
+            }
+          ]
+        },
+        {
+          "id": "n-queen",
+          "name": "N Queen",
+          "difficulty": "Hard",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/n-queens/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/n-queen-problem-return-all-distinct-solutions-to-the-n-queens-puzzle/"
+            }
+          ]
+        },
+        {
+          "id": "m-coloring-problem",
+          "name": "M Coloring Problem",
+          "difficulty": "Hard",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 3,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/m-coloring-problem/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/m-coloring-problem-backtracking-5/"
+            }
+          ]
+        },
+        {
+          "id": "palindrome-partitioning",
+          "name": "Palindrome Partitioning",
+          "difficulty": "Hard",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 4,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/palindrome-partitioning/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/palindrome-partitioning/"
+            }
+          ]
+        },
+        {
+          "id": "word-break",
+          "name": "Word Break",
+          "difficulty": "Hard",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 5,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/word-break/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/word-break-problem-using-recursion/"
+            }
+          ]
+        },
+        {
+          "id": "sudoku-solver",
+          "name": "Sudoku Solver",
+          "difficulty": "Hard",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 6,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/sudoku-solver/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/sudoku-solver/"
+            }
+          ]
+        },
+        {
+          "id": "expression-add-operators",
+          "name": "Expression Add Operators",
+          "difficulty": "Hard",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 7,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/expression-add-operators/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/expression-add-operators/"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
