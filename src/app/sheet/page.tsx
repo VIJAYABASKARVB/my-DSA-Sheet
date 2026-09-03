@@ -14,6 +14,7 @@ import { DueForReviewSection } from "@/components/sheet/DueForReviewSection";
 import type { MergedProblem, Pattern, Status, RevisionSchedule } from "@/lib/types";
 import { toast } from "sonner";
 import { restoreProgressWithSchedule } from "@/lib/firestore";
+import { LayoutList, Clock3 } from "lucide-react";
 
 type MergedPatternGroup = { pattern: Pattern; problems: MergedProblem[] };
 type MergedTopic = { id: string; name: string; patterns: MergedPatternGroup[] };
@@ -58,6 +59,20 @@ export default function SheetPage() {
   });
   const [expandedTopics, setExpandedTopics] = useState<string[]>([]);
   const [expandedPatterns, setExpandedPatterns] = useState<string[]>([]);
+  const [activeView, setActiveView] = useState<"sheet" | "revisions">("sheet");
+
+  // Restore toggle preference (sheet ↔ revisions)
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("sheet:activeView") as "sheet" | "revisions" | null;
+      if (saved === "sheet" || saved === "revisions") setActiveView(saved);
+    } catch {}
+  }, []);
+  useEffect(() => {
+    try {
+      localStorage.setItem("sheet:activeView", activeView);
+    } catch {}
+  }, [activeView]);
 
   // Keep topics expanded by default when they first load
   useEffect(() => {
@@ -168,6 +183,8 @@ export default function SheetPage() {
         toast.error("Problem not found: " + problemId);
         return;
       }
+      // Switch to sheet view if currently on revisions — fixes navigation when toggle separates views
+      setActiveView((prev) => (prev === "revisions" ? "sheet" : prev));
       // If filtered hides the problem, clear filters so it becomes visible
       const inFiltered = filtered.some((t) =>
         t.patterns.some((g) => g.problems.some((p) => p.id === problemId))
@@ -181,6 +198,7 @@ export default function SheetPage() {
       setExpandedPatterns((prev) => (prev.includes(prob.patternId) ? prev : [...prev, prob.patternId]));
 
       // Wait for React to render filtered + expanded accordions, then scroll
+      // Extra delay when switching from revisions tab
       const doScroll = (attempt = 0) => {
         const el = document.getElementById(`problem-${problemId}`);
         if (el) {
@@ -196,10 +214,11 @@ export default function SheetPage() {
           setTimeout(() => doScroll(attempt + 1), 180);
         }
       };
-      // 120ms initial delay covers filter clearing + accordion open animation start
-      setTimeout(() => doScroll(0), 120);
+      // 200ms when tab switch needed, else 120ms
+      const delay = activeView === "revisions" ? 200 : 120;
+      setTimeout(() => doScroll(0), delay);
     },
-    [problemMap, filtered]
+    [problemMap, filtered, activeView]
   );
 
   // Hard-delete with 5s Undo: solved -> unsolved accidentally
@@ -345,33 +364,79 @@ export default function SheetPage() {
           </div>
         )}
 
-        {/* FilterBar — sticky minimal, safe for keyboard */}
-        <div className="sticky top-[56px] z-10 -mx-4 px-4 sm:-mx-1 sm:px-1 py-2 -mt-2 bg-background/85 backdrop-blur-[8px] border-b border-transparent data-[scrolled=true]:border-border data-[scrolled=true]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:data-[scrolled=true]:shadow-[0_2px_12px_rgba(0,0,0,0.3)] transition-all duration-300 supports-[backdrop-filter]:bg-background/80" id="filter-sticky">
-          <FilterBar
-            filters={filters}
-            setFilters={setFilters}
-            topicNames={topicNames}
-            availableTags={availableTags}
-          />
+        {/* Sticky filtering card — toggle inside header (right), body is FilterBar */}
+        <div
+          className="sticky top-[56px] z-10 -mx-4 px-4 sm:-mx-1 sm:px-1 py-2 -mt-2 bg-background/85 backdrop-blur-[8px] border-b border-transparent data-[scrolled=true]:border-border data-[scrolled=true]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:data-[scrolled=true]:shadow-[0_2px_12px_rgba(0,0,0,0.3)] transition-all duration-300 supports-[backdrop-filter]:bg-background/80"
+          id="filter-sticky"
+        >
+          <div className="rounded-[12px] border border-border bg-card overflow-hidden" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+            <div className="flex items-center justify-between gap-2 px-3 md:px-4 py-2 border-b border-border bg-muted/20">
+              <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-mono tracking-wide text-muted-foreground">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
+                Filters
+              </span>
+              <span className="sm:hidden text-[11px] font-mono tracking-wide text-muted-foreground">Filters</span>
+              <div
+                role="tablist"
+                aria-label="Sheet or revisions view"
+                className="ml-auto inline-flex items-center gap-1 p-1 rounded-[10px] border border-border bg-muted"
+              >
+                <button
+                  role="tab"
+                  aria-selected={activeView === "sheet"}
+                  aria-controls="sheet-panel"
+                  id="tab-sheet"
+                  onClick={() => setActiveView("sheet")}
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[8px] text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${
+                    activeView === "sheet"
+                      ? "bg-card border border-border text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <LayoutList className="w-3.5 h-3.5" strokeWidth={1.75} aria-hidden="true" />
+                  Sheet
+                  <span className="hidden sm:inline ml-1 font-mono text-[11px] tabular-nums opacity-60">
+                    {filtered.length > 0 ? `${filtered.reduce((a, t) => a + t.patterns.reduce((x, g) => x + g.problems.length, 0), 0)}/${totalProblems}` : `${totalProblems}`}
+                  </span>
+                </button>
+                <button
+                  role="tab"
+                  aria-selected={activeView === "revisions"}
+                  aria-controls="revisions-panel"
+                  id="tab-revisions"
+                  onClick={() => setActiveView("revisions")}
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[8px] text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${
+                    activeView === "revisions"
+                      ? "bg-card border border-border text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Clock3 className="w-3.5 h-3.5" strokeWidth={1.75} aria-hidden="true" />
+                  Revisions
+                  <span className="inline-flex items-center gap-1 ml-1">
+                    {dueCount > 0 ? (
+                      <span className="px-1.5 py-0.5 rounded-full bg-[#FDEBEC] dark:bg-[#FDEBEC]/16 border border-border text-[#9F2F2D] dark:text-[#FCA5A5] text-[10px] font-mono leading-none">
+                        {dueCount} due
+                      </span>
+                    ) : (
+                      <span className="px-1.5 py-0.5 rounded-full bg-muted border border-border text-muted-foreground text-[10px] font-mono leading-none">
+                        {upcoming.length}
+                      </span>
+                    )}
+                  </span>
+                </button>
+              </div>
+            </div>
+            {activeView === "sheet" && (
+              <div className="p-3 md:p-4">
+                <FilterBar filters={filters} setFilters={setFilters} topicNames={topicNames} availableTags={availableTags} headerless />
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Due for Review — below 900px inline collapsible */}
-        <div className="rail-hide-900 mt-6">
-          <DueForReviewSection
-            dueToday={dueToday}
-            upcoming={upcoming}
-            problemMap={problemMap}
-            topicMap={topicMap}
-            patternMap={patternMap}
-            loading={srLoading}
-            error={srError}
-            onMarkRevised={markRevisionDone}
-            onSelectProblem={handleNavigateToProblem}
-          />
-        </div>
-
-        {/* Main + stat rail — rail appears at 900px */}
-        <div className="grid grid-cols-1 [900px]:grid-cols-[1fr_320px] xl:grid-cols-[1fr_340px] gap-6 md:gap-8 mt-6 pb-24">
+        {activeView === "sheet" ? (
+          <div className="mt-6 pb-24" id="sheet-panel" role="tabpanel" aria-labelledby="tab-sheet">
           <main className="space-y-3 min-w-0" aria-label="Problem topics">
             {loading ? (
               <div className="space-y-3" aria-busy="true" aria-live="polite">
@@ -444,9 +509,10 @@ export default function SheetPage() {
               ))
             )}
           </main>
-
-          <aside className="hidden rail-900 space-y-4" aria-label="Progress summary">
-            <div className="sticky top-[72px] space-y-4">
+          </div>
+        ) : (
+          <div className="mt-6 pb-24" id="revisions-panel" role="tabpanel" aria-labelledby="tab-revisions">
+            <div className="max-w-[860px] mx-auto space-y-6">
               <DueForReviewSection
                 dueToday={dueToday}
                 upcoming={upcoming}
@@ -458,12 +524,13 @@ export default function SheetPage() {
                 onMarkRevised={markRevisionDone}
                 onSelectProblem={handleNavigateToProblem}
               />
-              <StatRailCard
-                label="Completed"
-                value={<span className="text-foreground">{completedCount}</span>}
-                sub={`of ${totalProblems} · ${pct}% · ${solvedCount} solved · ${reviewedCount} review`}
-              />
-              <div className="grid grid-cols-2 gap-3">
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <StatRailCard
+                  label="Completed"
+                  value={<span className="text-foreground">{completedCount}</span>}
+                  sub={`of ${totalProblems} · ${pct}% · ${solvedCount} solved · ${reviewedCount} review`}
+                />
                 <StatRailCard label="In Review" value={<span className="text-[#956400] dark:text-[#EAB308]">{reviewedCount}</span>} />
                 <StatRailCard label="Remaining" value={<span className="text-muted-foreground">{unsolvedCount}</span>} />
               </div>
@@ -505,8 +572,8 @@ export default function SheetPage() {
                 </p>
               </div>
             </div>
-          </aside>
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

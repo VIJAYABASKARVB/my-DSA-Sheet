@@ -28,11 +28,13 @@ export function FilterBar({
   setFilters,
   topicNames,
   availableTags,
+  headerless,
 }: {
   filters: Filters;
   setFilters: (f: Filters) => void;
   topicNames: string[];
   availableTags: string[];
+  headerless?: boolean;
 }) {
   const toggle = <T extends string>(key: keyof Filters, value: T) => {
     setFilters({
@@ -51,8 +53,10 @@ export function FilterBar({
   const hasActive =
     filters.search || filters.topic || filters.difficulty || filters.status || filters.tags.length > 0;
 
+  const wrapperClass = headerless ? "" : "rounded-[12px] border border-border bg-card p-3 md:p-4";
+  const wrapperStyle = headerless ? undefined : ({ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" } as React.CSSProperties);
   return (
-    <div className="rounded-[12px] border border-border bg-card p-3 md:p-4" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+    <div className={wrapperClass} style={wrapperStyle}>
       <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5">
         <div className="relative flex-1 min-w-0 sm:min-w-[180px]">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" aria-hidden="true">

@@ -110,10 +110,10 @@ export function ProblemRow({
     <>
       <div
         id={`problem-${problem.id}`}
-        className="group/row flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 py-3 px-3 md:px-4 border-b border-border last:border-b-0 hover:bg-muted/60 transition-colors"
+        className="group/row flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 py-3 px-3 md:px-4 border-b border-border last:border-b-0 hover:bg-muted/60 transition-colors min-w-0 w-full"
       >
-        {/* Primary: status + name + difficulty */}
-        <div className="flex items-center gap-2.5 min-w-0 flex-1 w-full">
+        {/* Primary: status + name + difficulty — flexible column taking remaining width */}
+        <div className="flex items-center gap-2.5 min-w-0 flex-1 overflow-hidden">
           <button
             aria-label={`Status: ${status}. Click to cycle to ${cycle[status]}.`}
             onClick={() => onStatusChange(problem.id, cycle[status])}
@@ -122,7 +122,10 @@ export function ProblemRow({
             <span aria-hidden="true">{cfg.label}</span>
           </button>
 
-          <span className="flex-1 min-w-0 truncate text-[13px] font-medium tracking-tight text-foreground group-hover/row:text-foreground transition-colors" title={problem.name}>
+          <span
+            className="flex-1 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap truncate text-[13px] font-medium tracking-tight text-foreground group-hover/row:text-foreground transition-colors"
+            title={problem.name}
+          >
             {problem.name}
           </span>
 
@@ -135,8 +138,8 @@ export function ProblemRow({
           </Badge>
         </div>
 
-        {/* Meta + actions: wraps on mobile, inline on desktop — no indent on 320px */}
-        <div className="flex flex-wrap items-center gap-1.5 sm:gap-1.5 sm:justify-end w-full sm:w-auto pl-0 sm:pl-0">
+        {/* Meta + actions: right-side controls — never overlap name, shrink-0 */}
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-1.5 sm:justify-end w-full sm:w-auto shrink-0 pl-0 sm:pl-0">
           {status === "solved" && revisionSchedule && !revisionSchedule.isFullyMastered && (
             <span className="inline-flex items-center gap-1.5 shrink-0 mr-0.5">
               <span className="flex items-center gap-1">
@@ -164,10 +167,10 @@ export function ProblemRow({
             </Badge>
           )}
 
-          <span className="hidden sm:inline-flex flex-wrap gap-1 items-center">
+          <span className="hidden sm:inline-flex flex-wrap gap-1 items-center shrink-0">
             {(problem.tags ?? []).length === 0 ? null : (
               (problem.tags ?? []).map((tag) => (
-                <Badge key={tag} variant="secondary" className="rounded-full text-[10px] bg-card border-border text-muted-foreground px-2 py-0.5 font-medium">
+                <Badge key={tag} variant="secondary" className="rounded-full text-[10px] bg-card border-border text-muted-foreground px-2 py-0.5 font-medium shrink-0">
                   {tag}
                 </Badge>
               ))
@@ -185,7 +188,7 @@ export function ProblemRow({
             )}
           </span>
 
-          <span className="flex flex-wrap gap-1.5 items-center max-w-full">
+          <span className="flex flex-wrap gap-1.5 items-center max-w-full shrink-0">
             {problem.links.length === 0 ? (
               <span className="text-[10px] text-muted-foreground whitespace-nowrap hidden lg:inline">no links</span>
             ) : (
