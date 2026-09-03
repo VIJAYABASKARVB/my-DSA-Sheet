@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
@@ -53,6 +54,7 @@ export function ProblemRow({
   onMarkRevised,
   onEditLinks,
   onEditTags,
+  hasNote,
 }: {
   problem: MergedProblem;
   status: Status;
@@ -61,6 +63,7 @@ export function ProblemRow({
   onMarkRevised?: (id: string) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
   onEditTags: (id: string, tags: Tag[]) => void;
+  hasNote?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<PlatformLink[]>(problem.links);
@@ -99,6 +102,7 @@ export function ProblemRow({
     setNewTag("");
   };
 
+  const router = useRouter();
   const cfg = statusConfig[status];
 
   return (
@@ -187,6 +191,19 @@ export function ProblemRow({
             ))
           )}
         </div>
+
+        <button
+          onClick={() => router.push(`/notes/${problem.id}`)}
+          className={`w-7 h-7 rounded-[6px] border flex items-center justify-center shrink-0 text-xs transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${
+            hasNote
+              ? "bg-primary text-primary-foreground border-primary hover:bg-primary/90"
+              : "bg-card text-muted-foreground hover:text-foreground hover:bg-muted border-border"
+          }`}
+          title="Open Notes"
+          aria-label={`Open notes for ${problem.name}`}
+        >
+          <span aria-hidden="true" className="text-[11px]">{hasNote ? "📝" : "📄"}</span>
+        </button>
 
         {status === "solved" && revisionSchedule && !revisionSchedule.isFullyMastered && onMarkRevised && (
           <Button

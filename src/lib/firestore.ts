@@ -11,7 +11,7 @@ import {
   Timestamp,
   deleteField,
 } from "firebase/firestore";
-import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag, RevisionSchedule } from "./types";
+import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag, RevisionSchedule, Note } from "./types";
 
 type ProblemDoc = {
   id: string;
@@ -260,8 +260,8 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
   }
 
   // Sort topics by explicit order field; fallback to known order for legacy docs
-  // Order: array & hashing → Two Pointers → Prefix Sum → matrix manipulation → algorithms → Strings → Recursion & Backtracking → LinkedList → Sliding Window → Binary search → trees
-  const legacyOrder = ["arrays-hashing", "two-pointers", "prefix-sum", "matrix", "algorithms", "strings", "recursion-backtracking", "linked-list", "sliding-window", "binary-search", "trees-dfs-bfs"];
+  // Order: array & hashing → Two Pointers → Prefix Sum → matrix manipulation → algorithms → Strings → Recursion & Backtracking → LinkedList → Sliding Window → Binary search → trees → binary-search-tree
+  const legacyOrder = ["arrays-hashing", "two-pointers", "prefix-sum", "matrix", "algorithms", "strings", "recursion-backtracking", "linked-list", "sliding-window", "binary-search", "trees-dfs-bfs", "binary-search-tree"];
   topics.sort((a, b) => {
     const oa = (a as Topic & { order: number }).order;
     const ob = (b as Topic & { order: number }).order;
@@ -299,6 +299,150 @@ export function subscribeToProblems(
     },
     (err) => {
       console.error("[firestore] subscribeToProblems error", err);
+      if (onError) onError(err as Error);
+    }
+  );
+}
+
+// ---- Notes (per-user per-problem) ----
+
+type NoteDoc = {
+  content: string;
+  problemName: string;
+  updatedAt?: Timestamp;
+};
+
+function noteDocToNote(problemId: string, data: NoteDoc): Note {
+  return {
+    problemId,
+    problemName: data.problemName ?? problemId,
+    content: data.content ?? "",
+    updatedAt: data.updatedAt instanceof Timestamp ? data.updatedAt.toDate() : new Date(),
+  };
+}
+
+export async function getNote(userId: string, problemId: string): Promise<Note | null> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot load note");
+  const ref = doc(db, "users", uid, "notes", problemId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return null;
+  return noteDocToNote(problemId, snap.data() as NoteDoc);
+}
+
+export async function saveNote(userId: string, problemId: string, note: Partial<Note>): Promise<void> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot save note");
+  const content = note.content ?? "";
+  const hasContent = content.trim().length > 0;
+  const noteRef = doc(db, "users", uid, "notes", problemId);
+  const indexRef = doc(db, "users", uid, "notesIndex", "index");
+
+  if (!hasContent) {
+    // Empty content counts as deletion
+    await deleteDoc(noteRef);
+  } else {
+    const payload: Record<string, unknown> = {
+      content,
+      updatedAt: serverTimestamp(),
+    };
+    if (note.problemName) payload.problemName = note.problemName;
+    await setDoc(noteRef, payload, { merge: true });
+    // Ensure problemName backfilled if not supplied and doc existed without it
+    if (!note.problemName) {
+      try {
+        const cur = await getDoc(noteRef);
+        const curData = cur.data() as NoteDoc | undefined;
+        if (curData && !curData.problemName) {
+          // keep as problemId fallback will be used on read; no write needed
+        }
+      } catch {}
+    }
+  }
+
+  // Update notesIndex presence tracking
+  try {
+    const idxSnap = await getDoc(indexRef);
+    let currentIds: string[] = [];
+    if (idxSnap.exists()) {
+      const d = idxSnap.data() as { problemIds?: string[] };
+      if (Array.isArray(d.problemIds)) currentIds = d.problemIds;
+    }
+    const set = new Set(currentIds);
+    if (hasContent) set.add(problemId);
+    else set.delete(problemId);
+    const next = Array.from(set).sort();
+    // Only write if changed
+    const changed = next.length !== currentIds.length || next.some((id, i) => id !== currentIds[i]);
+    if (changed) {
+      await setDoc(indexRef, { problemIds: next, updatedAt: serverTimestamp() }, { merge: true });
+    }
+  } catch (e) {
+    console.warn("[firestore] saveNote index update failed", e);
+    // Don't throw — note itself is saved; index is best-effort presence
+  }
+}
+
+export function subscribeToNote(
+  userId: string,
+  problemId: string,
+  cb: (note: Note | null) => void,
+  onError?: (err: Error) => void
+): () => void {
+  const uid = userId || getCurrentUserId();
+  if (!uid) {
+    if (onError) onError(new Error("Not signed in"));
+    return () => {};
+  }
+  const ref = doc(db, "users", uid, "notes", problemId);
+  return onSnapshot(
+    ref,
+    (snap) => {
+      if (!snap.exists()) {
+        cb(null);
+        return;
+      }
+      cb(noteDocToNote(problemId, snap.data() as NoteDoc));
+    },
+    (err) => {
+      console.error("[firestore] subscribeToNote error", err);
+      if (onError) onError(err as Error);
+    }
+  );
+}
+
+export async function getNotesIndex(userId: string): Promise<Set<string>> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot load notes index");
+  const idxSnap = await getDoc(doc(db, "users", uid, "notesIndex", "index"));
+  if (!idxSnap.exists()) return new Set();
+  const d = idxSnap.data() as { problemIds?: string[] };
+  return new Set(Array.isArray(d.problemIds) ? d.problemIds : []);
+}
+
+export function subscribeToNotesIndex(
+  userId: string,
+  cb: (ids: Set<string>) => void,
+  onError?: (err: Error) => void
+): () => void {
+  const uid = userId || getCurrentUserId();
+  if (!uid) {
+    if (onError) onError(new Error("Not signed in"));
+    return () => {};
+  }
+  const ref = doc(db, "users", uid, "notesIndex", "index");
+  return onSnapshot(
+    ref,
+    (snap) => {
+      if (!snap.exists()) {
+        cb(new Set());
+        return;
+      }
+      const d = snap.data() as { problemIds?: string[] };
+      cb(new Set(Array.isArray(d.problemIds) ? d.problemIds : []));
+    },
+    (err) => {
+      console.error("[firestore] subscribeToNotesIndex error", err);
       if (onError) onError(err as Error);
     }
   );

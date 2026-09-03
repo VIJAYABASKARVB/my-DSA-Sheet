@@ -14,6 +14,7 @@ export function PatternAccordion({
   onMarkRevised,
   onEditLinks,
   onEditTags,
+  notedProblemIds,
 }: {
   pattern: Pattern;
   problems: MergedProblem[];
@@ -25,6 +26,7 @@ export function PatternAccordion({
   onMarkRevised?: (id: string) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
   onEditTags: (id: string, tags: Tag[]) => void;
+  notedProblemIds?: Set<string>;
 }) {
   const completed = problems.filter((p) => progress[p.id] === "solved" || progress[p.id] === "review").length;
   const pct = problems.length > 0 ? Math.round((completed / problems.length) * 100) : 0;
@@ -73,6 +75,7 @@ export function PatternAccordion({
                 onMarkRevised={onMarkRevised}
                 onEditLinks={onEditLinks}
                 onEditTags={onEditTags}
+                hasNote={notedProblemIds?.has(p.id) ?? false}
               />
             ))}
           </div>

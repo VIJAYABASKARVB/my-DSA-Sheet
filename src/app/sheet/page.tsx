@@ -6,6 +6,7 @@ import { useProblems } from "@/hooks/useProblems";
 import { useProgress } from "@/hooks/useProgress";
 import { useProblemOverrides } from "@/hooks/useProblemOverrides";
 import { useRevisionSchedule } from "@/hooks/useRevisionSchedule";
+import { useNotesIndex } from "@/hooks/useNotesIndex";
 import { FilterBar, type Filters } from "@/components/FilterBar";
 import { TopicAccordion } from "@/components/sheet/TopicAccordion";
 import { AppHeader } from "@/components/AppHeader";
@@ -47,6 +48,7 @@ export default function SheetPage() {
   const { progress, updateStatus, optimisticRemove, optimisticRestore, loading: pLoading } = useProgress(user?.uid ?? null);
   const { overrides, updateLinks, updateTags, loading: oLoading } = useProblemOverrides(user?.uid ?? null);
   const { revisions, dueToday, upcoming, dueCount, markRevisionDone, removeRevision, restoreRevision, loading: srLoading, error: srError } = useRevisionSchedule(user?.uid ?? null);
+  const { notedProblemIds } = useNotesIndex(user?.uid ?? null);
   const [filters, setFilters] = useState<Filters>({
     search: "",
     topic: null,
@@ -436,6 +438,7 @@ export default function SheetPage() {
                     onMarkRevised={markRevisionDone}
                     onEditLinks={updateLinks}
                     onEditTags={updateTags}
+                    notedProblemIds={notedProblemIds}
                   />
                 </div>
               ))

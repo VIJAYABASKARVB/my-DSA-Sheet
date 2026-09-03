@@ -1,0 +1,309 @@
+{
+  "topicId": "binary-search-tree",
+  "name": "Binary Search Tree",
+  "patterns": [
+    {
+      "patternId": "stage-1-bst-fundamentals",
+      "name": "Stage 1 — BST Fundamentals",
+      "order": 0,
+      "problems": [
+        {
+          "id": "introduction-to-bst",
+          "name": "Introduction to BST",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "order": 0,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/introduction-to-binary-search-tree/"
+            }
+          ]
+        },
+        {
+          "id": "search-in-bst",
+          "name": "Search in a Binary Search Tree",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/search-in-a-binary-search-tree/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/search-in-a-binary-search-tree/"
+            }
+          ]
+        },
+        {
+          "id": "find-min-max-in-bst",
+          "name": "Find Min/Max in BST",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "order": 2,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/find-minimum-and-maximum-element-in-binary-search-tree/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/find-the-minimum-and-maximum-value-in-a-binary-search-tree/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-2-bst-modifications",
+      "name": "Stage 2 — BST Modifications",
+      "order": 1,
+      "problems": [
+        {
+          "id": "insert-into-bst",
+          "name": "Insert into a Binary Search Tree",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "order": 0,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/insert-into-a-binary-search-tree/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/insert-a-given-node-in-binary-search-tree/"
+            }
+          ]
+        },
+        {
+          "id": "floor-and-ceil-in-bst",
+          "name": "Floor and Ceil in a BST",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "order": 1,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/floor-and-ceil-in-a-binary-search-tree/"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/floor-and-ceil-from-a-bst/"
+            }
+          ]
+        },
+        {
+          "id": "floor-in-bst",
+          "name": "Floor in a Binary Search Tree",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "order": 2,
+          "links": [
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/floor-in-binary-search-tree-bst/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/floor-in-a-binary-search-tree/"
+            }
+          ]
+        },
+        {
+          "id": "delete-node-in-bst",
+          "name": "Delete a Node in BST",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "order": 3,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/delete-node-in-a-bst/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/delete-a-node-in-binary-search-tree/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-3-bst-properties-validation",
+      "name": "Stage 3 — BST Properties & Validation",
+      "order": 2,
+      "problems": [
+        {
+          "id": "check-if-tree-is-bst",
+          "name": "Check if a Tree is a BST or Not",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "order": 0,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/validate-binary-search-tree/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/check-if-a-tree-is-a-bst-or-not/"
+            }
+          ]
+        },
+        {
+          "id": "kth-smallest-largest-in-bst",
+          "name": "Kth Smallest and Largest Element in BST",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/kth-largest-smallest-element-in-binary-search-tree/"
+            }
+          ]
+        },
+        {
+          "id": "inorder-successor-predecessor-bst",
+          "name": "Inorder Successor/Predecessor in BST",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/inorder-successor-in-bst/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/inorder-successor-predecessor-in-binary-search-tree/"
+            }
+          ]
+        },
+        {
+          "id": "lca-in-bst",
+          "name": "LCA in BST",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "order": 3,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/lowest-common-ancestor-in-a-binary-search-tree/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-4-bst-construction",
+      "name": "Stage 4 — BST Construction",
+      "order": 3,
+      "problems": [
+        {
+          "id": "construct-bst-from-preorder",
+          "name": "Construct a BST from a Preorder Traversal",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "order": 0,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/construct-a-bst-from-a-preorder-traversal/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patternId": "stage-5-advanced-bst",
+      "name": "Stage 5 — Advanced BST Problems",
+      "order": 4,
+      "problems": [
+        {
+          "id": "two-sum-in-bst",
+          "name": "Two Sum in BST",
+          "difficulty": "Easy",
+          "source": "Striver",
+          "order": 0,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/two-sum-iv-input-is-a-bst/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/two-sum-in-bst-check-if-there-exists-a-pair-with-sum-k/"
+            }
+          ]
+        },
+        {
+          "id": "bst-iterator",
+          "name": "BST Iterator",
+          "difficulty": "Medium",
+          "source": "Striver",
+          "order": 1,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/binary-search-tree-iterator/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/binary-search-tree-iterator/"
+            }
+          ]
+        },
+        {
+          "id": "recover-bst-two-nodes-swapped",
+          "name": "Correct BST with Two Nodes Swapped",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "order": 2,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/recover-binary-search-tree/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/recover-bst-correct-bst-with-two-nodes-swapped/"
+            }
+          ]
+        },
+        {
+          "id": "largest-bst-in-binary-tree",
+          "name": "Largest BST in Binary Tree",
+          "difficulty": "Hard",
+          "source": "Striver",
+          "order": 3,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/maximum-sum-bst-in-binary-tree/"
+            },
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/largest-bst-in-binary-tree/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

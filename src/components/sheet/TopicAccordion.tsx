@@ -16,6 +16,7 @@ export function TopicAccordion({
   onMarkRevised,
   onEditLinks,
   onEditTags,
+  notedProblemIds,
 }: {
   topic: Pick<Topic, "id" | "name">;
   patterns: { pattern: Topic["patterns"][number]; problems: MergedProblem[] }[];
@@ -29,6 +30,7 @@ export function TopicAccordion({
   onMarkRevised?: (id: string) => void;
   onEditLinks: (id: string, links: PlatformLink[]) => void;
   onEditTags: (id: string, tags: Tag[]) => void;
+  notedProblemIds?: Set<string>;
 }) {
   const total = patterns.reduce((acc, cur) => acc + cur.problems.length, 0);
   const completed = patterns.reduce(
@@ -102,6 +104,7 @@ export function TopicAccordion({
                 onMarkRevised={onMarkRevised}
                 onEditLinks={onEditLinks}
                 onEditTags={onEditTags}
+                notedProblemIds={notedProblemIds}
               />
             ))}
           </div>

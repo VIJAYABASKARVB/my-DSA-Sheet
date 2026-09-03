@@ -48,7 +48,7 @@ if (missing.length) {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Read individual topic JSON files (source of truth) — order matches requested: array & hashing → Two Pointers → Prefix Sum → matrix → algorithms → Strings → Recursion & Backtracking → LinkedList → Sliding Window → Binary search → trees
+// Read individual topic JSON files (source of truth) — order matches requested: array & hashing → Two Pointers → Prefix Sum → matrix → algorithms → Strings → Recursion & Backtracking → LinkedList → Sliding Window → Binary search → trees → binary-search-tree
 const topicFiles = [
   "src/data/arrays-hashing-topic.json",
   "src/data/two-pointers-topic.json",
@@ -61,6 +61,7 @@ const topicFiles = [
   "src/data/sliding-window-topic.json",
   "src/data/binary-search-topic.json",
   "src/data/trees-topic.json",
+  "src/data/binary-search-tree-topic.json",
 ];
 
 const topics = [];
@@ -158,7 +159,7 @@ try {
     getDocs(collection(db, "problems")),
   ]);
   console.log(`Verified: topics=${topicsSnap.size}, patterns=${patternsSnap.size}, problems=${problemsSnap.size}`);
-  if (topicsSnap.size !== 11) console.warn(`⚠️  Expected 11 topics, got ${topicsSnap.size}`);
+  if (topicsSnap.size !== 12) console.warn(`⚠️  Expected 12 topics, got ${topicsSnap.size}`);
 } catch (e) {
   console.warn("Could not verify collection sizes:", e.message);
 }

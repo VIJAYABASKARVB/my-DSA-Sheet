@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { enableIndexedDbPersistence, getFirestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
@@ -29,6 +29,18 @@ try {
 let _db: ReturnType<typeof getFirestore> | null = null;
 try {
   _db = getFirestore(app);
+  if (typeof window !== "undefined" && _db) {
+    enableIndexedDbPersistence(_db).catch((err: unknown) => {
+      const code = (err as { code?: string })?.code;
+      if (code === "failed-precondition") {
+        console.warn("[firebase] Persistence failed — multiple tabs open");
+      } else if (code === "unimplemented") {
+        console.warn("[firebase] Persistence not available in this browser");
+      } else {
+        console.warn("[firebase] Persistence error", err);
+      }
+    });
+  }
 } catch (e) {
   if (typeof window !== "undefined") console.warn("[firebase] getFirestore failed:", e);
   _db = null as unknown as ReturnType<typeof getFirestore>;

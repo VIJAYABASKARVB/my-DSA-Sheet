@@ -13,6 +13,7 @@ import strings from "@/data/strings-topic.json";
 import recursionBacktracking from "@/data/recursion-backtracking-topic.json";
 import linkedList from "@/data/linked-list-topic.json";
 import binarySearch from "@/data/binary-search-topic.json";
+import binarySearchTree from "@/data/binary-search-tree-topic.json";
 
 type RawTopic = {
   topicId: string;
@@ -38,6 +39,7 @@ const rawTopics: RawTopic[] = [
   slidingWindow as RawTopic,
   binarySearch as RawTopic,
   trees as RawTopic,
+  binarySearchTree as RawTopic,
 ];
 
 function buildFallbackTopics(): Topic[] {

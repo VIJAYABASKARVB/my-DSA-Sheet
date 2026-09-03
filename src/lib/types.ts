@@ -58,3 +58,10 @@ export type ProblemOverrideDoc = {
 };
 
 export type MergedProblem = Problem & { hasOverride: boolean };
+
+export type Note = {
+  problemId: string;
+  problemName: string;
+  content: string;
+  updatedAt: Date;
+};
