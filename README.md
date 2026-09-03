@@ -1,5 +1,7 @@
 # My DSA Sheet
 
+**Live:** `https://my-dsa-sheet.vercel.app` *(Vercel — after first deploy, replace this placeholder with your actual Vercel URL from dashboard)*
+
 Personal clean DSA problem tracking sheet — inspired by Striver's A2Z but with multi-source problems, Firestore-backed progress, and a collapsible Topic → Pattern → Problem hierarchy.
 
 **Live topics:** `Arrays & Hashing` (7 stages, 32 problems), `Two Pointers` (7 stages, 16 problems), `Sliding Window` (3 patterns, 19 problems), `Prefix Sum` (9 problems) and `Trees — DFS & BFS` (10 stages, 34 problems) — **110 problems total**. Firestore is primary for **problems** (`problems/{problemId}`) + **topics** (`topics/{topicId}`) + **patterns** (`patterns/{patternId}`) + progress (`users/{userId}/progress/{problemId}`) + editable link overrides (`problemOverrides/{problemId}`), all synced via `onSnapshot`. JSON files in `src/data/` are **seed-only artifacts** (backup/export), not fetched at runtime. See [Problem Ordering Notes](#problem-ordering-notes).
@@ -156,12 +158,32 @@ src/
 
 Click status icon on `ProblemRow`: `unsolved (☐) → solved (✓) → review (⟳) → unsolved`. Optimistic UI, Firestore `setDoc`/`deleteDoc` with `serverTimestamp()` to `users/{userId}/progress/{problemId}` (falls back to `anon` when no auth). `unsolved` = no doc in `users/{userId}/progress`.
 
-## Deployment to Vercel
+## Deployment
+
+**Hosting:** Vercel (Next.js) — Firebase Hosting `frameworksBackend` removed from `firebase.json` (DB/Rules stay on Firebase).
+**Database/Rules:** Firebase CLI `firebase deploy --only firestore --project my-dsa-sheet`
+
+### Deploy to Vercel (what you do)
+
+1. Go to `https://vercel.com` → Sign in with GitHub
+2. Add New Project → Import `VIJAYABASKARVB/my-DSA-Sheet`
+3. Framework auto-detects `Next.js` — keep defaults
+4. Add env vars from `.env.local` (Vercel → Settings → Environment Variables):
+   - `NEXT_PUBLIC_FIREBASE_API_KEY`
+   - `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
+   - `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
+   - `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
+   - `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
+   - `NEXT_PUBLIC_FIREBASE_APP_ID`
+5. Click Deploy → copy URL (e.g. `https://my-dsa-sheet.vercel.app`) → replace placeholder at top of this README
+6. For Firestore rules/DB changes only: `firebase deploy --only firestore --project my-dsa-sheet` (hosting stays on Vercel)
 
 ```bash
-vercel
-# Set same NEXT_PUBLIC_FIREBASE_* env vars in Vercel dashboard → Redeploy
-# After first deploy, run `npm run seed` locally (with prod env vars) to populate Firestore problems
+# local Firestore deploy (no hosting, no billing needed)
+firebase deploy --only firestore --project my-dsa-sheet
+
+# local Vercel CLI alternative
+vercel --prod
 ```
 
 ## Migration to multi-user (v2)
