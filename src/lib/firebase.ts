@@ -1,5 +1,10 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { enableIndexedDbPersistence, getFirestore } from "firebase/firestore";
+import {
+  getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentSingleTabManager,
+} from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
@@ -28,18 +33,24 @@ try {
 }
 let _db: ReturnType<typeof getFirestore> | null = null;
 try {
-  _db = getFirestore(app);
-  if (typeof window !== "undefined" && _db) {
-    enableIndexedDbPersistence(_db).catch((err: unknown) => {
-      const code = (err as { code?: string })?.code;
-      if (code === "failed-precondition") {
-        console.warn("[firebase] Persistence failed — multiple tabs open");
-      } else if (code === "unimplemented") {
-        console.warn("[firebase] Persistence not available in this browser");
+  if (typeof window !== "undefined") {
+    try {
+      _db = initializeFirestore(app, {
+        localCache: persistentLocalCache({
+          tabManager: persistentSingleTabManager(undefined),
+        }),
+      });
+    } catch (e) {
+      const msg = (e as Error)?.message ?? "";
+      if (msg.includes("already") || msg.includes("exists")) {
+        _db = getFirestore(app);
       } else {
-        console.warn("[firebase] Persistence error", err);
+        console.warn("[firebase] initializeFirestore with persistent cache failed, fallback to getFirestore", e);
+        _db = getFirestore(app);
       }
-    });
+    }
+  } else {
+    _db = getFirestore(app);
   }
 } catch (e) {
   if (typeof window !== "undefined") console.warn("[firebase] getFirestore failed:", e);
