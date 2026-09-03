@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: "Where is my data stored?",
-    a: "Firestore per-user: users/{uid}/progress and users/{uid}/spacedReviews plus per-problem overrides for links and tags. Sign in with Google to sync across devices; without sign-in edits are session-local and revert on refresh.",
+    a: "Firestore per-user: users/{uid}/progress (with embedded revisionSchedule) plus per-problem overrides for links and tags plus users/{uid}/notes. Sign in with Google to sync across devices; without sign-in edits are session-local and revert on refresh.",
   },
 ];
 
@@ -127,38 +127,38 @@ export default function LandingPage() {
             }}
           />
         </div>
-        <div className="relative max-w-5xl mx-auto px-4 md:px-6 pt-16 md:pt-24 lg:pt-32 pb-12 md:pb-16 flex flex-col items-center text-center">
+        <div className="relative max-w-5xl mx-auto px-4 md:px-6 pt-10 sm:pt-16 md:pt-24 lg:pt-32 pb-10 sm:pb-12 md:pb-16 flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
             <span className="text-[10px] font-mono tracking-[0.08em] uppercase font-medium text-muted-foreground">Curated for depth · not sprawl</span>
           </div>
 
-          <h1 className="mt-8 max-w-[18ch] font-[var(--font-newsreader)] text-[clamp(2.6rem,6vw,4.5rem)] font-[400] leading-[0.95] tracking-[-0.04em] text-foreground text-balance">
+          <h1 className="mt-6 sm:mt-8 max-w-[18ch] font-[var(--font-newsreader)] text-[clamp(2.1rem,6vw,4.5rem)] font-[400] leading-[0.95] tracking-[-0.04em] text-foreground text-balance">
             Master DSA
             <br />
             <span className="font-[var(--font-newsreader)] italic font-[300] tracking-[-0.03em] text-muted-foreground">without</span> the sprawl
           </h1>
 
-          <p className="mt-5 max-w-[62ch] text-[15px] md:text-[16px] leading-relaxed text-muted-foreground text-balance">
+          <p className="mt-4 sm:mt-5 max-w-[62ch] text-[15px] md:text-[16px] leading-relaxed text-muted-foreground text-balance text-pretty">
             Striver and NeetCode merged and ordered into Topic → Pattern → Problem. 110 problems staged by learning dependency, Firestore-synced progress, and spaced repetition built for obsessive repetition.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
             <Link
               href="/sheet"
-              className="inline-flex items-center justify-center rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-6 py-3 transition-colors active:scale-[0.98]"
+              className="inline-flex items-center justify-center rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-6 py-3 transition-colors active:scale-[0.98] w-full sm:w-auto"
             >
               Open your sheet
             </Link>
             <a
               href="#system"
-              className="inline-flex items-center justify-center rounded-[6px] border border-border bg-card hover:bg-muted text-foreground text-sm font-medium px-6 py-3 transition-colors active:scale-[0.98]"
+              className="inline-flex items-center justify-center rounded-[6px] border border-border bg-card hover:bg-muted text-foreground text-sm font-medium px-6 py-3 transition-colors active:scale-[0.98] w-full sm:w-auto"
             >
               See the system
             </a>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 text-xs">
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2 text-xs px-2 sm:px-0">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-muted-foreground">
               <span className="w-1 h-1 rounded-full bg-primary" aria-hidden="true" /> Topic → Pattern → Problem
             </span>
@@ -167,7 +167,7 @@ export default function LandingPage() {
           </div>
 
           {/* Faux-OS window preview */}
-          <div className="mt-12 md:mt-16 w-full max-w-[880px] text-left">
+          <div className="mt-8 sm:mt-12 md:mt-16 w-full max-w-[880px] text-left">
             <div className="rounded-[12px] border border-border bg-card overflow-hidden" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
               <div className="h-9 flex items-center justify-between px-4 border-b border-border bg-muted/50">
                 <div className="flex items-center gap-1.5">
@@ -227,7 +227,7 @@ export default function LandingPage() {
       </section>
 
       {/* SYSTEM */}
-      <section id="system" className="max-w-[1160px] mx-auto w-full px-4 md:px-6 py-24 md:py-32">
+      <section id="system" className="max-w-[1160px] mx-auto w-full px-4 md:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
         <div data-reveal className="reveal max-w-3xl mb-10">
           <div className="eyebrow">
             <MinimalIcon kind="layers" /> The system
@@ -240,8 +240,8 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-12 gap-4 md:gap-5 auto-rows-[minmax(260px,auto)]">
-          <div data-reveal className="reveal flat-card col-span-12 lg:col-span-7 p-6 md:p-8 flex flex-col">
+        <div className="grid grid-cols-12 gap-4 sm:gap-5 auto-rows-[minmax(220px,auto)] sm:auto-rows-[minmax(260px,auto)]">
+          <div data-reveal className="reveal flat-card col-span-12 lg:col-span-7 p-5 sm:p-6 md:p-8 flex flex-col">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <span className="inline-flex items-center rounded-full bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 border border-border px-2.5 py-1 text-[11px] font-mono font-medium text-[#346538] dark:text-[#86EFAC]">Progress is the product</span>
@@ -284,7 +284,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div data-reveal className="reveal flat-card col-span-12 lg:col-span-5 p-6 md:p-8 flex flex-col">
+          <div data-reveal className="reveal flat-card col-span-12 lg:col-span-5 p-5 sm:p-6 md:p-8 flex flex-col">
             <div className="w-full h-28 rounded-[8px] border border-border bg-muted flex items-center justify-center gap-3">
               <span className="w-10 h-10 rounded-[8px] bg-[#E1F3FE] dark:bg-[#E1F3FE]/16 border border-border flex items-center justify-center">
                 <MinimalIcon kind="layers" />
@@ -302,7 +302,7 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <div data-reveal className="reveal flat-card col-span-12 p-6 md:p-8">
+          <div data-reveal className="reveal flat-card col-span-12 p-5 sm:p-6 md:p-8">
             <div className="grid md:grid-cols-[1.15fr_0.85fr] gap-8 items-start">
               <div>
                 <div className="flex items-center gap-2">
@@ -356,7 +356,7 @@ export default function LandingPage() {
 
       {/* QUOTE */}
       <section className="border-y border-border bg-card">
-        <div className="max-w-[1160px] mx-auto px-4 md:px-6 py-12 md:py-16">
+        <div className="max-w-[1160px] mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-16">
           <div data-reveal className="reveal grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
             <div>
               <blockquote className="font-[var(--font-newsreader)] text-[clamp(1.35rem,3vw,1.9rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
@@ -396,7 +396,7 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="max-w-5xl mx-auto w-full px-4 md:px-6 py-24 md:py-32">
+      <section id="faq" className="max-w-5xl mx-auto w-full px-4 md:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
         <div data-reveal className="reveal max-w-3xl">
           <div className="eyebrow">FAQ</div>
           <h2 className="mt-4 font-[var(--font-newsreader)] text-[clamp(1.7rem,3.5vw,2.4rem)] leading-none tracking-[-0.03em] text-foreground">Plain answers.</h2>
@@ -417,7 +417,7 @@ export default function LandingPage() {
               </button>
               <div className={`grid transition-all duration-300 ease-out ${openFaq === i ? "grid-rows-[1fr] opacity-100 pb-5" : "grid-rows-[0fr] opacity-0"}`}>
                 <div className="overflow-hidden">
-                  <p className="text-sm leading-relaxed text-muted-foreground max-w-[68ch] pr-8">{f.a}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground max-w-[60ch] pr-8 text-pretty">{f.a}</p>
                 </div>
               </div>
             </div>
@@ -430,7 +430,7 @@ export default function LandingPage() {
 
       {/* FINAL CTA */}
       <section className="border-t border-border bg-card">
-        <div className="max-w-5xl mx-auto px-4 md:px-6 py-16 md:py-24 text-center">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 py-12 sm:py-16 md:py-24 text-center">
           <h2 className="font-[var(--font-newsreader)] text-[clamp(2rem,5vw,3.2rem)] font-[400] leading-[0.95] tracking-[-0.04em] text-foreground text-balance">
             Your sheet.
             <br />
@@ -439,14 +439,14 @@ export default function LandingPage() {
           <p className="mt-3 max-w-[54ch] mx-auto text-[15px] leading-relaxed text-muted-foreground text-balance">
             Five topics, 110 problems, zero sprawl. Progress syncs via Firestore and your next review is already computed.
           </p>
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-7 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3">
             <Link
               href="/sheet"
-              className="inline-flex items-center justify-center rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-6 py-3 transition-colors active:scale-[0.98]"
+              className="inline-flex items-center justify-center rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-6 py-3 transition-colors active:scale-[0.98] w-full sm:w-auto"
             >
               Open sheet — it’s free
             </Link>
-            <span className="text-xs font-mono text-muted-foreground hidden sm:inline">No signup required · syncs when you do</span>
+            <span className="text-xs font-mono text-muted-foreground text-center sm:text-left">No signup required · syncs when you do</span>
           </div>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-2 text-[11px] font-mono text-muted-foreground">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-3 py-1">

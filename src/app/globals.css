@@ -225,7 +225,7 @@ body::before {
   background-size: 200% 100%;
 }
 
-/* Reveal */
+/* Reveal — editorial 600ms kept for hero only; sheet stagger is capped via JS to 200ms effective */
 .reveal {
   opacity: 0;
   transform: translateY(12px);
@@ -335,6 +335,21 @@ kbd {
 .hairline-x { border-top: 1px solid #EAEAEA; }
 .dark .hairline-x { border-top-color: rgba(255,255,255,0.10); }
 
+/* Responsive helper: rail appears at 900px not just 1024 */
+@media (min-width: 900px) {
+  .rail-900 { display: block !important; }
+  .rail-hide-900 { display: none !important; }
+}
+
+/* Touch/coarse pointer adjustments */
+@media (pointer: coarse) {
+  ::-webkit-scrollbar { display: none; }
+  .scrollbar-none { -webkit-overflow-scrolling: touch; }
+}
+@media (hover: none) {
+  .hover\:bg-muted:hover { background: transparent; }
+}
+
 /* Ambient blob */
 .ambient-blob {
   position: fixed;
@@ -357,4 +372,7 @@ kbd {
 }
 @media (prefers-reduced-motion: reduce) {
   .ambient-blob { animation: none; }
+}
+@media (max-width: 640px) {
+  .ambient-blob { width: 420px; height: 420px; filter: blur(1px); }
 }

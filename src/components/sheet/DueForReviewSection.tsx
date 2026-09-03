@@ -85,7 +85,7 @@ export function DueForReviewSection({ dueToday, upcoming, problemMap, topicMap, 
           </Badge>
         </div>
 
-        <div className="max-h-[420px] overflow-y-auto scrollbar-none">
+        <div className="max-h-[min(420px,42dvh)] sm:max-h-[420px] overflow-y-auto scrollbar-none overscroll-contain" style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
           {loading ? (
             <div className="p-4 space-y-3">
               <div className="h-16 w-full skeleton rounded-[8px]" />
@@ -117,16 +117,16 @@ export function DueForReviewSection({ dueToday, upcoming, problemMap, topicMap, 
                 const overdueBg = overdueDays > 3 ? "bg-[#FDEBEC]/60 dark:bg-[#FDEBEC]/16" : overdueDays > 1 ? "bg-[#FBF3DB]/50 dark:bg-[#FBF3DB]/16" : "";
 
                 return (
-                  <div
-                    key={item.problemId}
-                    className={`group w-full text-left px-4 py-3.5 hover:bg-muted transition-colors flex items-center gap-3 ${overdueBg}`}
-                  >
-                    <button
-                      onClick={() => handleSelect(item.problemId)}
-                      aria-label={`Jump to ${problem?.name ?? item.problemId}, ${overdueText}`}
-                      className="flex-1 min-w-0 text-left focus-visible:outline-none"
+                    <div
+                      key={item.problemId}
+                      className={`group w-full text-left px-3 sm:px-4 py-3 sm:py-3.5 hover:bg-muted transition-colors flex items-center gap-2 sm:gap-3 ${overdueBg}`}
                     >
-                      <div className="text-[13px] font-medium tracking-tight text-foreground truncate group-hover:text-foreground">
+                      <button
+                        onClick={() => handleSelect(item.problemId)}
+                        aria-label={`Jump to ${problem?.name ?? item.problemId}, ${overdueText}`}
+                        className="flex-1 min-w-0 text-left focus-visible:outline-none py-1"
+                      >
+                      <div className="text-[13px] font-medium tracking-tight text-foreground truncate group-hover:text-foreground" title={problem?.name ?? item.problemId}>
                         {problem?.name ?? item.problemId}
                       </div>
                       <div className="flex items-center gap-1.5 mt-1 flex-wrap">
@@ -152,7 +152,7 @@ export function DueForReviewSection({ dueToday, upcoming, problemMap, topicMap, 
                         variant="outline"
                         onClick={() => onMarkRevised?.(item.problemId)}
                         aria-label={`Mark Revised for ${problem?.name ?? item.problemId}`}
-                        className="h-7 px-3 rounded-[6px] text-xs font-medium border-border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary"
+                        className="h-8 sm:h-7 px-3 rounded-[6px] text-xs font-medium border-border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary"
                       >
                         Mark Revised ✓
                       </Button>
@@ -192,7 +192,7 @@ export function DueForReviewSection({ dueToday, upcoming, problemMap, topicMap, 
           </Badge>
         </div>
 
-        <div className="max-h-[320px] overflow-y-auto scrollbar-none">
+        <div className="max-h-[min(320px,38dvh)] sm:max-h-[320px] overflow-y-auto scrollbar-none overscroll-contain" style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
           {loading ? (
             <div className="p-4 space-y-3">
               <div className="h-14 w-full skeleton rounded-[8px]" />
@@ -214,13 +214,13 @@ export function DueForReviewSection({ dueToday, upcoming, problemMap, topicMap, 
                 const revisionLabel = `Revision ${item.currentRevisionIndex + 1} of 6`;
                 const dateStr = item.nextDate.toLocaleDateString(undefined, { month: "short", day: "numeric" });
                 return (
-                  <div key={item.problemId} className="group w-full text-left px-4 py-3 hover:bg-muted transition-colors flex items-center gap-3">
+                  <div key={item.problemId} className="group w-full text-left px-3 sm:px-4 py-3 hover:bg-muted transition-colors flex items-center gap-2 sm:gap-3">
                     <button
                       onClick={() => handleSelect(item.problemId)}
-                      className="flex-1 min-w-0 text-left focus-visible:outline-none"
+                      className="flex-1 min-w-0 text-left focus-visible:outline-none py-1"
                       aria-label={`Jump to ${problem?.name ?? item.problemId}`}
                     >
-                      <div className="text-[13px] font-medium tracking-tight text-foreground truncate">
+                      <div className="text-[13px] font-medium tracking-tight text-foreground truncate" title={problem?.name ?? item.problemId}>
                         {problem?.name ?? item.problemId}
                       </div>
                       <div className="flex items-center gap-1.5 mt-1 flex-wrap">
@@ -236,12 +236,12 @@ export function DueForReviewSection({ dueToday, upcoming, problemMap, topicMap, 
                         <span className="text-[11px] font-mono text-muted-foreground">{revisionLabel}</span>
                       </div>
                     </button>
-                    <div className="flex flex-col items-end gap-1 shrink-0">
+                    <div className="flex flex-col items-end gap-1 sm:gap-1 shrink-0">
                       <Button
                         size="xs"
                         variant="outline"
                         onClick={() => onMarkRevised?.(item.problemId)}
-                        className="h-7 px-3 rounded-[6px] text-xs font-medium border-border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary"
+                        className="h-8 sm:h-7 px-3 rounded-[6px] text-xs font-medium border-border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary"
                       >
                         Mark Revised ✓
                       </Button>

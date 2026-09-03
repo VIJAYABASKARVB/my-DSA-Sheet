@@ -1,49 +1,60 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-30T00:00:00.000Z",
-  "title": "Design System: My DSA Sheet — Vanguard Edition",
+  "generatedAt": "2026-09-03T00:00:00.000Z",
+  "title": "Design System: My DSA Sheet — Minimal Archive",
   "extensions": {
     "colorMeta": {
-      "vantablack": {
+      "paper": {
         "role": "neutral",
-        "displayName": "Vantablack OLED",
-        "canonical": "oklch(0.08 0 0)",
-        "tonalRamp": ["oklch(0.15 0 0)", "oklch(0.20 0 0)", "oklch(0.30 0 0)", "oklch(0.42 0 0)", "oklch(0.56 0 0)", "oklch(0.72 0 0)", "oklch(0.86 0 0)", "oklch(0.96 0 0)"]
+        "displayName": "Warm Paper",
+        "canonical": "#F7F6F3",
+        "tonalRamp": ["#111111", "#787774", "#B8B8B5", "#EAEAEA", "#F0EFEC", "#F7F6F3", "#FBFBFA", "#FFFFFF"]
       },
-      "foreground": {
+      "charcoal": {
         "role": "neutral",
-        "displayName": "Warm Ash Ink",
-        "canonical": "oklch(0.96 0.005 106)",
-        "tonalRamp": ["oklch(0.15 0.005 106)", "oklch(0.25 0.005 106)", "oklch(0.40 0.005 106)", "oklch(0.56 0.005 106)", "oklch(0.70 0.005 106)", "oklch(0.82 0.005 106)", "oklch(0.90 0.005 106)", "oklch(0.96 0.005 106)"]
+        "displayName": "Warm Charcoal",
+        "canonical": "#0F0F0F",
+        "tonalRamp": ["#0F0F0F", "#141414", "#1A1A1A", "#1E1E1E", "#242424", "#787774", "#B8B8B5", "#F5F5F3"]
       },
-      "emerald": {
-        "role": "primary",
-        "displayName": "Vanguard Emerald",
-        "canonical": "oklch(0.72 0.17 162.48)",
-        "tonalRamp": ["oklch(0.18 0.12 162)", "oklch(0.30 0.15 162)", "oklch(0.45 0.16 162)", "oklch(0.58 0.17 162)", "oklch(0.72 0.17 162)", "oklch(0.82 0.14 162)", "oklch(0.90 0.08 162)", "oklch(0.95 0.04 162)"]
+      "paleRed": {
+        "role": "semantic",
+        "displayName": "Pale Red — Hard",
+        "canonical": "#FDEBEC",
+        "tonalRamp": ["#9F2F2D", "#FCA5A5", "#FDEBEC"]
       },
-      "amber": {
-        "role": "secondary",
-        "displayName": "Caution Amber",
-        "canonical": "oklch(0.78 0.16 70)",
-        "tonalRamp": ["oklch(0.20 0.10 70)", "oklch(0.32 0.13 70)", "oklch(0.48 0.15 70)", "oklch(0.62 0.16 70)", "oklch(0.78 0.16 70)", "oklch(0.85 0.12 70)", "oklch(0.90 0.08 70)", "oklch(0.95 0.04 70)"]
+      "paleYellow": {
+        "role": "semantic",
+        "displayName": "Pale Yellow — Review/Medium/Due",
+        "canonical": "#FBF3DB",
+        "tonalRamp": ["#956400", "#EAB308", "#FDE68A", "#FBF3DB"]
+      },
+      "paleGreen": {
+        "role": "semantic",
+        "displayName": "Pale Green — Easy/Mastered",
+        "canonical": "#EDF3EC",
+        "tonalRamp": ["#346538", "#86EFAC", "#EDF3EC"]
+      },
+      "paleBlue": {
+        "role": "semantic",
+        "displayName": "Pale Blue — Informational",
+        "canonical": "#E1F3FE",
+        "tonalRamp": ["#1F6C9F", "#7CC4F5", "#E1F3FE"]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Instrument Serif Display", "purpose": "Hero only — obsessive archive title." },
-      "headline": { "displayName": "Topic Headline", "purpose": "Topic names — Instrument Serif 20px." },
-      "title": { "displayName": "Pattern Title", "purpose": "Pattern / problem names — Geist tight." },
+      "display": { "displayName": "Newsreader Display", "purpose": "Hero only — calm editorial title, once per route." },
+      "headline": { "displayName": "Topic Headline", "purpose": "Topic names — Newsreader 17px." },
+      "title": { "displayName": "Pattern Title", "purpose": "Pattern / problem names — Geist 13px tight." },
       "body": { "displayName": "Body Copy", "purpose": "Descriptions, empty states — 13px Geist." },
-      "label": { "displayName": "Eyebrow Mono", "purpose": "Micro labels — 10px Geist Mono uppercase tracked." }
+      "label": { "displayName": "Eyebrow Mono", "purpose": "Micro labels — 10px Geist Mono uppercase tracked 0.08em." }
     },
     "shadows": [
-      { "name": "bezel-inner", "value": "inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.25)", "purpose": "Default bezel depth inside double-bezel." },
-      { "name": "glass-island", "value": "inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.35)", "purpose": "Fixed header / dialog islands only." }
+      { "name": "flat-card", "value": "0 2px 8px rgba(0,0,0,0.04) light / 0 2px 12px rgba(0,0,0,0.30) dark", "purpose": "Flat card hover only; flat at rest." },
+      { "name": "header-blur", "value": "backdrop-blur(8px) bg-card/85 border-b", "purpose": "Sticky header/filter only — 8px blur." }
     ],
     "motion": [
-      { "name": "ease-vanguard", "value": "cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "Hero entrances, bezel reveals — 700ms." },
-      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Micro state feedback — 150-250ms." },
-      { "name": "duration-vanguard", "value": "700ms", "purpose": "Signature duration; shorten to 200ms for product taps." }
+      { "name": "ease-editorial", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Reveals 600ms, micro feedback 150-250ms." },
+      { "name": "duration-editorial", "value": "600ms", "purpose": "Signature duration; shorten to 200ms for taps." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
@@ -56,61 +67,61 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Emerald pill with inner white arrow — hero / dialog save.",
-      "html": "<button class=\"ds-btn-primary\">Sign in<span class=\"ds-btn-arrow\"><svg viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M6 3l5 5-5 5\"/></svg></span></button>",
-      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:8px;padding:4px 4px 4px 14px;border-radius:9999px;background:#10B981;color:#fff;font:500 12px/1 Geist,sans-serif;letter-spacing:0.01em;border:1px solid #10B981;transition:background 700ms cubic-bezier(0.32,0.72,0,1),transform 700ms cubic-bezier(0.32,0.72,0,1)}.ds-btn-primary:hover{background:#0FB981;transform:translateY(-1px)}.ds-btn-primary:active{transform:scale(0.98)}.ds-btn-primary:focus-visible{outline:2px solid #10B981;outline-offset:2px}.ds-btn-arrow{width:28px;height:28px;border-radius:9999px;background:#fff;color:#10B981;display:flex;align-items:center;justify-content:center;transition:transform 700ms cubic-bezier(0.32,0.72,0,1)}.ds-btn-primary:hover .ds-btn-arrow{transform:translate(2px,-1px) scale(1.05)}"
+      "description": "Monochrome pill — bg-primary text-primary-foreground, 6px radius.",
+      "html": "<button class=\"ds-btn-primary\">Open Sheet</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;padding:8px 16px;border-radius:6px;background:#111;color:#fff;font:500 12px/1 Geist,sans-serif;transition:background 200ms cubic-bezier(0.16,1,0.3,1),transform 200ms}.ds-btn-primary:hover{background:rgba(17,17,17,0.9)}.ds-btn-primary:active{transform:scale(0.98)}.dark .ds-btn-primary{background:#F5F5F3;color:#0F0F0F}"
     },
     {
       "name": "Filter Pill",
       "kind": "chip",
       "refersTo": "button-primary",
-      "description": "Segmented difficulty/status pills — active emerald.",
+      "description": "Segmented difficulty/status pills — active bg-primary, inactive ghost; tags are rounded-full.",
       "html": "<div class=\"ds-pill-group\"><button class=\"ds-pill ds-pill-active\">Easy</button><button class=\"ds-pill\">Medium</button><button class=\"ds-pill\">Hard</button></div>",
-      "css": ".ds-pill-group{display:inline-flex;gap:4px;padding:4px;border-radius:9999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05)}.ds-pill{padding:6px 14px;border-radius:9999px;font:500 12px/1 Geist,sans-serif;border:1px solid transparent;color:#8A8A8A;transition:all 700ms cubic-bezier(0.32,0.72,0,1)}.ds-pill:hover{color:#fff;background:rgba(255,255,255,0.05)}.ds-pill-active{background:#10B981;color:#fff;border-color:#10B981;box-shadow:0 2px 10px rgba(16,185,129,0.3)}"
+      "css": ".ds-pill-group{display:inline-flex;gap:4px;padding:4px;border-radius:8px;background:#F7F6F3;border:1px solid #EAEAEA}.dark .ds-pill-group{background:#1E1E1E;border-color:rgba(255,255,255,0.10)}.ds-pill{padding:6px 12px;border-radius:6px;font:500 12px/1 Geist,sans-serif;border:1px solid transparent;color:#787774;transition:all 200ms}.ds-pill:hover{color:#111;background:#fff}.ds-pill-active{background:#111;color:#fff;border-color:#111}.dark .ds-pill-active{background:#F5F5F3;color:#0F0F0F}"
     },
     {
       "name": "Search Input",
       "kind": "input",
       "refersTo": "input-search",
-      "description": "42px pill search with icon — FilterBar.",
-      "html": "<div class=\"ds-input-wrap\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"#71717A\" stroke-width=\"1.25\"><circle cx=\"7\" cy=\"7\" r=\"4.5\"/><path d=\"M10.5 10.5L13 13\"/></svg><input class=\"ds-input\" placeholder=\"Search 110 problems…\"/></div>",
-      "css": ".ds-input-wrap{display:flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:9999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);transition:border-color 300ms}.ds-input-wrap:focus-within{border-color:rgba(16,185,129,0.30)}.ds-input{flex:1;background:transparent;border:none;outline:none;color:#F5F5F3;font:400 13px/1 Geist,sans-serif}.ds-input::placeholder{color:#71717A}"
+      "description": "40px pill search with icon — FilterBar.",
+      "html": "<div class=\"ds-input-wrap\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"#787774\" stroke-width=\"1.25\"><circle cx=\"7\" cy=\"7\" r=\"4.5\"/><path d=\"M10.5 10.5L13 13\"/></svg><input class=\"ds-input\" placeholder=\"Search 110 problems…\"/></div>",
+      "css": ".ds-input-wrap{display:flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:8px;background:#F7F6F3;border:1px solid #EAEAEA;transition:border-color 200ms}.ds-input-wrap:focus-within{border-color:#111;box-shadow:0 0 0 1px rgba(17,17,17,0.08)}.dark .ds-input-wrap{background:#1E1E1E;border-color:rgba(255,255,255,0.10)}"
     },
     {
-      "name": "Bezel Card",
+      "name": "Flat Card",
       "kind": "card",
-      "refersTo": "card-bezel",
-      "description": "Double-bezel container — Topic / stat rail.",
-      "html": "<div class=\"ds-bezel-outer\"><div class=\"ds-bezel-inner\">Vanguard content</div></div>",
-      "css": ".ds-bezel-outer{background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.06);box-shadow:inset 0 1px 0 rgba(255,255,255,0.03);padding:6px;border-radius:32px}.ds-bezel-inner{background:#1A1A1A;border:1px solid rgba(255,255,255,0.04);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 4px 24px rgba(0,0,0,0.25);border-radius:26px;padding:20px;color:#F5F5F3;font:400 13px/1.5 Geist,sans-serif}"
+      "refersTo": "card-flat",
+      "description": "Flat card — hairline border, 12px radius, tonal stack background.",
+      "html": "<div class=\"ds-card\">Topic content</div>",
+      "css": ".ds-card{background:#FFFFFF;border:1px solid #EAEAEA;border-radius:12px;padding:16px;transition:box-shadow 200ms,border-color 200ms}.ds-card:hover{box-shadow:0 2px 8px rgba(0,0,0,0.04);border-color:#E5E5E3}.dark .ds-card{background:#1A1A1A;border-color:rgba(255,255,255,0.10)}"
     },
     {
-      "name": "Navigation Island",
+      "name": "Header",
       "kind": "nav",
-      "refersTo": "card-bezel",
-      "description": "Fixed glass island header — Code2 + progress + auth.",
-      "html": "<header class=\"ds-nav\"><span class=\"ds-nav-dot\"></span><span class=\"ds-nav-title\">DSA Sheet</span><span class=\"ds-nav-progress\">42/110</span></header>",
-      "css": ".ds-nav{display:flex;align-items:center;gap:12px;padding:6px 8px;border-radius:9999px;background:rgba(20,20,20,0.62);border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 8px 32px rgba(0,0,0,0.45);backdrop-filter:blur(24px) saturate(1.2);color:#F5F5F3;font:500 12px/1 Geist,sans-serif}.ds-nav-dot{width:32px;height:32px;border-radius:9999px;background:#10B981;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(16,185,129,0.35)}.ds-nav-progress{margin-left:auto;padding:6px 12px;border-radius:9999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.05);font:500 11px/1 Geist Mono,monospace}"
+      "refersTo": "card-flat",
+      "description": "Sticky header — 56px, warm paper/charcoal, 8px blur, circular progress.",
+      "html": "<header class=\"ds-header\"><span class=\"ds-logo\">DSA</span><span class=\"ds-progress\">42/110</span></header>",
+      "css": ".ds-header{display:flex;align-items:center;gap:12px;height:56px;padding:0 24px;background:rgba(255,255,255,0.85);border-bottom:1px solid #EAEAEA;backdrop-filter:blur(8px)}"
     },
     {
-      "name": "Recall Trio",
+      "name": "Revision Dots",
       "kind": "chip",
-      "refersTo": "button-primary",
-      "description": "Three 28px recall buttons — easy/hint/blank.",
-      "html": "<div class=\"ds-recall\"><button class=\"ds-recall-btn ds-recall-easy\" title=\"Easy recall\">✓</button><button class=\"ds-recall-btn ds-recall-hint\">◐</button><button class=\"ds-recall-btn ds-recall-blank\">✕</button></div>",
-      "css": ".ds-recall{display:flex;gap:4px}.ds-recall-btn{width:28px;height:28px;border-radius:9999px;border:1px solid;display:flex;align-items:center;justify-content:center;font:600 12px/1 Geist,sans-serif;transition:all 700ms cubic-bezier(0.32,0.72,0,1)}.ds-recall-easy{background:rgba(16,185,129,0.10);color:#10B981;border-color:rgba(16,185,129,0.15)}.ds-recall-easy:hover{background:rgba(16,185,129,0.15)}.ds-recall-hint{background:rgba(245,158,11,0.10);color:#F59E0B;border-color:rgba(245,158,11,0.15)}.ds-recall-blank{background:rgba(239,68,68,0.10);color:#EF4444;border-color:rgba(239,68,68,0.15)}"
+      "refersTo": "card-flat",
+      "description": "6-dot revision progress — filled bg-primary, current pale yellow, empty muted.",
+      "html": "<div class=\"ds-dots\"><span class=\"ds-dot ds-dot-filled\"></span><span class=\"ds-dot ds-dot-current\"></span><span class=\"ds-dot\"></span></div>",
+      "css": ".ds-dots{display:flex;gap:4px}.ds-dot{width:6px;height:6px;border-radius:9999px;border:1px solid #EAEAEA;background:#F7F6F3}.ds-dot-filled{background:#111;border-color:#111}.dark .ds-dot-filled{background:#F5F5F3;border-color:#F5F5F3}"
     }
   ],
   "narrative": {
-    "northStar": "The Obsessive Archive",
-    "overview": "A vantablack lab notebook etched with glass. Flat at rest, tonal depth via bezels and hairlines; blur only on fixed islands. One hero brand beat, everything else restrained and dense. Progress is the product — every surface answers how much is done.",
-    "keyCharacteristics": ["Vantablack OLED + emerald commit ≤10%", "Double-bezel signature (outer 2rem / inner 26px)", "Instrument Serif once, Geist/Mono elsewhere", "700ms Vanguard ease — slow elegance, fast task feedback", "Grain 3% + mesh blur"],
+    "northStar": "The Calm Archive",
+    "overview": "Warm paper / warm charcoal editorial archive. Flat at rest, tonal depth via hairlines; blur only on sticky header/filter. One calm hero beat, everything else restrained and dense. Progress is monochrome — every surface answers how much is done.",
+    "keyCharacteristics": ["Warm paper #F7F6F3 / charcoal #0F0F0F flat stack", "Newsreader once, Geist/Mono elsewhere", "600ms editorial ease — slow reveals, fast taps", "Pale tints only for difficulty/status/due", "Ambient grain + blob behind content only"],
     "rules": [
-      { "name": "The Emerald Rarity Rule", "body": "Emerald occupies ≤10% of any scrolled viewport. Hero pct pill and progress bars are exempt.", "section": "colors" },
-      { "name": "The One Display Rule", "body": "Instrument Serif appears only in hero + topic headlines. All labels/buttons/data use Geist/Mono.", "section": "typography" },
-      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. Shadows appear only as response to state or on fixed islands.", "section": "elevation" }
+      { "name": "The Monochrome Progress Rule", "body": "Progress is always bg-primary (monochrome). Pale tints only for difficulty/status.", "section": "colors" },
+      { "name": "The One Display Rule", "body": "Newsreader appears only in hero + topic headlines. All labels/buttons/data use Geist/Mono.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. Shadows only on hover/islands; blur only on sticky header.", "section": "elevation" }
     ],
-    "dos": ["Do keep vantablack OLED and let grain + mesh do atmosphere.", "Do use emerald only for progress/active — ≤10%.", "Do use double-bezel for primary containers.", "Do animate transform/opacity/filter only with Vanguard ease."],
-    "donts": ["Don't look like generic shadcn dashboard.", "Don't use border-left >1px accent.", "Don't use gradient text.", "Don't blur every scroll card.", "Don't use SaaS-cream editorial lane except hero.", "Don't animate layout properties."]
+    "dos": ["Do keep warm paper/charcoal and let grain + blob do atmosphere.", "Do use monochrome progress for all bars.", "Do keep inputs at 40px, rows compact but taps ≥32px on 375px.", "Do animate transform/opacity only with editorial ease."],
+    "donts": ["Don't look like generic shadcn dashboard.", "Don't use border-left >1px accent.", "Don't use gradient text.", "Don't blur scroll cards.", "Don't use high-chroma neon.", "Don't animate layout properties."]
   }
 }

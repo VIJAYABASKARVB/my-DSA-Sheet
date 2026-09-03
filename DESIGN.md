@@ -1,39 +1,49 @@
 ---
-name: "My DSA Sheet — Vanguard Edition"
-description: "Firestore-synced DSA tracker · Topic→Pattern→Problem · Vanguard OLED + Ethereal Glass"
+name: "My DSA Sheet — Minimal Archive"
+description: "Firestore-synced DSA tracker · Topic→Pattern→Problem · Warm paper/charcoal + flat editorial minimal"
 colors:
-  vantablack: "#0A0A0A"
-  vantablack-soft: "#141414"
-  surface: "#1A1A1A"
-  card: "#242424"
-  muted: "#2E2E2E"
-  foreground: "#F5F5F3"
-  muted-foreground: "#8A8A8A"
-  emerald: "#10B981"
-  emerald-soft: "#10B9811A"
-  border-subtle: "#262626"
-  amber: "#F59E0B"
-  red: "#EF4444"
+  paper: "#F7F6F3"
+  paper-soft: "#FBFBFA"
+  charcoal: "#0F0F0F"
+  charcoal-soft: "#141414"
+  card-light: "#FFFFFF"
+  card-dark: "#1A1A1A"
+  muted-light: "#F7F6F3"
+  muted-dark: "#1E1E1E"
+  foreground-light: "#111111"
+  foreground-dark: "#F5F5F3"
+  muted-foreground-light: "#787774"
+  muted-foreground-dark: "#B8B8B5"
+  border-light: "#EAEAEA"
+  border-dark: "rgba(255,255,255,0.10)"
+  pale-red-bg: "#FDEBEC"
+  pale-red-text: "#9F2F2D"
+  pale-blue-bg: "#E1F3FE"
+  pale-blue-text: "#1F6C9F"
+  pale-green-bg: "#EDF3EC"
+  pale-green-text: "#346538"
+  pale-yellow-bg: "#FBF3DB"
+  pale-yellow-text: "#956400"
 typography:
   display:
-    fontFamily: "Instrument Serif, Georgia, serif"
-    fontSize: "clamp(2.2rem, 6vw, 3.75rem)"
+    fontFamily: "Newsreader, Georgia, serif"
+    fontSize: "clamp(1.9rem, 4.5vw, 2.6rem)"
     fontWeight: 400
-    lineHeight: 0.9
-    letterSpacing: "-0.04em"
+    lineHeight: 1.05
+    letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Instrument Serif, Georgia, serif"
-    fontSize: "20px"
+    fontFamily: "Newsreader, Georgia, serif"
+    fontSize: "17px"
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "-0.02em"
   title:
-    fontFamily: "Geist, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
+    fontFamily: "Geist, -apple-system, system-ui, sans-serif"
     fontSize: "13px"
     fontWeight: 500
     lineHeight: 1.4
   body:
-    fontFamily: "Geist, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
+    fontFamily: "Geist, -apple-system, system-ui, sans-serif"
     fontSize: "13px"
     fontWeight: 400
     lineHeight: 1.6
@@ -42,13 +52,11 @@ typography:
     fontSize: "10px"
     fontWeight: 500
     lineHeight: 1
-    letterSpacing: "0.16em"
+    letterSpacing: "0.08em"
 rounded:
-  sm: "12px"
-  md: "16px"
-  lg: "24px"
-  bezel-outer: "32px"
-  bezel-inner: "26px"
+  sm: "6px"
+  md: "8px"
+  lg: "12px"
 spacing:
   sm: "8px"
   md: "16px"
@@ -56,152 +64,138 @@ spacing:
   xl: "32px"
 components:
   button-primary:
-    backgroundColor: "{colors.emerald}"
-    textColor: "{colors.foreground}"
-    rounded: "{rounded.lg}"
-    padding: "4px 12px 4px 4px"
-  button-primary-hover:
-    backgroundColor: "{colors.emerald}"
+    backgroundColor: "{colors.foreground-light}"
+    textColor: "{colors.card-light}"
+    rounded: "{rounded.sm}"
+    padding: "8px 16px"
   badge-difficulty-easy:
-    backgroundColor: "{colors.emerald-soft}"
-    textColor: "{colors.emerald}"
-    rounded: "{rounded.lg}"
+    backgroundColor: "{colors.pale-green-bg}"
+    textColor: "{colors.pale-green-text}"
+    rounded: "9999px"
   input-search:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.foreground}"
+    backgroundColor: "{colors.muted-light}"
+    textColor: "{colors.foreground-light}"
+    rounded: "{rounded.md}"
+  card-flat:
+    backgroundColor: "{colors.card-light}"
     rounded: "{rounded.lg}"
-  card-bezel:
-    backgroundColor: "{colors.card}"
-    rounded: "{rounded.bezel-inner}"
-    padding: "6px"
+    padding: "12px"
 ---
 
-# Design System: My DSA Sheet — Vanguard Edition
+# Design System: My DSA Sheet — Minimal Archive
 
 ## 1. Overview
 
-**Creative North Star: "The Obsessive Archive"**
+**Creative North Star: "The Calm Archive"**
 
-A vantablack lab notebook etched with glass. The system is not a marketing site that happens to have a list — it is an archive for obsessive repetition. Vantablack OLED (oklch(0.08 0 0) at `src/app/globals.css:54`) is the ground; ethereal glass mesh orbs (fixed, pointer-events-none at `globals.css:137-149`) breathe behind it but never compete with the data. Double-bezel islands (`bezel-outer` 2rem / `bezel-inner` calc(2rem−0.375rem) at `globals.css:105-106`) are the only surfaces that earn blur (`glass-island` blur 24px + saturate 1.2 at `globals.css:186-195`). Everything that scrolls stays flat, tonal, and performant.
+A warm paper (light) / warm charcoal (dark) editorial sheet for obsessive repetition. Not a marketing site — an archive where progress is the product. The ground is `#F7F6F3` at `src/app/globals.css:54` (light) and `#0F0F0F` at `src/app/globals.css:111` (dark), with flat tonal stacking `background → card → muted` and hairline `#EAEAEA` / `rgba(255,255,255,0.10)` borders. Grain/ambient orb sit fixed behind content at 3–6% opacity (`globals.css:173-189`, `339-357`), pointer-events-none — never on scroll cards. One hero editorial beat (Newsreader `clamp(1.9rem,4.5vw,2.6rem)` at `src/app/page.tsx:136`, `src/app/sheet/page.tsx:299`) carries the brand; everything below stays restrained, dense, flat.
 
-Density is a virtue. Topic → Pattern → Problem is always visible; progress is never more than one glance away. The hero is the single committed brand beat — Instrument Serif display at `clamp(2.2rem,6vw,3.75rem)` (`src/app/sheet/page.tsx:169`) plus mono metrics — everything below is restrained, tight, task-focused.
+Density is a virtue. Topic → Pattern → Problem is always visible; Due-for-Review and progress are one glance away. The system is Restrained: monochrome carries 90% of surface; pale semantic tints (red/amber/green/blue at `globals.css:98-105`) appear only for meaning (difficulty, solved/review/due).
 
-**Anti-reject:** Generic shadcn dashboard (identical card grids, border-left accent stripes, hero-metric big-number template), SaaS-cream editorial-typographic, neon-on-black crypto terminal. Those lanes are saturated; this archive is darker, more precise, more personal.
+**Anti-reject:** Vanilla shadcn dashboard (identical card grids, border-left accent, gray tables), neon-on-black crypto terminal, glassmorphism on every card, gradient text. Vanguard OLED specs previously in this file were shipped and then intentionally replaced by warm minimal (`git eb0f1a8`).
 
 **Key Characteristics:**
-- Vantablack OLED + emerald commit (≤10% except hero + progress)
-- Double-bezel as signature container (outer hairline, inner glass)
-- Instrument Serif display once, Geist + Geist Mono everywhere else
-- 700ms Vanguard ease (`cubic-bezier(0.32,0.72,0,1)` at `globals.css:100`) — slow elegance, short task feedback at 150-250ms where possible
-- Grain 3% + mesh blur 0.5px for depth without cost
+- Warm paper/charcoal + flat cards, hairline borders only
+- Newsreader display once per route, Geist + Geist Mono elsewhere
+- 600ms editorial ease `cubic-bezier(0.16,1,0.3,1)` at `globals.css:95` — reveals 600ms, task feedback 150-250ms
+- Pale tints for difficulty/status, monochrome for progress (`bg-primary` is foreground)
+- Fixed ambient depth (grain + blob) — no blur on scroll content; header uses `backdrop-blur-[8px]` only (`src/components/AppHeader.tsx:109`)
 
 ## 2. Colors
 
-Restrained strategy: tinted neutrals carry 90% of the surface; emerald is the only saturated accent and appears on progress, selection, and due states — its rarity is the point.
+Restrained strategy: tinted neutrals carry 90% of surface; semantic pale tints are the only saturated accents and appear only where meaning requires them.
 
-### Primary
-- **Vanguard Emerald** (#10B981 / oklch(0.72 0.17 162.48) at `globals.css:81`): Primary actions, solved state, progress fill (`src/app/sheet/page.tsx:185`, `TopicAccordion.tsx:57`, `PatternAccordion.tsx:46`), circular progress stroke (`AppHeader.tsx:38`), due-today today accent. Never used as large background; always as pill/badge/fill/stroke.
-- **Emerald Soft** (#10B98114 / oklch(0.72 0.17 162.48 / 0.08) at `globals.css:82` / `--emerald-muted`): Hover washes, easy-recall inactive (`RecallButtons.tsx:22`), selection rings (`DueForReviewSection.tsx:52`).
-
-### Neutral
-- **Vantablack** (#0A0A0A / oklch(0.08 0 0) at `globals.css:54`): Page background (`bg-background`). Grain overlay at 3% sits on top.
-- **Vantablack Soft** (#141414 / oklch(0.12 0 0 / 0.62) `glass-island`): Fixed header island, dialog chrome (`ProblemRow.tsx:193`).
-- **Surface** (#1A1A1A / oklch(0.14 0 0) `--card`/`--sidebar`): Cards, bezel-inner (`bezel-inner` bg at `globals.css:207`).
-- **Muted** (#2E2E2E / oklch(0.18 0 0) `--muted`/`--secondary`): Inactive pills (`FilterBar.tsx:121`), secondary badge bg.
-- **Foreground** (#F5F5F3 / oklch(0.96 0 0) at `globals.css:55`): Primary text, always tinted warm (chroma 0.005) never pure white.
-- **Muted Foreground** (#8A8A8A / oklch(0.56 0 0) `--muted-foreground`): Labels, counts, eyebrows (10px tracking 0.16em).
-- **Border Subtle** (#262626 / oklch(1 0 0 / 0.07) `--border`): Hairline borders, dividers (`border-white/[0.06]` maps here at 6% opacity).
+### Primary (monochrome)
+- **Primary / Progress** — `--primary` is `#111111` light / `#F5F5F3` dark (`globals.css:63/120`). Used for circular progress stroke (`AppHeader.tsx:46`), topic/pattern bars (`TopicAccordion.tsx:80`, `PatternAccordion.tsx:62`, `sheet/page.tsx:490`), active filter pills (`FilterBar.tsx:15-23`), solved status (`ProblemRow.tsx:33-37`). Progress is monochrome, not emerald.
+- **Foreground / Card / Muted** — Tonal stack light: `background #F7F6F3` → `card #FFFFFF` → `muted #F7F6F3`; dark: `background #0F0F0F` → `card #1A1A1A` → `muted #1E1E1E`. Always tinted warm, never pure `#000/#fff`.
 
 ### Semantic Accents (small roles, not palette drivers)
-- **Amber** (#F59E0B): Review / hint / due states (`statusConfig review` at `ProblemRow.tsx:40-45`, `RecallButtons hint` at `:24-28`, `DueForReviewSection amber-500/10`). Used only for "attention, not success."
-- **Red** (#EF4444): Hard difficulty (`ProblemRow.tsx:15`), blank recall (`RecallButtons.tsx:31-35`).
+- **Pale Green** `#EDF3EC / #346538` (`--pale-green-bg/text` at `globals.css:102-103`): Easy difficulty (`ProblemRow.tsx:12`), mastered badge (`ProblemRow.tsx:148`), upcoming header (`DueForReviewSection.tsx:181`).
+- **Pale Yellow / Amber** `#FBF3DB / #956400` (`globals.css:104-105`): Medium difficulty (`ProblemRow.tsx:13`), review status (`ProblemRow.tsx:39-43`), due badge (`AppHeader.tsx:134`), due-today today accent (`DueForReviewSection.tsx:135`). Dark variants use `/16` opacity washes.
+- **Pale Red** `#FDEBEC / #9F2F2D` (`globals.css:98-99`): Hard difficulty (`ProblemRow.tsx:14`), due-empty error states (`DueForReviewSection.tsx:70`).
+- **Pale Blue** `#E1F3FE / #1F6C9F` (`globals.css:100-101`): Secondary informational accents (landing system grid at `src/app/page.tsx:289`).
 
 ### Named Rules
-**The Emerald Rarity Rule.** Emerald occupies ≤10% of any scrolled viewport. Hero pct pill and progress bars are exempt; no other surface may drench emerald. If emerald covers >10%, demote to emerald-soft wash or zinc.
-**The Vantablack Rule.** Background is never #000 or #fff. Even "white" text is oklch(0.96 0 0) with 0.005 chroma tint; even "black" is oklch(0.08 0 0). High chroma at extremes is forbidden.
+**The Monochrome Progress Rule.** Progress is always `bg-primary` (foreground). No emerald fill. If color appears on a progress bar, it is wrong — pale tints are reserved for difficulty/status only.
+**The Warm Neutral Rule.** Background is never `#000` or `#fff`. Light foreground is `#111`, dark foreground is `#F5F5F3` (`oklch` tinted). High chroma at extremes is forbidden.
 
 ## 3. Typography
 
-**Display Font:** Instrument Serif (variable `--font-instrument-serif` at `src/app/layout.tsx:18-23`, loaded `display:swap`, weight 400)
-**Body Font:** Geist Sans (variable `--font-geist-sans` at `layout.tsx:6-10`)
-**Label/Mono Font:** Geist Mono (variable `--font-geist-mono` at `layout.tsx:12-16`)
+**Display Font:** Newsreader (variable `--font-newsreader` at `src/app/layout.tsx:19`, `display:swap`, normal+italic)
+**Body Font:** Geist Sans (variable `--font-geist-sans` at `layout.tsx:7`)
+**Label/Mono Font:** Geist Mono (variable `--font-geist-mono` at `layout.tsx:13`)
 
-**Character:** Display once per page (hero only) — elegant, editorial, vanguard. Body is system-native, tight tracking (-0.02em), no fluid scale — fixed rem so sidebar and sheet agree. Mono carries all metrics, counts, due dates, and status (10px mono badges feel like lab labels).
+**Character:** Display once per page (hero only) — editorial, calm, archival. Body is system-native, tight tracking (-0.02em). Mono carries all metrics, counts, due dates, and status (10px mono badges feel like lab labels).
 
 ### Hierarchy
-- **Display** (400, clamp(2.2rem,6vw,3.75rem), 0.9, -0.04em): Hero "Your DSA Sheet, perfected." at `page.tsx:169`. Used once per route. Light on dark → line-height +0.05 (0.9 vs 1.0 spec) for breathing.
-- **Headline** (400, 20px, 1, -0.02em): Topic names at `TopicAccordion.tsx:42` (Instrument Serif). Three words max; truncate if longer.
-- **Title** (500, 13px, 1.4): Pattern names at `PatternAccordion.tsx:35`, Problem names at `ProblemRow.tsx:135` (truncated). Max 65-75ch for prose at `page.tsx:176` (description), but titles truncate, not wrap.
-- **Body** (400, 13-15px, 1.6): Descriptions, empty-state copy, due metadata (11px at `DueForReviewSection.tsx:126-134`).
-- **Label** (500, 10px, 0.16em, uppercase): Eyebrows (`eyebrow` at `globals.css:292-306`), stat rail labels (`StatRailCard` at `page.tsx:35-43`), badge uppercase difficulty (`ProblemRow.tsx:142`).
+- **Display** (400, clamp(1.9rem,4.5vw,2.6rem), 1.05, -0.03em): Hero at `src/app/sheet/page.tsx:299` and landing at `src/app/page.tsx:136`. Used once per route. Italic `font-[300]` for the contrast word ("Sheet", "without").
+- **Headline** (400, 17px, 1, -0.02em): Topic names at `TopicAccordion.tsx:66` (Newsreader). Truncate if longer.
+- **Title** (500, 13px, 1.4): Pattern names at `PatternAccordion.tsx:52`, problem names at `ProblemRow.tsx:122` (truncated). Max 65–75ch for prose at `src/app/page.tsx:142`, but titles truncate, not wrap.
+- **Body** (400, 13-15px, 1.6): Descriptions, empty-state copy, due metadata (11px at `DueForReviewSection.tsx:133-141`).
+- **Label** (500, 10px, 0.08em, uppercase, Mono): Eyebrows (`eyebrow` at `globals.css:250-270`), stat rail labels (`sheet/page.tsx:36`), badge uppercase difficulty (`ProblemRow.tsx:155`).
 
 ### Named Rules
-**The One Display Rule.** Instrument Serif appears only in hero + topic headlines. All labels, buttons, data, and body use Geist/Geist Mono. If a button contains serif, it is wrong.
-**The Mono Metric Rule.** Any number that is a count or percent is Geist Mono, not Geist Sans. Solved/total, pct, overdue days, reviewCount — all mono.
+**The One Display Rule.** Newsreader appears only in hero + topic headlines. All labels, buttons, data, and body use Geist/Geist Mono. If a button contains serif, it is wrong.
+**The Mono Metric Rule.** Any number that is a count or percent is Geist Mono, not Geist Sans. Solved/total, pct, overdue days, completedRevisions — all mono.
 
 ## 4. Elevation
 
-Flat by default. Depth is conveyed by tonal layering (vantablack → surface → card → muted) and hairline borders (1px at 6-8% white), not shadows. Shadows appear only as response to state or on fixed islands.
+Flat by default. Depth is conveyed by tonal layering (paper → card → muted → border) and hairline borders (1px at `globals.css:273`), not shadows. Shadows appear only as response to state or on fixed islands.
 
 ### Shadow Vocabulary
-- **Bezel Inner** (`inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.25)` at `globals.css:209-211`): Default card depth. Always present inside `bezel-outer` → `bezel-inner`.
-- **Glass Island** (`inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.35) + blur(24px) saturate(1.2)` at `globals.css:189-194`): AppHeader (`AppHeader.tsx:93`) and expanded mobile overlay. Only fixed/sticky surfaces.
-- **Glass Surface** (`inset 0 1px 0 rgba(255,255,255,0.04) + blur(12px)` at `globals.css:178-183`): Secondary sticky panels (DueForReview header at `globals.css:168-176` pattern).
-- **Reveal Motion** (not shadow but elevation cue): `translateY(24px) scale(0.98) blur(8px)` → `translateY(0) scale(1) blur(0)` over 800ms Vanguard ease (`globals.css:265-280`), disabled under `prefers-reduced-motion` (`globals.css:282-289`).
+- **Flat Card** (`globals.css:273-299`): `bg-card border border-border rounded-[12px]`. Hover: `0 2px 8px rgba(0,0,0,0.04)` light / `0 2px 12px rgba(0,0,0,0.3)` dark + `border-border` boost. Always present; no blur.
+- **Flat Bone** (`flat-card--bone` at `globals.css:291-299`): Muted variant `bg-[#FBFBFA]` light / `#141414` dark for secondary containers.
+- **Header Island** (`AppHeader.tsx:109` + `sheet/page.tsx:349`): `bg-card/85 backdrop-blur-[8px] border-b border-border` + `shadow-[0_2px_8px_rgba(0,0,0,0.04)]` on scrolled state. Only sticky header/filter earn blur.
+- **Reveal Motion** (`globals.css:229-247`): `translateY(12px)` → `0` over 600ms `var(--ease-editorial)`, disabled under `prefers-reduced-motion`.
 
 ### Named Rules
-**The Flat-By-Default Rule.** Surfaces are flat at rest. Shadows/borw appear only on islands or hover. Grain (`grain::before` fixed 3% at `globals.css:125-135`) and mesh (`mesh::before` fixed radial gradients at `137-149`) are behind content, pointer-events-none, never on scroll containers.
+**The Flat-By-Default Rule.** Surfaces are flat at rest. Shadows appear only on hover/islands. Ambient blob (`ambient-blob` fixed 600px radial at `globals.css:339-357`) and body `::before` grain are behind content, pointer-events-none, never on scroll containers.
 
 ## 5. Components
 
 ### Buttons
-- **Shape:** Pill-full (`rounded-full`) for primary/filter actions; `rounded-lg` for shadcn default at `button.tsx:7`. Island buttons have inner white dot arrow (Group hover translate 1-2px).
-- **Primary:** Emerald bg, white text, 7px inner white circle with arrow (`page.tsx:217-227`, `ProblemRow.tsx:316-321`). Padding: pl-5 pr-1 py-1 text-xs/s. Transition: `700ms ease-vanguard`.
-- **Hover / Focus:** `hover:bg-emerald/90`, `focus-visible:ring-ring/50` (`button.tsx:7`), `active:scale-[0.98]` or `active:scale-[0.92]` for icon buttons. Never bounce/elastic.
-- **Secondary / Ghost:** `bg-white/[0.04] border-white/5` → `hover:bg-white/[0.08]` (`ProblemRow.tsx:186`, `FilterBar.tsx:118-121`). Secondary subtle, not competing with emerald.
+- **Shape:** `rounded-[6px]` for primary/filter (small), `rounded-[8px]` for cards, `rounded-[12px]` for sections. No pill-full.
+- **Primary:** `bg-primary text-primary-foreground` (`sheet/page.tsx:308`, `AppHeader.tsx:214`). Monochrome, hover `bg-primary/90`, `active:scale-[0.98]`. Transition `200ms var(--ease-editorial)`.
+- **Secondary / Ghost:** `bg-card border border-border` → `hover:bg-muted` (`ProblemRow.tsx:226`, `FilterBar.tsx:121`). Subtle, not competing.
+- **Icon:** `w-7 h-7 rounded-[6px] border border-border bg-card` → `hover:bg-muted` for status/notes/edit (`ProblemRow.tsx:114,195,220`).
 
-### Chips
-- **Style:** Filter pills in segmented container (`rounded-full bg-white/[0.03] border-white/5 p-1` at `FilterBar.tsx:113`). Active: emerald bg + white text + shadow `0 2px 10px rgba(16,185,129,0.3)` (`FilterBar.tsx:16`, `RecallButtons.tsx:20`).
-- **State:** Easy/Medium/Hard pills map to emerald/amber/red active (`FilterBar.tsx:15-18`); Solved/Review map to emerald/amber (`FilterBar.tsx:21-24`); Tags map to emerald when selected else `bg-white/[0.04]` (`FilterBar.tsx:158-162`).
+### Chips / Pills
+- **Difficulty group** (`FilterBar.tsx:114`): Segmented container `rounded-[8px] bg-muted border border-border p-1`. Active: `bg-primary text-primary-foreground border-primary`. Future: semantic pale variants per difficulty (see craft).
+- **Status group** (`FilterBar.tsx:131`): Same container; active maps to `bg-primary`.
+- **Tags** (`FilterBar.tsx:157`): `h-7 px-3 rounded-full border` — active `bg-primary`, inactive `bg-card border-border`.
 
 ### Cards / Containers
-- **Corner Style:** Bezel outer 2rem, inner calc(2rem−0.375rem) (`globals.css:105-106`); Pattern accordion 1.25rem (`PatternAccordion.tsx:32`).
-- **Background:** Tonal stack: page vantablack → bezel-outer white/[0.035] → bezel-inner oklch(0.145) (`globals.css:198-213`). Pattern items: `bg-white/[0.015]` closed → `bg-white/[0.03]` open.
-- **Shadow Strategy:** Bezel inner shadow by default; island shadow only on AppHeader overlay (see Elevation).
-- **Border:** `1px solid oklch(1 0 0 / 0.06)` outer, `0.04` inner — hairline only (`globals.css:199-208`).
-- **Internal Padding:** Outer `p-6` → inner `p-5` for bezel; `p-1.5` for compact TopicAccordion (`TopicAccordion.tsx:36`), `px-4 py-3` for Pattern trigger (`PatternAccordion.tsx:34`).
+- **Corner Style:** `12px` default (`rounded-[12px]`), `8px` for pattern items (`PatternAccordion.tsx:48`).
+- **Background:** Tonal stack: page `bg-background` → card `bg-card` → muted `bg-muted/30` inside accordions (`TopicAccordion.tsx:85`).
+- **Border:** `1px solid var(--border)` — `#EAEAEA` light / `rgba(255,255,255,0.10)` dark — hairline only.
+- **Internal Padding:** `p-3 md:p-4` FilterBar, `px-5 py-4` Topic trigger, `px-4 py-3` Pattern trigger, `py-2.5 px-3 md:px-4` rows.
 
 ### Inputs / Fields
-- **Style:** `h-[42px] rounded-full bg-white/[0.04] border-white/10` (`FilterBar.tsx:65`), placeholder zinc-500, focus `border-emerald/30`. No fill change on focus; border shift only.
-- **Focus:** `focus-visible:border-emerald/30 focus-visible:ring-0` — subtle, not glow. Text inputs in dialog `h-9 rounded-full` (`ProblemRow.tsx:232`).
-- **Error / Disabled:** Toasts via `sonner` (`layout.tsx:47`), not inline red text. Disabled `opacity-50 pointer-events-none`.
+- **Style:** `h-10 rounded-[8px] bg-muted border-border` (`FilterBar.tsx:70`), placeholder `text-muted-foreground`, focus `ring-1 ring-ring/20`. No fill change on focus; ring only.
+- **Dialog Inputs:** `h-9 rounded-[8px] bg-muted border-border` (`ProblemRow.tsx:268`).
+- **Error / Disabled:** Toasts via `sonner` (`layout.tsx:59`), not inline red text. Disabled `opacity-50`.
 
 ### Navigation
-- Fixed glass island (`fixed top-4 inset-x-0 flex justify-center` at `AppHeader.tsx:91`) — `glass-island rounded-full px-2 py-1.5 max-w-[1160px]` (`AppHeader.tsx:93`). Left brand lockup (emerald dot Code2 + mono DSA + vanguard pulse), center topic counts (desktop only), right circular progress (`CircularProgress` SVG at `AppHeader.tsx:8-47`) + auth. Mobile: hamburger morph (2 spans rotate 45deg at `AppHeader.tsx:218-222`) → overlay `bg-black/75 backdrop-blur-3xl` at `AppHeader.tsx:241` with staggered reveals.
+- Sticky header (`sticky top-0 z-30 bg-card/85 backdrop-blur-[8px] border-b border-border` at `AppHeader.tsx:109`) — inner `max-w-[1160px] mx-auto px-4 md:px-6 h-[56px] flex`. Left brand lockup (mono DSA badge + Sheet wordmark), center sheet stats (desktop), right circular progress (`CircularProgress` SVG at `AppHeader.tsx:7-56`) + ThemeToggle + auth. Mobile: hamburger morph (2 spans rotate 45deg at `AppHeader.tsx:229-231`) → drawer `max-h-[520px]` at `AppHeader.tsx:242`.
 - Typography: nav text is 11-13px mono/label, not display.
-
-### Signature: Double-Bezel Section
-- Outer `bezel-outer` wraps inner `bezel-inner`; reveals use `IntersectionObserver` threshold 0.12 at `page.tsx:303-317`, staggered 80ms per topic. Grain/mesh are fixed layers behind; never blur the bezel itself.
 
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** keep the page vantablack OLED (oklch(0.08 0 0)) and let grain 3% + mesh radials do the atmosphere — not per-card gradients.
-- **Do** use emerald only for progress, solved, active filter, due accent — ≤10% except hero pct pill (`page.tsx:184`) and topic bars (`TopicAccordion.tsx:57`).
-- **Do** reserve Instrument Serif for hero + topic headlines only; use Geist Mono for every count/pct/badge.
-- **Do** keep product inputs at 42px pill height (FilterBar) with 44px touch target audit; row icons may compact to 28-32px but rail/sheet controls stay ≥42px.
-- **Do** use double-bezel for primary containers (TopicAccordion, FilterBar, stat rail, DueForReview) — outer 2rem, inner calc(2rem−0.375rem), hairline borders.
-- **Do** animate only `transform`/`opacity`/`filter` with Vanguard ease 700ms for entrances, 150-250ms for state feedback; respect `prefers-reduced-motion`.
-- **Do** keep dialogs glass-dark (`bg-[#0A0A0A]/90 backdrop-blur-3xl` at `ProblemRow.tsx:193`) with focus trap via @base-ui/react/dialog.
+- **Do** keep the page warm paper `#F7F6F3` / charcoal `#0F0F0F` and let `body::before` grain + `ambient-blob` do atmosphere — not per-card gradients.
+- **Do** use monochrome `bg-primary` for all progress (circular + linear); reserve pale tints only for difficulty/status/due meaning.
+- **Do** reserve Newsreader for hero + topic headlines only; use Geist Mono for every count/pct/badge.
+- **Do** keep product inputs at 40px (`h-10`) with 42px touch-target audit on rail; row icons may compact to 28px but filter/sheet controls stay ≥40px.
+- **Do** use flat cards for primary containers (TopicAccordion, FilterBar, DueForReview, notes) — `rounded-[12px] border border-border bg-card` with hairline, not bezels.
+- **Do** animate only `transform`/`opacity`/`filter` with `--ease-editorial` 600ms for reveals, 150-250ms for state feedback; respect `prefers-reduced-motion`.
+- **Do** keep dialogs `bg-card border border-border rounded-[12px]` with focus trap via @base-ui/react/dialog at `src/components/ui/dialog.tsx`.
 
 ### Don't:
 - **Don't** look like a generic shadcn dashboard — no identical card grids, no repeated icon+heading+text cards, no hero-metric big-number template.
 - **Don't** use border-left or border-right >1px as colored accent on cards/list items/callouts — use full border tint or leading icon instead.
-- **Don't** use gradient text (background-clip:text) — use single solid emerald or foreground with weight/size contrast.
-- **Don't** apply glassmorphism/blur as default on scroll cards — blur is permissioned only for fixed islands (AppHeader, dialog) per globals.css:167 comment.
-- **Don't** look like SaaS-cream editorial — no editorial-typographic lane (display serif italic + mono labels + ruled separators + monochromatic restraint) except the single hero beat.
-- **Don't** look like neon-on-black crypto — no high-chroma neons at 0.2+ on dark; reduce chroma as lightness approaches 0 (emerald chroma 0.17 at L 0.72 is allowed; neon at L 0.08 is forbidden).
-- **Don't** animate CSS layout properties (height/width/top) — transition `grid-template-rows` or `transform` instead; accordion uses `h-(--accordion-panel-height)` with `data-open:animate-` at `accordion.tsx:57`.
-- **Don't** nest cards — a card inside a card inside a card is always wrong; use bezel → flat pattern → row divider instead.
-- **Don't** wrap everything in a container — hero mesh and grain are fixed full-bleed, not contained.
-
+- **Don't** use gradient text (background-clip:text) — use single solid foreground with weight/size contrast.
+- **Don't** apply glassmorphism/blur as default on scroll cards — blur is permissioned only for sticky header/filter/dialog at 8px.
+- **Don't** look like neon-on-black crypto — no high-chroma neons at 0.2+ on dark; pale tints at `/16` washes only.
+- **Don't** animate CSS layout properties (height/width/top) — transition `transform`/`opacity`; accordion uses `h-(--accordion-panel-height)` with `data-open:animate-` at `src/components/ui/accordion.tsx:57`.
+- **Don't** nest cards more than 2 deep — Topic (card) → Pattern (card) → Row (divider) is the hierarchy; avoid card inside card inside card.
+- **Don't** wrap everything in a container — hero grid and ambient blob are full-bleed, not contained.

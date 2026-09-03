@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Pencil, ExternalLink, StickyNote, NotebookPen, X, Plus } from "lucide-react";
 import type { MergedProblem, Status, PlatformLink, Tag, RevisionSchedule } from "@/lib/types";
 
 const difficultyStyles: Record<string, string> = {
@@ -109,125 +110,142 @@ export function ProblemRow({
     <>
       <div
         id={`problem-${problem.id}`}
-        className="group/row flex flex-wrap sm:flex-nowrap items-center gap-2.5 md:gap-3 py-2.5 px-3 md:px-4 border-b border-border last:border-b-0 hover:bg-muted/60 transition-colors"
+        className="group/row flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 py-3 px-3 md:px-4 border-b border-border last:border-b-0 hover:bg-muted/60 transition-colors"
       >
-        <button
-          aria-label={`Status: ${status}. Click to cycle to ${cycle[status]}.`}
-          onClick={() => onStatusChange(problem.id, cycle[status])}
-          className={`w-7 h-7 rounded-[6px] border flex items-center justify-center shrink-0 text-xs font-medium transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${cfg.bg} ${cfg.border} ${cfg.text}`}
-        >
-          <span aria-hidden="true">{cfg.label}</span>
-        </button>
+        {/* Primary: status + name + difficulty */}
+        <div className="flex items-center gap-2.5 min-w-0 flex-1 w-full">
+          <button
+            aria-label={`Status: ${status}. Click to cycle to ${cycle[status]}.`}
+            onClick={() => onStatusChange(problem.id, cycle[status])}
+            className={`w-9 h-9 sm:w-7 sm:h-7 rounded-[6px] border flex items-center justify-center shrink-0 text-xs font-medium transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${cfg.bg} ${cfg.border} ${cfg.text}`}
+          >
+            <span aria-hidden="true">{cfg.label}</span>
+          </button>
 
-        <span className="flex-1 min-w-[120px] truncate text-[13px] font-medium tracking-tight text-foreground group-hover/row:text-foreground transition-colors">
-          {problem.name}
-        </span>
-
-        {status === "solved" && revisionSchedule && !revisionSchedule.isFullyMastered && (
-          <span className="inline-flex items-center gap-1.5 shrink-0">
-            <span className="flex items-center gap-1">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <span
-                  key={i}
-                  className={`w-1.5 h-1.5 rounded-full border ${
-                    i < revisionSchedule.currentRevisionIndex
-                      ? "bg-primary border-primary"
-                      : i === revisionSchedule.currentRevisionIndex
-                        ? "bg-[#FBF3DB] border-border dark:bg-[#FBF3DB]/40"
-                        : "bg-muted border-border"
-                  }`}
-                />
-              ))}
-            </span>
-            <Badge variant="outline" className="rounded-full text-[10px] px-2 py-0.5 font-mono border bg-muted text-muted-foreground">
-              Revision {revisionSchedule.currentRevisionIndex + 1} of 6
-            </Badge>
+          <span className="flex-1 min-w-0 truncate text-[13px] font-medium tracking-tight text-foreground group-hover/row:text-foreground transition-colors" title={problem.name}>
+            {problem.name}
           </span>
-        )}
-        {status === "solved" && revisionSchedule?.isFullyMastered && (
-          <Badge variant="outline" className="rounded-full text-[10px] px-2 py-0.5 font-medium border bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 text-[#346538] dark:text-[#86EFAC]">
-            Mastered ✓
+
+          <Badge
+            variant="outline"
+            aria-label={`Difficulty ${problem.difficulty}`}
+            className={`rounded-full text-[10px] font-semibold uppercase tracking-wide shrink-0 px-2.5 py-1 border ${difficultyStyles[problem.difficulty]}`}
+          >
+            {problem.difficulty}
           </Badge>
-        )}
+        </div>
 
-        <Badge
-          variant="outline"
-          aria-label={`Difficulty ${problem.difficulty}`}
-          className={`rounded-full text-[10px] font-semibold uppercase tracking-wide shrink-0 px-2.5 py-1 border ${difficultyStyles[problem.difficulty]}`}
-        >
-          {problem.difficulty}
-        </Badge>
+        {/* Meta + actions: wraps on mobile, inline on desktop — no indent on 320px */}
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-1.5 sm:justify-end w-full sm:w-auto pl-0 sm:pl-0">
+          {status === "solved" && revisionSchedule && !revisionSchedule.isFullyMastered && (
+            <span className="inline-flex items-center gap-1.5 shrink-0 mr-0.5">
+              <span className="flex items-center gap-1">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={`w-1.5 h-1.5 rounded-full border ${
+                      i < revisionSchedule.currentRevisionIndex
+                        ? "bg-primary border-primary"
+                        : i === revisionSchedule.currentRevisionIndex
+                          ? "bg-[#FBF3DB] border-border dark:bg-[#FBF3DB]/40"
+                          : "bg-muted border-border"
+                    }`}
+                  />
+                ))}
+              </span>
+              <Badge variant="outline" className="rounded-full text-[10px] px-2 py-0.5 font-mono border bg-muted text-muted-foreground">
+                Revision {revisionSchedule.currentRevisionIndex + 1} of 6
+              </Badge>
+            </span>
+          )}
+          {status === "solved" && revisionSchedule?.isFullyMastered && (
+            <Badge variant="outline" className="rounded-full text-[10px] px-2 py-0.5 font-medium border bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 text-[#346538] dark:text-[#86EFAC]">
+              Mastered ✓
+            </Badge>
+          )}
 
-        <div className="hidden sm:flex gap-1 flex-wrap shrink-0 max-w-[28vw]">
-          {(problem.tags ?? []).length === 0 ? (
-            <span className="text-[10px] text-muted-foreground italic">no tags</span>
-          ) : (
-            (problem.tags ?? []).map((tag) => (
+          <span className="hidden sm:inline-flex flex-wrap gap-1 items-center">
+            {(problem.tags ?? []).length === 0 ? null : (
+              (problem.tags ?? []).map((tag) => (
+                <Badge key={tag} variant="secondary" className="rounded-full text-[10px] bg-card border-border text-muted-foreground px-2 py-0.5 font-medium">
+                  {tag}
+                </Badge>
+              ))
+            )}
+          </span>
+          {/* Mobile tags: single line, scroll if needed but wraps */}
+          <span className="sm:hidden flex flex-wrap gap-1">
+            {(problem.tags ?? []).slice(0, 3).map((tag) => (
               <Badge key={tag} variant="secondary" className="rounded-full text-[10px] bg-card border-border text-muted-foreground px-2 py-0.5 font-medium">
                 {tag}
               </Badge>
-            ))
-          )}
-        </div>
+            ))}
+            {(problem.tags ?? []).length > 3 && (
+              <span className="text-[10px] text-muted-foreground px-1">+{(problem.tags ?? []).length - 3}</span>
+            )}
+          </span>
 
-        <div className="flex gap-1.5 overflow-x-auto shrink-0 max-w-[40vw] scrollbar-none -mr-1 pr-1">
-          {problem.links.length === 0 ? (
-            <span className="text-[10px] text-muted-foreground whitespace-nowrap hidden md:inline">no links</span>
-          ) : (
-            problem.links.map((l, i) => (
-              <a
-                key={i}
-                href={l.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${l.platform} — ${problem.name}`}
-                className="inline-flex items-center gap-1 pl-2.5 pr-1 py-1 rounded-[6px] border border-border bg-card hover:bg-muted text-[11px] font-mono text-muted-foreground hover:text-foreground whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20"
+          <span className="flex flex-wrap gap-1.5 items-center max-w-full">
+            {problem.links.length === 0 ? (
+              <span className="text-[10px] text-muted-foreground whitespace-nowrap hidden lg:inline">no links</span>
+            ) : (
+              problem.links.map((l, i) => (
+                <a
+                  key={i}
+                  href={l.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${l.platform} — ${problem.name}`}
+                  className="inline-flex items-center gap-1 pl-2.5 pr-1 py-1.5 sm:py-1 rounded-[6px] border border-border bg-card hover:bg-muted text-[11px] font-mono text-muted-foreground hover:text-foreground whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 min-h-8 sm:min-h-0"
+                >
+                  {platformBadge[l.platform] ?? l.platform}
+                  <span className="w-5 h-5 rounded-[4px] border border-border bg-muted flex items-center justify-center" aria-hidden="true">
+                    <ExternalLink className="w-3 h-3" strokeWidth={1.75} />
+                  </span>
+                </a>
+              ))
+            )}
+          </span>
+
+          <span className="flex items-center gap-1.5 sm:gap-1.5 shrink-0 ml-auto sm:ml-0">
+            <button
+              onClick={() => router.push(`/notes/${problem.id}`)}
+              className={`w-9 h-9 sm:w-7 sm:h-7 rounded-[6px] border flex items-center justify-center shrink-0 transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${
+                hasNote
+                  ? "bg-primary text-primary-foreground border-primary hover:bg-primary/90"
+                  : "bg-card text-muted-foreground hover:text-foreground hover:bg-muted border-border"
+              }`}
+              title="Open Notes"
+              aria-label={`Open notes for ${problem.name}`}
+            >
+              <span aria-hidden="true">{hasNote ? <StickyNote className="w-3.5 h-3.5" strokeWidth={1.75} /> : <NotebookPen className="w-3.5 h-3.5" strokeWidth={1.75} />}</span>
+            </button>
+
+            {status === "solved" && revisionSchedule && !revisionSchedule.isFullyMastered && onMarkRevised && (
+              <Button
+                variant="outline"
+                size="xs"
+                onClick={() => onMarkRevised(problem.id)}
+                aria-label={`Mark Revised for ${problem.name}`}
+                className="h-9 sm:h-7 px-3 rounded-[6px] text-xs font-medium border-border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary shrink-0"
               >
-                {platformBadge[l.platform] ?? l.platform}
-                <span className="w-5 h-5 rounded-[4px] border border-border bg-muted flex items-center justify-center text-[10px]" aria-hidden="true">
-                  ↗
-                </span>
-              </a>
-            ))
-          )}
+                Mark Revised ✓
+              </Button>
+            )}
+
+            <button
+              onClick={handleOpen}
+              aria-label={`Edit links and tags for ${problem.name}`}
+              className="w-9 h-9 sm:w-7 sm:h-7 rounded-[6px] border border-border bg-card flex items-center justify-center shrink-0 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20"
+            >
+              <Pencil className="w-3.5 h-3.5" strokeWidth={1.75} aria-hidden="true" />
+            </button>
+          </span>
         </div>
-
-        <button
-          onClick={() => router.push(`/notes/${problem.id}`)}
-          className={`w-7 h-7 rounded-[6px] border flex items-center justify-center shrink-0 text-xs transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${
-            hasNote
-              ? "bg-primary text-primary-foreground border-primary hover:bg-primary/90"
-              : "bg-card text-muted-foreground hover:text-foreground hover:bg-muted border-border"
-          }`}
-          title="Open Notes"
-          aria-label={`Open notes for ${problem.name}`}
-        >
-          <span aria-hidden="true" className="text-[11px]">{hasNote ? "📝" : "📄"}</span>
-        </button>
-
-        {status === "solved" && revisionSchedule && !revisionSchedule.isFullyMastered && onMarkRevised && (
-          <Button
-            variant="outline"
-            size="xs"
-            onClick={() => onMarkRevised(problem.id)}
-            aria-label={`Mark Revised for ${problem.name}`}
-            className="h-7 px-3 rounded-[6px] text-xs font-medium border-border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary shrink-0"
-          >
-            Mark Revised ✓
-          </Button>
-        )}
-
-        <button
-          onClick={handleOpen}
-          aria-label={`Edit links and tags for ${problem.name}`}
-          className="w-7 h-7 rounded-[6px] border border-border bg-card flex items-center justify-center shrink-0 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20"
-        >
-          <span aria-hidden="true" className="text-xs">✎</span>
-        </button>
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[560px] max-h-[85vh] overflow-y-auto bg-card border border-border rounded-[12px] p-0 gap-0 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+            <DialogContent className="sm:max-w-[560px] max-h-[85vh] overflow-y-auto overscroll-contain bg-card border border-border rounded-[12px] p-0 gap-0 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
           <div className="p-6">
             <DialogHeader className="pb-4 border-b border-border mb-6">
               <DialogTitle className="text-foreground font-[var(--font-newsreader)] text-xl tracking-tight">{problem.name}</DialogTitle>
@@ -245,10 +263,10 @@ export function ProblemRow({
                         {tag}
                         <button
                           onClick={() => setDraftTags((prev) => prev.filter((t) => t !== tag))}
-                          className="ml-0.5 w-5 h-5 rounded-full bg-card border border-border hover:bg-[#FDEBEC] dark:hover:bg-[#FDEBEC]/15 hover:text-[#9F2F2D] dark:hover:text-[#FCA5A5] flex items-center justify-center transition-colors"
+                          className="ml-0.5 w-5 h-5 rounded-full bg-card border border-border hover:bg-[#FDEBEC] dark:hover:bg-[#FDEBEC]/15 hover:text-[#9F2F2D] dark:hover:text-[#FCA5A5] flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/20"
                           aria-label={`Remove ${tag}`}
                         >
-                          <span className="text-[10px]">×</span>
+                          <X className="w-3 h-3" strokeWidth={2} aria-hidden="true" />
                         </button>
                       </Badge>
                     ))
@@ -256,6 +274,7 @@ export function ProblemRow({
                 </div>
                 <div className="flex gap-2">
                   <Input
+                    aria-label="New tag"
                     placeholder="New tag (e.g., Love-Babbar)"
                     value={newTag}
                     onChange={(e) => setNewTag(e.target.value)}
@@ -267,7 +286,7 @@ export function ProblemRow({
                     }}
                     className="rounded-[8px] bg-muted border-border text-sm focus-visible:border-ring/20 focus-visible:ring-0 h-9"
                   />
-                  <button onClick={() => addTag(newTag)} className="px-4 h-9 rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium transition-colors shrink-0">
+                  <button onClick={() => addTag(newTag)} aria-label="Add tag" className="px-4 h-9 rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium transition-colors shrink-0 active:scale-[0.98]">
                     Add
                   </button>
                 </div>
@@ -320,7 +339,9 @@ export function ProblemRow({
                       </SelectContent>
                     </Select>
                     <Input
+                      aria-label={`Link URL ${idx + 1}`}
                       placeholder="https://..."
+                      type="url"
                       value={l.url}
                       onChange={(e) =>
                         setDraft((d) => d.map((x, i) => (i === idx ? { ...x, url: e.target.value } : x)))
@@ -329,9 +350,10 @@ export function ProblemRow({
                     />
                     <button
                       onClick={() => setDraft((d) => d.filter((_, i) => i !== idx))}
-                      className="w-8 h-8 rounded-[6px] bg-card border border-border text-muted-foreground hover:text-[#9F2F2D] dark:hover:text-[#FCA5A5] hover:bg-[#FDEBEC] dark:hover:bg-[#FDEBEC]/15 flex items-center justify-center transition-colors shrink-0"
+                      aria-label={`Remove link ${idx + 1}`}
+                      className="w-8 h-8 rounded-[6px] bg-card border border-border text-muted-foreground hover:text-[#9F2F2D] dark:hover:text-[#FCA5A5] hover:bg-[#FDEBEC] dark:hover:bg-[#FDEBEC]/15 flex items-center justify-center transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20"
                     >
-                      <span className="text-sm">×</span>
+                      <X className="w-3.5 h-3.5" strokeWidth={2} aria-hidden="true" />
                     </button>
                   </div>
                 ))}
@@ -339,7 +361,7 @@ export function ProblemRow({
                   onClick={() => setDraft((d) => [...d, { platform: "LeetCode", url: "" }])}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] border border-border bg-muted hover:bg-card text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <span className="w-5 h-5 rounded-full bg-card border border-border flex items-center justify-center text-xs leading-none">+</span>
+                  <span className="w-5 h-5 rounded-full bg-card border border-border flex items-center justify-center" aria-hidden="true"><Plus className="w-3 h-3" strokeWidth={2} /></span>
                   Add link
                 </button>
               </div>

@@ -48,18 +48,18 @@ export function PatternAccordion({
         value={pattern.id}
         className="rounded-[8px] border border-border bg-card overflow-hidden hover:border-border data-[state=open]:border-border transition-colors"
       >
-        <AccordionTrigger className="px-4 py-3 hover:no-underline group/pattern focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/10 focus-visible:ring-inset">
-          <span className="flex-1 text-left text-[13px] font-medium tracking-tight text-foreground group-hover/pattern:text-foreground transition-colors">
+        <AccordionTrigger className="px-3 sm:px-4 py-3 hover:no-underline group/pattern focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/10 focus-visible:ring-inset">
+          <span className="flex-1 text-left text-[13px] font-medium tracking-tight text-foreground group-hover/pattern:text-foreground transition-colors pr-2 truncate" title={pattern.name}>
             {pattern.name}
           </span>
-          <div className="flex items-center gap-2.5 mr-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 mr-1 sm:mr-2 shrink-0">
             <span className="text-[11px] font-mono tabular-nums px-2 py-0.5 rounded-full bg-muted border border-border text-muted-foreground">
               <span className="text-foreground">{completed}</span>
               <span className="text-muted-foreground/40 mx-0.5">/</span>
               {problems.length}
             </span>
-            <div className="w-14 h-2 rounded-full bg-secondary border border-border overflow-hidden hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of pattern complete`}>
-              <div className="h-full rounded-full bg-primary/80 group-data-[state=open]:bg-primary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" style={{ width: `${pct}%`, minWidth: pct > 0 ? '2px' : '0' }} />
+            <div className="w-12 sm:w-14 h-2 rounded-full bg-secondary border border-border overflow-hidden hidden sm:flex" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of pattern complete`}>
+              <div className="h-full rounded-full bg-primary/80 group-data-[state=open]:bg-primary transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]" style={{ width: `${pct}%`, minWidth: pct > 0 ? '2px' : '0' }} />
             </div>
           </div>
         </AccordionTrigger>

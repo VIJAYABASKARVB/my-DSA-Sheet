@@ -120,9 +120,9 @@ export default function NotesPage() {
         </div>
       </header>
 
-      {/* Mobile tabs when editing */}
+      {/* Mobile/Tablet tabs when editing — up to 900px stacked */}
       {isEditing && (
-        <div className="md:hidden sticky top-[56px] z-10 bg-background border-b border-border px-4">
+        <div className="[900px]:hidden sticky top-[56px] z-10 bg-background border-b border-border px-4">
           <div className="flex gap-2 py-2">
             <button
               onClick={() => setActiveTab("editor")}
@@ -157,7 +157,7 @@ export default function NotesPage() {
               <p className="text-xs text-muted-foreground/60 mt-1 font-mono">Markdown supported · autosaves every 800ms</p>
             </div>
           ) : (
-            <article className="prose dark:prose-invert max-w-none prose-sm md:prose-base prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-foreground prose-p:leading-relaxed prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-zinc-950 dark:prose-pre:bg-zinc-950 prose-pre:border prose-pre:border-border prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-a:text-primary hover:prose-a:text-primary/80 prose-th:text-foreground prose-td:text-muted-foreground prose-hr:border-border">
+            <article className="prose dark:prose-invert max-w-none prose-sm md:prose-base prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-foreground prose-p:leading-relaxed prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-[#0F0F0F] dark:prose-pre:bg-[#0F0F0F] prose-pre:border prose-pre:border-border prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-a:text-primary hover:prose-a:text-primary/80 prose-th:text-foreground prose-td:text-muted-foreground prose-hr:border-border">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
@@ -167,7 +167,7 @@ export default function NotesPage() {
                     const codeString = String(children).replace(/\n$/, "");
                     if (match) {
                       return (
-                        <SyntaxHighlighter style={oneDark} language={match[1]} PreTag="div" className="rounded-[8px] !bg-zinc-950 !p-4 text-sm">
+                        <SyntaxHighlighter style={oneDark} language={match[1]} PreTag="div" className="rounded-[8px] !bg-[#0F0F0F] !p-4 text-sm">
                           {codeString}
                         </SyntaxHighlighter>
                       );
@@ -182,35 +182,35 @@ export default function NotesPage() {
           )}
         </div>
       ) : (
-        // Edit Mode — Split Screen
-        <div className="flex-1 flex flex-col md:grid md:grid-cols-2 min-h-[calc(100dvh-56px)]">
-          {/* Editor Panel */}
-          <div className={`${activeTab === "preview" ? "hidden md:flex" : "flex"} flex-col border-b md:border-b-0 md:border-r border-zinc-700 bg-zinc-950 relative min-h-[40vh] md:min-h-0`}>
-            <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-800 bg-zinc-950">
-              <span className="text-[11px] tracking-[0.08em] uppercase font-medium text-zinc-400 font-mono">Editor</span>
-              <span className="text-xs text-muted-foreground font-mono">
-                {saving ? <span className="text-zinc-400">Saving…</span> : savedRecently ? <span className="text-emerald-400">Saved</span> : <span className="text-zinc-500 hidden md:inline">Autosaves 800ms</span>}
+        // Edit Mode — Split Screen (900px cohesion: stacked on tablet, split on desktop)
+        <div className="flex-1 flex flex-col [900px]:grid [900px]:grid-cols-2 h-[calc(100dvh-56px)] overflow-hidden">
+          {/* Editor Panel — warm charcoal, not zinc, keeps code-dark in both themes */}
+          <div className={`${activeTab === "preview" ? "hidden [900px]:flex" : "flex"} flex-col border-b [900px]:border-b-0 [900px]:border-r border-border bg-[#0F0F0F] relative min-h-[40vh] [900px]:min-h-0 overflow-hidden`}>
+            <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.08] bg-[#0F0F0F] shrink-0">
+              <span className="text-[11px] tracking-[0.08em] uppercase font-medium text-white/60 font-mono">Editor</span>
+              <span className="text-xs font-mono" role="status" aria-live="polite">
+                {saving ? <span className="text-white/60">Saving…</span> : savedRecently ? <span className="text-[#86EFAC]">Saved</span> : <span className="text-white/40 hidden [900px]:inline">Autosaves 800ms</span>}
               </span>
             </div>
-            <div className="flex-1 overflow-auto p-0">
+            <div className="flex-1 overflow-y-auto overscroll-contain p-0">
               {/* Prefer CodeEditor, fallback to textarea if not loaded */}
-              <div className="h-full min-h-[300px] md:min-h-[500px]">
+              <div className="h-full min-h-[300px] [900px]:min-h-[500px]">
                 <FallbackEditor content={content} onChange={updateContent} />
               </div>
             </div>
           </div>
 
           {/* Preview Panel */}
-          <div className={`${activeTab === "editor" ? "hidden md:block" : "block"} flex flex-col bg-background overflow-auto`}>
-            <div className="hidden md:flex items-center px-4 py-2 border-b border-border bg-card/50">
+          <div className={`${activeTab === "editor" ? "hidden [900px]:flex" : "flex"} flex-col bg-background overflow-hidden`}>
+            <div className="hidden [900px]:flex items-center px-4 py-2 border-b border-border bg-card/50 shrink-0">
               <span className="text-[11px] tracking-[0.08em] uppercase font-medium text-muted-foreground font-mono">Preview</span>
-              <span className="ml-auto text-[11px] text-muted-foreground font-mono hidden md:inline">Live</span>
+              <span className="ml-auto text-[11px] text-muted-foreground font-mono hidden [900px]:inline">Live</span>
             </div>
-            <div className="flex-1 p-4 md:p-6 overflow-auto">
+            <div className="flex-1 p-4 md:p-6 overflow-y-auto overscroll-contain">
               {!content.trim() ? (
                 <p className="text-sm text-muted-foreground italic">Nothing to preview yet — start typing on the left.</p>
               ) : (
-                <article className="prose dark:prose-invert max-w-none prose-sm md:prose-base prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-foreground prose-p:leading-relaxed prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-zinc-950 dark:prose-pre:bg-zinc-950 prose-pre:border prose-pre:border-border prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-a:text-primary hover:prose-a:text-primary/80 prose-th:text-foreground prose-td:text-muted-foreground prose-hr:border-border">
+                <article className="prose dark:prose-invert max-w-none prose-sm md:prose-base prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-foreground prose-p:leading-relaxed prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-[#0F0F0F] dark:prose-pre:bg-[#0F0F0F] prose-pre:border prose-pre:border-border prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-a:text-primary hover:prose-a:text-primary/80 prose-th:text-foreground prose-td:text-muted-foreground prose-hr:border-border">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
@@ -220,7 +220,7 @@ export default function NotesPage() {
                         const codeString = String(children).replace(/\n$/, "");
                         if (match) {
                           return (
-                            <SyntaxHighlighter style={oneDark} language={match[1]} PreTag="div" className="rounded-[8px] !bg-zinc-950 !p-4 text-sm">
+                            <SyntaxHighlighter style={oneDark} language={match[1]} PreTag="div" className="rounded-[8px] !bg-[#0F0F0F] !p-4 text-sm">
                               {codeString}
                             </SyntaxHighlighter>
                           );
@@ -251,7 +251,7 @@ function FallbackEditor({ content, onChange }: { content: string; onChange: (v: 
   }, []);
 
   if (!mounted) {
-    return <textarea value={content} onChange={(e) => onChange(e.target.value)} className="w-full h-full min-h-[300px] md:min-h-[500px] bg-zinc-950 text-zinc-100 font-mono text-sm p-4 resize-none focus:outline-none placeholder:text-zinc-500" placeholder="Start writing markdown..." />;
+    return <textarea value={content} onChange={(e) => onChange(e.target.value)} className="w-full h-full min-h-[300px] [900px]:min-h-[500px] bg-[#0F0F0F] text-[#F5F5F3] font-mono text-sm p-4 resize-none focus:outline-none placeholder:text-white/40" placeholder="Start writing markdown..." />;
   }
 
   // Try CodeEditor, but wrap in try - if it errors, fallback
@@ -269,7 +269,7 @@ function FallbackEditor({ content, onChange }: { content: string; onChange: (v: 
           style={{
             fontSize: 14,
             fontFamily: "var(--font-geist-mono), ui-monospace, monospace",
-            backgroundColor: "#09090b",
+            backgroundColor: "#0F0F0F",
             minHeight: "500px",
             height: "100%",
           }}
@@ -284,12 +284,12 @@ function FallbackEditor({ content, onChange }: { content: string; onChange: (v: 
       <textarea
         value={content}
         onChange={(e) => onChange(e.target.value)}
-        className="flex-1 w-full bg-zinc-950 text-zinc-100 font-mono text-sm p-4 resize-none focus:outline-none placeholder:text-zinc-500 min-h-[300px] md:min-h-[500px]"
+        className="flex-1 w-full bg-[#0F0F0F] text-[#F5F5F3] font-mono text-sm p-4 resize-none focus:outline-none placeholder:text-white/40 min-h-[300px] [900px]:min-h-[500px]"
         placeholder={"# Notes\n\n- Use **bold**, *italic*, `code`\n- Lists, tables, blockquotes supported\n- Code blocks:\n\n```js\nconsole.log(\"hello\")\n```\n"}
         autoFocus
       />
-      <div className="px-3 py-1.5 border-t border-zinc-800 bg-zinc-900 flex justify-end">
-        <button onClick={() => setUseCodeEditor(true)} className="text-[11px] font-mono text-zinc-400 hover:text-zinc-200 transition-colors">
+      <div className="px-3 py-1.5 border-t border-white/[0.08] bg-[#141414] flex justify-end">
+        <button onClick={() => setUseCodeEditor(true)} className="text-[11px] font-mono text-white/60 hover:text-white transition-colors">
           Try syntax-highlighted editor →
         </button>
       </div>

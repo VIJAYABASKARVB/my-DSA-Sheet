@@ -287,7 +287,7 @@ export default function SheetPage() {
 
       <div id="sheet-content" className="max-w-[1160px] mx-auto w-full flex-1 px-4 md:px-6" tabIndex={-1}>
         {/* HERO — minimal editorial */}
-        <section className="relative py-10 md:py-14 border-b border-border mb-8" aria-labelledby="hero-title">
+        <section className="relative py-6 sm:py-10 md:py-14 border-b border-border mb-6 sm:mb-8" aria-labelledby="hero-title">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="max-w-[720px]">
               <div className="flex flex-wrap items-center gap-2">
@@ -296,10 +296,10 @@ export default function SheetPage() {
                   ← Back to home
                 </Link>
               </div>
-              <h1 id="hero-title" className="mt-4 font-[var(--font-newsreader)] text-[clamp(1.9rem,4.5vw,2.6rem)] leading-[1.05] tracking-[-0.03em] text-foreground">
+              <h1 id="hero-title" className="mt-3 sm:mt-4 font-[var(--font-newsreader)] text-[clamp(1.65rem,5vw,2.6rem)] leading-[0.98] tracking-[-0.03em] text-foreground text-balance">
                 Your DSA <span className="italic font-[300] text-muted-foreground">Sheet</span>, perfected.
               </h1>
-              <p className="mt-2.5 text-[13px] leading-relaxed text-muted-foreground max-w-[58ch]">
+              <p className="mt-2 sm:mt-2.5 text-[13px] leading-relaxed text-muted-foreground max-w-[58ch] text-pretty">
                 Striver and NeetCode, merged and ordered. Topic → Pattern → Problem with spaced repetition and Firestore sync. Built for depth, not sprawl.
               </p>
             </div>
@@ -345,8 +345,8 @@ export default function SheetPage() {
           </div>
         )}
 
-        {/* FilterBar — sticky minimal */}
-        <div className="sticky top-[56px] z-10 -mx-1 px-1 py-2 -mt-2 bg-background/85 backdrop-blur-[8px] border-b border-transparent data-[scrolled=true]:border-border data-[scrolled=true]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:data-[scrolled=true]:shadow-[0_2px_12px_rgba(0,0,0,0.3)] transition-all duration-300" id="filter-sticky">
+        {/* FilterBar — sticky minimal, safe for keyboard */}
+        <div className="sticky top-[56px] z-10 -mx-4 px-4 sm:-mx-1 sm:px-1 py-2 -mt-2 bg-background/85 backdrop-blur-[8px] border-b border-transparent data-[scrolled=true]:border-border data-[scrolled=true]:shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:data-[scrolled=true]:shadow-[0_2px_12px_rgba(0,0,0,0.3)] transition-all duration-300 supports-[backdrop-filter]:bg-background/80" id="filter-sticky">
           <FilterBar
             filters={filters}
             setFilters={setFilters}
@@ -355,8 +355,8 @@ export default function SheetPage() {
           />
         </div>
 
-        {/* Due for Review — mobile */}
-        <div className="lg:hidden mt-6">
+        {/* Due for Review — below 900px inline collapsible */}
+        <div className="rail-hide-900 mt-6">
           <DueForReviewSection
             dueToday={dueToday}
             upcoming={upcoming}
@@ -370,8 +370,8 @@ export default function SheetPage() {
           />
         </div>
 
-        {/* Main + stat rail */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6 md:gap-8 mt-6 pb-24">
+        {/* Main + stat rail — rail appears at 900px */}
+        <div className="grid grid-cols-1 [900px]:grid-cols-[1fr_320px] xl:grid-cols-[1fr_340px] gap-6 md:gap-8 mt-6 pb-24">
           <main className="space-y-3 min-w-0" aria-label="Problem topics">
             {loading ? (
               <div className="space-y-3" aria-busy="true" aria-live="polite">
@@ -380,21 +380,21 @@ export default function SheetPage() {
                 <SkeletonCard />
               </div>
             ) : topics.length === 0 ? (
-              <div className="rounded-[12px] border border-border bg-card flex flex-col items-center justify-center py-14 md:py-16 text-center p-8">
+              <div className="rounded-[12px] border border-border bg-card flex flex-col items-center justify-center py-10 sm:py-14 text-center p-6 sm:p-8">
                 <div className="w-12 h-12 rounded-[8px] bg-muted border border-border flex items-center justify-center mb-4 text-muted-foreground text-sm" aria-hidden="true">
                   ◻
                 </div>
                 <h2 className="font-[var(--font-newsreader)] text-xl tracking-tight text-foreground mb-1.5">No problems loaded</h2>
-                <p className="text-sm text-muted-foreground max-w-sm mb-5 leading-relaxed">Firestore is empty. Seed your data to get started.</p>
+                <p className="text-sm text-muted-foreground max-w-sm mb-5 leading-relaxed text-pretty">Firestore is empty. Seed your data to get started.</p>
                 <code className="font-mono text-xs bg-muted border border-border rounded-[6px] px-3 py-1.5 text-muted-foreground">npm run seed</code>
               </div>
             ) : filtered.length === 0 ? (
-              <div className="rounded-[12px] border border-border bg-card flex flex-col items-center justify-center py-14 md:py-16 text-center p-8">
+              <div className="rounded-[12px] border border-border bg-card flex flex-col items-center justify-center py-10 sm:py-14 text-center p-6 sm:p-8">
                 <div className="w-12 h-12 rounded-[8px] bg-muted border border-border flex items-center justify-center mb-4 text-muted-foreground text-sm" aria-hidden="true">
                   ⌕
                 </div>
                 <h2 className="font-[var(--font-newsreader)] text-xl tracking-tight text-foreground mb-1.5">No matches</h2>
-                <p className="text-sm text-muted-foreground max-w-sm mb-5">No problems match your current filters. Adjust or clear to rediscover.</p>
+                <p className="text-sm text-muted-foreground max-w-sm mb-5 text-pretty">No problems match your current filters. Adjust or clear to rediscover.</p>
                 <button
                   onClick={() => setFilters({ search: "", topic: null, difficulty: null, status: null, tags: [] })}
                   aria-label="Clear all filters"
@@ -408,7 +408,7 @@ export default function SheetPage() {
                 <div
                   key={topic.id}
                   className="reveal"
-                  style={{ transitionDelay: `${idx * 80}ms` } as React.CSSProperties}
+                  style={{ transitionDelay: `${Math.min(idx * 40, 120)}ms` } as React.CSSProperties}
                   ref={(el) => {
                     if (!el) return;
                     const obs = new IntersectionObserver(
@@ -445,7 +445,7 @@ export default function SheetPage() {
             )}
           </main>
 
-          <aside className="hidden lg:block space-y-4" aria-label="Progress summary">
+          <aside className="hidden rail-900 space-y-4" aria-label="Progress summary">
             <div className="sticky top-[72px] space-y-4">
               <DueForReviewSection
                 dueToday={dueToday}
@@ -488,7 +488,7 @@ export default function SheetPage() {
                         </div>
                         <div className="h-2 w-full rounded-full bg-secondary border border-border overflow-hidden" role="progressbar" aria-valuenow={pctT} aria-valuemin={0} aria-valuemax={100} aria-label={`${pctT}% of ${t.name} complete`}>
                           <div
-                            className="h-full rounded-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                            className="h-full rounded-full bg-primary transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
                             style={{ width: `${pctT}%`, minWidth: pctT > 0 ? '4px' : '0' }}
                           />
                         </div>

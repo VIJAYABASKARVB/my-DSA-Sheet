@@ -119,8 +119,8 @@ export function AppHeader({
                 <span className="text-[10px] tracking-[0.14em] uppercase font-medium text-muted-foreground">Sheet</span>
               </span>
             </Link>
-            <span className="hidden lg:block w-px h-5 bg-border" aria-hidden="true" />
-            <nav aria-label="Sheet stats" className="hidden lg:flex items-center gap-3 text-xs">
+            <span className="hidden md:block w-px h-5 bg-border" aria-hidden="true" />
+            <nav aria-label="Sheet stats" className="hidden md:flex items-center gap-3 text-xs">
               <span className="inline-flex items-center gap-1.5 text-muted-foreground">
                 <span className="font-mono text-foreground font-medium">{topicCount}</span> topics
               </span>
@@ -161,43 +161,46 @@ export function AppHeader({
                 <span className="absolute inset-0 flex items-center justify-center text-[8px] font-mono font-semibold text-foreground" aria-hidden="true">
                   {pct}
                 </span>
+                {typeof dueCount === "number" && dueCount > 0 && (
+                  <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#E57373] ring-2 ring-card" aria-hidden="true" />
+                )}
               </div>
             </div>
 
-            <div className="hidden md:block h-5 w-px bg-border" aria-hidden="true" />
+            <div className="hidden [900px]:block h-5 w-px bg-border" aria-hidden="true" />
 
             <Link
               href="/sheet"
-              className="hidden md:inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
+              className="hidden [900px]:inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
             >
               Sheet
             </Link>
 
             <ThemeToggle />
 
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden [900px]:flex items-center gap-2">
               {authLoading ? (
                 <div className="w-20 h-8 rounded-[6px] bg-muted border border-border animate-pulse" aria-label="Loading auth" />
               ) : user ? (
                 <div className="flex items-center gap-2">
-                  <div className="hidden lg:flex items-center gap-2 rounded-[8px] border border-border bg-muted pl-1 pr-2.5 py-1">
-                    {user.photoURL ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={user.photoURL}
-                        alt={user.displayName ?? user.email ?? "User"}
-                        className="w-6 h-6 rounded-full border border-border object-cover"
-                        referrerPolicy="no-referrer"
-                      />
-                    ) : (
-                      <div className="w-6 h-6 rounded-full bg-card border border-border flex items-center justify-center text-[10px] font-mono text-foreground" aria-hidden="true">
-                        {(user.displayName ?? user.email ?? "U").slice(0, 1).toUpperCase()}
-                      </div>
-                    )}
-                    <span className="text-xs font-medium text-foreground max-w-[110px] truncate">
-                      {user.displayName ?? user.email?.split("@")[0] ?? "Signed in"}
-                    </span>
-                  </div>
+                    <div className="hidden xl:flex items-center gap-2 rounded-[8px] border border-border bg-muted pl-1 pr-2.5 py-1">
+                      {user.photoURL ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={user.photoURL}
+                          alt={user.displayName ?? user.email ?? "User"}
+                          className="w-6 h-6 rounded-full border border-border object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <div className="w-6 h-6 rounded-full bg-card border border-border flex items-center justify-center text-[10px] font-mono text-foreground" aria-hidden="true">
+                          {(user.displayName ?? user.email ?? "U").slice(0, 1).toUpperCase()}
+                        </div>
+                      )}
+                      <span className="text-xs font-medium text-foreground max-w-[110px] truncate">
+                        {user.displayName ?? user.email?.split("@")[0] ?? "Signed in"}
+                      </span>
+                    </div>
                   <button
                     onClick={onSignOut}
                     aria-label="Sign out"
@@ -223,7 +226,7 @@ export function AppHeader({
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden w-9 h-9 rounded-[6px] border border-border bg-card flex items-center justify-center shrink-0 active:scale-[0.96] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20"
+              className="[900px]:hidden w-9 h-9 rounded-[6px] border border-border bg-card flex items-center justify-center shrink-0 active:scale-[0.96] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20"
             >
               <span className="relative w-3.5 h-3.5 flex items-center justify-center">
                 <span className={`absolute h-px w-3.5 bg-foreground transition-all duration-300 ${menuOpen ? "rotate-45" : "-translate-y-1"}`} />
@@ -233,16 +236,16 @@ export function AppHeader({
           </div>
         </div>
 
-        {/* Mobile drawer */}
+        {/* Mobile/Tablet drawer — covers md down, safe-area aware */}
         <div
           id="mobile-menu"
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
-          className={`md:hidden border-t border-border bg-card overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0 pointer-events-none"}`}
+          className={`[900px]:hidden border-t border-border bg-card overflow-hidden transition-all duration-300 overscroll-contain ${menuOpen ? "max-h-[min(520px,70dvh)] opacity-100" : "max-h-0 opacity-0 pointer-events-none"}`}
           aria-hidden={!menuOpen}
         >
-          <div className="px-4 py-5 space-y-5">
+          <div className="px-4 py-5 space-y-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] overflow-y-auto max-h-[min(520px,70dvh)]">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <CircularProgress value={pct} size={44} strokeWidth={2.5} />
