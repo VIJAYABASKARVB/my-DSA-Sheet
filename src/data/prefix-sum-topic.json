@@ -41,25 +41,6 @@
           "order": 1
         },
         {
-          "id": "longest-subarray-with-zero-sum",
-          "name": "Longest Subarray with Zero Sum",
-          "difficulty": "Medium",
-          "links": [
-            {
-              "platform": "TakeUForward",
-              "url": "https://takeuforward.org/data-structure/longest-subarray-with-0-sum/"
-            },
-            {
-              "platform": "GeeksForGeeks",
-              "url": "https://www.geeksforgeeks.org/longest-sub-array-sum-0/"
-            }
-          ],
-          "tags": [
-            "Striver"
-          ],
-          "order": 2
-        },
-        {
           "id": "contiguous-array",
           "name": "Contiguous Array",
           "difficulty": "Medium",
@@ -72,7 +53,7 @@
           "tags": [
             "Others"
           ],
-          "order": 3
+          "order": 2
         },
         {
           "id": "count-subarrays-with-given-sum",
@@ -91,7 +72,7 @@
           "tags": [
             "Striver"
           ],
-          "order": 4
+          "order": 3
         },
         {
           "id": "subarray-sum-equals-k",
@@ -110,7 +91,7 @@
           "tags": [
             "Neetcode"
           ],
-          "order": 5
+          "order": 4
         },
         {
           "id": "subarray-sums-divisible-by-k",
@@ -129,7 +110,7 @@
           "tags": [
             "Others"
           ],
-          "order": 6
+          "order": 5
         },
         {
           "id": "continuous-subarray-sum",
@@ -148,7 +129,7 @@
           "tags": [
             "Others"
           ],
-          "order": 7
+          "order": 6
         },
         {
           "id": "range-sum-query-2d-immutable",
@@ -163,7 +144,7 @@
           "tags": [
             "Neetcode"
           ],
-          "order": 8
+          "order": 7
         }
       ],
       "order": 0

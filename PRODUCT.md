@@ -6,7 +6,7 @@ product
 
 ## Users
 
-Solo DSA learners and interview-prepping engineers (high-frequency returners, not first-time visitors). Context: late-night laptop or dim room, obsessive progress tracking across 5–12 topics, 110+ problems (Arrays & Hashing, Two Pointers, Sliding Window, Prefix Sum, Trees DFS/BFS plus Strings, Matrix, Recursion/Backtracking, Linked List, Binary Search in Firestore). Job: find the next problem to solve, mark status `unsolved → solved → review` (src/components/sheet/ProblemRow.tsx:24), follow spaced-repetition 1-3-5-6-10-17 revision schedule (src/lib/revision-schedule.ts:5, src/hooks/useRevisionSchedule.ts:148), and track Firestore-synced progress across devices (onSnapshot at src/lib/firestore.ts + src/lib/revision-schedule.ts:98). Filter bar is sticky, AND-logic, always present (src/components/FilterBar.tsx:54). Notes are per-problem markdown at src/app/notes/[problemId]/page.tsx:21 with 800ms autosave (src/hooks/useNote.ts).
+Solo DSA learners and interview-prepping engineers (high-frequency returners, not first-time visitors). Context: late-night laptop or dim room, obsessive progress tracking across 5–12 topics, 109+ problems (Arrays & Hashing, Two Pointers, Sliding Window, Prefix Sum, Trees DFS/BFS plus Strings, Matrix, Recursion/Backtracking, Linked List, Binary Search in Firestore). Job: find the next problem to solve, mark status `unsolved → solved → review` (src/components/sheet/ProblemRow.tsx:24), follow spaced-repetition 1-3-5-6-10-17 revision schedule (src/lib/revision-schedule.ts:5, src/hooks/useRevisionSchedule.ts:148), and track Firestore-synced progress across devices (onSnapshot at src/lib/firestore.ts + src/lib/revision-schedule.ts:98). Filter bar is sticky, AND-logic, always present (src/components/FilterBar.tsx:54). Notes are per-problem markdown at src/app/notes/[problemId]/page.tsx:21 with 800ms autosave (src/hooks/useNote.ts).
 
 ## Product Purpose
 
@@ -22,7 +22,7 @@ What this must NOT look like: generic shadcn dashboard (identical card grids, bo
 
 ## Design Principles
 
-1. **Depth over sprawl.** Curated 110 problems staged by learning dependency (e.g., Morris before Flatten at src/lib/firestore.ts). The sheet teaches order, not just lists.
+1. **Depth over sprawl.** Curated 109 problems staged by learning dependency (e.g., Morris before Flatten at src/lib/firestore.ts). The sheet teaches order, not just lists.
 2. **Progress is the product.** Every surface answers "how much is done?" — hero pct, topic bars (src/app/sheet/page.tsx:489-494), pattern counters (src/components/sheet/PatternAccordion.tsx:31-32), due badge (src/components/AppHeader.tsx:131-138). No vanity metrics.
 3. **Flat is the signal.** Warm paper/charcoal ground with tonal stacking (background → card → muted) and hairline borders; shadows only on hover/islands (src/app/globals.css:273-299). Fixed grain/ambient blob are pointer-events-none behind content (src/app/globals.css:173-189, :339-357).
 4. **Edit without leaving flow.** Link/tag edits via Dialog that preserves pattern context (src/components/sheet/ProblemRow.tsx:229-357), optimistic Firestore merge with revert (src/hooks/useProgress.ts, src/hooks/useRevisionSchedule.ts:92-145). Notes via src/app/notes/[problemId]/page.tsx with autosave. Sync is silent on success, loud on failure via sonner.

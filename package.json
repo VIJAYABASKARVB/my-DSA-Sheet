@@ -11,6 +11,7 @@
         "dev:turbo": "next dev",
         "build:turbo": "next build",
         "seed": "node scripts/seed-problems.mjs",
+        "delete:problem": "node scripts/delete-problem.mjs",
         "migrate:tags": "node scripts/migrate-tags.mjs",
         "wipe:progress": "node scripts/wipe-progress.mjs",
         "wipe:overrides": "node scripts/wipe-progress.mjs --overrides"

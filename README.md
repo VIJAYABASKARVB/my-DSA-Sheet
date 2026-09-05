@@ -1,10 +1,10 @@
 # My DSA Sheet
 
-**Live:** `https://my-dsa-sheet.vercel.app` *(Vercel — after first deploy, replace this placeholder with your actual Vercel URL from dashboard)*
+**Live:** `https://my-dsa-sheet-six.vercel.app` *(Vercel Production — canonical. Do not use preview URLs for testing; always use this URL. Firebase `authorizedDomains` includes this domain.)*
 
 Personal clean DSA problem tracking sheet — inspired by Striver's A2Z but with multi-source problems, Firestore-backed progress, and a collapsible Topic → Pattern → Problem hierarchy.
 
-**Live topics:** `Arrays & Hashing` (7 stages, 32 problems), `Two Pointers` (7 stages, 16 problems), `Sliding Window` (3 patterns, 19 problems), `Prefix Sum` (9 problems) and `Trees — DFS & BFS` (10 stages, 34 problems) — **110 problems total**. Firestore is primary for **problems** (`problems/{problemId}`) + **topics** (`topics/{topicId}`) + **patterns** (`patterns/{patternId}`) + progress (`users/{userId}/progress/{problemId}`) + editable link overrides (`problemOverrides/{problemId}`), all synced via `onSnapshot`. JSON files in `src/data/` are **seed-only artifacts** (backup/export), not fetched at runtime. See [Problem Ordering Notes](#problem-ordering-notes).
+**Live topics:** `Arrays & Hashing` (7 stages, 32 problems), `Two Pointers` (7 stages, 16 problems), `Sliding Window` (3 patterns, 19 problems), `Prefix Sum` (8 problems) and `Trees — DFS & BFS` (10 stages, 34 problems) — **109 problems total**. Firestore is primary for **problems** (`problems/{problemId}`) + **topics** (`topics/{topicId}`) + **patterns** (`patterns/{patternId}`) + progress (`users/{userId}/progress/{problemId}`) + editable link overrides (`problemOverrides/{problemId}`), all synced via `onSnapshot`. JSON files in `src/data/` are **seed-only artifacts** (backup/export), not fetched at runtime. See [Problem Ordering Notes](#problem-ordering-notes).
 
 ## Tech Stack
 
@@ -55,7 +55,7 @@ service cloud.firestore {
 
 # 5. Seed problems (Firestore primary, JSON is seed-only)
 npm run seed
-# → reads src/data/arrays-hashing-topic.json + trees-topic.json + prefix-sum-topic.json + two-pointers-topic.json + sliding-window-topic.json and upserts 110 docs to problems/, topics/, patterns/
+# → reads src/data/arrays-hashing-topic.json + trees-topic.json + prefix-sum-topic.json + two-pointers-topic.json + sliding-window-topic.json and upserts 109 docs to problems/, topics/, patterns/
 
 # 6. Run
 npm run dev
@@ -140,7 +140,7 @@ src/
 ├── data/
 │   ├── arrays-hashing-topic.json  # Arrays & Hashing seed (7 stages, 32 problems)
 │   ├── trees-topic.json           # Trees seed (verbatim, 10 stages, TakeUForward+LeetCode)
-│   ├── prefix-sum-topic.json      # Prefix Sum seed (9 problems)
+│   ├── prefix-sum-topic.json      # Prefix Sum seed (8 problems)
 │   ├── two-pointers-topic.json    # Two Pointers seed (7 stages, 16 problems)
 │   ├── sliding-window-topic.json  # Sliding Window seed (3 patterns, 19 problems)
 │   └── problems.json              # (deprecated — individual topic JSONs are now source of truth)
@@ -175,7 +175,7 @@ Click status icon on `ProblemRow`: `unsolved (☐) → solved (✓) → review (
    - `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
    - `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
    - `NEXT_PUBLIC_FIREBASE_APP_ID`
-5. Click Deploy → copy URL (e.g. `https://my-dsa-sheet.vercel.app`) → replace placeholder at top of this README
+5. Click Deploy → copy URL (`https://my-dsa-sheet-six.vercel.app` — canonical Production) → ensure Firebase Authentication → Settings → Authorized domains includes `my-dsa-sheet-six.vercel.app`. Do not use preview URLs (`*-*.vercel.app` hashes) for auth testing.
 6. For Firestore rules/DB changes only: `firebase deploy --only firestore --project my-dsa-sheet` (hosting stays on Vercel)
 
 ```bash

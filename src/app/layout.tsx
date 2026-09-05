@@ -32,7 +32,7 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: "My DSA Sheet — Minimal Archive",
-  description: "Curated DSA archive — Topic → Pattern → Problem, 110 problems, spaced repetition. Warm monochrome, editorial precision.",
+  description: "Curated DSA archive — Topic → Pattern → Problem, 109 problems, spaced repetition. Warm monochrome, editorial precision.",
 };
 
 export const viewport: Viewport = {

@@ -100,7 +100,7 @@ export default function LandingPage() {
             </a>
             <span className="w-px h-4 bg-border" aria-hidden="true" />
             <span className="text-[11px] font-mono text-muted-foreground">
-              <span className="text-foreground font-medium">110</span> problems · <span className="text-foreground font-medium">5</span> topics
+              <span className="text-foreground font-medium">109</span> problems · <span className="text-foreground font-medium">5</span> topics
             </span>
           </nav>
           <div className="flex items-center gap-2 shrink-0">
@@ -140,7 +140,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="mt-4 sm:mt-5 max-w-[62ch] text-[15px] md:text-[16px] leading-relaxed text-muted-foreground text-balance text-pretty">
-            Striver and NeetCode merged and ordered into Topic → Pattern → Problem. 110 problems staged by learning dependency, Firestore-synced progress, and spaced repetition built for obsessive repetition.
+            Striver and NeetCode merged and ordered into Topic → Pattern → Problem. 109 problems staged by learning dependency, Firestore-synced progress, and spaced repetition built for obsessive repetition.
           </p>
 
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
@@ -259,7 +259,7 @@ export default function LandingPage() {
               <div className="rounded-[8px] border border-border bg-muted p-4">
                 <div className="text-[10px] tracking-[0.08em] uppercase font-medium text-muted-foreground font-mono">Solved</div>
                 <div className="mt-1.5 text-xl font-mono font-semibold text-foreground">42</div>
-                <div className="text-xs text-muted-foreground">of 110 · 38%</div>
+                <div className="text-xs text-muted-foreground">of 109 · 38%</div>
                 <div className="mt-3 h-1.5 rounded-full bg-card border border-border p-0.5 overflow-hidden">
                   <div className="h-full rounded-full bg-primary w-[38%]" />
                 </div>
@@ -315,7 +315,7 @@ export default function LandingPage() {
                 <div className="mt-5 h-11 flex items-center gap-3 px-4 rounded-[8px] border border-border bg-muted">
                   <MinimalIcon kind="search" />
                   <span className="text-sm text-muted-foreground">Search problems…</span>
-                  <span className="ml-auto hidden sm:inline-flex text-xs font-mono px-2 py-1 rounded-full bg-card border border-border text-foreground">110</span>
+                  <span className="ml-auto hidden sm:inline-flex text-xs font-mono px-2 py-1 rounded-full bg-card border border-border text-foreground">109</span>
                 </div>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {["Easy", "Medium", "Hard"].map((d) => (
@@ -437,7 +437,7 @@ export default function LandingPage() {
             <span className="italic font-[300] text-muted-foreground">perfected.</span>
           </h2>
           <p className="mt-3 max-w-[54ch] mx-auto text-[15px] leading-relaxed text-muted-foreground text-balance">
-            Five topics, 110 problems, zero sprawl. Progress syncs via Firestore and your next review is already computed.
+            Five topics, 109 problems, zero sprawl. Progress syncs via Firestore and your next review is already computed.
           </p>
           <div className="mt-7 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3">
             <Link
@@ -453,7 +453,7 @@ export default function LandingPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" /> 5 topics
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-3 py-1">29 patterns</span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-3 py-1">110 problems</span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-3 py-1">109 problems</span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-3 py-1">Firestore + onSnapshot</span>
           </div>
         </div>
