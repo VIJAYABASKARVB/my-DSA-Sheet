@@ -336,7 +336,6 @@ export async function saveNote(userId: string, problemId: string, note: Partial<
   const content = note.content ?? "";
   const hasContent = content.trim().length > 0;
   const noteRef = doc(db, "users", uid, "notes", problemId);
-  const indexRef = doc(db, "users", uid, "notesIndex", "index");
 
   if (!hasContent) {
     // Empty content counts as deletion
@@ -360,27 +359,53 @@ export async function saveNote(userId: string, problemId: string, note: Partial<
     }
   }
 
-  // Update notesIndex presence tracking
-  try {
-    const idxSnap = await getDoc(indexRef);
-    let currentIds: string[] = [];
-    if (idxSnap.exists()) {
-      const d = idxSnap.data() as { problemIds?: string[] };
-      if (Array.isArray(d.problemIds)) currentIds = d.problemIds;
+  // Update notesIndex presence tracking (drives the sheet's note icon).
+  // Retried once; throws on persistent failure so the UI can surface it.
+  await updateNotesIndex(uid, problemId, hasContent);
+}
+
+async function updateNotesIndex(uid: string, problemId: string, hasContent: boolean): Promise<void> {
+  const indexRef = doc(db, "users", uid, "notesIndex", "index");
+  let lastErr: unknown = null;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const idxSnap = await getDoc(indexRef);
+      let currentIds: string[] = [];
+      if (idxSnap.exists()) {
+        const d = idxSnap.data() as { problemIds?: string[] };
+        if (Array.isArray(d.problemIds)) currentIds = d.problemIds;
+      }
+      const set = new Set(currentIds);
+      if (hasContent) set.add(problemId);
+      else set.delete(problemId);
+      const next = Array.from(set).sort();
+      // Only write if changed
+      const changed = next.length !== currentIds.length || next.some((id, i) => id !== currentIds[i]);
+      if (changed) {
+        await setDoc(indexRef, { problemIds: next, updatedAt: serverTimestamp() }, { merge: true });
+      }
+      return;
+    } catch (e) {
+      lastErr = e;
+      console.warn(`[firestore] updateNotesIndex attempt ${attempt + 1} failed`, e);
     }
-    const set = new Set(currentIds);
-    if (hasContent) set.add(problemId);
-    else set.delete(problemId);
-    const next = Array.from(set).sort();
-    // Only write if changed
-    const changed = next.length !== currentIds.length || next.some((id, i) => id !== currentIds[i]);
-    if (changed) {
-      await setDoc(indexRef, { problemIds: next, updatedAt: serverTimestamp() }, { merge: true });
-    }
-  } catch (e) {
-    console.warn("[firestore] saveNote index update failed", e);
-    // Don't throw — note itself is saved; index is best-effort presence
   }
+  throw new Error(
+    `Note saved, but the note-icon index could not be updated (${(lastErr as Error)?.message ?? lastErr}). Reopen this note to retry.`
+  );
+}
+
+// Self-heal: ensure a note that has content is present in the notes index.
+// Repairs orphans from earlier failed index writes (icon stuck off).
+export async function ensureNoteIndexed(userId: string, problemId: string): Promise<boolean> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot repair notes index");
+  const noteSnap = await getDoc(doc(db, "users", uid, "notes", problemId));
+  if (!noteSnap.exists()) return false;
+  const data = noteSnap.data() as NoteDoc | undefined;
+  if (!data || data.content.trim().length === 0) return false;
+  await updateNotesIndex(uid, problemId, true);
+  return true;
 }
 
 export function subscribeToNote(

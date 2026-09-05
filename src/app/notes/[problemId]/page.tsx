@@ -24,7 +24,7 @@ export default function NotesPage() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
   const { topics } = useProblems(user?.uid ?? null);
-  const { note, content, loading: noteLoading, saving, savedRecently, updateContent, setProblemName, flush } = useNote(user?.uid ?? null, problemId);
+  const { note, content, loading: noteLoading, error: noteError, saving, savedRecently, updateContent, setProblemName, flush } = useNote(user?.uid ?? null, problemId);
 
   const [isEditing, setIsEditing] = useState(false);
   const [activeTab, setActiveTab] = useState<"editor" | "preview">("editor");
@@ -189,7 +189,7 @@ export default function NotesPage() {
             <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.08] bg-[#0F0F0F] shrink-0">
               <span className="text-[11px] tracking-[0.08em] uppercase font-medium text-white/60 font-mono">Editor</span>
               <span className="text-xs font-mono" role="status" aria-live="polite">
-                {saving ? <span className="text-white/60">Saving…</span> : savedRecently ? <span className="text-[#86EFAC]">Saved</span> : <span className="text-white/40 hidden [900px]:inline">Autosaves 800ms</span>}
+                {noteError ? <span className="text-[#FCA5A5] max-w-[220px] truncate inline-block align-bottom" title={noteError}>Sync issue — {noteError}</span> : saving ? <span className="text-white/60">Saving…</span> : savedRecently ? <span className="text-[#86EFAC]">Saved</span> : <span className="text-white/40 hidden [900px]:inline">Autosaves 800ms</span>}
               </span>
             </div>
             <div className="flex-1 overflow-y-auto overscroll-contain p-0">

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useCallback, useRef } from "react";
 import type { Note } from "@/lib/types";
-import { subscribeToNote, saveNote } from "@/lib/firestore";
+import { subscribeToNote, saveNote, ensureNoteIndexed } from "@/lib/firestore";
 
 export function useNote(userId: string | null | undefined, problemId: string) {
   const [note, setNote] = useState<Note | null>(null);
@@ -43,6 +43,14 @@ export function useNote(userId: string | null | undefined, problemId: string) {
           pendingRef.current = null;
           // capture problemName for future saves
           if (data?.problemName) problemNameRef.current = data.problemName;
+          // Self-heal: a note with content must be present in the notes index
+          // (drives the sheet's note icon). Repairs orphans from failed index writes.
+          if (data && data.content.trim().length > 0) {
+            void ensureNoteIndexed(userId, problemId).catch((e) => {
+              console.warn("[useNote] notes index self-heal failed", e);
+              setError((e as Error).message ?? String(e));
+            });
+          }
         } else {
           // If user is not currently dirty (no pending debounce), sync
           if (!pendingRef.current && data) {

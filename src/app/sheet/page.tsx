@@ -49,7 +49,7 @@ export default function SheetPage() {
   const { progress, updateStatus, optimisticRemove, optimisticRestore, loading: pLoading } = useProgress(user?.uid ?? null);
   const { overrides, updateLinks, updateTags, loading: oLoading } = useProblemOverrides(user?.uid ?? null);
   const { revisions, dueToday, upcoming, dueCount, markRevisionDone, removeRevision, restoreRevision, loading: srLoading, error: srError } = useRevisionSchedule(user?.uid ?? null);
-  const { notedProblemIds } = useNotesIndex(user?.uid ?? null);
+  const { notedProblemIds, error: notesIndexError } = useNotesIndex(user?.uid ?? null);
   const [filters, setFilters] = useState<Filters>({
     search: "",
     topic: null,
@@ -430,6 +430,11 @@ export default function SheetPage() {
             {activeView === "sheet" && (
               <div className="p-3 md:p-4">
                 <FilterBar filters={filters} setFilters={setFilters} topicNames={topicNames} availableTags={availableTags} headerless />
+                {notesIndexError && user && (
+                  <p className="pt-2 text-[11px] font-mono text-[#956400] dark:text-[#EAB308]" role="status">
+                    Note icons unavailable ({notesIndexError}) — notes are safe; refresh to retry.
+                  </p>
+                )}
               </div>
             )}
           </div>
