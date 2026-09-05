@@ -3,9 +3,154 @@
   "name": "Recursion",
   "patterns": [
     {
+      "patternId": "stage-0-learn-basic-recursion",
+      "name": "Stage 0 — Learn Basic Recursion",
+      "order": 0,
+      "problems": [
+        {
+          "id": "print-something-n-times",
+          "name": "Understand Recursion by Print Something N Times",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 0,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/recursion/introduction-to-recursion-understand-recursion-by-printing-something-n-times"
+            }
+          ]
+        },
+        {
+          "id": "print-name-n-times",
+          "name": "Print Name N Times using Recursion",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 1,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/recursion/print-name-n-times-using-recursion"
+            }
+          ]
+        },
+        {
+          "id": "print-1-to-n",
+          "name": "Print 1 to N using Recursion",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 2,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/recursion/print-1-to-n-using-recursion"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/dsa/print-1-to-n-without-using-loops/"
+            }
+          ]
+        },
+        {
+          "id": "print-n-to-1",
+          "name": "Print N to 1 using Recursion",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 3,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/recursion/print-n-to-1-using-recursion"
+            }
+          ]
+        },
+        {
+          "id": "sum-of-first-n-numbers",
+          "name": "Sum of First N Numbers",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 4,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/sum-of-first-n-natural-numbers"
+            }
+          ]
+        },
+        {
+          "id": "factorial-of-a-given-number",
+          "name": "Factorial of a Given Number",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 5,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/factorial-of-a-number-iterative-and-recursive"
+            }
+          ]
+        },
+        {
+          "id": "reverse-an-array",
+          "name": "Reverse an Array",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 6,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/reverse-a-given-array"
+            },
+            {
+              "platform": "GeeksForGeeks",
+              "url": "https://www.geeksforgeeks.org/dsa/reverse-an-array-using-recursion/"
+            }
+          ]
+        },
+        {
+          "id": "check-palindrome-string",
+          "name": "Check if String is Palindrome or Not",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 7,
+          "links": [
+            {
+              "platform": "TakeUForward",
+              "url": "https://takeuforward.org/data-structure/check-if-the-given-string-is-palindrome-or-not/"
+            },
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/valid-palindrome/"
+            }
+          ]
+        },
+        {
+          "id": "fibonacci-number",
+          "name": "Fibonacci Number",
+          "difficulty": "Easy",
+          "source": "striver",
+          "tags": ["striver"],
+          "order": 8,
+          "links": [
+            {
+              "platform": "LeetCode",
+              "url": "https://leetcode.com/problems/fibonacci-number/"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "patternId": "stage-1-basic-recursion",
       "name": "Stage 1 — Basic Recursion",
-      "order": 0,
+      "order": 1,
       "problems": [
         {
           "id": "recursive-atoi",
@@ -66,7 +211,7 @@
     {
       "patternId": "stage-2-recursion-on-data-structures",
       "name": "Stage 2 — Recursion on Data Structures",
-      "order": 1,
+      "order": 2,
       "problems": [
         {
           "id": "reverse-a-stack",
@@ -109,7 +254,7 @@
     {
       "patternId": "stage-3-string-generation",
       "name": "Stage 3 — String & Bit Generation",
-      "order": 2,
+      "order": 3,
       "problems": [
         {
           "id": "generate-binary-strings-no-consecutive-ones",
@@ -152,7 +297,7 @@
     {
       "patternId": "stage-4-subsequences-pick-not-pick",
       "name": "Stage 4 — Subsequences (Pick / Not Pick)",
-      "order": 3,
+      "order": 4,
       "problems": [
         {
           "id": "learn-all-patterns-of-subsequences",
@@ -227,7 +372,7 @@
     {
       "patternId": "stage-5-combination-problems",
       "name": "Stage 5 — Combination Problems",
-      "order": 4,
+      "order": 5,
       "problems": [
         {
           "id": "subsets-i",
@@ -342,7 +487,7 @@
     {
       "patternId": "stage-6-backtracking-hard",
       "name": "Stage 6 — Backtracking Hard Problems",
-      "order": 5,
+      "order": 6,
       "problems": [
         {
           "id": "rat-in-a-maze",
