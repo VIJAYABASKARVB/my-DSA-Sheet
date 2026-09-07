@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Pencil, ExternalLink, StickyNote, NotebookPen, X, Plus } from "lucide-react";
 import type { MergedProblem, Status, PlatformLink, Tag, RevisionSchedule } from "@/lib/types";
+import { canonicalizeTag } from "@/lib/types";
 
 const difficultyStyles: Record<string, string> = {
   Easy: "bg-[#EDF3EC] dark:bg-[#EDF3EC]/16 text-[#346538] dark:text-[#86EFAC] border-border",
@@ -80,7 +81,7 @@ export function ProblemRow({
 
   const handleSave = () => {
     const cleaned = draft.filter((l) => l.url.trim()).map((l) => ({ ...l, url: l.url.trim() }));
-    const cleanedTags = draftTags.map((t) => t.trim()).filter(Boolean);
+    const cleanedTags = draftTags.map((t) => canonicalizeTag(t.trim())).filter(Boolean);
     const seen = new Set<string>();
     const deduped: Tag[] = [];
     for (const t of cleanedTags) {
@@ -96,7 +97,7 @@ export function ProblemRow({
   };
 
   const addTag = (tag: string) => {
-    const trimmed = tag.trim();
+    const trimmed = canonicalizeTag(tag.trim());
     if (!trimmed) return;
     if (draftTags.some((t) => t.toLowerCase() === trimmed.toLowerCase())) return;
     setDraftTags((prev) => [...prev, trimmed]);

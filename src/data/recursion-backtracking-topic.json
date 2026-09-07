@@ -11,8 +11,8 @@
           "id": "print-something-n-times",
           "name": "Understand Recursion by Print Something N Times",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 0,
           "links": [
             {
@@ -25,8 +25,8 @@
           "id": "print-name-n-times",
           "name": "Print Name N Times using Recursion",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 1,
           "links": [
             {
@@ -39,8 +39,8 @@
           "id": "print-1-to-n",
           "name": "Print 1 to N using Recursion",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 2,
           "links": [
             {
@@ -57,8 +57,8 @@
           "id": "print-n-to-1",
           "name": "Print N to 1 using Recursion",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 3,
           "links": [
             {
@@ -71,8 +71,8 @@
           "id": "sum-of-first-n-numbers",
           "name": "Sum of First N Numbers",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 4,
           "links": [
             {
@@ -85,8 +85,8 @@
           "id": "factorial-of-a-given-number",
           "name": "Factorial of a Given Number",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 5,
           "links": [
             {
@@ -99,8 +99,8 @@
           "id": "reverse-an-array",
           "name": "Reverse an Array",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 6,
           "links": [
             {
@@ -117,8 +117,8 @@
           "id": "check-palindrome-string",
           "name": "Check if String is Palindrome or Not",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 7,
           "links": [
             {
@@ -135,8 +135,8 @@
           "id": "fibonacci-number",
           "name": "Fibonacci Number",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 8,
           "links": [
             {
@@ -156,8 +156,8 @@
           "id": "recursive-atoi",
           "name": "Recursive Implementation of atoi()",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 0,
           "links": [
             {
@@ -174,8 +174,8 @@
           "id": "pow-x-n",
           "name": "Pow(x, n)",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 1,
           "links": [
             {
@@ -192,8 +192,8 @@
           "id": "count-good-numbers",
           "name": "Count Good Numbers",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 2,
           "links": [
             {
@@ -217,8 +217,8 @@
           "id": "reverse-a-stack",
           "name": "Reverse a Stack",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 0,
           "links": [
             {
@@ -235,8 +235,8 @@
           "id": "sort-a-stack-using-recursion",
           "name": "Sort a Stack Using Recursion",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 1,
           "links": [
             {
@@ -260,8 +260,8 @@
           "id": "generate-binary-strings-no-consecutive-ones",
           "name": "Generate Binary Strings Without Consecutive 1s",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 0,
           "links": [
             {
@@ -278,8 +278,8 @@
           "id": "generate-parentheses",
           "name": "Generate Parentheses",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 1,
           "links": [
             {
@@ -303,8 +303,8 @@
           "id": "learn-all-patterns-of-subsequences",
           "name": "Learn All Patterns of Subsequences (Theory)",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 0,
           "links": [
             {
@@ -317,8 +317,8 @@
           "id": "power-set",
           "name": "Power Set",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 1,
           "links": [
             {
@@ -335,8 +335,8 @@
           "id": "check-subsequence-sum-k-exists",
           "name": "Check if There Exists a Subsequence with Sum K",
           "difficulty": "Easy",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 2,
           "links": [
             {
@@ -353,8 +353,8 @@
           "id": "count-subsequences-sum-k",
           "name": "Count All Subsequences with Sum K",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 3,
           "links": [
             {
@@ -378,8 +378,8 @@
           "id": "subsets-i",
           "name": "Subsets I",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 0,
           "links": [
             {
@@ -396,8 +396,8 @@
           "id": "subsets-ii",
           "name": "Subsets II",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 1,
           "links": [
             {
@@ -414,8 +414,8 @@
           "id": "combination-sum",
           "name": "Combination Sum",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 2,
           "links": [
             {
@@ -432,8 +432,8 @@
           "id": "combination-sum-ii",
           "name": "Combination Sum II",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 3,
           "links": [
             {
@@ -450,8 +450,8 @@
           "id": "combination-sum-iii",
           "name": "Combination Sum III",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 4,
           "links": [
             {
@@ -468,8 +468,8 @@
           "id": "letter-combinations-phone-number",
           "name": "Letter Combinations of a Phone Number",
           "difficulty": "Medium",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 5,
           "links": [
             {
@@ -493,8 +493,8 @@
           "id": "rat-in-a-maze",
           "name": "Rat in a Maze",
           "difficulty": "Hard",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 0,
           "links": [
             {
@@ -511,8 +511,8 @@
           "id": "word-search",
           "name": "Word Search",
           "difficulty": "Hard",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 1,
           "links": [
             {
@@ -529,8 +529,8 @@
           "id": "n-queen",
           "name": "N Queen",
           "difficulty": "Hard",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 2,
           "links": [
             {
@@ -547,8 +547,8 @@
           "id": "m-coloring-problem",
           "name": "M Coloring Problem",
           "difficulty": "Hard",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 3,
           "links": [
             {
@@ -565,8 +565,8 @@
           "id": "palindrome-partitioning",
           "name": "Palindrome Partitioning",
           "difficulty": "Hard",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 4,
           "links": [
             {
@@ -583,8 +583,8 @@
           "id": "word-break",
           "name": "Word Break",
           "difficulty": "Hard",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 5,
           "links": [
             {
@@ -601,8 +601,8 @@
           "id": "sudoku-solver",
           "name": "Sudoku Solver",
           "difficulty": "Hard",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 6,
           "links": [
             {
@@ -619,8 +619,8 @@
           "id": "expression-add-operators",
           "name": "Expression Add Operators",
           "difficulty": "Hard",
-          "source": "striver",
-          "tags": ["striver"],
+          "source": "Striver",
+          "tags": ["Striver"],
           "order": 7,
           "links": [
             {

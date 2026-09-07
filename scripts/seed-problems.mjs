@@ -8,7 +8,18 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import { existsSync } from "fs";
 import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc, serverTimestamp, collection, getDocs } from "firebase/firestore";
+
+// Canonical tag forms: Striver | Neetcode | Others (case-insensitive normalization)
+function canonicalizeTag(t) {
+  const s = String(t ?? "").trim();
+  const l = s.toLowerCase();
+  if (l === "striver") return "Striver";
+  if (l === "neetcode" || l === "neetcode") return "Neetcode";
+  if (l === "others" || l === "other") return "Others";
+  return s;
+}
 
 // Load env from .env.local if present (simple parser, no dotenv dep)
 function loadEnvFile(path) {
@@ -46,19 +57,33 @@ if (missing.length) {
 }
 
 const app = initializeApp(firebaseConfig);
+
+// Authenticated writes are required by firestore.rules (problems/topics/patterns
+// allow write only when request.auth != null). Sign in with a seed user when
+// SEED_EMAIL + SEED_PASSWORD are set; otherwise fall back to anonymous, which
+// only works if write rules are temporarily opened.
+const seedEmail = process.env.SEED_EMAIL;
+const seedPassword = process.env.SEED_PASSWORD;
+if (seedEmail && seedPassword) {
+  const auth = getAuth(app);
+  await signInWithEmailAndPassword(auth, seedEmail, seedPassword);
+  console.log(`Signed in as ${seedEmail} for seeding`);
+} else {
+  console.warn("SEED_EMAIL/SEED_PASSWORD not set — attempting anonymous seed (needs open write rules)");
+}
 const db = getFirestore(app);
 
-// Read individual topic JSON files (source of truth) — order matches requested: array & hashing → Two Pointers → Prefix Sum → matrix → algorithms → Strings → Recursion & Backtracking → LinkedList → Sliding Window → Binary search → trees → binary-search-tree
+// Read individual topic JSON files (source of truth) — order matches requested: arrays-hashing → two-pointers → prefix-sum → sliding-window → algorithms → matrix → strings → linked-list → recursion-backtracking → binary-search → trees-dfs-bfs → binary-search-tree
 const topicFiles = [
   "src/data/arrays-hashing-topic.json",
   "src/data/two-pointers-topic.json",
   "src/data/prefix-sum-topic.json",
-  "src/data/matrix-topic.json",
-  "src/data/algorithms-topic.json",
-  "src/data/strings-topic.json",
-  "src/data/recursion-backtracking-topic.json",
-  "src/data/linked-list-topic.json",
   "src/data/sliding-window-topic.json",
+  "src/data/algorithms-topic.json",
+  "src/data/matrix-topic.json",
+  "src/data/strings-topic.json",
+  "src/data/linked-list-topic.json",
+  "src/data/recursion-backtracking-topic.json",
   "src/data/binary-search-topic.json",
   "src/data/trees-topic.json",
   "src/data/binary-search-tree-topic.json",
@@ -126,7 +151,8 @@ for (let topicIdx = 0; topicIdx < topics.length; topicIdx++) {
     for (const p of problems) {
       totalProblems++;
       const problemId = p.id;
-      const tags = Array.isArray(p.tags) ? p.tags : p.source ? [p.source] : [];
+      const rawTags = Array.isArray(p.tags) ? p.tags : p.source ? [p.source] : [];
+      const tags = [...new Set(rawTags.map(canonicalizeTag).filter(Boolean))];
       const docData = {
         id: problemId,
         name: p.name,

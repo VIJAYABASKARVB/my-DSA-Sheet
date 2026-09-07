@@ -12,6 +12,7 @@ import {
   deleteField,
 } from "firebase/firestore";
 import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag, RevisionSchedule, Note } from "./types";
+import { canonicalizeTag, normalizeTags } from "./types";
 
 type ProblemDoc = {
   id: string;
@@ -230,13 +231,13 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
       }
     }
     const group = pMap.get(d.patternId)!;
-    const tags: Tag[] = Array.isArray(d.tags) ? d.tags : d.source ? [d.source] : [];
+    const tags: Tag[] = normalizeTags(Array.isArray(d.tags) ? d.tags : d.source ? [d.source] : []);
     group.problems.push({
       id: d.id,
       name: d.name,
       difficulty: d.difficulty,
       tags,
-      source: d.source as unknown as Problem["source"],
+      source: (d.source ? canonicalizeTag(d.source) : undefined) as unknown as Problem["source"],
       links: d.links ?? [],
       topicId: d.topicId,
       patternId: d.patternId,
@@ -260,8 +261,8 @@ function buildTopicsFromDocs(docs: ProblemDoc[]): Topic[] {
   }
 
   // Sort topics by explicit order field; fallback to known order for legacy docs
-  // Order: array & hashing → Two Pointers → Prefix Sum → matrix manipulation → algorithms → Strings → Recursion & Backtracking → LinkedList → Sliding Window → Binary search → trees → binary-search-tree
-  const legacyOrder = ["arrays-hashing", "two-pointers", "prefix-sum", "matrix", "algorithms", "strings", "recursion-backtracking", "linked-list", "sliding-window", "binary-search", "trees-dfs-bfs", "binary-search-tree"];
+  // Order: arrays-hashing → two-pointers → prefix-sum → sliding-window → algorithms → matrix → strings → linked-list → recursion-backtracking → binary-search → trees-dfs-bfs → binary-search-tree
+  const legacyOrder = ["arrays-hashing", "two-pointers", "prefix-sum", "sliding-window", "algorithms", "matrix", "strings", "linked-list", "recursion-backtracking", "binary-search", "trees-dfs-bfs", "binary-search-tree"];
   topics.sort((a, b) => {
     const oa = (a as Topic & { order: number }).order;
     const ob = (b as Topic & { order: number }).order;

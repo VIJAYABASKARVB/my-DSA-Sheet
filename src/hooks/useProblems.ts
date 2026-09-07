@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { Topic } from "@/lib/types";
+import { canonicalizeTag, normalizeTags } from "@/lib/types";
 import { subscribeToProblems } from "@/lib/firestore";
 import arraysHashing from "@/data/arrays-hashing-topic.json";
 import trees from "@/data/trees-topic.json";
@@ -31,12 +32,12 @@ const rawTopics: RawTopic[] = [
   arraysHashing as RawTopic,
   twoPointers as RawTopic,
   prefixSum as RawTopic,
-  matrix as RawTopic,
-  algorithms as RawTopic,
-  strings as RawTopic,
-  recursionBacktracking as RawTopic,
-  linkedList as RawTopic,
   slidingWindow as RawTopic,
+  algorithms as RawTopic,
+  matrix as RawTopic,
+  strings as RawTopic,
+  linkedList as RawTopic,
+  recursionBacktracking as RawTopic,
   binarySearch as RawTopic,
   trees as RawTopic,
   binarySearchTree as RawTopic,
@@ -56,8 +57,8 @@ function buildFallbackTopics(): Topic[] {
         id: prob.id,
         name: prob.name,
         difficulty: prob.difficulty as Topic["patterns"][number]["problems"][number]["difficulty"],
-        tags: (prob.tags ?? (prob.source ? [prob.source] : [])) as Topic["patterns"][number]["problems"][number]["tags"],
-        source: prob.source as Topic["patterns"][number]["problems"][number]["source"],
+        tags: normalizeTags(prob.tags ?? (prob.source ? [prob.source] : [])) as Topic["patterns"][number]["problems"][number]["tags"],
+        source: (prob.source ? canonicalizeTag(prob.source) : undefined) as Topic["patterns"][number]["problems"][number]["source"],
         links: prob.links as Topic["patterns"][number]["problems"][number]["links"],
         topicId: t.topicId,
         patternId: p.patternId,

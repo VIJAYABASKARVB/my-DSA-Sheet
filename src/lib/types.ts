@@ -3,6 +3,28 @@ export type Status = 'unsolved' | 'solved' | 'review';
 export type Source = 'Neetcode' | 'Striver' | 'Others';
 export type Tag = string;
 
+export function canonicalizeTag(t: string): Tag {
+  const s = t.trim();
+  const l = s.toLowerCase();
+  if (l === "striver") return "Striver";
+  if (l === "neetcode" || l === "neetcode") return "Neetcode";
+  if (l === "others" || l === "other") return "Others";
+  return s;
+}
+
+export function normalizeTags(tags: unknown): Tag[] {
+  if (!Array.isArray(tags)) return [];
+  const out: Tag[] = [];
+  const seen = new Set<string>();
+  for (const raw of tags) {
+    const c = canonicalizeTag(String(raw ?? ""));
+    if (!c || seen.has(c.toLowerCase())) continue;
+    seen.add(c.toLowerCase());
+    out.push(c);
+  }
+  return out;
+}
+
 export type PlatformLink = {
   platform: 'LeetCode' | 'NeetCode' | 'TakeUForward' | 'Code360' | 'GeeksForGeeks' | 'InterviewBit';
   url: string;
