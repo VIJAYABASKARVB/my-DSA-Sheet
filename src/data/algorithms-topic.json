@@ -1,6 +1,6 @@
 {
   "topicId": "algorithms",
-  "name": "Algorithms",
+  "name": "Kadane's Algorithm & Others",
   "patterns": [
     {
       "patternId": "kadanes-algorithm",
