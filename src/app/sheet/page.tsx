@@ -74,12 +74,8 @@ export default function SheetPage() {
     } catch {}
   }, [activeView]);
 
-  // Keep topics expanded by default when they first load
-  useEffect(() => {
-    if (topics.length > 0 && expandedTopics.length === 0) {
-      setExpandedTopics(topics.map((t) => t.id));
-    }
-  }, [topics, expandedTopics.length]);
+  // Collapsed by default: topics/patterns start closed, expand on click.
+  // Revision deep-links explicitly expand via handleNavigateToProblem.
 
   useEffect(() => {
     const el = document.getElementById("filter-sticky");
@@ -151,6 +147,27 @@ export default function SheetPage() {
       })
       .filter(Boolean) as MergedTopic[];
   }, [mergedTopics, filters, progress]);
+
+  const isFiltering =
+    filters.search !== "" ||
+    filters.topic !== null ||
+    filters.difficulty !== null ||
+    filters.status !== null ||
+    filters.tags.length > 0;
+
+  // While filtering, force-expand matches so results aren't hidden in closed accordions.
+  // When filters clear, revert to manual expanded state.
+  const effectiveExpandedTopics = useMemo(
+    () => (isFiltering ? filtered.map((t) => t.id) : expandedTopics),
+    [isFiltering, filtered, expandedTopics]
+  );
+  const effectiveExpandedPatterns = useMemo(
+    () =>
+      isFiltering
+        ? filtered.flatMap((t) => t.patterns.map((g) => g.pattern.id))
+        : expandedPatterns,
+    [isFiltering, filtered, expandedPatterns]
+  );
 
   const loading = pLoading || oLoading || problemsLoading;
   const totalProblems = topics.flatMap((t) => t.patterns.flatMap((p) => p.problems)).length;
@@ -500,8 +517,8 @@ export default function SheetPage() {
                     patterns={topic.patterns}
                     progress={progress}
                     revisions={revisions}
-                    expandedTopics={expandedTopics}
-                    expandedPatterns={expandedPatterns}
+                    expandedTopics={effectiveExpandedTopics}
+                    expandedPatterns={effectiveExpandedPatterns}
                     onExpandedTopicsChange={setExpandedTopics}
                     onExpandedPatternsChange={setExpandedPatterns}
                     onStatusChange={handleStatusChange}

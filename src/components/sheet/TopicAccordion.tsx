@@ -39,8 +39,8 @@ export function TopicAccordion({
   );
   const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
   const isControlled = expandedTopics !== undefined && onExpandedTopicsChange !== undefined;
-  // Treat empty controlled array as "default open all" to avoid flash-closed on first mount before sheet/page populates
-  const isOpen = isControlled ? (expandedTopics!.length === 0 ? true : expandedTopics!.includes(topic.id)) : true;
+  // Collapsed by default: empty controlled array means closed.
+  const isOpen = isControlled ? expandedTopics!.includes(topic.id) : false;
   const handleTopicChange = (value: string[]) => {
     if (!onExpandedTopicsChange || !expandedTopics) return;
     const nextOpen = value.includes(topic.id);
@@ -53,7 +53,7 @@ export function TopicAccordion({
 
   return (
     <Accordion
-      {...(isControlled ? { value: isOpen ? [topic.id] : [], onValueChange: handleTopicChange } : { defaultValue: [topic.id] })}
+      {...(isControlled ? { value: isOpen ? [topic.id] : [], onValueChange: handleTopicChange } : { defaultValue: [] })}
       className="mb-3"
     >
       <AccordionItem
