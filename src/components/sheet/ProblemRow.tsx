@@ -106,19 +106,32 @@ export function ProblemRow({
 
   const router = useRouter();
   const cfg = statusConfig[status];
+  const [flash, setFlash] = useState(false);
+  const [popKey, setPopKey] = useState(0);
+
+  const handleStatusClick = () => {
+    // Immediate tactile feedback; parent state follows optimistically
+    if (cycle[status] === "solved") {
+      setFlash(true);
+      setTimeout(() => setFlash(false), 950);
+    }
+    setPopKey((k) => k + 1);
+    onStatusChange(problem.id, cycle[status]);
+  };
 
   return (
     <>
       <div
         id={`problem-${problem.id}`}
-        className="group/row flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 py-3 px-3 md:px-4 border-b border-border last:border-b-0 hover:bg-muted/60 transition-colors min-w-0 w-full"
+        className={`group/row flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 py-3 px-3 md:px-4 border-b border-border last:border-b-0 hover:bg-muted/60 transition-colors min-w-0 w-full ${flash ? "row-flash" : ""}`}
       >
         {/* Primary: status + name + difficulty — flexible column taking remaining width */}
         <div className="flex items-center gap-2.5 min-w-0 flex-1 overflow-hidden">
           <button
+            key={popKey}
             aria-label={`Status: ${status}. Click to cycle to ${cycle[status]}.`}
-            onClick={() => onStatusChange(problem.id, cycle[status])}
-            className={`w-9 h-9 sm:w-7 sm:h-7 rounded-[6px] border flex items-center justify-center shrink-0 text-xs font-medium transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${cfg.bg} ${cfg.border} ${cfg.text}`}
+            onClick={handleStatusClick}
+            className={`w-9 h-9 sm:w-7 sm:h-7 rounded-[6px] border flex items-center justify-center shrink-0 text-xs font-medium transition-colors active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20 ${popKey > 0 ? "status-pop" : ""} ${cfg.bg} ${cfg.border} ${cfg.text}`}
           >
             <span aria-hidden="true">{cfg.label}</span>
           </button>

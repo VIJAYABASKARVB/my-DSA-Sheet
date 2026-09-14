@@ -1,19 +1,22 @@
 "use client";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useProblems } from "@/hooks/useProblems";
 import { useProgress } from "@/hooks/useProgress";
 import { useProblemOverrides } from "@/hooks/useProblemOverrides";
 import { useRevisionSchedule } from "@/hooks/useRevisionSchedule";
 import { useNotesIndex } from "@/hooks/useNotesIndex";
+import { useStreak } from "@/hooks/useStreak";
 import { FilterBar, type Filters } from "@/components/FilterBar";
 import { TopicAccordion } from "@/components/sheet/TopicAccordion";
 import { AppHeader } from "@/components/AppHeader";
 import { DueForReviewSection } from "@/components/sheet/DueForReviewSection";
+import { StreakCalendar } from "@/components/sheet/StreakCalendar";
+import { CompletionCelebration } from "@/components/sheet/CompletionCelebration";
 import type { MergedProblem, Pattern, Status, RevisionSchedule } from "@/lib/types";
 import { toast } from "sonner";
-import { restoreProgressWithSchedule } from "@/lib/firestore";
+import { restoreProgressWithSchedule, logSolveActivity } from "@/lib/firestore";
 import { LayoutList, Clock3 } from "lucide-react";
 
 type MergedPatternGroup = { pattern: Pattern; problems: MergedProblem[] };
@@ -60,6 +63,7 @@ export default function SheetPage() {
   const [expandedTopics, setExpandedTopics] = useState<string[]>([]);
   const [expandedPatterns, setExpandedPatterns] = useState<string[]>([]);
   const [activeView, setActiveView] = useState<"sheet" | "revisions">("sheet");
+  const [celebration, setCelebration] = useState<{ title: string; subtitle: string; pct: number } | null>(null);
 
   // Restore toggle preference (sheet ↔ revisions)
   useEffect(() => {
@@ -177,6 +181,45 @@ export default function SheetPage() {
   const unsolvedCount = totalProblems - completedCount;
   const topicNames = topics.map((t) => t.name);
   const pct = totalProblems > 0 ? Math.round((completedCount / totalProblems) * 100) : 0;
+
+  // Solved-only rhythm (above filter bar)
+  const { stats: streakStats, matrix: streakMatrix, monthLabels: streakMonths, loading: streakLoading } = useStreak(
+    user?.uid ?? null,
+    20
+  );
+
+  // Milestone celebration: fire once per milestone per session, only on upward crossing
+  const prevPctRef = useRef({ init: false, value: 0 });
+  useEffect(() => {
+    if (!prevPctRef.current.init) {
+      prevPctRef.current.init = true;
+      prevPctRef.current.value = pct;
+      return;
+    }
+    const prev = prevPctRef.current.value;
+    prevPctRef.current.value = pct;
+    if (totalProblems === 0 || pct <= prev) return;
+    const milestones = [25, 50, 75, 100];
+    const crossed = milestones.find((m) => prev < m && pct >= m);
+    if (!crossed) return;
+    try {
+      if (sessionStorage.getItem(`sheet:celebrated:${crossed}`)) return;
+      sessionStorage.setItem(`sheet:celebrated:${crossed}`, "1");
+    } catch {}
+    const copy: Record<number, { title: string; subtitle: string }> = {
+      25: { title: "Quarter through depth", subtitle: "A solid start — the archive is warming up." },
+      50: { title: "Halfway through depth", subtitle: "Half the sheet solved. Hold the daily rhythm." },
+      75: { title: "Three quarters — hold it", subtitle: "The hard part is behind you. Finish with depth." },
+      100: { title: "Sheet complete — mastered", subtitle: "Every problem solved. Now keep revisions alive." },
+    };
+    const c = copy[crossed] ?? { title: "Milestone reached", subtitle: "Progress compounds with repetition." };
+    const reduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      toast.success(`${c.title} — ${pct}% complete`);
+      return;
+    }
+    setCelebration({ title: c.title, subtitle: c.subtitle, pct });
+  }, [pct, totalProblems]);
 
   const { problemMap, topicMap, patternMap } = useMemo(() => {
     const pMap = new Map<string, MergedProblem>();
@@ -300,6 +343,11 @@ export default function SheetPage() {
         if (revisions[problemId]) removeRevision(problemId);
       }
 
+      // Solved-only rhythm log: survives later hard-delete Undo by design
+      if (next === "solved" && prevStatus !== "solved") {
+        void logSolveActivity(problemId, user?.uid);
+      }
+
       updateStatus(problemId, next);
     },
     [progress, revisions, problemMap, user, updateStatus, optimisticRemove, optimisticRestore, removeRevision, restoreRevision]
@@ -380,6 +428,17 @@ export default function SheetPage() {
             </button>
           </div>
         )}
+
+        {/* Solve rhythm — above filter bar, solved days only */}
+        <div className="mb-4 sm:mb-5">
+          <StreakCalendar
+            matrix={streakMatrix}
+            monthLabels={streakMonths}
+            stats={streakStats}
+            loading={streakLoading || authLoading}
+            signedIn={!!user}
+          />
+        </div>
 
         {/* Sticky filtering card — toggle inside header (right), body is FilterBar */}
         <div
@@ -597,6 +656,13 @@ export default function SheetPage() {
           </div>
         )}
       </div>
+      <CompletionCelebration
+        open={celebration !== null}
+        title={celebration?.title ?? ""}
+        subtitle={celebration?.subtitle ?? ""}
+        pct={celebration?.pct ?? pct}
+        onClose={() => setCelebration(null)}
+      />
     </div>
   );
 }

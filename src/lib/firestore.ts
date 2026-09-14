@@ -10,6 +10,8 @@ import {
   serverTimestamp,
   Timestamp,
   deleteField,
+  increment,
+  arrayUnion,
 } from "firebase/firestore";
 import type { Status, PlatformLink, Topic, Problem, Difficulty, Tag, RevisionSchedule, Note } from "./types";
 import { canonicalizeTag, normalizeTags } from "./types";
@@ -469,6 +471,80 @@ export function subscribeToNotesIndex(
     },
     (err) => {
       console.error("[firestore] subscribeToNotesIndex error", err);
+      if (onError) onError(err as Error);
+    }
+  );
+}
+
+// ---- Solve activity (solved-only streak log, survives hard-delete Undo) ----
+
+export type ActivityDoc = {
+  count: number;
+  problemIds?: string[];
+  updatedAt?: Timestamp;
+};
+
+export function activityDayKey(d: Date = new Date()): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+/**
+ * Immutable-ish daily solve log. Incremented on solved, never decremented
+ * on unsolve so the streak calendar behaves like LeetCode motivation.
+ * Best-effort: never throws to avoid breaking the solve flow.
+ */
+export async function logSolveActivity(problemId: string, userId?: string, at: Date = new Date()): Promise<void> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) return;
+  try {
+    const key = activityDayKey(at);
+    await setDoc(
+      doc(db, "users", uid, "activity", key),
+      { count: increment(1), problemIds: arrayUnion(problemId), updatedAt: serverTimestamp() },
+      { merge: true }
+    );
+  } catch (e) {
+    console.warn("[firestore] logSolveActivity failed", e);
+  }
+}
+
+export async function getActivity(userId?: string): Promise<Record<string, number>> {
+  const uid = userId || getCurrentUserId();
+  if (!uid) throw new Error("Not signed in — cannot load activity");
+  const snap = await getDocs(collection(db, "users", uid, "activity"));
+  const out: Record<string, number> = {};
+  snap.forEach((d) => {
+    const data = d.data() as ActivityDoc;
+    if (typeof data.count === "number" && data.count > 0) out[d.id] = data.count;
+  });
+  return out;
+}
+
+export function subscribeToActivity(
+  callback: (activity: Record<string, number>) => void,
+  userId?: string,
+  onError?: (err: Error) => void
+): () => void {
+  const uid = userId || getCurrentUserId();
+  if (!uid) {
+    if (onError) onError(new Error("Not signed in"));
+    return () => {};
+  }
+  return onSnapshot(
+    collection(db, "users", uid, "activity"),
+    (snap) => {
+      const out: Record<string, number> = {};
+      snap.forEach((d) => {
+        const data = d.data() as ActivityDoc;
+        if (typeof data.count === "number" && data.count > 0) out[d.id] = data.count;
+      });
+      callback(out);
+    },
+    (err) => {
+      console.error("[firestore] subscribeToActivity error", err);
       if (onError) onError(err as Error);
     }
   );

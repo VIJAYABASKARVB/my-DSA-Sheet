@@ -32,5 +32,8 @@ service cloud.firestore {
     match /users/{userId}/notesIndex/{docId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
+    match /users/{userId}/activity/{docId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
   }
 }

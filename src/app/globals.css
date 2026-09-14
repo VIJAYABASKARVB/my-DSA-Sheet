@@ -376,3 +376,50 @@ kbd {
 @media (max-width: 640px) {
   .ambient-blob { width: 420px; height: 420px; filter: blur(1px); }
 }
+
+/* Solve rhythm + completion celebration — monochrome, transform/opacity only */
+.streak-today {
+  outline: 1px solid var(--ring);
+  outline-offset: 1px;
+}
+
+.celebrate-card {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+.dark .celebrate-card {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes row-flash {
+  0% { background-color: rgba(52, 101, 56, 0.14); }
+  100% { background-color: transparent; }
+}
+.row-flash {
+  animation: row-flash 900ms var(--ease-editorial);
+}
+
+@keyframes status-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.22); }
+  100% { transform: scale(1); }
+}
+.status-pop {
+  animation: status-pop 220ms var(--ease-editorial);
+}
+
+@keyframes mastered-sheen {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+.mastered-sheen {
+  animation: mastered-sheen 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row-flash,
+  .status-pop,
+  .mastered-sheen {
+    animation: none;
+  }
+}
